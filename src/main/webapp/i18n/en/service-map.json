@@ -1,0 +1,18 @@
+{
+  "service-map": {
+    "title": "Servicemaps",
+    "createServiceMap": "Create servicemap",
+    "choose-service-maps": "Choose a servicemap",
+    "new-offer": "New serviceofferentry",
+    "title-offer": "Title",
+    "description": "Description",
+    "costHour": "Cost per hour",
+    "total": "Total",
+
+    "ride-costs": "Ride costs",
+    "pricePerKilometre": "Costs per kilometre",
+    "add-ride-costs": "Add ride costs",
+    "riding-cost-not-set": "The riding costs for this service map are not set.",
+    "riding-cost-for-service-map": "The riding costs for this service map are:"
+  }
+}

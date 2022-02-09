@@ -1,0 +1,9 @@
+{
+  "redeem-point-bonds": {
+    "info": "Please enter the 15-digit code below, which you will find at the bottom of the point value. You can only use this coupon once.",
+    "code-valid": "The code is valid.",
+    "code-invalid": "The code is invalid.",
+    "code-null": "Please enter the code",
+    "check-code": "Check code"
+  }
+}

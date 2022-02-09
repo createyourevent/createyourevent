@@ -1,0 +1,95 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="organization">
+      <h2 data-cy="organizationDetailsHeading"><span jhiTranslate="createyoureventApp.organization.detail.title">Organization</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ organization.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organization.name">Name</span></dt>
+        <dd>
+          <span>{{ organization.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organization.organizationType">Organization Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'createyoureventApp.OrganizationType.' + organization.organizationType }}">{{
+            organization.organizationType
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organization.logo">Logo</span></dt>
+        <dd>
+          <div *ngIf="organization.logo">
+            <a (click)="openFile(organization.logo, organization.logoContentType)">
+              <img
+                [src]="'data:' + organization.logoContentType + ';base64,' + organization.logo"
+                style="max-width: 100%"
+                alt="organization image"
+              />
+            </a>
+            {{ organization.logoContentType }}, {{ byteSize(organization.logo) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organization.active">Active</span></dt>
+        <dd>
+          <span>{{ organization.active }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organization.activeOwner">Active Owner</span></dt>
+        <dd>
+          <span>{{ organization.activeOwner }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organization.description">Description</span></dt>
+        <dd>
+          <span>{{ organization.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organization.address">Address</span></dt>
+        <dd>
+          <span>{{ organization.address }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organization.motto">Motto</span></dt>
+        <dd>
+          <span>{{ organization.motto }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organization.phone">Phone</span></dt>
+        <dd>
+          <span>{{ organization.phone }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organization.webAddress">Web Address</span></dt>
+        <dd>
+          <span>{{ organization.webAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organization.placeNumber">Place Number</span></dt>
+        <dd>
+          <span>{{ organization.placeNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organization.price">Price</span></dt>
+        <dd>
+          <span>{{ organization.price }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organization.rentType">Rent Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'createyoureventApp.RentType.' + organization.rentType }}">{{ organization.rentType }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organization.user">User</span></dt>
+        <dd>
+          <span>{{ organization.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/organization', organization.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

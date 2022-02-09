@@ -1,0 +1,29 @@
+{
+  "createyoureventApp": {
+    "shopLikeDislike": {
+      "home": {
+        "title": "Shop Like Dislikes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Shop Like Dislike",
+        "createOrEditLabel": "Create or edit a Shop Like Dislike",
+        "notFound": "No Shop Like Dislikes found"
+      },
+      "created": "A new Shop Like Dislike is created with identifier {{ param }}",
+      "updated": "A Shop Like Dislike is updated with identifier {{ param }}",
+      "deleted": "A Shop Like Dislike is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Shop Like Dislike {{ id }}?"
+      },
+      "detail": {
+        "title": "Shop Like Dislike"
+      },
+      "id": "ID",
+      "like": "Like",
+      "dislike": "Dislike",
+      "date": "Date",
+      "comment": "Comment",
+      "shop": "Shop",
+      "user": "User"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "event-update": {
+    "edit-location": "Edit location",
+    "edit-products": "Edit products",
+    "edit-address": "Edit address",
+    "edit-services": "Edit services"
+  }
+}

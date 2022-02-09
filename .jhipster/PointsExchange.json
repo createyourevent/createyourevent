@@ -1,0 +1,31 @@
+{
+  "name": "PointsExchange",
+  "fields": [
+    {
+      "fieldName": "pointsTotal",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "bondPointsTotal",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "bond",
+      "otherEntityRelationshipName": "pointsExchange",
+      "relationshipName": "bonds"
+    }
+  ],
+  "entityTableName": "points_exchange",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211025022153"
+}

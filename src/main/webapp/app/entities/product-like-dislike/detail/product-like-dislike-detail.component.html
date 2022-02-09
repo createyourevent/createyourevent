@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="productLikeDislike">
+      <h2 data-cy="productLikeDislikeDetailsHeading">
+        <span jhiTranslate="createyoureventApp.productLikeDislike.detail.title">Product Like Dislike</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ productLikeDislike.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.productLikeDislike.like">Like</span></dt>
+        <dd>
+          <span>{{ productLikeDislike.like }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.productLikeDislike.dislike">Dislike</span></dt>
+        <dd>
+          <span>{{ productLikeDislike.dislike }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.productLikeDislike.date">Date</span></dt>
+        <dd>
+          <span>{{ productLikeDislike.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.productLikeDislike.comment">Comment</span></dt>
+        <dd>
+          <span>{{ productLikeDislike.comment }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.productLikeDislike.product">Product</span></dt>
+        <dd>
+          <div *ngIf="productLikeDislike.product">
+            <a [routerLink]="['/product', productLikeDislike.product?.id, 'view']">{{ productLikeDislike.product?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.productLikeDislike.user">User</span></dt>
+        <dd>
+          <span>{{ productLikeDislike.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/product-like-dislike', productLikeDislike.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

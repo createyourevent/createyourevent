@@ -1,0 +1,19 @@
+{
+  "admin-dashboard-service": {
+    "calculation-title": "Berechnungen und Bilanz",
+    "calculation-info": "Nachfolgend finden Sie die wichtigsten Bilanz- und Berechnungsdaten für diese Dienstleistung, die für Sie von Interesse sein könnten.",
+    "ratings-title": "Alle Ratings für den Shop",
+    "ratings-info": "Unten sehen Sie alle Likes/Dislikes, welche für diese Dienstleistung eines jeweils einzelnen User's gegeben wurde. Auch finden Sie dort die Email-Adresse des Users welcher geliked hat. So können Sie auch bei möglichen Fragen bezüglich der Entscheidung mit diesem Kontakt aufnehmen.",
+    "comments-title": "Kommentare und Feedback's",
+    "comments-info": "Unten finden Sie alle Kommentare, welche für diese Dienstleistung abgegeben wurden. Falls Sie auf eine Kommentar persönlich Antworten möchten, können Sie direkt unten dies über die Email-Adresse machen.",
+    "gallery-title": "Gallerie",
+    "gallery-info": "Sie können maximal 10 Bilder Ihrer Dienstleistung hier raufladen. Diese Bilder werden auf Ihrer Dienstleistungs-Profil-Seite angezeigt.",
+    "calculation": "Kalkulation",
+    "comments-feedback": "Kommentare und Feedback",
+    "ratings": "Rating's",
+    "gallery": "Gallerie",
+    "music": "Musik",
+    "music-title": "MP3 Musik Upload",
+    "music-info": "Unten können Sie maximal 5 MP3 Musikstücke uploaden. Die maximale Dateigrösse beträgt 15 MB."
+  }
+}

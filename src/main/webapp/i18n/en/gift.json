@@ -1,0 +1,30 @@
+{
+  "createyoureventApp": {
+    "gift": {
+      "home": {
+        "title": "Gifts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Gift",
+        "createOrEditLabel": "Create or edit a Gift",
+        "notFound": "No Gifts found"
+      },
+      "created": "A new Gift is created with identifier {{ param }}",
+      "updated": "A Gift is updated with identifier {{ param }}",
+      "deleted": "A Gift is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Gift {{ id }}?"
+      },
+      "detail": {
+        "title": "Gift"
+      },
+      "id": "ID",
+      "title": "Title",
+      "description": "Description",
+      "photo": "Photo",
+      "points": "Points",
+      "active": "Active",
+      "stock": "Stock",
+      "giftShoppingCarts": "Gift Shopping Carts"
+    }
+  }
+}

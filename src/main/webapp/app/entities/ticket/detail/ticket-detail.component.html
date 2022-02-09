@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="ticket">
+      <h2 data-cy="ticketDetailsHeading"><span jhiTranslate="createyoureventApp.ticket.detail.title">Ticket</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ ticket.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.ticket.amount">Amount</span></dt>
+        <dd>
+          <span>{{ ticket.amount }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.ticket.total">Total</span></dt>
+        <dd>
+          <span>{{ ticket.total }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.ticket.date">Date</span></dt>
+        <dd>
+          <span>{{ ticket.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.ticket.refNo">Ref No</span></dt>
+        <dd>
+          <span>{{ ticket.refNo }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.ticket.accessDate">Access Date</span></dt>
+        <dd>
+          <span>{{ ticket.accessDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.ticket.ticketsUsed">Tickets Used</span></dt>
+        <dd>
+          <span>{{ ticket.ticketsUsed }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.ticket.event">Event</span></dt>
+        <dd>
+          <div *ngIf="ticket.event">
+            <a [routerLink]="['/event', ticket.event?.id, 'view']">{{ ticket.event?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.ticket.user">User</span></dt>
+        <dd>
+          <span>{{ ticket.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/ticket', ticket.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

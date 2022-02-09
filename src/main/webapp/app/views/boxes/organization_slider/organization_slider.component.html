@@ -1,0 +1,40 @@
+
+
+<p-carousel [value]="organizations" [orientation]="orientation" [autoplayInterval]="autoplayInterval" [verticalViewPortHeight]="verticalViewPortHeight" [circular]="circular" [numVisible]="numVisible" [numScroll]="numScroll">
+  <p-header>
+      <h3 jhiTranslate="organization_slider.organizations">Organisations</h3>
+  </p-header>
+  <ng-template let-organization pTemplate="item">
+    <div class="card card-container">
+      <h3 class="title">{{ organization.name }}</h3>
+      <h5 class="center">{{ organization.organizationType }}</h5>
+      <div class="center">
+          <img class="img img-center" [src]="'data:' + organization.logoContentType + ';base64,' + organization.logo" style="max-width: 250px; max-height: 350px;" alt="{{ organization.name }}"/>
+      </div>
+      <h5 class="motto center">{{ organization.motto }}</h5>
+          <hr/>
+          <p>
+            <span class="bold" jhiTranslate="organization-data-view.placenumber">Place:</span> {{ organization.placeNumber }}
+        </p>
+        <p>
+          <span class="bold" jhiTranslate="organization-data-view.price">Price:</span> {{ organization.price | currency }}
+        </p>
+        <p>
+          <span class="bold" jhiTranslate="create-event.rent-type">Rent type:</span> {{ organization.rentType }}
+        </p>
+      <div class="address">
+        <p>
+          {{ formatAddress(organization) }}
+        </p>
+    </div>
+    <p>
+        <span class="bold" jhiTranslate="partners.phone">Phone:</span> {{ organization.phone }}
+    </p>
+    <p>
+        <span class="bold" jhiTranslate="partners.webaddress">Webaddress:</span> {{ organization.webAddress }}
+    </p>
+    <hr/>
+    </div>
+
+  </ng-template>
+</p-carousel>

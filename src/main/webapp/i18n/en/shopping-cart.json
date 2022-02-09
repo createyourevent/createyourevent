@@ -1,0 +1,16 @@
+{
+    "shopping-cart": {
+        "list-products": "Product list",
+        "filter-name": "Filter by product name:",
+        "list-servicemaps": "Servicemaps list",
+        "filter-servicemaps": "Filter by service maps:",
+        "no-products": "No products selected",
+        "no-services": "No service selected",
+        "total-entrance-fees": "Total entrance fees",
+        "investment": "Investment",
+        "totally-for-shopping": "Total for shopping",
+        "cashbox": "Cashbox",
+        "total-products": "Total products",
+        "total-services": "Total services"
+    }
+}

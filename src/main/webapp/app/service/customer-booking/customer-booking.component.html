@@ -1,0 +1,122 @@
+<div class="container-fluid">
+    <div id="row">
+        <div class="col-md-12">
+            <label for="servicemaps" jhiTranslate="customer-booking.select-servicemap"></label>
+            <p-dropdown  id="servicemaps" name="serviceMap" [options]="serviceMaps" [(ngModel)]="serviceMapId" optionLabel="title" optionValue="id" (onChange)="selectServiceMap($event)" placeholder="{{ 'customer-booking.select-servicemap' | translate }}"></p-dropdown>
+        </div>
+    </div>
+    <hr/>
+
+    <p-tabView>
+        <p-tabPanel header="{{ 'customer-booking.provisionally' | translate }}">
+            <div class="row">
+                <div class="col-md-12">
+                    <div *ngFor="let order of serviceMapsOrdersProvisionally">
+                        <p-card class="cards">
+                            <p-header>
+                                <h3>{{ order.serviceMap!.title }}</h3>
+                            </p-header>
+                            <table>
+                                <tr class="tr-border">
+                                    <td><span jhiTranslate="customer-booking.date-from" class="bold">Date from</span></td><td>{{ order.dateFrom!.toString() | date: 'medium'}}</td>
+                                </tr>
+                                <tr class="tr-border">
+                                    <td><span jhiTranslate="customer-booking.date-until" class="bold">Date until</span></td><td>{{ order.dateUntil!.toString()  | date: 'medium' }}</td>
+                                </tr>
+                                <tr class="tr-border">
+                                    <td><span jhiTranslate="customer-booking.cost-hour" class="bold">Cost hour</span></td><td>{{ order.costHour | currency }}</td>
+                                </tr>
+                                <tr class="tr-border">
+                                    <td><span jhiTranslate="customer-booking.total-hours" class="bold">Total hours</span></td><td>{{ order.totalHours }}</td>
+                                </tr>
+                                <tr class="tr-border">
+                                    <td><span jhiTranslate="customer-booking.ride-costs" class="bold">Ride costs</span></td><td>{{ order.rideCosts | currency }}</td>
+                                </tr>
+                                <tr class="tr-border">
+                                    <td><span jhiTranslate="customer-booking.kilometre" class="bold">Kilometre</span></td><td>{{ order.kilometre }} km</td>
+                                </tr>
+                                <tr class="tr-border">
+                                    <td><span jhiTranslate="customer-booking.total" class="bold">Total</span></td><td>{{ order.total | currency }}</td>
+                                </tr>
+                            </table>
+                            <hr/>
+                            <dl>
+                                <dt><span jhiTranslate="customer-booking.event" class="bold">Event</span></dt>
+                                <dd><a href="/events/{{ order.event.id }}/view">{{ order.event.name }}</a></dd>
+
+                                <dt><span jhiTranslate="customer-booking.organisator" class="bold">Organisator</span></dt>
+                                <dd><a (click)="clickUserName(order.event.user)">{{ order.event.user.email }}</a></dd>
+                            </dl>
+                            <p-footer>
+                                <div class="border-box">
+                                    <span jhiTranslate="orders.seen">Seen</span>
+                                    <p-toggleButton (onChange)="seenChange($event, order.id!)" [(ngModel)]="order.seen" [disabled]="order.seen" onIcon="pi pi-check" offIcon="pi pi-times"></p-toggleButton>
+                                </div>
+                                <div class="border-box">
+                                    <span jhiTranslate="orders.approved">Approved</span>
+                                    <p-toggleButton (onChange)="approvedChange($event, order.id!)" [(ngModel)]="order.approved" [disabled]="order.approved || !order.seen || clickSeen" onIcon="pi pi-check" offIcon="pi pi-times"></p-toggleButton>
+                                </div>
+                            </p-footer>
+                        </p-card>
+                    </div>
+                    <div class="clear"></div>
+              </div>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="{{ 'customer-booking.definitely' | translate }}">
+            <div class="row">
+                <div class="col-md-12">
+                    <div *ngFor="let order of serviceMapsOrdersDefinitely">
+                        <p-card class="cards">
+                            <p-header>
+                                <h3>{{ order.serviceMap!.title }}</h3>
+                            </p-header>
+                            <table>
+                                <tr class="tr-border">
+                                    <td><span jhiTranslate="customer-booking.date-from" class="bold">Date from</span></td><td>{{ order.dateFrom!.toString() | date: 'medium'}}</td>
+                                </tr>
+                                <tr class="tr-border">
+                                    <td><span jhiTranslate="customer-booking.date-until" class="bold">Date until</span></td><td>{{ order.dateUntil!.toString()  | date: 'medium' }}</td>
+                                </tr>
+                                <tr class="tr-border">
+                                    <td><span jhiTranslate="customer-booking.cost-hour" class="bold">Cost hour</span></td><td>{{ order.costHour | currency }}</td>
+                                </tr>
+                                <tr class="tr-border">
+                                    <td><span jhiTranslate="customer-booking.total-hours" class="bold">Total hours</span></td><td>{{ order.totalHours }}</td>
+                                </tr>
+                                <tr class="tr-border">
+                                    <td><span jhiTranslate="customer-booking.ride-costs" class="bold">Ride costs</span></td><td>{{ order.rideCosts | currency }}</td>
+                                </tr>
+                                <tr class="tr-border">
+                                    <td><span jhiTranslate="customer-booking.kilometre" class="bold">Kilometre</span></td><td>{{ order.kilometre }} km</td>
+                                </tr>
+                                <tr class="tr-border">
+                                    <td><span jhiTranslate="customer-booking.total" class="bold">Total</span></td><td>{{ order.total | currency }}</td>
+                                </tr>
+                            </table>
+                            <hr/>
+                            <dl>
+                                <dt><span jhiTranslate="customer-booking.event" class="bold">Event</span></dt>
+                                <dd><a href="/events/{{ order.event.id }}/view">{{ order.event!.name }}</a></dd>
+
+                                <dt><span jhiTranslate="customer-booking.organisator" class="bold">Organisator</span></dt>
+                                <dd><a (click)="clickUserName(order.event!.user!)">{{ order.event!.user!.email }}</a></dd>
+                            </dl>
+                            <p-footer>
+                            </p-footer>
+                        </p-card>
+                    </div>
+                    <div class="clear"></div>
+              </div>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+
+    <hr/>
+    <div class="btn-cancel">
+        <button type="button" id="cancel-save" class="btn btn-secondary btn-cancel" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+      </button>
+    </div>
+
+</div>

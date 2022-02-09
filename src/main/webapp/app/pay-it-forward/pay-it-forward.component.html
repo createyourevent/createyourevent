@@ -1,0 +1,28 @@
+<div class="box_violet">
+  <h1 class="title" jhiTranslate="pay-it-forward.title">Pay It Forward of Create Your Event</h1>
+  <p jhiTranslate="pay-it-forward.info">
+    We have developed a Pay It Forward system for Create Your Event, in which we pay a certain percentage of all feeable income to event organizers.
+    This means that everyone who organizes an event with us receives a percentage of all fees that we incur for their event as a deposit.
+    We charge 13% for the successful sale of products, the successful offering of a service, the successful completion of an event and for the
+    successful booking of an organization. We now add up all the fees and pay a variable percentage to our organizers for the event that you plan
+    and advertise with us.
+  </p>
+</div>
+<hr/>
+<div class="alert alert-info" role="alert">
+  <h3 jhiTranslate="pay-it-forward.total-fees.title">Total fees for paying it forward.</h3>
+  <div class="row">
+		<div class="col-md-3">
+      <span jhiTranslate="pay-it-forward.total-fees">Total fees:</span>
+		</div>
+		<div class="col-md-3">
+      {{ totalFeesValue | currency }}
+		</div>
+		<div class="col-md-3">
+      <span jhiTranslate="pay-it-forward.total-fees.thereof"></span> {{ payItForwardRate | percent }}
+		</div>
+		<div class="col-md-3">
+      {{ totalFeesValue * payItForwardRate | currency }}
+		</div>
+	</div>
+</div>

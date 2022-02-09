@@ -1,0 +1,10 @@
+{
+  "shop-overview": {
+    "title": "Shop:",
+    "name": "Name",
+    "productType": "Product type",
+    "active": "Active",
+    "description": "Description",
+    "logo": "Companylogo"
+  }
+}

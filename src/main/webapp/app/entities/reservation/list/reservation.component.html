@@ -1,0 +1,146 @@
+<div>
+  <h2 id="page-heading" data-cy="ReservationHeading">
+    <span jhiTranslate="createyoureventApp.reservation.home.title">Reservations</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="createyoureventApp.reservation.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-reservation"
+        [routerLink]="['/reservation/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="createyoureventApp.reservation.home.createLabel"> Create a new Reservation </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="reservations?.length === 0">
+    <span jhiTranslate="createyoureventApp.reservation.home.notFound">No reservations found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="reservations && reservations.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="date">
+            <span jhiTranslate="createyoureventApp.reservation.date">Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="billed">
+            <span jhiTranslate="createyoureventApp.reservation.billed">Billed</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accessEvent">
+            <span jhiTranslate="createyoureventApp.reservation.accessEvent">Access Event</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accessDate">
+            <span jhiTranslate="createyoureventApp.reservation.accessDate">Access Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="tdTxId">
+            <span jhiTranslate="createyoureventApp.reservation.tdTxId">Td Tx Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="transactionId.id">
+            <span jhiTranslate="createyoureventApp.reservation.transactionId">Transaction Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="ticket.id">
+            <span jhiTranslate="createyoureventApp.reservation.ticket">Ticket</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="user.id">
+            <span jhiTranslate="createyoureventApp.reservation.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="event.id">
+            <span jhiTranslate="createyoureventApp.reservation.event">Event</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/reservation', reservation.id, 'view']">{{ reservation.id }}</a>
+          </td>
+          <td>{{ reservation.date | formatMediumDatetime }}</td>
+          <td>{{ reservation.billed }}</td>
+          <td>{{ reservation.accessEvent }}</td>
+          <td>{{ reservation.accessDate | formatMediumDatetime }}</td>
+          <td>{{ reservation.tdTxId }}</td>
+          <td>
+            <div *ngIf="reservation.transactionId">
+              <a [routerLink]="['/reservation-transaction-id', reservation.transactionId?.id, 'view']">{{
+                reservation.transactionId?.id
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="reservation.ticket">
+              <a [routerLink]="['/ticket', reservation.ticket?.id, 'view']">{{ reservation.ticket?.id }}</a>
+            </div>
+          </td>
+          <td>
+            {{ reservation.user?.id }}
+          </td>
+          <td>
+            <div *ngIf="reservation.event">
+              <a [routerLink]="['/event', reservation.event?.id, 'view']">{{ reservation.event?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/reservation', reservation.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/reservation', reservation.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(reservation)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="reservations && reservations.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

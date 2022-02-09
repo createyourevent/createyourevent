@@ -1,0 +1,8 @@
+{
+  "admin-comments-event-product": {
+    "admin-comments": "Administration comments between product and event",
+    "comments-ratings-product-event": "Comments and ratings for evaluation between product and event",
+    "comments-title": "Comments between event and product",
+    "comments-info": "Below you will find all comments that were written between a product and an event. Here you can also delete inappropriate comments."
+  }
+}

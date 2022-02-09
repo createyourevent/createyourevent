@@ -1,0 +1,29 @@
+{
+  "createyoureventApp": {
+    "serviceComment": {
+      "home": {
+        "title": "Service Comments",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Service Comment erstellen",
+        "createOrEditLabel": "Service Comment erstellen oder bearbeiten",
+        "notFound": "Keine Service Comments gefunden"
+      },
+      "created": "Service Comment erstellt mit ID {{ param }}",
+      "updated": "Service Comment aktualisiert mit ID {{ param }}",
+      "deleted": "Service Comment gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Service Comment {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Service Comment"
+      },
+      "id": "ID",
+      "comment": "Comment",
+      "date": "Date",
+      "serviceComments": "Service Comments",
+      "createYourEventService": "Create Your Event Service",
+      "user": "User",
+      "serviceComment": "Service Comment"
+    }
+  }
+}

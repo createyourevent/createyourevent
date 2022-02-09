@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="worksheet">
+      <h2 data-cy="worksheetDetailsHeading"><span jhiTranslate="createyoureventApp.worksheet.detail.title">Worksheet</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ worksheet.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.worksheet.description">Description</span></dt>
+        <dd>
+          <span>{{ worksheet.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.worksheet.start">Start</span></dt>
+        <dd>
+          <span>{{ worksheet.start | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.worksheet.end">End</span></dt>
+        <dd>
+          <span>{{ worksheet.end | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.worksheet.costHour">Cost Hour</span></dt>
+        <dd>
+          <span>{{ worksheet.costHour }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.worksheet.total">Total</span></dt>
+        <dd>
+          <span>{{ worksheet.total }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.worksheet.billingType">Billing Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'createyoureventApp.WorksheetType.' + worksheet.billingType }}">{{ worksheet.billingType }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.worksheet.userType">User Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'createyoureventApp.UserType.' + worksheet.userType }}">{{ worksheet.userType }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.worksheet.user">User</span></dt>
+        <dd>
+          <span>{{ worksheet.user?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.worksheet.event">Event</span></dt>
+        <dd>
+          <div *ngIf="worksheet.event">
+            <a [routerLink]="['/event', worksheet.event?.id, 'view']">{{ worksheet.event?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.worksheet.product">Product</span></dt>
+        <dd>
+          <div *ngIf="worksheet.product">
+            <a [routerLink]="['/product', worksheet.product?.id, 'view']">{{ worksheet.product?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/worksheet', worksheet.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

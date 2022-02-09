@@ -1,0 +1,197 @@
+<div>
+  <h2 id="page-heading" data-cy="ProductHeading">
+    <span jhiTranslate="createyoureventApp.product.home.title">Products</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="createyoureventApp.product.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-product"
+        [routerLink]="['/product/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="createyoureventApp.product.home.createLabel"> Create a new Product </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="products?.length === 0">
+    <span jhiTranslate="createyoureventApp.product.home.notFound">No products found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="products && products.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="title">
+            <span jhiTranslate="createyoureventApp.product.title">Title</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="keywords">
+            <span jhiTranslate="createyoureventApp.product.keywords">Keywords</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <span jhiTranslate="createyoureventApp.product.description">Description</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateAdded">
+            <span jhiTranslate="createyoureventApp.product.dateAdded">Date Added</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateModified">
+            <span jhiTranslate="createyoureventApp.product.dateModified">Date Modified</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="priceType">
+            <span jhiTranslate="createyoureventApp.product.priceType">Price Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="rentType">
+            <span jhiTranslate="createyoureventApp.product.rentType">Rent Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="price">
+            <span jhiTranslate="createyoureventApp.product.price">Price</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="photo">
+            <span jhiTranslate="createyoureventApp.product.photo">Photo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="photo2">
+            <span jhiTranslate="createyoureventApp.product.photo2">Photo 2</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="photo3">
+            <span jhiTranslate="createyoureventApp.product.photo3">Photo 3</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="youtube">
+            <span jhiTranslate="createyoureventApp.product.youtube">Youtube</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="active">
+            <span jhiTranslate="createyoureventApp.product.active">Active</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="stock">
+            <span jhiTranslate="createyoureventApp.product.stock">Stock</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="productType">
+            <span jhiTranslate="createyoureventApp.product.productType">Product Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="itemNumber">
+            <span jhiTranslate="createyoureventApp.product.itemNumber">Item Number</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <span jhiTranslate="createyoureventApp.product.status">Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="unit">
+            <span jhiTranslate="createyoureventApp.product.unit">Unit</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="amount">
+            <span jhiTranslate="createyoureventApp.product.amount">Amount</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="motto">
+            <span jhiTranslate="createyoureventApp.product.motto">Motto</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="shop.id">
+            <span jhiTranslate="createyoureventApp.product.shop">Shop</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a>
+          </td>
+          <td>{{ product.title }}</td>
+          <td>{{ product.keywords }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.dateAdded | formatMediumDatetime }}</td>
+          <td>{{ product.dateModified | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'createyoureventApp.PriceType.' + product.priceType }}">{{ product.priceType }}</td>
+          <td jhiTranslate="{{ 'createyoureventApp.RentType.' + product.rentType }}">{{ product.rentType }}</td>
+          <td>{{ product.price }}</td>
+          <td>
+            <a *ngIf="product.photo" (click)="openFile(product.photo, product.photoContentType)">
+              <img [src]="'data:' + product.photoContentType + ';base64,' + product.photo" style="max-height: 30px" alt="product image" />
+            </a>
+            <span *ngIf="product.photo">{{ product.photoContentType }}, {{ byteSize(product.photo) }}</span>
+          </td>
+          <td>
+            <a *ngIf="product.photo2" (click)="openFile(product.photo2, product.photo2ContentType)">
+              <img [src]="'data:' + product.photo2ContentType + ';base64,' + product.photo2" style="max-height: 30px" alt="product image" />
+            </a>
+            <span *ngIf="product.photo2">{{ product.photo2ContentType }}, {{ byteSize(product.photo2) }}</span>
+          </td>
+          <td>
+            <a *ngIf="product.photo3" (click)="openFile(product.photo3, product.photo3ContentType)">
+              <img [src]="'data:' + product.photo3ContentType + ';base64,' + product.photo3" style="max-height: 30px" alt="product image" />
+            </a>
+            <span *ngIf="product.photo3">{{ product.photo3ContentType }}, {{ byteSize(product.photo3) }}</span>
+          </td>
+          <td>{{ product.youtube }}</td>
+          <td>{{ product.active }}</td>
+          <td>{{ product.stock }}</td>
+          <td jhiTranslate="{{ 'createyoureventApp.ProductType.' + product.productType }}">{{ product.productType }}</td>
+          <td>{{ product.itemNumber }}</td>
+          <td jhiTranslate="{{ 'createyoureventApp.OrderStatus.' + product.status }}">{{ product.status }}</td>
+          <td jhiTranslate="{{ 'createyoureventApp.Unit.' + product.unit }}">{{ product.unit }}</td>
+          <td>{{ product.amount }}</td>
+          <td>{{ product.motto }}</td>
+          <td>
+            <div *ngIf="product.shop">
+              <a [routerLink]="['/shop', product.shop?.id, 'view']">{{ product.shop?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/product', product.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/product', product.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(product)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="products && products.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+{
+  "map": {
+    "map": "Karte",
+    "distance": "Max. Distanz der Event's zum Standpunkt",
+    "events": "Events",
+    "shops": "Lieferanten",
+    "services": "Dienstleistungen"
+  }
+}

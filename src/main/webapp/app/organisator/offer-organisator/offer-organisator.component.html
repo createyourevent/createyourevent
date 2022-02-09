@@ -1,0 +1,7 @@
+<h1><span jhiTranslate="offer-organisator.title">Offert's for the event</span>{{ jhiEvent.name }}</h1>
+<p>
+    <span jhiTranslate="offer-organisator.info">
+        Below you can enter multiple offers to calculate the total workload for your event.
+    </span>
+</p>
+<jhi-offer [worksheets]="worksheets" [userType]="'ORGANIZOR'" [event]="jhiEvent" [user]="user" [billingType]="'OFFER'"></jhi-offer>

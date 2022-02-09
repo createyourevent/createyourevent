@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Good Thymes Virtual Grocery</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style th:inline="css">
+      .red {  background-color: red;
+              box-shadow: 5px 5px 15px 5px #000000;
+           }
+    </style>
+  </head>
+
+  <body>
+    <div class="red">
+      <h3 style="text-align: center; color: green">
+        <span th:text="'Welcome to ' + ${to} + '!'"></span>
+      </h3>
+    </div>
+  </body>
+
+</html>

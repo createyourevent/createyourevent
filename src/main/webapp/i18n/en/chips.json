@@ -1,0 +1,30 @@
+{
+  "createyoureventApp": {
+    "chips": {
+      "home": {
+        "title": "Chips",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Chips",
+        "createOrEditLabel": "Create or edit a Chips",
+        "notFound": "No Chips found"
+      },
+      "created": "A new Chips is created with identifier {{ param }}",
+      "updated": "A Chips is updated with identifier {{ param }}",
+      "deleted": "A Chips is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Chips {{ id }}?"
+      },
+      "detail": {
+        "title": "Chips"
+      },
+      "id": "ID",
+      "points": "Points",
+      "website": "Website",
+      "x": "X",
+      "y": "Y",
+      "image": "Image",
+      "color": "Color",
+      "chipsCollectionChips": "Chips Collection Chips"
+    }
+  }
+}

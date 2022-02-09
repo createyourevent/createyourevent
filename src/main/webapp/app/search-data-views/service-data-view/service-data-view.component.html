@@ -1,0 +1,126 @@
+<h1 id="main-title" class="main-title" jhiTranslate="service-data-view.title">Search service</h1>
+
+<p-dataView #dv [value]="servicesWithDistance"   [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid" [loading]="loading">
+  <ng-template pTemplate="header">
+    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+        <div class="row">
+          <div class="col-md-4">
+            <span class="p-input-icon-left p-mb-2 p-mb-md-0">
+              <i class="pi pi-search"></i>
+              <input type="search" pInputText placeholder="Search by name" (input)="dv.filter($event.target!.value)">
+           </span>
+          </div>
+          <div class="col-md-6">
+            <ng-container *ngIf="user">
+              <div class="row">
+                <div class="col-md-3">
+                  <h5><span jhiTranslate="distance.distance"></span>{{ distance }} Km</h5>
+                  <p-knob [(ngModel)]="distance" [step]="5" (onChange)="changeSliderRadius($event)" class="slider"></p-knob>
+                </div>
+                <div class="col-md-9">
+                  <div class="alert alert-info" role="alert">
+                    <span jhiTranslate="data-view.distance-info">
+                      Use the switch to select the maximum range in which you want to search for events.
+                      If the distance is set to 0, all search results are displayed.
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div  class="col-md-2">
+            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+          </div>
+        </div>
+    </div>
+  </ng-template>
+
+
+    <ng-template let-service pTemplate="listItem">
+      <div class="row violet padding product-row-inline">
+        <div class="row width-100">
+          <div class="col-md-4 padding-10">
+            <span class="bungee-inline bold">{{ service.name }}</span><br/>
+            <p>
+              <img mat-card-image [src]="'data:' + service.logoContentType + ';base64,' + service.logo" style="max-height: 150px; max-width: 250px"  alt="{{ service.name }}"/>
+            </p>
+            <span>{{ 'createyoureventApp.ServiceCategory.' + service.category | translate }}</span>
+          </div>
+          <div class="col-md-4 padding-10">
+            <p class="address">
+              {{ service.address }}
+            </p>
+            <span jhiTranslate="shop-data-view.phone">Phone:</span> {{ service.phone }}<br/>
+            Web: <a class="link" href="{{ service.webAddress }}">{{service.webAddress}}</a>
+          </div>
+          <div class="col-md-4 padding-10">
+            <p class="bold">
+              {{ service.motto }}
+            </p>
+            <hr/>
+            <a class="myButton" (click)="goToService(service.id)">
+              <fa-icon icon="arrow-right"></fa-icon>&nbsp;<span jhiTranslate="entity.action.view">View</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template let-service pTemplate="gridItem">
+      <div class="card card-container violet">
+        <div class="row">
+          <div class="col-md-12">
+            <span class="bungee-inline">{{ service.name }}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <span>{{ 'createyoureventApp.ServiceCategory.' + service.category | translate }}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p>
+              <img mat-card-image [src]="'data:' + service.logoContentType + ';base64,' + service.logo" style="max-height: 150px; max-width: 250px"  alt="{{ service.name }}"/>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p class="bold">
+              {{ service.motto }}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p class="address">
+              {{ service.address }}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <span jhiTranslate="shop-data-view.phone">Phone:</span> {{ service.phone }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            Web: <a class="link" href="{{ service.webAddress }}">{{service.webAddress}}</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr/>
+            <a class="myButton" (click)="goToService(service.id)">
+              <fa-icon icon="arrow-right"></fa-icon>&nbsp;<span jhiTranslate="entity.action.view">View</span>
+            </a>
+          </div>
+        </div>
+    </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+    </ng-template>
+</p-dataView>
+

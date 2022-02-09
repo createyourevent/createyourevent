@@ -1,0 +1,9 @@
+{
+  "createyoureventApp": {
+    "EventStatus": {
+      "null": "",
+      "PROCESSING": "PROCESSING",
+      "DEFINITELY": "DEFINITELY"
+    }
+  }
+}

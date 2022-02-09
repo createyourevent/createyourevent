@@ -1,0 +1,7 @@
+{
+  "dashboard-supplier": {
+    "title": "Dashboard for all your shop's",
+    "info": "Below you see a tabular list of all of your shops. From here you can edit and delete them later. From here you can also access all pages such as orders or administration.",
+    "shop-active": "Shop was activated / deactivated."
+  }
+}

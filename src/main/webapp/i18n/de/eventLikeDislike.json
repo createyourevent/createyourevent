@@ -1,0 +1,29 @@
+{
+  "createyoureventApp": {
+    "eventLikeDislike": {
+      "home": {
+        "title": "Event Like Dislikes",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Event Like Dislike erstellen",
+        "createOrEditLabel": "Event Like Dislike erstellen oder bearbeiten",
+        "notFound": "Keine Event Like Dislikes gefunden"
+      },
+      "created": "Event Like Dislike erstellt mit ID {{ param }}",
+      "updated": "Event Like Dislike aktualisiert mit ID {{ param }}",
+      "deleted": "Event Like Dislike gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Event Like Dislike {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Event Like Dislike"
+      },
+      "id": "ID",
+      "like": "Like",
+      "dislike": "Dislike",
+      "date": "Date",
+      "comment": "Comment",
+      "event": "Event",
+      "user": "User"
+    }
+  }
+}

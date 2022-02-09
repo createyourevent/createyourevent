@@ -1,0 +1,133 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="event">
+      <h2 data-cy="eventDetailsHeading"><span jhiTranslate="createyoureventApp.event.detail.title">Event</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ event.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.name">Name</span></dt>
+        <dd>
+          <span>{{ event.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.description">Description</span></dt>
+        <dd>
+          <span>{{ event.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.dateStart">Date Start</span></dt>
+        <dd>
+          <span>{{ event.dateStart | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.dateEnd">Date End</span></dt>
+        <dd>
+          <span>{{ event.dateEnd | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.category">Category</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'createyoureventApp.EventCategory.' + event.category }}">{{ event.category }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.price">Price</span></dt>
+        <dd>
+          <span>{{ event.price }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.flyer">Flyer</span></dt>
+        <dd>
+          <div *ngIf="event.flyer">
+            <a (click)="openFile(event.flyer, event.flyerContentType)">
+              <img [src]="'data:' + event.flyerContentType + ';base64,' + event.flyer" style="max-width: 100%" alt="event image" />
+            </a>
+            {{ event.flyerContentType }}, {{ byteSize(event.flyer) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.youtube">Youtube</span></dt>
+        <dd>
+          <span>{{ event.youtube }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.privateOrPublic">Private Or Public</span></dt>
+        <dd>
+          <span>{{ event.privateOrPublic }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.active">Active</span></dt>
+        <dd>
+          <span>{{ event.active }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.minPlacenumber">Min Placenumber</span></dt>
+        <dd>
+          <span>{{ event.minPlacenumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.placenumber">Placenumber</span></dt>
+        <dd>
+          <span>{{ event.placenumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.investment">Investment</span></dt>
+        <dd>
+          <span>{{ event.investment }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'createyoureventApp.EventStatus.' + event.status }}">{{ event.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.definitelyConfirmed">Definitely Confirmed</span></dt>
+        <dd>
+          <span>{{ event.definitelyConfirmed }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.motto">Motto</span></dt>
+        <dd>
+          <span>{{ event.motto }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.billed">Billed</span></dt>
+        <dd>
+          <span>{{ event.billed }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.stars">Stars</span></dt>
+        <dd>
+          <span>{{ event.stars }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.billedOrganisator">Billed Organisator</span></dt>
+        <dd>
+          <span>{{ event.billedOrganisator }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.billedeCreateYourEvent">Billede Create Your Event</span></dt>
+        <dd>
+          <span>{{ event.billedeCreateYourEvent }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.location">Location</span></dt>
+        <dd>
+          <div *ngIf="event.location">
+            <a [routerLink]="['/location', event.location?.id, 'view']">{{ event.location?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.eventDetail">Event Detail</span></dt>
+        <dd>
+          <div *ngIf="event.eventDetail">
+            <a [routerLink]="['/event-details', event.eventDetail?.id, 'view']">{{ event.eventDetail?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.user">User</span></dt>
+        <dd>
+          <span>{{ event.user?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.event.reservedUsers">Reserved Users</span></dt>
+        <dd>
+          <span *ngFor="let reservedUsers of event.reservedUsers; let last = last"> {{ reservedUsers.id }}{{ last ? '' : ', ' }} </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/event', event.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,178 @@
+<p-toast></p-toast>
+<ng-container *ngIf="success || error">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 jhiTranslate="register.title">Registration shop</h1>
+
+            <div class="alert alert-success" *ngIf="success" jhiTranslate="register-shop.messages.success">
+                <strong>Registration shop saved!</strong> After successfully checking your details, we will activate the shop.
+            </div>
+
+            <div class="alert alert-danger" *ngIf="error" jhiTranslate="register-shop.messages.error.fail">
+                <strong>Registration failed!</strong> Please try again later.
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="!success && !error">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <form name="registerShopForm" role="form" novalidate (ngSubmit)="registerShop()" [formGroup]="registerShopForm"  autocomplete="off"btn-xs>
+                <div class="alert alert-info" role="alert">
+                    <h2 id="register-shop" jhiTranslate="createyoureventApp.register-shop.title">Register a Shop</h2>
+                    <p jhiTranslate="register-shop.info">
+                        Below you can register a shop with us with a few clicks. Please fill in all the information we need.
+                        Afterwards we will check the application on our part. If everything is in order, we will activate the shop.
+                        Afterwards you can manage the shop in your dashboard. Normally it takes about 1 day until we have activated
+                        the shop. You can find the dashboard here: <a href="/supplier/dashboard\">Click here</a>
+                    </p>
+                </div>
+                <hr/>
+                <div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="createyoureventApp.register-shop.name" for="field_name">Name of the shop:</label>
+                        <input type="text" class="form-control" name="name" id="field_name"
+                            formControlName="name" autocorrect="off" spellcheck="false" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');"/>
+                        <div *ngIf="registerShopForm.get('name')!.invalid && (registerShopForm.get('name')!.dirty || registerShopForm.get('name')!.touched)">
+                            <small class="form-text text-danger"
+                                *ngIf="registerShopForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="createyoureventApp.shop.motto" for="field_motto">Motto</label>
+                        <input type="text" class="form-control" name="motto" id="field_motto"
+                               formControlName="motto"/>
+                        <div *ngIf="registerShopForm.get('motto')!.invalid && (registerShopForm.get('motto')!.dirty || registerShopForm.get('motto')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="registerShopForm.get('motto')?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="createyoureventApp.product.keywords" for="field_keywords">Keywords</label>
+                        <tag-input [(ngModel)]='items' [maxItems]='4' [ngModelOptions]="{standalone: true}"></tag-input>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="fieldnames.address" for="field_address">Address</label>
+                        <input ngx-google-places-autocomplete  type="text" class="form-control" name="address" id="field_address"
+                               formControlName="address" (onAddressChange)="addressChange($event)"/>
+                        <small class="form-text" jhiTranslate="fieldnames.address.info">
+                            Please enter the address in the following format: '(street house-number, zip-code city, country)'. Example: (Musterstrasse 165, 8200 Schaffhausen, Switzerland)
+                        </small>
+
+                       <div *ngIf="registerShopForm.get('address')!.invalid && (registerShopForm.get('address')!.dirty || registerShopForm.get('address')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="registerShopForm.get('address')?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                            </small>
+                            <small class="form-text text-danger"
+                                    *ngIf="registerShopForm.get('address')?.errors?.pattern" jhiTranslate="settings.messages.validate.address.pattern">
+                                The adress-format is wrong.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="createyoureventApp.shop.phone" for="field_phone">Phone</label>
+                        <input type="text" class="form-control" name="phone" id="field_phone"
+                               formControlName="phone"/>
+                        <div *ngIf="registerShopForm.get('phone')!.invalid && (registerShopForm.get('phone')!.dirty || registerShopForm.get('phone')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="registerShopForm.get('phone')?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="createyoureventApp.shop.webAddress" for="field_webAddress">Web Address</label>
+                        <input type="text" class="form-control" name="webAddress" id="field_webAddress"
+                               formControlName="webAddress"/>
+                        <div *ngIf="registerShopForm.get('webAddress')!.invalid && (registerShopForm.get('webAddress')!.dirty || registerShopForm.get('webAddress')!.touched)">
+                        <small class="form-text text-danger"
+                                *ngIf="registerShopForm.get('webAddress')?.errors?.startsWithHttp" jhiTranslate="messages.startsWithHttp">
+                        The webaddress must starts with either "http://" or "https://"
+                        </small>
+                    </div>  
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="register-shop.productType" for="field_productType">Select shop category:</label>
+                        <select class="form-control" name="productType" formControlName="productType" id="field_productType">
+                            <option value="REAL_ESTATE">{{ 'createyoureventApp.ProductType.REAL_ESTATE' | translate }}</option>
+                            <option value="FOOD">{{ 'createyoureventApp.ProductType.FOOD' | translate }}</option>
+                            <option value="DRINK">{{ 'createyoureventApp.ProductType.DRINK' | translate }}</option>
+                            <option value="MUSIC">{{ 'createyoureventApp.ProductType.MUSIC' | translate }}</option>
+                            <option value="LIGHTSHOW">{{ 'createyoureventApp.ProductType.LIGHTSHOW' | translate }}</option>
+                            <option value="DECORATION">{{ 'createyoureventApp.ProductType.DECORATION' | translate }}</option>
+                            <option value="MISCELLANEOUS">{{ 'createyoureventApp.ProductType.MISCELLANEOUS' | translate }}</option>
+                        </select>
+                        <div *ngIf="registerShopForm.get('productType')!.invalid && (registerShopForm.get('productType')!.dirty || registerShopForm.get('productType')!.touched)">
+                            <small class="form-text text-danger"
+                                *ngIf="registerShopForm.get('productType')?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="register-shop.description" for="field_description">Description</label>
+                    <quill-editor [styles]="{height: '350px'}" formControlName="description" [modules]="modules" (onEditorCreated)="getEditorInstance($event)">
+                        <quill-view format="text" theme="snow">
+                        </quill-view>
+                    </quill-editor>
+                    <input type="file" style="display: none" id="fileInputField"/>
+                    <div *ngIf="registerShopForm.get('description')!.invalid && (registerShopForm.get('description')!.dirty || registerShopForm.get('description')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="registerShopForm.get('description')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="createyoureventApp.shop.logo" for="field_logo">Logo</label>
+                    <div>
+                        <img [src]="'data:' + registerShopForm.get('logoContentType')!.value + ';base64,' + registerShopForm.get('logo')!.value" style="max-height: 100px;" *ngIf="registerShopForm.get('logo')!.value" alt="shop image"/>
+                        <div *ngIf="registerShopForm.get('logo')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ registerShopForm.get('logoContentType')!.value }}, {{ byteSize(registerShopForm.get('logo')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('logo', 'logoContentType', 'file_logo')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_logo" (change)="setFileData($event, 'logo', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="logo" id="field_logo"
+                        formControlName="logo"/>
+                    <input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType"
+                        formControlName="logoContentType" />
+
+                    <div *ngIf="registerShopForm.get('logo')!.invalid">
+                        <small class="form-text text-danger"
+                            *ngIf="registerShopForm.get('logo')?.errors?.maxFileSize" jhiTranslate="messages.fileSize">
+                            This file is too big.
+                        </small>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+
+                    <button (click)="registerShop()" id="save-entity" [disabled]="registerShopForm.invalid || isSaving" class="btn btn-primary">
+                        <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-container>

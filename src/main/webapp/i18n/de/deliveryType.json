@@ -1,0 +1,29 @@
+{
+  "createyoureventApp": {
+    "deliveryType": {
+      "home": {
+        "title": "Delivery Types",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Delivery Type erstellen",
+        "createOrEditLabel": "Delivery Type erstellen oder bearbeiten",
+        "notFound": "Keine Delivery Types gefunden"
+      },
+      "created": "Delivery Type erstellt mit ID {{ param }}",
+      "updated": "Delivery Type aktualisiert mit ID {{ param }}",
+      "deleted": "Delivery Type gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Delivery Type {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Delivery Type"
+      },
+      "id": "ID",
+      "deliveryType": "Delivery Type",
+      "minimumOrderQuantity": "Minimum Order Quantity",
+      "price": "Price",
+      "pricePerKilometre": "Price Per Kilometre",
+      "eventProductOrders": "Event Product Orders",
+      "product": "Product"
+    }
+  }
+}

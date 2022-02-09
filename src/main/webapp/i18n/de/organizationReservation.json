@@ -1,0 +1,34 @@
+{
+  "createyoureventApp": {
+    "organizationReservation": {
+      "home": {
+        "title": "Organization Reservations",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Organization Reservation erstellen",
+        "createOrEditLabel": "Organization Reservation erstellen oder bearbeiten",
+        "notFound": "Keine Organization Reservations gefunden"
+      },
+      "created": "Organization Reservation erstellt mit ID {{ param }}",
+      "updated": "Organization Reservation aktualisiert mit ID {{ param }}",
+      "deleted": "Organization Reservation gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Organization Reservation {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Organization Reservation"
+      },
+      "id": "ID",
+      "date": "Date",
+      "dateFrom": "Date From",
+      "dateUntil": "Date Until",
+      "seen": "Seen",
+      "approved": "Approved",
+      "total": "Total",
+      "feeBilled": "Fee Billed",
+      "user": "User",
+      "event": "Event",
+      "feeTransaction": "Fee Transaction",
+      "organization": "Organization"
+    }
+  }
+}

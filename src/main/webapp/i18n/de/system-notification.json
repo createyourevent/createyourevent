@@ -1,0 +1,10 @@
+{
+  "system-notification": {
+    "events-in-seven-days": "Folgende Events, welche von Ihnen organisiert werden, müssen Sie noch definitiv bestätigen.",
+    "events-in-seven-days-with-distance": "Ein Event im Umkreis von 25km findet in den nächsten 7 Tagen statt.",
+    "pay-tickets": "Bitte bezahlen Sie noch folgende Tickets.",
+    "event-product-orders": "Sie haben Produktebestellungen, welche Sie noch nicht gesehen haben.",
+    "service-orders": "Sie haben Dienstleistungsbuchungen nicht gesehen.",
+    "organization-reservations": "Sie haben Organisationsmieten noch nicht gesehen."
+  }
+}

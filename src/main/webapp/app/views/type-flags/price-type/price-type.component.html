@@ -1,0 +1,20 @@
+<ng-container *ngIf="product.priceType === 'SELL'">
+    <div class="marker green">
+        <p>{{ 'createyoureventApp.PriceType.SELL' | translate }}</p>
+    </div>
+</ng-container>
+<ng-container *ngIf="product.priceType === 'RENT' && product.rentType === 'HOURLY'">
+    <div class="marker blue">
+        <p>{{ 'createyoureventApp.PriceType.RENT' | translate }}:{{ 'createyoureventApp.RentType.HOURLY' | translate }}</p>
+    </div>
+</ng-container>
+<ng-container *ngIf="product.priceType === 'RENT' && product.rentType === 'HALFDAY'">
+    <div class="marker blue">
+        <p>{{ 'createyoureventApp.PriceType.RENT' | translate }}:{{ 'createyoureventApp.RentType.HALFDAY' | translate }}</p>
+    </div>
+</ng-container>
+<ng-container *ngIf="product.priceType === 'RENT' && product.rentType === 'DAY'">
+    <div class="marker blue">
+        <p>{{ 'createyoureventApp.PriceType.RENT' | translate }}:{{ 'createyoureventApp.RentType.DAY' | translate }}</p>
+    </div>
+</ng-container>

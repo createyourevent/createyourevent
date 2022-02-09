@@ -1,0 +1,7 @@
+{
+    "messages": {
+        "fileSize": "The file size is to big.",
+        "fileDimension": "The file is too big in width or heigh",
+        "startsWithHttp": "The webaddress must beginn with either \"http://\" or \"https://\"."
+    }
+}

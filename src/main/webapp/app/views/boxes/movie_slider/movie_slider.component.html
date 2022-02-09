@@ -1,0 +1,24 @@
+<ng-container *ngIf="loaded">
+  <div class="movieFrame">
+    <p-carousel class="movie_frame" [value]="events"  [orientation]="orientation" [autoplayInterval]="autoplayInterval" [verticalViewPortHeight]="verticalViewPortHeight" [circular]="circular" [numVisible]="numVisible" [numScroll]="numScroll">
+        <p-header>
+        </p-header>
+        <ng-template let-event pTemplate="item">
+            <a (click)="goToEvent(event.id)">
+                <div class="container_box_slider">
+                    <div class="box_{{ 4 | randomNumber }}">
+                        <span class="black"></span>
+                        <div class="card content">
+                          <img class="card-img-top card-img-event-slider" [src]="'data:' + event.flyerContentType + ';base64,' + event.flyer" alt="{{ event.name }}">
+                          <div class="card-body">
+                            <h6 class="card-title bold"><span class="font-title-event">{{ event.name }}</span></h6>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+               </a>
+        </ng-template>
+    </p-carousel>
+  </div>
+</ng-container>

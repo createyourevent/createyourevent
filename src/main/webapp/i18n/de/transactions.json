@@ -1,0 +1,10 @@
+{
+  "transactions": {
+    "userId": "Benutzer Id",
+    "firstname": "Vorname",
+    "lastname": "Nachname",
+    "transactionDepositId": "Transaktionsvorkassenid",
+    "transactionId": "Transaktionsid",
+    "no-reservations": "Keine Reservationen gefunden."
+  }
+}

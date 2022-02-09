@@ -1,0 +1,22 @@
+{
+  "add-product": {
+    "title": "Name",
+    "keywords": "Keywords",
+    "description": "Description",
+    "priceType": "Price type",
+    "rentType": "Rent type",
+    "price": "Price",
+    "quantity": "Quantity",
+    "youtube": "Youtube: (The VideoId - for example if the link is https://www.youtube.com/watch?v=KBMO_4Nj4HQ, the videoId would be KBMO_4Nj4HQ (The whole text after v=))",
+    "active": "Active",
+    "itemNumber": "Itemnumber",
+    "editLabel": "Edit product",
+    "amount": "Amount",
+    "unit": "Unit",
+    "stock": "Stock",
+    "home.editLabel": "Edit product",
+    "info.stock": "If you enter the value \"- 1\" in the Inventory field, no inventory will be carried out. Thus, the visitor can buy the product an unlimited number of times in your shop.",
+    "info-purchase-type": "Please select at least one type of purchase.",
+    "please-wait": "Please wait... This window will close automatically."
+  }
+}

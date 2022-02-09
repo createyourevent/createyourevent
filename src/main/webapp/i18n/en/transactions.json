@@ -1,0 +1,10 @@
+{
+  "transactions": {
+    "userId": "UserId",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "transactionDepositId": "Transaction deposit id",
+    "transactionId": "Transaction id",
+    "no-reservations": "No reservations found."
+  }
+}

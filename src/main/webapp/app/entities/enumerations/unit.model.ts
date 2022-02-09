@@ -1,0 +1,23 @@
+export enum Unit {
+  ITEM = 'ITEM',
+
+  GRAM = 'GRAM',
+
+  KILOGRAM = 'KILOGRAM',
+
+  TONNE = 'TONNE',
+
+  MILLIMETER = 'MILLIMETER',
+
+  CENTIMETER = 'CENTIMETER',
+
+  METER = 'METER',
+
+  MILILITER = 'MILILITER',
+
+  CENTILITER = 'CENTILITER',
+
+  DECILITER = 'DECILITER',
+
+  LITER = 'LITER',
+}

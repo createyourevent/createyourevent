@@ -1,0 +1,24 @@
+{
+  "workflow-organisator": {
+    "title": "Event status",
+    "info": "This tab is intended for setting the event status. Each event has 2 status. That would be 'In progress' and 'Definitive'. As soon as you click this button at the bottom on the right side, this event is marked as definite. Furthermore, all products that you have ordered are displayed as Ordered at the supplier. Say you should be careful with this switch. If this status is not set up to 7 days before the event, it is automatically set 7 days before the event. Please note that by this time all products and services that you have bought or booked for this event must have the status \"Seen\" and \"Approved\" before you can definitely hold this event.",
+    "setDefinitly": "Set event status to definitely",
+    "title-confirm": "Will this event take place?",
+    "info-confirm": "This event takes place in 7 days. Please confirm this event within the next 2 days. If it has not been confirmed up to 5 days before the event, this event will be automatically deleted.",
+    "definitly": "Confirm and set this event to definitly.",
+    "confirmed": "This event will take place.",
+    "eventProductOrders": "All products for this event and its status",
+    "eventServiceMapOrders": "All servicemaps for this event and its status",
+    "product": "Product",
+    "servicemap": "Servicemap",
+    "approved": "Approved",
+    "seen": "Seen",
+    "owner": "Owner: ",
+    "seen-and-approved": "The products and service maps must first have the status \"seen\" and \"approved\" before this event can be set to the status \"definitive\".",
+    "number-reservations": "Number of reservations",
+    "minimum-reservations": "Minimum reservations",
+    "reservations-info": "Below you can see how many reservations have been made so far. You can only definitely confirm the event once the minimum number of reservations has been received.",
+    "organization-info": "If you have hired an organization for this event, it must first be marked as seen and confirmed by the landlord so that the event can be switched to definitive.",
+    "organization": "Organization"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "createyoureventApp": {
+    "wishlistEntry": {
+      "home": {
+        "title": "Wishlist Entries",
+        "createLabel": "Create a new Wishlist Entry",
+        "createOrEditLabel": "Create or edit a Wishlist Entry",
+        "notFound": "No Wishlist Entries found"
+      },
+      "created": "A new Wishlist Entry is created with identifier {{ param }}",
+      "updated": "A Wishlist Entry is updated with identifier {{ param }}",
+      "deleted": "A Wishlist Entry is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Wishlist Entry {{ id }}?"
+      },
+      "detail": {
+        "title": "Wishlist Entry"
+      },
+      "like": "Like",
+      "dislike": "Dislike",
+      "quantity": "Quantity",
+      "total": "Total",
+      "product": "Product",
+      "user": "User",
+      "wishlistEntryComments": "Wishlist Entry Comments",
+      "wishlist": "Wishlist"
+    }
+  }
+}

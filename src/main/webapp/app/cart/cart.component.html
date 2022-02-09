@@ -1,0 +1,126 @@
+<p-sidebar [(visible)]="display" styleClass="p-sidebar-lg" [style]="{width:'90em'}">
+    <div class="cart">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    {{ 'shopping-cart.total-entrance-fees' | translate }}
+                </div>
+                <div class="col-md-3">
+                    {{ 'shopping-cart.investment' | translate }}
+                </div>
+                <div class="col-md-3">
+                    {{ 'shopping-cart.totally-for-shopping' | translate }}
+                </div>
+                <div class="col-md-3">
+                    {{ 'shopping-cart.cashbox' | translate }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    {{ calcRevenue() | currency }}
+                </div>
+                <div class="col-md-3">
+                    {{ getInvestment() | currency }}
+                </div>
+                <div class="col-md-3">
+                    {{ calcRevenue() + getInvestment() | currency }}
+                </div>
+                <div class="col-md-3">
+                    {{ maximumInCart() | currency }}
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ 'shopping-cart.total-products' | translate }}
+                </div>
+                <div class="col-md-6">
+                    {{ 'shopping-cart.total-services' | translate }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ getTotalProducts() | currency }}
+                </div>
+                <div class="col-md-6">
+                    {{ getTotalServices() | currency }}
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-12">
+                    <ng-container *ngIf="selectedEventProductOrders.length === 0">
+                        <div class="alert alert-primary" role="alert">
+                            {{ 'shopping-cart.no-products' | translate }}
+                          </div>
+                    </ng-container>
+                    <ng-container *ngIf="selectedEventProductOrders.length > 0">
+                    <p-orderList [value]="selectedEventProductOrders" [listStyle]="{'height':'250px'}" header="{{ 'shopping-cart.list-products' | translate }}" filterBy="product.title" filterPlaceholder="{{ 'shopping-cart.filter-name' | translate}}">
+                        <ng-template let-selectedEventProductOrder pTemplate="item">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        {{ selectedEventProductOrder.product.title }}
+                                    </div>
+                                    <div class="col-md-3">
+                                        {{ selectedEventProductOrder.product.price | currency }}
+                                    </div>
+                                    <div class="col-md-3">
+                                        {{ selectedEventProductOrder.amount}}
+                                    </div>
+                                    <div class="col-md-3">
+                                        {{ selectedEventProductOrder.total | currency}}
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-orderList>
+                  </ng-container>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-12">
+                    <ng-container *ngIf="selectedEventServiceMapOrders.length === 0">
+                        <div class="alert alert-primary" role="alert">
+                            {{ 'shopping-cart.no-services' | translate }}
+                          </div>
+                    </ng-container>
+                    <ng-container *ngIf="selectedEventServiceMapOrders.length > 0">
+                    <p-orderList [value]="selectedEventServiceMapOrders" [listStyle]="{'height':'250px'}" header="{{ 'shopping-cart.list-servicemaps' | translate }}" filterBy="product.name" filterPlaceholder="{{ 'shopping-cart.filter-servicemaps' | translate}}">
+                        <ng-template let-selectedEventServiceMapOrder pTemplate="item">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        {{ selectedEventServiceMapOrder.serviceMap.title }}
+                                    </div>
+                                    <div class="col-md-3">
+                                        {{ selectedEventServiceMapOrder.costHour | currency }}
+                                    </div>
+                                    <div class="col-md-3">
+                                        {{ selectedEventServiceMapOrder.rideCosts | currency }}
+                                    </div>
+                                    <div class="col-md-3">
+                                        {{ selectedEventServiceMapOrder.kilometre }} km
+                                    </div>
+                                    <div class="col-md-3">
+                                        {{ selectedEventServiceMapOrder.total | currency}}
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-orderList>
+                  </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</p-sidebar>
+
+<ng-container *ngIf="showCartButton">
+    <p-button type="button" (click)="display = true" class="cart-button">
+        <fa-icon icon="shopping-cart" class="icon-cart-button"></fa-icon>
+    </p-button>
+</ng-container>
+

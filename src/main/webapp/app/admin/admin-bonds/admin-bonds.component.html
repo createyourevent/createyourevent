@@ -1,0 +1,103 @@
+<p-fieldset legend="{{ 'admin-bonds.add-bond' | translate }}" [toggleable]="true">
+
+  <ng-container *ngIf="valide === false">
+    <div class="alert alert-danger" role="alert">
+      <span jhiTranslate="admin-bonds.fill-out-all-fields">Please fill out all fields</span>
+    </div>
+  </ng-container>
+
+
+  <div class="row">
+		<div class="col-md-4">
+      <div class="p-field p-col-12 p-md-4">
+        <span class="p-float-label">
+            <input type="text" id="title" pInputText [(ngModel)]="name">
+            <label for="title" jhiTranslate="admin-bonds.name">Title</label>
+        </span>
+      </div>
+		</div>
+		<div class="col-md-4">
+      <div class="p-field p-col-12 p-md-4">
+        <span class="p-float-label">
+          <textarea inputId="description" [rows]="5" [cols]="30" pInputTextarea [(ngModel)]="description" autoResize="autoResize"></textarea>
+            <label for="description" jhiTranslate="admin-bonds.description">Description</label>
+        </span>
+    </div>
+		</div>
+		<div class="col-md-4">
+      <div class="p-field p-col-12 p-md-4">
+        <span class="p-float-label">
+            <p-inputNumber inputId="points" [(ngModel)]="points"></p-inputNumber>
+            <label for="points" jhiTranslate="admin-bonds.points">Points</label>
+        </span>
+    </div>
+		</div>
+	</div>
+  <button pButton type="button" label="{{ 'admin-bonds.generate-bond' | translate }}" (click)="generateBond()" ></button>
+</p-fieldset>
+
+
+<p-fieldset legend="{{ 'admin-bonds.overview-bonds' | translate }}" [toggleable]="false">
+  <p-table #dt [value]="bonds" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
+  (onEditInit)="onRowEditInit($event)" (onEditComplete)="onRowEditComplete($event)" (onEditCancel)="onRowEditCancel($event)" editMode="cell">
+    <ng-template pTemplate="header">
+        <tr>
+            <th jhiTranslate="admin-bonds.name">Title</th>
+            <th jhiTranslate="admin-bonds.description">Description</th>
+            <th jhiTranslate="admin-bonds.points">Points</th>
+            <th jhiTranslate="admin-bonds.creation-date">Creation date</th>
+            <th jhiTranslate="admin-bonds.redemption-date">Redemption date</th>
+            <th jhiTranslate="admin-bonds.code">Code</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-bond>
+        <tr>
+            <td [pEditableColumn]="bond" [pEditableColumnField]="'name'" [pEditableColumnRowIndex]="index">
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="bond.name">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{ bond.name }}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td [pEditableColumn]="bond" [pEditableColumnField]="'description'" [pEditableColumnRowIndex]="index">
+              <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <textarea inputId="description" [rows]="5" [cols]="25" pInputTextarea [(ngModel)]="bond.description" autoResize="autoResize"></textarea>
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                      {{ bond.description }}
+                  </ng-template>
+              </p-cellEditor>
+            </td>
+            <td [pEditableColumn]="bond" [pEditableColumnField]="'points'" [pEditableColumnRowIndex]="index">
+              <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <p-inputNumber inputId="points" [(ngModel)]="bond.points"></p-inputNumber>
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                      {{ bond.points }}
+                  </ng-template>
+              </p-cellEditor>
+            </td>
+            <td>{{ bond.creationDate }}</td>
+            <td>{{ bond.redemptionDate }}</td>
+            <td>{{ bond.code }}</td>
+            <td>
+              <button pButton type="button" label="{{ 'admin-bonds.print' | translate }}" (click)="gotoBond(bond.id)" ></button>
+              <button pButton type="button" label="{{ 'admin-bonds.delete' | translate }}" (click)="deleteBond(bond)" ></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+    </ng-template>
+  </p-table>
+</p-fieldset>

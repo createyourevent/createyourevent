@@ -1,0 +1,24 @@
+{
+  "workflow-organisator": {
+    "title": "Event-Status",
+    "info": "Dieser Tab ist für das Setzten des Eventstatuses gedacht. Jeder Event hat 2 Status. Das wären 'In Bearbeitung' und 'Definitiv'. Sobald Sie diesen Schalter unten auf die rechte Seite wird dieser Event als Definitief markiert. Weiter werden alle Produkte, welche Sie bestellt haben, beim Lieferant als Bestellt angezeigt. Sprich Sie sollten vorsichtig mit diesem Schalter sein. Falls dieser Status bis 7 Tage vor dem Event nicht gesetzt wird, wird er automatisch 7 Tage vor dem Event gesetzt. Bitte beachten Sie unbedingt, dass bis zu diesem Zeitpunkt alle Produkte und Dienstleistungen, welche Sie für diesen Event gekauft oder gebucht haben, den Status \"Gesehen\" und \"Bestätigt\" haben müssen, bevor Sie diesen Event definitiev durchführen können.",
+    "setDefinitly": "Setzte Event-Status auf definitiv",
+    "title-confirm": "Wird dieser Event stattfinden?",
+    "info-confirm": "Diese Veranstaltung findet in 7 Tagen statt. Bitte bestätigen Sie diese Veranstaltung innerhalb der nächsten 2 Tage. Wenn es bis 5 Tage vor dem Ereignis nicht bestätigt wurde, wird dieses Ereignis automatisch gelöscht.",
+    "definitly": "Bestätige und setze diesen Event auf definitiv.",
+    "confirmed": "Event bestätigt. Dieser Event findet definitiv statt.",
+    "eventProductOrders": "Alle Produkte für diesen Event und dessen Status",
+    "eventServiceMapOrders": "Alle Servicemaps für diesen Event und dessen Status",
+    "product": "Produkt",
+    "servicemap": "Servicemap",
+    "approved": "Bestätigt",
+    "seen": "Gesehen",
+    "owner": "Inhaber: ",
+    "seen-and-approved": "Die Produkte und Servicemaps müssen erst den Status \"Gesehen\" und \"Bestätigt\" haben, bevor Sie diesen Event auf den Status \"Definitiv\" gesetzt werden kann.",
+    "number-reservations": "Anzahl Reservationen",
+    "minimum-reservations": "Minimale Anzahl Reservationen",
+    "reservations-info": "Unten sehen Sie wie viel Reservationen bis jetzt eingegangen sind. Sie können den Event erst definitiev bestätigen, wenn die minimale Anzahl von Reservationen eingegangen ist.",
+    "organization-info": "Falls Sie eine Organisation für diesen Event gemietet haben, muss diese ebenfalls erst vom Vermieter als gesehen und bestätigt markiert sein, damit der Event auf definitiv geschalten werden kann.",
+    "organization": "Organisation"
+  }
+}

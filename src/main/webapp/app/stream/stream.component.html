@@ -1,0 +1,126 @@
+<mzd-timeline [alternateSide]="alternateSide" [firstContentSide]="firstContentSide">
+    <ng-template ngFor let-event [ngForOf]="events" let-i="index" [ngForTrackBy]="trackByFn">
+        <ng-container *ngIf="i%2 === 0">
+            <mzd-timeline-content [card]="false" [border]="true" class="content-left">
+                <mzd-icon><fa-icon icon="grin-stars"></fa-icon></mzd-icon>
+                <mat-card [gradient]>
+                    <mat-card-header>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-card-title>{{event.name}}</mat-card-title>
+                                <mat-card-subtitle>{{event.motto}}</mat-card-subtitle>
+                            </div>
+                            <div class="col-md-6">
+                                <ng-container *ngIf="event.definitelyConfirmed && event.status === 'DEFINITELY'">
+                                    <div class="alert alert-success" role="alert">
+                                        <span jhiTranslate="event-detail.definitely">This event will definitely take place.</span>
+                                      </div>
+                                </ng-container>
+                                <ng-container *ngIf="!event.definitelyConfirmed && event.status === 'PROCESSING'">
+                                    <div class="alert alert-warning" role="alert">
+                                        <span jhiTranslate="event-detail.not-confirmed">This event has not yet been definitively confirmed.</span>
+                                      </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </mat-card-header>
+                    <ng-container *ngIf="event.flyer">
+                        <img mat-card-image [src]="'data:' + event.flyerContentType + ';base64,' + event.flyer" alt="event image"/>
+                    </ng-container>
+                    <mat-card-content>
+                    <p class="date">
+                        {{ event.dateStart!.toString() | date }}  {{ event.dateStart!.toString() | date:'shortTime' }} - {{ event.dateEnd!.toString() | date }}  {{ event.dateEnd!.toString() | date:'shortTime' }}
+                    </p>
+                    <hr/>
+                    <p>
+                        <dt><span jhiTranslate="event-detail.placenumber">Placenumber</span></dt>
+                        <dd>
+                            <span>{{ event.placenumber }}</span>
+                        </dd>
+                        <dt><span jhiTranslate="event-detail.price">Price</span></dt>
+                        <dd>
+                            <span>{{ event.price | currency }}</span>
+                        </dd>
+                    </p>
+
+                    <ng-template #t let-fill="fill">
+                      <span class="heart" [class.full]="fill === 100">
+                        <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                      </span>
+                    </ng-template>
+                      <ngb-rating [rate]="getAverage(event.id)" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                      <br/>
+                      <span jhiTranslate="event-detail.total-ratings">Total ratings:</span> {{ getRatingsTotal(event.id) }}
+
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button (click)="goToEvent(event.id!)" class="btn btn-info btn-sm">
+                            <fa-icon icon="eye"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </mzd-timeline-content>
+        </ng-container>
+        <ng-container *ngIf="i%2 !== 0">
+            <mzd-timeline-content  [card]="false" [border]="true" class="content-right">
+                <mzd-icon><fa-icon icon="star"></fa-icon></mzd-icon>
+                <mat-card [gradient]>
+                    <mat-card-header>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-card-title>{{event.name}}</mat-card-title>
+                                <mat-card-subtitle>{{event.motto}}</mat-card-subtitle>
+                            </div>
+                            <div class="col-md-6">
+                                <ng-container *ngIf="event.definitelyConfirmed && event.status === 'DEFINITELY'">
+                                    <div class="alert alert-success" role="alert">
+                                        <span jhiTranslate="event-detail.definitely">This event will definitely take place.</span>
+                                      </div>
+                                </ng-container>
+                                <ng-container *ngIf="!event.definitelyConfirmed && event.status === 'PROCESSING'">
+                                    <div class="alert alert-warning" role="alert">
+                                        <span jhiTranslate="event-detail.not-confirmed">This event has not yet been definitively confirmed.</span>
+                                      </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </mat-card-header>
+                    <ng-container *ngIf="event.flyer">
+                        <img mat-card-image [src]="'data:' + event.flyerContentType + ';base64,' + event.flyer" alt="event image"/>
+                    </ng-container>
+                    <mat-card-content>
+                    <p class="date">
+                      {{ event.dateStart!.toString() | date }}  {{ event.dateStart!.toString() | date:'shortTime' }} - {{ event.dateEnd!.toString() | date }}  {{ event.dateEnd!.toString() | date:'shortTime' }}
+                    </p>
+                    <hr/>
+                    <p>
+                        <dt><span jhiTranslate="event-detail.placenumber">Placenumber</span></dt>
+                        <dd>
+                            <span>{{ event.placenumber }}</span>
+                        </dd>
+                        <dt><span jhiTranslate="event-detail.price">Price</span></dt>
+                        <dd>
+                            <span>{{ event.price | currency }}</span>
+                        </dd>
+                    </p>
+                    <ng-template #t let-fill="fill">
+                      <span class="heart" [class.full]="fill === 100">
+                        <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                      </span>
+                    </ng-template>
+                      <ngb-rating [rate]="getAverage(event.id)" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                      <br/>
+                      <span jhiTranslate="event-detail.total-ratings">Total ratings:</span> {{ getRatingsTotal(event.id) }}
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button (click)="goToEvent(event.id!)" class="btn btn-info btn-sm">
+                            <fa-icon icon="eye"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </mzd-timeline-content>
+        </ng-container>
+     </ng-template>
+  </mzd-timeline>

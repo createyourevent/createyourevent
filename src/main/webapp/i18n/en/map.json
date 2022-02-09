@@ -1,0 +1,9 @@
+{
+  "map": {
+    "map": "Map",
+    "distance": "Maximum distance of the event to the point of view",
+    "events": "Events",
+    "shops": "Suppliers",
+    "services": "Services"
+  }
+}

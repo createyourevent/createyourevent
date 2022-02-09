@@ -1,0 +1,9 @@
+{
+  "countdown": {
+    "days": "Tage",
+    "hours": "Stunden",
+    "minutes": "Minuten",
+    "seconds": "Sekunden",
+    "text": "Dieser Event findet statt in:"
+  }
+}

@@ -1,0 +1,153 @@
+<div>
+  <h2 id="page-heading" data-cy="CreateYourEventServiceHeading">
+    <span jhiTranslate="createyoureventApp.createYourEventService.home.title">Create Your Event Services</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="createyoureventApp.createYourEventService.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-create-your-event-service"
+        [routerLink]="['/create-your-event-service/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="createyoureventApp.createYourEventService.home.createLabel"> Create a new Create Your Event Service </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="createYourEventServices?.length === 0">
+    <span jhiTranslate="createyoureventApp.createYourEventService.home.notFound">No createYourEventServices found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="createYourEventServices && createYourEventServices.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="name">
+            <span jhiTranslate="createyoureventApp.createYourEventService.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="logo">
+            <span jhiTranslate="createyoureventApp.createYourEventService.logo">Logo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="active">
+            <span jhiTranslate="createyoureventApp.createYourEventService.active">Active</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="activeOwner">
+            <span jhiTranslate="createyoureventApp.createYourEventService.activeOwner">Active Owner</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <span jhiTranslate="createyoureventApp.createYourEventService.description">Description</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="address">
+            <span jhiTranslate="createyoureventApp.createYourEventService.address">Address</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="motto">
+            <span jhiTranslate="createyoureventApp.createYourEventService.motto">Motto</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="phone">
+            <span jhiTranslate="createyoureventApp.createYourEventService.phone">Phone</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="webAddress">
+            <span jhiTranslate="createyoureventApp.createYourEventService.webAddress">Web Address</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="category">
+            <span jhiTranslate="createyoureventApp.createYourEventService.category">Category</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="user.id">
+            <span jhiTranslate="createyoureventApp.createYourEventService.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let createYourEventService of createYourEventServices; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/create-your-event-service', createYourEventService.id, 'view']">{{ createYourEventService.id }}</a>
+          </td>
+          <td>{{ createYourEventService.name }}</td>
+          <td>
+            <a *ngIf="createYourEventService.logo" (click)="openFile(createYourEventService.logo, createYourEventService.logoContentType)">
+              <img
+                [src]="'data:' + createYourEventService.logoContentType + ';base64,' + createYourEventService.logo"
+                style="max-height: 30px"
+                alt="createYourEventService image"
+              />
+            </a>
+            <span *ngIf="createYourEventService.logo"
+              >{{ createYourEventService.logoContentType }}, {{ byteSize(createYourEventService.logo) }}</span
+            >
+          </td>
+          <td>{{ createYourEventService.active }}</td>
+          <td>{{ createYourEventService.activeOwner }}</td>
+          <td>{{ createYourEventService.description }}</td>
+          <td>{{ createYourEventService.address }}</td>
+          <td>{{ createYourEventService.motto }}</td>
+          <td>{{ createYourEventService.phone }}</td>
+          <td>{{ createYourEventService.webAddress }}</td>
+          <td jhiTranslate="{{ 'createyoureventApp.ServiceCategory.' + createYourEventService.category }}">
+            {{ createYourEventService.category }}
+          </td>
+          <td>
+            {{ createYourEventService.user?.id }}
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/create-your-event-service', createYourEventService.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/create-your-event-service', createYourEventService.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(createYourEventService)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="createYourEventServices && createYourEventServices.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

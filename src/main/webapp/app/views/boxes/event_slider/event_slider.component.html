@@ -1,0 +1,51 @@
+<ng-container *ngIf="loaded">
+    <p-carousel [value]="events"  [orientation]="orientation" [autoplayInterval]="autoplayInterval" [verticalViewPortHeight]="verticalViewPortHeight" [circular]="circular" [numVisible]="numVisible" [numScroll]="numScroll">
+        <p-header>
+            <h3 jhiTranslate="event_slider.events">Event's</h3>
+        </p-header>
+        <ng-template let-event pTemplate="item">
+           <a (click)="goToEvent(event.id)">
+            <div class="container_box_slider">
+                <div class="box_{{ 4 | randomNumber }}">
+                    <span class="black"></span>
+                    <div class="card content">
+                      <ng-container *ngIf="event.flyer">
+                        <img class="card-img-top card-img-event-slider" [src]="'data:' + event.flyerContentType + ';base64,' + event.flyer" alt="{{ event.name }}">
+                      </ng-container>
+                      <div class="card-body">
+                        <h5 class="card-title bold"><span class="font-title-event">{{ event.name }}</span></h5>
+                        <h6 class="card-subtitle">{{event.motto}}</h6>
+                        <div class="card-text">
+                          <hr/>
+                          <div>{{ event.dateStart | date:'medium' }}</div>
+                          <div>{{ event.dateEnd | date:'medium' }}</div>
+                          <hr/>
+                          <p>
+                            <dt><span jhiTranslate="event-detail.placenumber">Placenumber</span></dt>
+                            <dd>
+                                <span>{{ event.id | totalTickets | async }}/{{ event.placenumber }}</span>
+                            </dd>
+                            <dt><span jhiTranslate="event-detail.price">Price</span></dt>
+                            <dd>
+                                <span>{{ event.price | currency }}</span>
+                            </dd>
+                          </p>
+
+                          <ng-template #t let-fill="fill">
+                            <span class="heart" [class.full]="fill === 100">
+                              <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                            </span>
+                          </ng-template>
+                            <ngb-rating [rate]="getAverage(event.id)" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                            <br/>
+                            <span jhiTranslate="event_slider.total-ratings">Total ratings:</span> {{ getRatingsTotal(event.id) }}
+                        </div>
+                        <br/>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+           </a>
+        </ng-template>
+    </p-carousel>
+</ng-container>

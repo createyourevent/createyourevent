@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="reservation">
+      <h2 data-cy="reservationDetailsHeading"><span jhiTranslate="createyoureventApp.reservation.detail.title">Reservation</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ reservation.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.reservation.date">Date</span></dt>
+        <dd>
+          <span>{{ reservation.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.reservation.billed">Billed</span></dt>
+        <dd>
+          <span>{{ reservation.billed }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.reservation.accessEvent">Access Event</span></dt>
+        <dd>
+          <span>{{ reservation.accessEvent }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.reservation.accessDate">Access Date</span></dt>
+        <dd>
+          <span>{{ reservation.accessDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.reservation.tdTxId">Td Tx Id</span></dt>
+        <dd>
+          <span>{{ reservation.tdTxId }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.reservation.transactionId">Transaction Id</span></dt>
+        <dd>
+          <div *ngIf="reservation.transactionId">
+            <a [routerLink]="['/reservation-transaction-id', reservation.transactionId?.id, 'view']">{{ reservation.transactionId?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.reservation.ticket">Ticket</span></dt>
+        <dd>
+          <div *ngIf="reservation.ticket">
+            <a [routerLink]="['/ticket', reservation.ticket?.id, 'view']">{{ reservation.ticket?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.reservation.user">User</span></dt>
+        <dd>
+          <span>{{ reservation.user?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.reservation.event">Event</span></dt>
+        <dd>
+          <div *ngIf="reservation.event">
+            <a [routerLink]="['/event', reservation.event?.id, 'view']">{{ reservation.event?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/reservation', reservation.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,353 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-product-heading" data-cy="ProductCreateUpdateHeading" jhiTranslate="createyoureventApp.product.home.createOrEditLabel">
+        Create or edit a Product
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.title" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('title')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.keywords" for="field_keywords">Keywords</label>
+          <input type="text" class="form-control" name="keywords" id="field_keywords" data-cy="keywords" formControlName="keywords" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.description" for="field_description"
+            >Description</label
+          >
+          <textarea
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          ></textarea>
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.dateAdded" for="field_dateAdded">Date Added</label>
+          <div class="d-flex">
+            <input
+              id="field_dateAdded"
+              data-cy="dateAdded"
+              type="datetime-local"
+              class="form-control"
+              name="dateAdded"
+              formControlName="dateAdded"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.dateModified" for="field_dateModified"
+            >Date Modified</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateModified"
+              data-cy="dateModified"
+              type="datetime-local"
+              class="form-control"
+              name="dateModified"
+              formControlName="dateModified"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.priceType" for="field_priceType">Price Type</label>
+          <select class="form-control" name="priceType" formControlName="priceType" id="field_priceType" data-cy="priceType">
+            <option [ngValue]="null">{{ 'createyoureventApp.PriceType.null' | translate }}</option>
+            <option *ngFor="let priceType of priceTypeValues" [value]="priceType">
+              {{ 'createyoureventApp.PriceType.' + priceType | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.rentType" for="field_rentType">Rent Type</label>
+          <select class="form-control" name="rentType" formControlName="rentType" id="field_rentType" data-cy="rentType">
+            <option [ngValue]="null">{{ 'createyoureventApp.RentType.null' | translate }}</option>
+            <option *ngFor="let rentType of rentTypeValues" [value]="rentType">
+              {{ 'createyoureventApp.RentType.' + rentType | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.price" for="field_price">Price</label>
+          <input type="number" class="form-control" name="price" id="field_price" data-cy="price" formControlName="price" />
+          <div *ngIf="editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('price')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('price')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.photo" for="field_photo">Photo</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('photoContentType')!.value + ';base64,' + editForm.get('photo')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('photo')!.value"
+              alt="product image"
+            />
+            <div *ngIf="editForm.get('photo')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left">{{ editForm.get('photoContentType')!.value }}, {{ byteSize(editForm.get('photo')!.value) }}</span>
+              <button
+                type="button"
+                (click)="clearInputImage('photo', 'photoContentType', 'file_photo')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_photo"
+              data-cy="photo"
+              (change)="setFileData($event, 'photo', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="photo" id="field_photo" data-cy="photo" formControlName="photo" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="photoContentType"
+            id="field_photoContentType"
+            formControlName="photoContentType"
+          />
+          <div *ngIf="editForm.get('photo')!.invalid && (editForm.get('photo')!.dirty || editForm.get('photo')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('photo')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.photo2" for="field_photo2">Photo 2</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('photo2ContentType')!.value + ';base64,' + editForm.get('photo2')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('photo2')!.value"
+              alt="product image"
+            />
+            <div *ngIf="editForm.get('photo2')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left">{{ editForm.get('photo2ContentType')!.value }}, {{ byteSize(editForm.get('photo2')!.value) }}</span>
+              <button
+                type="button"
+                (click)="clearInputImage('photo2', 'photo2ContentType', 'file_photo2')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_photo2"
+              data-cy="photo2"
+              (change)="setFileData($event, 'photo2', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="photo2" id="field_photo2" data-cy="photo2" formControlName="photo2" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="photo2ContentType"
+            id="field_photo2ContentType"
+            formControlName="photo2ContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.photo3" for="field_photo3">Photo 3</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('photo3ContentType')!.value + ';base64,' + editForm.get('photo3')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('photo3')!.value"
+              alt="product image"
+            />
+            <div *ngIf="editForm.get('photo3')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left">{{ editForm.get('photo3ContentType')!.value }}, {{ byteSize(editForm.get('photo3')!.value) }}</span>
+              <button
+                type="button"
+                (click)="clearInputImage('photo3', 'photo3ContentType', 'file_photo3')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_photo3"
+              data-cy="photo3"
+              (change)="setFileData($event, 'photo3', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="photo3" id="field_photo3" data-cy="photo3" formControlName="photo3" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="photo3ContentType"
+            id="field_photo3ContentType"
+            formControlName="photo3ContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.youtube" for="field_youtube">Youtube</label>
+          <input type="text" class="form-control" name="youtube" id="field_youtube" data-cy="youtube" formControlName="youtube" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.active" for="field_active">Active</label>
+          <input type="checkbox" class="form-check" name="active" id="field_active" data-cy="active" formControlName="active" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.stock" for="field_stock">Stock</label>
+          <input type="number" class="form-control" name="stock" id="field_stock" data-cy="stock" formControlName="stock" />
+          <div *ngIf="editForm.get('stock')!.invalid && (editForm.get('stock')!.dirty || editForm.get('stock')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('stock')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('stock')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.productType" for="field_productType"
+            >Product Type</label
+          >
+          <select class="form-control" name="productType" formControlName="productType" id="field_productType" data-cy="productType">
+            <option [ngValue]="null">{{ 'createyoureventApp.ProductType.null' | translate }}</option>
+            <option *ngFor="let productType of productTypeValues" [value]="productType">
+              {{ 'createyoureventApp.ProductType.' + productType | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.itemNumber" for="field_itemNumber">Item Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="itemNumber"
+            id="field_itemNumber"
+            data-cy="itemNumber"
+            formControlName="itemNumber"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'createyoureventApp.OrderStatus.null' | translate }}</option>
+            <option *ngFor="let orderStatus of orderStatusValues" [value]="orderStatus">
+              {{ 'createyoureventApp.OrderStatus.' + orderStatus | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.unit" for="field_unit">Unit</label>
+          <select class="form-control" name="unit" formControlName="unit" id="field_unit" data-cy="unit">
+            <option [ngValue]="null">{{ 'createyoureventApp.Unit.null' | translate }}</option>
+            <option *ngFor="let unit of unitValues" [value]="unit">{{ 'createyoureventApp.Unit.' + unit | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('unit')!.invalid && (editForm.get('unit')!.dirty || editForm.get('unit')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('unit')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.amount" for="field_amount">Amount</label>
+          <input type="number" class="form-control" name="amount" id="field_amount" data-cy="amount" formControlName="amount" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.motto" for="field_motto">Motto</label>
+          <input type="text" class="form-control" name="motto" id="field_motto" data-cy="motto" formControlName="motto" />
+          <div *ngIf="editForm.get('motto')!.invalid && (editForm.get('motto')!.dirty || editForm.get('motto')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('motto')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.product.shop" for="field_shop">Shop</label>
+          <select class="form-control" id="field_shop" data-cy="shop" name="shop" formControlName="shop">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="shopOption.id === editForm.get('shop')!.value?.id ? editForm.get('shop')!.value : shopOption"
+              *ngFor="let shopOption of shopsSharedCollection; trackBy: trackShopById"
+            >
+              {{ shopOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

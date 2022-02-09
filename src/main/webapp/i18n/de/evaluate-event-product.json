@@ -1,0 +1,10 @@
+{
+  "evaluate-event-product": {
+    "title": "Bewerte Produkt für Event",
+    "eval-prod": "Bewerte Produkt: ",
+    "for-event": " für Event: ",
+    "comment": "Kommentare und Feedbacks",
+    "placenumber": "Platzanzahl",
+    "price": "Preis"
+  }
+}

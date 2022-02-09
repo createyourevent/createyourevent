@@ -1,0 +1,32 @@
+{
+  "createyoureventApp": {
+    "ticket": {
+      "home": {
+        "title": "Tickets",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Ticket erstellen",
+        "createOrEditLabel": "Ticket erstellen oder bearbeiten",
+        "notFound": "Keine Tickets gefunden"
+      },
+      "created": "Ticket erstellt mit ID {{ param }}",
+      "updated": "Ticket aktualisiert mit ID {{ param }}",
+      "deleted": "Ticket gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Ticket {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Ticket"
+      },
+      "id": "ID",
+      "amount": "Amount",
+      "total": "Total",
+      "date": "Date",
+      "refNo": "Ref No",
+      "accessDate": "Access Date",
+      "ticketsUsed": "Tickets Used",
+      "event": "Event",
+      "user": "User",
+      "reservation": "Reservation"
+    }
+  }
+}

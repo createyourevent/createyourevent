@@ -1,0 +1,74 @@
+<h2 id="page-heading">
+    <span jhiTranslate="service-map.title">Service maps</span>
+</h2>
+
+<p-toolbar styleClass="p-mb-4">
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-create-your-event-service" (click)="gotoNewServiceMaps()">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="service-map.createServiceMap">
+            Create a Service-Map
+            </span>
+        </button>
+</p-toolbar>
+
+
+
+<div class="service-offers card">
+    <h5>Service Maps</h5>
+
+        <p-table [value]="serviceMaps" dataKey="id" editMode="row">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th jhiTranslate="service-map.title">Title</th>
+                    <th style="width:8rem"></th>
+                    <th style="width:8rem"></th>
+                    <th style="width:8rem"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-serviceMap let-editing="editing" let-ri="rowIndex">
+                <tr [pEditableRow]="serviceMap">
+                    <td pEditableColumn>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="serviceMap.title" required>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{serviceMap.title}}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td style="text-align:center">
+                        <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(serviceMap)" class="p-button-rounded p-button-text"></button>
+                        <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(serviceMap)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                        <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(serviceMap, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                    </td>
+                    <td>
+                        <button (click)="gotoServiceOffers(serviceMap.id)"
+                        class="btn btn-info btn-sm">
+                            <fa-icon icon="clipboard-check"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="dashboardService.gotoServiceOffers">Service-Offers</span>
+                        </button>
+                    </td>
+                    <td>
+                        <button type="submit" (click)="delete(serviceMap)"
+                            class="btn btn-danger btn-sm">
+                        <fa-icon icon="times"></fa-icon>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+
+
+
+        <hr/>
+
+            <button type="button" id="cancel-save" class="btn btn-primary" (click)="gotoDashboard()">
+                <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+

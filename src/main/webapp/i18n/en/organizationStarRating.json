@@ -1,0 +1,28 @@
+{
+  "createyoureventApp": {
+    "organizationStarRating": {
+      "home": {
+        "title": "Organization Star Ratings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Organization Star Rating",
+        "createOrEditLabel": "Create or edit a Organization Star Rating",
+        "notFound": "No Organization Star Ratings found"
+      },
+      "created": "A new Organization Star Rating is created with identifier {{ param }}",
+      "updated": "A Organization Star Rating is updated with identifier {{ param }}",
+      "deleted": "A Organization Star Rating is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Organization Star Rating {{ id }}?"
+      },
+      "detail": {
+        "title": "Organization Star Rating"
+      },
+      "id": "ID",
+      "stars": "Stars",
+      "date": "Date",
+      "comment": "Comment",
+      "organization": "Organization",
+      "user": "User"
+    }
+  }
+}

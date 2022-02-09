@@ -1,0 +1,6 @@
+{
+  "fieldnames": {
+    "address": "Adresse",
+    "address.info": "Bitte geben Sie die Adresse in folgendem Format ein: '(Strasse Hausnummer, Postleitzahl Stadt, Land)'. Beispiel: (Musterstrasse 165, 8200 Musterhausen, Schweiz)"
+  }
+}

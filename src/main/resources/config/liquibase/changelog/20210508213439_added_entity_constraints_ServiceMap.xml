@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity ServiceMap.
+    -->
+    <changeSet id="20210508213439-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="ride_cost_id"
+                                 baseTableName="service_map"
+                                 constraintName="fk_service_map__ride_cost_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ride_costs"/>
+
+        <addForeignKeyConstraint baseColumnNames="create_your_event_service_id"
+                                 baseTableName="service_map"
+                                 constraintName="fk_service_map__create_your_event_service_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="create_your_event_service"/>
+    </changeSet>
+</databaseChangeLog>

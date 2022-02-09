@@ -1,0 +1,26 @@
+{
+  "createyoureventApp": {
+    "productrating": {
+      "home": {
+        "title": "Productratings",
+        "createLabel": "Productrating erstellen",
+        "createOrEditLabel": "Productrating erstellen oder bearbeiten",
+        "notFound": "No Productratings found"
+      },
+      "created": "Productrating erstellt mit ID {{ param }}",
+      "updated": "Productrating aktualisiert mit ID {{ param }}",
+      "deleted": "Productrating gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Productrating {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Productrating"
+      },
+      "rating": "Rating",
+      "date": "Date",
+      "comment": "Comment",
+      "product": "Product",
+      "user": "User"
+    }
+  }
+}

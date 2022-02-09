@@ -1,0 +1,13 @@
+<span jhiTranslate="dashboard-event.workflow">Workflow</span>
+<jhi-workflow-organisator [jhiEvent]="jhiEvent"></jhi-workflow-organisator>
+
+<div class="row">
+    <div class="col-md-12">
+        <hr/>
+        <div class="btn-cancel">
+            <button type="button" id="cancel-save" class="btn btn-secondary btn-cancel" (click)="previousState()">
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+          </button>
+        </div>
+    </div>
+</div>

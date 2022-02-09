@@ -1,0 +1,28 @@
+{
+  "select-services": {
+    "category": "Category",
+    "add-to-cart": "Add to cart",
+    "remove-from-cart": "Remove from cart",
+    "choose-category": "Choose category",
+    "total-hours": "Total hours",
+    "total-work-costs": "Total work costs",
+    "total-ride-costs": "Total ride costs",
+    "service-cart": "Service cart",
+    "kilometre": "Kilometre",
+    "distance-slider": "Radius-Filter for services",
+    "distance-info": "With the slider below you can determine which service portfolios you would like to display based on the distance from the event to the service company. If you set the slider to 0, it shows you all service maps.",
+    "total-products": "Total products",
+    "total-services": "Total services",
+    "total-cart": "Total in order list",
+    "order-cart": "Order cart",
+    "total-delivery-costs": "Total delivery costs",
+    "total-shipping": "Total shipping",
+    "servicemap": "Servicemap",
+    "service": "Service company",
+    "category-info": "Please select the category from which you would like to choose your services. You can then select the services you want or need from the service offers below.",
+    "error_free_space": "Sorry, for this date we dont have a free space to help you out.",
+    "error_rent_dates": "You have to set the dates.",
+    "total-entry": "Total entries",
+    "total-to-buy": "Total to buy"
+  }
+}

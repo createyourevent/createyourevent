@@ -1,0 +1,12 @@
+<ng-container *ngIf="loaded">
+    <p-carousel [value]="partners"  [orientation]="orientation" [autoplayInterval]="autoplayInterval" [verticalViewPortHeight]="verticalViewPortHeight" [circular]="circular" [numVisible]="numVisible" [numScroll]="numScroll">
+        <p-header>
+            <h3 class="title_partner">Partner:</h3>
+        </p-header>
+        <ng-template let-partner pTemplate="item">
+            <a href="{{ partner.webaddress }}">
+                <img class="img-thumbnail" [src]="'data:' + partner.logoContentType + ';base64,' + partner.logo" style="max-width: 300px; width: 250px;" alt="{{ partner.name }}"/>
+            </a>
+        </ng-template>
+    </p-carousel>
+</ng-container>

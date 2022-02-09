@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="bond">
+      <h2 data-cy="bondDetailsHeading"><span jhiTranslate="createyoureventApp.bond.detail.title">Bond</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ bond.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.bond.name">Name</span></dt>
+        <dd>
+          <span>{{ bond.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.bond.description">Description</span></dt>
+        <dd>
+          <span>{{ bond.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.bond.code">Code</span></dt>
+        <dd>
+          <span>{{ bond.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.bond.points">Points</span></dt>
+        <dd>
+          <span>{{ bond.points }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.bond.creationDate">Creation Date</span></dt>
+        <dd>
+          <span>{{ bond.creationDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.bond.redemptionDate">Redemption Date</span></dt>
+        <dd>
+          <span>{{ bond.redemptionDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.bond.user">User</span></dt>
+        <dd>
+          <span>{{ bond.user?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.bond.pointsExchange">Points Exchange</span></dt>
+        <dd>
+          <div *ngIf="bond.pointsExchange">
+            <a [routerLink]="['/points-exchange', bond.pointsExchange?.id, 'view']">{{ bond.pointsExchange?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/bond', bond.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

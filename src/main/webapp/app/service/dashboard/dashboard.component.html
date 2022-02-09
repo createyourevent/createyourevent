@@ -1,0 +1,89 @@
+
+<p-toast key="myKey1"></p-toast>
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="dashboardService.home.title">Create Your Event Services</span>
+    </h2>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="createYourEventServices?.length === 0">
+        <span jhiTranslate="dashboardService.home.notFound">No createYourEventServices found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="createYourEventServices?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="dashboardService.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="logo"><span jhiTranslate="dashboardService.logo">Logo</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="motto"><span jhiTranslate="dashboardService.motto">Motto</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let createYourEventService of createYourEventServices ;trackBy: trackId">
+                    <td>{{ createYourEventService.name }}</td>
+                    <td>
+                        <a *ngIf="createYourEventService.logo" (click)="openFile(createYourEventService!.logoContentType!, createYourEventService.logo)">
+                            <img [src]="'data:' + createYourEventService.logoContentType + ';base64,' + createYourEventService.logo" style="max-height: 30px;" alt="createYourEventService image"/>
+                        </a>
+                    </td>
+                    <td>{{ createYourEventService.motto }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/services', createYourEventService.id, 'viewService']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/services', createYourEventService.id, 'editService']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <!--
+                            <button type="submit" (click)="delete(createYourEventService)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                            -->
+
+                            <button id="jh-orders" class="btn btn-danger btn-sm" [routerLink]="['/services', createYourEventService.id, 'dashboard-service']">
+                                <fa-icon icon="list"></fa-icon>
+                                <span  jhiTranslate="dashboardService.dashboard-service">
+                                Dashboard
+                                </span>
+                            </button>
+                            <button (click)="serviceMaps(createYourEventService.id!)"
+                            class="btn btn-info btn-sm">
+                                <fa-icon icon="clipboard-check"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="dashboardService.gotoServiceMaps">Service-Maps</span>
+                            </button>
+                            <button id="jh-orders" class="btn btn-danger btn-sm" [routerLink]="['/service', createYourEventService.id, 'customer-booking']">
+                                <fa-icon icon="book-dead"></fa-icon>
+                                <span  jhiTranslate="dashboardService.customer-booking">
+                                Booking
+                                </span>
+                            </button>
+                            <p-inputSwitch [(ngModel)]="createYourEventService.activeOwner" (onChange)="setServiceActive($event, createYourEventService.id)" disabled="{{ createYourEventService.id | checkServiceActive | async }}"></p-inputSwitch>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="createYourEventServices!.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+
+<div mat-dialog-content>
+<ng-container *ngIf="action != 'Delete'; else elseTemplate">
+  <form [formGroup]="worksheetForm">
+    <h1 mat-dialog-title jhiTranslate="offer.editrow.title">{{ action }} offer</h1>
+    <input type="hidden" id="id" name="id" formControlName="id">
+
+    <label for="description"><span jhiTranslate="offer.description">Description</span></label>
+    <textarea id="description" name="description" class="form-control" formControlName="description"></textarea>
+    <div *ngIf="worksheetForm.controls['description'].invalid && (worksheetForm.controls['description'].dirty || worksheetForm.controls['description'].touched)" class="alert alert-danger">
+        <small *ngIf="worksheetForm!.controls['description']!.errors.required">
+            <span jhiTranslate="offer.required">This field is required.</span>
+        </small>
+    </div>
+
+    <label for="start"><span jhiTranslate="offer.start">Start</span></label>
+    <input type="datetime-local" (change)="calcTotal()" id="start" name="start" class="form-control" formControlName="start">
+    <div *ngIf="worksheetForm.controls['start'].invalid && (worksheetForm.controls['start'].dirty || worksheetForm.controls['start'].touched)" class="alert alert-danger">
+        <small *ngIf="worksheetForm!.controls['start']!.errors.required">
+            <span jhiTranslate="offer.required">This field is required.</span>
+        </small>
+    </div>
+
+    <label for="end"><span jhiTranslate="offer.end">End</span></label>
+    <input type="datetime-local" id="end" (change)="calcTotal()" name="end" class="form-control" formControlName="end">
+    <div *ngIf="worksheetForm.controls['end'].invalid && (worksheetForm.controls['end'].dirty || worksheetForm.controls['end'].touched)" class="alert alert-danger">
+        <small *ngIf="worksheetForm!.controls['end']!.errors.required">
+            <span jhiTranslate="offer.required">This field is required.</span>
+        </small>
+    </div>
+
+    <label for="costHour"><span jhiTranslate="offer.costHour">Cost per hour</span></label>
+    <input id="costHour" name="costHour" (change)="calcTotal()" class="form-control" formControlName="costHour">
+    <div *ngIf="worksheetForm.controls['costHour'].invalid && (worksheetForm.controls['costHour'].dirty || worksheetForm.controls['costHour'].touched)" class="alert alert-danger">
+        <small *ngIf="worksheetForm!.controls['costHour']!.errors.required">
+            <span jhiTranslate="offer.required">This field is required.</span>
+        </small>
+    </div>
+
+    <label for="total"><span jhiTranslate="offer.total">Total</span></label>
+    <input id="total" name="total" class="form-control" formControlName="total" disabled="disabled">
+
+    </form>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <form [formGroup]="worksheetForm">
+        <h1 mat-dialog-title jhiTranslate="offer.editrow.delete.title">Delete offer entry?</h1>
+        <input type="hidden" id="id" name="id" formControlName="id">
+        <span jhiTranslate="offer.editrow.delete">Sure to delete this offer?</span>
+    </form>
+</ng-template>
+</div>
+<div mat-dialog-actions>
+  <button type="button" class="btn btn-primary" (click)="doAction()">{{action}}</button>
+  <button type="button" class="btn btn-secondary btn-cancel" (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>

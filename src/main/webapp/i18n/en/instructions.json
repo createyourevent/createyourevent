@@ -1,0 +1,14 @@
+{
+  "instructions": {
+    "title_page": "Instructions for www.createyourevent.org",
+    "register": "Register on www.createyourevent.org",
+    "register.info": "If you decide to plan an event, or to deliver products for an event or to offer a service for an event as a service provider, you can do all of this with us at www.createyourevent.org. Be your own organizer, your supplier or a service provider and help make every event a complete success for everyone in the near future.",
+    "menu": "Overview menu",
+    "menu.info": "Overview of the Create Your Event menu. Here you can find out how we have carefully thought through the menu structure of Create Your Event and how you can find yourself as an organizer, supplier, service provider but also as an event participant.",
+    "register-shop": "Register a shop on www.createyourevent.org",
+    "register-shop.info": "If you are a supplier of a product, you can create a non-binding shop on www.createyourevent.org. In addition to the free advertising that you receive as a result, you can then offer your products to our event organizers. All you have to do is enter all the products that you would like to sell with us in the shop. You will receive a profile on which you can present your shop and below all of your products that you have registered on www.createyourevent.org will be shown in a list. You can also upload a logo and write a report on your company so that you can be better searched for.",
+    "register-service": "Register a service on www.createyourevent.org",
+    "register-service.info": "If you are a service provider, you can also register at www.createyourevent.org and record your costs. You can easily record these costs with us in an hourly rate and also record the kilometer price that you have with us. The hours required and the price per kilometer are then automatically calculated based on the information provided by the organizer. As a service provider, after the event has been recorded, you can consult with the organizer as to whether this is possible, as the organizer had in mind."
+
+  }
+}

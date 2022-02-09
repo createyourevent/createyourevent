@@ -1,0 +1,31 @@
+{
+  "createyoureventApp": {
+    "partner": {
+      "home": {
+        "title": "Partners",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Partner erstellen",
+        "createOrEditLabel": "Partner erstellen oder bearbeiten",
+        "notFound": "Keine Partners gefunden"
+      },
+      "created": "Partner erstellt mit ID {{ param }}",
+      "updated": "Partner aktualisiert mit ID {{ param }}",
+      "deleted": "Partner gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Partner {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Partner"
+      },
+      "id": "ID",
+      "name": "Name",
+      "address": "Address",
+      "phone": "Phone",
+      "logo": "Logo",
+      "mail": "Mail",
+      "webaddress": "Webaddress",
+      "sponsorshipAmount": "Sponsorship Amount",
+      "active": "Active"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "createyoureventApp": {
+    "eventProductRatingComment": {
+      "home": {
+        "title": "Event Product Rating Comments",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Event Product Rating Comment erstellen",
+        "createOrEditLabel": "Event Product Rating Comment erstellen oder bearbeiten",
+        "notFound": "Keine Event Product Rating Comments gefunden"
+      },
+      "created": "Event Product Rating Comment erstellt mit ID {{ param }}",
+      "updated": "Event Product Rating Comment aktualisiert mit ID {{ param }}",
+      "deleted": "Event Product Rating Comment gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Event Product Rating Comment {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Event Product Rating Comment"
+      },
+      "id": "ID",
+      "comment": "Comment",
+      "date": "Date",
+      "user": "User",
+      "event": "Event",
+      "product": "Product"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+    "edit-products": {
+        "edit-products-form-event": "Edit products from event",
+        "product-image": "Product image",
+        "product-name": "Product name",
+        "seen": "Seen",
+        "approved": "Approved",
+        "amount": "Amount",
+        "total": "Total",
+        "action": "Action",
+        "add-product": "Add product",
+        "price": "Price",
+        "stock": "Stock",
+        "rent-date": "Rent date",
+        "price-type": "Price type",
+        "update": "Update",
+        "add-product-for": "Add product for event ",
+        "from": " from ",
+        "edit-product-for": "Edit product from ",
+        "error": "Error",
+        "not-enought-quantity-in-time": "This product is not available in this time range.",
+        "product-updated": "Product updated",
+        "success": "Successful",
+        "not-allowed-amount": "More than 0 products must be selected. Please enter a valid quantity.",
+        "selling-price": "Selling price",
+        "not-allowed-selling-price": "Selling price not allowed.",
+        "selling-price-updated":  "Selling price updated"
+    }
+}

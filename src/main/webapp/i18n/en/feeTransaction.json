@@ -1,0 +1,31 @@
+{
+  "createyoureventApp": {
+    "feeTransaction": {
+      "home": {
+        "title": "Fee Transactions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Fee Transaction",
+        "createOrEditLabel": "Create or edit a Fee Transaction",
+        "notFound": "No Fee Transactions found"
+      },
+      "created": "A new Fee Transaction is created with identifier {{ param }}",
+      "updated": "A Fee Transaction is updated with identifier {{ param }}",
+      "deleted": "A Fee Transaction is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Fee Transaction {{ id }}?"
+      },
+      "detail": {
+        "title": "Fee Transaction"
+      },
+      "id": "ID",
+      "date": "Date",
+      "transactionId": "Transaction Id",
+      "eventProductOrder": "Event Product Order",
+      "eventServiceMapOrder": "Event Service Map Order",
+      "event": "Event",
+      "organizationReservation": "Organization Reservation",
+      "entries": "Entries",
+      "user": "User"
+    }
+  }
+}

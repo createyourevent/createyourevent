@@ -1,0 +1,230 @@
+
+.mat-card {
+  margin: 20px;
+  width: 350px;
+  float: left;
+}
+
+.btn {
+  margin: 3px;
+}
+
+.btn-rating {
+  margin-bottom: 15px;
+}
+
+.share-box {
+  width: 500px;
+  margin: 40px auto;
+  padding: 15px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.chango {
+  font-family: 'Chango', cursive;
+  color: yellow;
+  text-shadow: 5px 5px black;
+}
+
+.clear {
+  clear: both;
+}
+
+.heart {
+  position: relative;
+  display: inline-block;
+  font-size: 3rem;
+  color: #d3d3d3;
+}
+
+.full {
+  color: red;
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: red;
+}
+
+.feedback {
+  margin: 20px;
+}
+
+.title {
+  color: red;
+}
+
+.title-box {
+  width: 100%;
+  background-color: tan;
+  border: 1px solid;
+  border-radius: 3px;
+  margin: auto;
+  text-align: center;
+}
+
+.user_comment {
+  list-style-type: none;
+}
+
+.comment_body {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 3px auto;
+  width: calc(100% - 75px);
+  min-height: 65px;
+  margin-left: 10px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  color: #555;
+  background-color: white;
+  border-bottom: 2px solid lighten(grey, 15%);
+}
+
+.star {
+  font-size: 1.5rem;
+  color: #b0c4de;
+}
+.filled {
+  color: #1e90ff;
+}
+.bad {
+  color: #deb0b0;
+}
+.filled.bad {
+  color: #ff1e1e;
+}
+
+.spinner-container {
+  margin: 0 auto;
+  width: 100%;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.box_confirmed {
+  width: 500px;
+  font-weight: bold;
+  box-shadow: rgb(85, 91, 255) 0px 0px 0px 3px, rgb(31, 193, 27) 0px 0px 0px 6px, rgb(255, 217, 19) 0px 0px 0px 9px,
+    rgb(255, 156, 85) 0px 0px 0px 12px, rgb(255, 85, 85) 0px 0px 0px 15px;
+  margin: 45px auto;
+}
+
+.product-link {
+  color: #fff;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.img_div {
+  position: relative;
+  height:auto;
+  max-width: 290px;
+  overflow: hidden;
+}
+
+.card-image {
+  margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  height: auto;
+  max-height: 250px;
+  max-width: 280px;
+  overflow: hidden;
+}
+
+.mat-card {
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.mat-card-image:first-child {
+  margin-top: 0px;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+
+.content {
+  padding: 20px;
+}
+
+
+
+
+.address {
+  white-space: pre-wrap;
+}
+
+.scene {
+  width: 320px;
+  min-height: 1000px;
+  perspective: 800px;
+  margin: 35px;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flipcard {
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  position: relative;
+
+}
+
+.card__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.card__face--front {
+  background: white;
+  min-height: 1000px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card__face--back {
+  background: white;
+  transform: rotateY( 180deg );
+  min-height: 1000px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flipcard.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.bold {
+  font-weight: bold;
+}
+
+
+.sel-card {
+  border-radius: 10px;
+  margin: 15px;
+  width: 45%;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+  padding: 10px;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#a90329+0,8f0222+44,6d0019+100;Brown+Red+3D */
+  background: rgb(169,3,41); /* Old browsers */
+  background: -moz-linear-gradient(top,  rgb(169,3,41) 0%, rgb(143,2,34) 44%, rgb(109,0,25) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  rgb(169,3,41) 0%,rgb(143,2,34) 44%,rgb(109,0,25) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  rgb(169,3,41) 0%,rgb(143,2,34) 44%,rgb(109,0,25) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
+}

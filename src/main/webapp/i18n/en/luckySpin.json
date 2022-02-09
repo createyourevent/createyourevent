@@ -1,0 +1,9 @@
+{
+  "luckySpin": {
+    "title": "Wheel of fortune...",
+    "turnWheel": "Turn the wheel..",
+    "not-enought-points": "Not enought points to play..",
+    "stake": "Today's stake is:",
+    "points": "Points"
+  }
+}

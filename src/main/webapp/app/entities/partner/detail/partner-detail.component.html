@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="partner">
+      <h2 data-cy="partnerDetailsHeading"><span jhiTranslate="createyoureventApp.partner.detail.title">Partner</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ partner.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.partner.name">Name</span></dt>
+        <dd>
+          <span>{{ partner.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.partner.address">Address</span></dt>
+        <dd>
+          <span>{{ partner.address }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.partner.phone">Phone</span></dt>
+        <dd>
+          <span>{{ partner.phone }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.partner.logo">Logo</span></dt>
+        <dd>
+          <div *ngIf="partner.logo">
+            <a (click)="openFile(partner.logo, partner.logoContentType)">
+              <img [src]="'data:' + partner.logoContentType + ';base64,' + partner.logo" style="max-width: 100%" alt="partner image" />
+            </a>
+            {{ partner.logoContentType }}, {{ byteSize(partner.logo) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.partner.mail">Mail</span></dt>
+        <dd>
+          <span>{{ partner.mail }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.partner.webaddress">Webaddress</span></dt>
+        <dd>
+          <span>{{ partner.webaddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.partner.sponsorshipAmount">Sponsorship Amount</span></dt>
+        <dd>
+          <span>{{ partner.sponsorshipAmount }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.partner.active">Active</span></dt>
+        <dd>
+          <span>{{ partner.active }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/partner', partner.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

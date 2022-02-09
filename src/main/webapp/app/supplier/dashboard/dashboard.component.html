@@ -1,0 +1,131 @@
+<p-toast key="myKey1"></p-toast>
+<jhi-alert-error></jhi-alert-error>
+
+<jhi-alert></jhi-alert>
+
+<h2 id="register-shop" jhiTranslate="dashboard-supplier.title">Dashboard of your shop's</h2>
+
+<p jhiTranslate="dashboard-supplier.info">
+    Below you see a tabular list of all of your shops. From here you can edit and delete them later.
+    From here you can also access all pages such as orders or administration.
+</p>
+
+  <div id="shops" class="tabcontent">
+    <div class="col-md-12">
+        <mat-toolbar color="primary">
+            <h3 jhiTranslate="createyoureventApp.shop.home.title">Shops</h3>
+        </mat-toolbar>
+    </div>
+        <div>
+
+            <div class="alert alert-warning" id="no-result" *ngIf="shops?.length === 0">
+                <span jhiTranslate="createyoureventApp.shop.home.notFound">No shops found</span>
+            </div>
+
+            <div class="table-responsive" id="entities" *ngIf="shops?.length > 0">
+                <table class="table table-striped" aria-describedby="page-heading">
+                    <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                            <th scope="col"  jhiSortBy="name"><span jhiTranslate="createyoureventApp.shop.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                            <th scope="col"  jhiSortBy="productType"><span jhiTranslate="createyoureventApp.shop.productType">Product Type</span> <fa-icon icon="sort"></fa-icon></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let shop of shops ;trackBy: trackId">
+                            <td>{{ shop.name }}</td>
+                            <td jhiTranslate="{{ 'createyoureventApp.ProductType.' + shop.productType }}">{{ shop.productType }}</td>
+                            <td class="text-right">
+                                <div class="btn-group">
+
+                                    <button type="submit"
+                                    [routerLink]="['/supplier/shop', shop.id, 'overview']"
+                                    class="btn btn-info btn-sm">
+                                        <fa-icon icon="eye"></fa-icon>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['/supplier/shop', shop.id, 'edit']"
+                                            class="btn btn-primary btn-sm">
+                                        <fa-icon icon="pencil-alt"></fa-icon>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                    </button>
+                                    <!--
+                                    <button type="submit" (click)="delete(shop)"
+                                    class="btn btn-danger btn-sm">
+                                        <fa-icon icon="times"></fa-icon>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                                    </button>
+                                    -->
+                                    <button id="jh-orders" class="btn btn-danger btn-sm" [routerLink]="['/shops/', shop.id, 'dashboard-shop']">
+                                        <fa-icon icon="list"></fa-icon>
+                                        <span  jhiTranslate="register-product.dashboard-shop">
+                                        Orders
+                                        </span>
+                                    </button>
+
+                                    <button id="overview-product" class="btn btn-info btn-sm" [routerLink]="['/supplier/register-product/', shop.id, 'overviewProduct']">
+                                        <fa-icon icon="scroll"></fa-icon>
+                                        <span  jhiTranslate="register-product.overviewProduct">
+                                        Overview Products
+                                        </span>
+                                    </button>
+                                    <button id="jh-add-product" class="btn btn-primary btn-sm" [routerLink]="['/supplier/register-product/', shop.id, 'addProduct']">
+                                        <fa-icon icon="plus"></fa-icon>
+                                        <span  jhiTranslate="register-product.addProduct">
+                                        Add Product
+                                        </span>
+                                    </button>
+                                    <button id="jh-orders" class="btn btn-danger btn-sm" [routerLink]="['/supplier/orders/', shop.id]">
+                                        <fa-icon icon="paperclip"></fa-icon>
+                                        <span  jhiTranslate="register-product.orders">
+                                        Orders
+                                        </span>
+                                    </button>
+                                    <p-inputSwitch [(ngModel)]="shop.activeOwner" (onChange)="setShopActive($event, shop.id)" disabled="{{ shop.id | checkShopActive | async }}"></p-inputSwitch>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="shops?.length > 0">
+                <div class="row justify-content-center">
+                    <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+                </div>
+
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+{
+  "activate": {
+    "title": "Activation",
+    "messages": {
+      "success": "<strong>Your user account has been activated.</strong> Please ",
+      "error": "<strong>Your user could not be activated.</strong> Please use the registration form to sign up.",
+      "redirect": "The page will automatically be redirected to the settings in 10 seconds. Please fill out this form completely so that all functions work properly. We will no longer use the data. This information is only used to ensure that the site functions properly with distances and comments and other things. We ask for your understanding that we need this information for us."
+    }
+  }
+}

@@ -1,0 +1,121 @@
+<ng-container *ngIf="jhiEvent && reservations && worksheets && productorders">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <span class="bold" jhiTranslate="calculation-event.max-num-of-participants">Maximum number of participants</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="bold" jhiTranslate="calculation-event.entrance-fee">Entrance fee</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="bold" jhiTranslate="calculation-event.total-entrance-fee">Total entrance fee</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        {{ jhiEvent.placenumber }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ jhiEvent.price | currency }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ (jhiEvent?.placenumber * jhiEvent?.price) | currency }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <span class="bold" jhiTranslate="calculation-event.costs-products">Cost of the products</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="bold" jhiTranslate="calculation-event.costs-services">Cost of the products</span>
+                    </div>
+                    <!--
+                    <div class="col-md-4">
+                        <span class="bold" jhiTranslate="calculation-event.costs-offers">Cost of all offers</span>
+                    </div>
+                    -->
+                    <div class="col-md-4">
+                        <span class="bold" jhiTranslate="calculation-event.total-costs">Total of all costs</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        {{ calculateTotalProducts() | currency }}
+                    </div>
+                    <!--
+                    <div class="col-md-4">
+                        {{ calculateTotalWorksheets() | currency }}
+                    </div>
+                    -->
+                    <div class="col-md-4">
+                        {{ calculateTotalServices() | currency }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ (calculateTotalWorksheets() + calculateTotalProducts()) + calculateTotalServices() | currency }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <span class="bold" jhiTranslate="calculation-event.entries-currently-booked">Entries currently booked</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="bold" jhiTranslate="calculation-event.entrance-fee">Entrance fee</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="bold" jhiTranslate="calculation-event.earnings-from-booked-entries">Current earnings from the booked entries</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        {{ getNumberReservations() }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ jhiEvent.price | currency }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ (getNumberReservations() * jhiEvent.price) | currency }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <span class="bold" jhiTranslate="calculation-event.total-revenue">Total revenue</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="bold" jhiTranslate="calculation-event.total-expenses">Total expenses</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="bold" jhiTranslate="calculation-event.total">Total</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        {{ (jhiEvent.placenumber * jhiEvent.price!) | currency }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ (calculateTotalWorksheets() + calculateTotalProducts()) | currency }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ ((jhiEvent.placenumber * jhiEvent.price) - (calculateTotalWorksheets() + calculateTotalProducts() + calculateTotalServices())) | currency }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

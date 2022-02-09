@@ -1,0 +1,28 @@
+{
+  "createyoureventApp": {
+    "eventProductRatingComment": {
+      "home": {
+        "title": "Event Product Rating Comments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Event Product Rating Comment",
+        "createOrEditLabel": "Create or edit a Event Product Rating Comment",
+        "notFound": "No Event Product Rating Comments found"
+      },
+      "created": "A new Event Product Rating Comment is created with identifier {{ param }}",
+      "updated": "A Event Product Rating Comment is updated with identifier {{ param }}",
+      "deleted": "A Event Product Rating Comment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Event Product Rating Comment {{ id }}?"
+      },
+      "detail": {
+        "title": "Event Product Rating Comment"
+      },
+      "id": "ID",
+      "comment": "Comment",
+      "date": "Date",
+      "user": "User",
+      "event": "Event",
+      "product": "Product"
+    }
+  }
+}

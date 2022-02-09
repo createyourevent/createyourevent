@@ -1,0 +1,95 @@
+<h3 jhiTranslate="organization-has-events.title">The following events are held in this location</h3>
+
+<p-dataView #dv [value]="events"   [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid" [loading]="loading">
+  <ng-template pTemplate="header">
+      <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+          <div class="row">
+            <div class="col-md-10">
+              <span class="p-input-icon-left p-mb-2 p-mb-md-0">
+                <i class="pi pi-search"></i>
+                <input type="search" pInputText placeholder="Search by name" (input)="dv.filter($event.target!.value)">
+             </span>
+            </div>
+            <div  class="col-md-2">
+              <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </div>
+          </div>
+      </div>
+  </ng-template>
+
+
+  <ng-template let-event pTemplate="listItem">
+      <div class="row events-list-row">
+          <div class="col-md-3">
+              <img class="img-list img img-center" [src]="'data:' + event.flyerContentType + ';base64,' + event.flyer" alt="event image"/>
+          </div>
+          <div class="col-md-3 title">
+              {{event.name}}
+          </div>
+          <div class="col-md-3">
+              <div class="info">
+                  <p>
+                    <dt><span jhiTranslate="event-detail.placenumber">Placenumber</span></dt>
+                    <dd>
+                        <span>{{ event.reservations.length }}/{{ event.placenumber }}</span>
+                    </dd>
+                    <dt><span jhiTranslate="event-detail.price">Price</span></dt>
+                    <dd>
+                        <span>{{ event.price | currency }}</span>
+                    </dd>
+                  </p>
+                  <hr/>
+                  <div>{{ event.dateStart | date:'medium' }}</div>
+                  <div>{{ event.dateEnd | date:'medium' }}</div>
+              </div>
+          </div>
+          <div class="col-md-3">
+              <ng-template #t let-fill="fill">
+                  <span class="heart" [class.full]="fill === 100">
+                    <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                  </span>
+                </ng-template>
+                <ngb-rating [rate]="getAverage(event.id)" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                <a class="shiny-button" (click)="goToEvent(event.id)" jhiTranslate="event-data-view.goto-event">Go to event</a>
+          </div>
+      </div>
+  </ng-template>
+  <ng-template let-event pTemplate="gridItem">
+      <div class="p-col-12 p-md-3">
+          <div class="card card-container">
+                  <h3 class="title">{{ event.name }}</h3>
+                  <div class="center">
+                      <img class="img img-center" [src]="'data:' + event.flyerContentType + ';base64,' + event.flyer" style="max-width: 250px; max-height: 350px;" alt="event image"/>
+                  </div>
+                  <div class="info">
+                      <hr/>
+                      <p>
+                        <dt><span jhiTranslate="event-detail.placenumber">Placenumber</span></dt>
+                        <dd>
+                            <span>{{ event.reservations.length }}/{{ event.placenumber }}</span>
+                        </dd>
+                        <dt><span jhiTranslate="event-detail.price">Price</span></dt>
+                        <dd>
+                            <span>{{ event.price | currency }}</span>
+                        </dd>
+                      </p>
+                      <div>{{ event.dateStart | date:'medium' }}</div>
+                      <div>{{ event.dateEnd | date:'medium' }}</div>
+                  </div>
+                  <ng-template #t let-fill="fill">
+                    <span class="heart" [class.full]="fill === 100">
+                      <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                    </span>
+                  </ng-template>
+                  <ngb-rating [rate]="getAverage(event.id)" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+
+                  <a class="shiny-button" (click)="goToEvent(event.id)" jhiTranslate="event-data-view.goto-event">Go to event</a>
+          </div>
+      </div>
+  </ng-template>
+
+
+  <ng-template pTemplate="footer">
+      <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+  </ng-template>
+</p-dataView>

@@ -1,0 +1,92 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="eventServiceMapOrder">
+      <h2 data-cy="eventServiceMapOrderDetailsHeading">
+        <span jhiTranslate="createyoureventApp.eventServiceMapOrder.detail.title">Event Service Map Order</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ eventServiceMapOrder.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventServiceMapOrder.date">Date</span></dt>
+        <dd>
+          <span>{{ eventServiceMapOrder.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventServiceMapOrder.dateFrom">Date From</span></dt>
+        <dd>
+          <span>{{ eventServiceMapOrder.dateFrom | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventServiceMapOrder.dateUntil">Date Until</span></dt>
+        <dd>
+          <span>{{ eventServiceMapOrder.dateUntil | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventServiceMapOrder.costHour">Cost Hour</span></dt>
+        <dd>
+          <span>{{ eventServiceMapOrder.costHour }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventServiceMapOrder.rideCosts">Ride Costs</span></dt>
+        <dd>
+          <span>{{ eventServiceMapOrder.rideCosts }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventServiceMapOrder.total">Total</span></dt>
+        <dd>
+          <span>{{ eventServiceMapOrder.total }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventServiceMapOrder.totalHours">Total Hours</span></dt>
+        <dd>
+          <span>{{ eventServiceMapOrder.totalHours }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventServiceMapOrder.kilometre">Kilometre</span></dt>
+        <dd>
+          <span>{{ eventServiceMapOrder.kilometre }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventServiceMapOrder.billed">Billed</span></dt>
+        <dd>
+          <span>{{ eventServiceMapOrder.billed }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventServiceMapOrder.seen">Seen</span></dt>
+        <dd>
+          <span>{{ eventServiceMapOrder.seen }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventServiceMapOrder.approved">Approved</span></dt>
+        <dd>
+          <span>{{ eventServiceMapOrder.approved }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventServiceMapOrder.event">Event</span></dt>
+        <dd>
+          <div *ngIf="eventServiceMapOrder.event">
+            <a [routerLink]="['/event', eventServiceMapOrder.event?.id, 'view']">{{ eventServiceMapOrder.event?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventServiceMapOrder.serviceMap">Service Map</span></dt>
+        <dd>
+          <div *ngIf="eventServiceMapOrder.serviceMap">
+            <a [routerLink]="['/service-map', eventServiceMapOrder.serviceMap?.id, 'view']">{{ eventServiceMapOrder.serviceMap?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventServiceMapOrder.cart">Cart</span></dt>
+        <dd>
+          <div *ngIf="eventServiceMapOrder.cart">
+            <a [routerLink]="['/cart', eventServiceMapOrder.cart?.id, 'view']">{{ eventServiceMapOrder.cart?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/event-service-map-order', eventServiceMapOrder.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

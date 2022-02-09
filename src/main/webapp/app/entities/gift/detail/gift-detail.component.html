@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="gift">
+      <h2 data-cy="giftDetailsHeading"><span jhiTranslate="createyoureventApp.gift.detail.title">Gift</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ gift.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.gift.title">Title</span></dt>
+        <dd>
+          <span>{{ gift.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.gift.description">Description</span></dt>
+        <dd>
+          <span>{{ gift.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.gift.photo">Photo</span></dt>
+        <dd>
+          <div *ngIf="gift.photo">
+            <a (click)="openFile(gift.photo, gift.photoContentType)">
+              <img [src]="'data:' + gift.photoContentType + ';base64,' + gift.photo" style="max-width: 100%" alt="gift image" />
+            </a>
+            {{ gift.photoContentType }}, {{ byteSize(gift.photo) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.gift.points">Points</span></dt>
+        <dd>
+          <span>{{ gift.points }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.gift.active">Active</span></dt>
+        <dd>
+          <span>{{ gift.active }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.gift.stock">Stock</span></dt>
+        <dd>
+          <span>{{ gift.stock }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/gift', gift.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

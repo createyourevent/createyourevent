@@ -1,0 +1,10 @@
+{
+  "createyoureventApp": {
+    "OrderStatus": {
+      "null": "",
+      "NEW": "NEW",
+      "PROCESSING": "PROCESSING",
+      "COMPLETED": "COMPLETED"
+    }
+  }
+}

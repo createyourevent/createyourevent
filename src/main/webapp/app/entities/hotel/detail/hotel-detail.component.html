@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="hotel">
+      <h2 data-cy="hotelDetailsHeading"><span jhiTranslate="createyoureventApp.hotel.detail.title">Hotel</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ hotel.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.hotel.menu">Menu</span></dt>
+        <dd>
+          <span>{{ hotel.menu }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.hotel.placesToSleep">Places To Sleep</span></dt>
+        <dd>
+          <span>{{ hotel.placesToSleep }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.hotel.organization">Organization</span></dt>
+        <dd>
+          <div *ngIf="hotel.organization">
+            <a [routerLink]="['/organization', hotel.organization?.id, 'view']">{{ hotel.organization?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.hotel.user">User</span></dt>
+        <dd>
+          <span>{{ hotel.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/hotel', hotel.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

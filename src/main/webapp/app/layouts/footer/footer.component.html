@@ -1,0 +1,150 @@
+<!-- footer -->
+<footer class="footer">
+  <div class="row">
+    <div class="col-md-3">
+        <div class="palme"></div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <a href="https://www.paypal.com/donate?hosted_button_id=TFN826GCAZ5WN">
+                    <img src="./../../../content/images/donation.png" width="200px">
+                </a>
+            </div>
+            <div class="col-md-6">
+                <img src="./../../../content/images/QR-Code.png">
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-md-9">
+        <div class="jumbotron text-center margin-20">
+            <div class="row">
+                <div class="col-md-12">
+                    <share-buttons></share-buttons>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-info alert-copyright" role="alert">
+            <div class="inner-alert">
+                <span class="powered-by">
+                    Made with <span class="created-with-heart"></span> by <a href="https://www.heartfull-mind.org">Heartfull Mind</a>
+                </span>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="box_violet">
+    <jhi-event-slider  orientation="horizontal" numVisible="4" numScroll="1" circular="true" autoplayInterval="10000"  [events]="allEvents" ></jhi-event-slider>
+  </div>
+
+  <div class="box_green">
+      <jhi-partner_slider [partners]="partners"></jhi-partner_slider>
+  </div>
+
+<jhi-tag-cloud></jhi-tag-cloud>
+
+<div class="row">
+  <div class="col-md-12">
+    <nav class="navbar navbar-dark navbar-expand-md bg-dark">
+      <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
+        <span class="logo-img"></span>
+        <!-- <span jhiTranslate="global.title" class="navbar-title">Createyourevent</span> <span class="navbar-version">{{ version }}</span> -->
+      </a>
+      <a
+        class="navbar-toggler d-lg-none"
+        href="javascript:void(0);"
+        data-toggle="collapse"
+        data-target="#navbarResponsive"
+        aria-controls="navbarResponsive"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        (click)="toggleNavbar()"
+      >
+        <fa-icon icon="bars"></fa-icon>
+      </a>
+      <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link" routerLink="instructions" (click)="collapseNavbar()">
+              <span>
+                <fa-icon icon="question"></fa-icon>
+                <span jhiTranslate="navbar.instructions">Instructions</span>
+              </span>
+            </a>
+          </li>
+
+
+          <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link" routerLink="/agb" (click)="collapseNavbar()">
+              <span>
+                <fa-icon icon="file-signature"></fa-icon>
+                <span jhiTranslate="routes.agb.title">AGB's</span>
+              </span>
+            </a>
+          </li>
+
+          <li
+            ngbDropdown
+            class="nav-item dropdown pointer"
+            display="dynamic"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="partner-menu">
+              <span>
+                <fa-icon icon="comments-dollar"></fa-icon>
+                <span jhiTranslate="navbar.partner"> Partner </span>
+              </span>
+            </a>
+            <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="company-menu">
+              <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="dropdown-item" routerLink="register-partner" (click)="collapseNavbar()">
+                  <span>
+                    <fa-icon icon="address-card"></fa-icon>
+                    <span jhiTranslate="navbar.register-partner">Register partner</span>
+                  </span>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="dropdown-item" routerLink="partners" (click)="collapseNavbar()">
+                  <span>
+                    <fa-icon icon="star"></fa-icon>
+                    <span jhiTranslate="navbar.show-all-partner">Show all partner</span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+
+
+
+<div class="contact-address box_yellow">
+	<div class="row">
+		<div class="col-md-4 logo_footer">
+      <img src="../../../content/images/createyourevent_250px.png" />
+    </div>
+		<div class="col-md-4">
+      <p class="address">
+        <span class="bold">Create Your Event - Inh. Baumann</span><br/>
+        Neutalstrasse 4<br/>
+        8207 Herblingen- Schaffhausen<br/>
+      </p>
+		</div>
+		<div class="col-md-4">
+      <p class="address">
+        Tel: 078 729 63 96<br/>
+        Email: ceo@createyourevent.org<br/>
+        Web: https://createyourevent.org<br/>
+        Firmen-Nr.: CHE-324.268.428<br/>
+      </p>
+		</div>
+	</div>
+</div>
+</footer>

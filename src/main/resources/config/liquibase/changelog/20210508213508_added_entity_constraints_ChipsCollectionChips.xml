@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity ChipsCollectionChips.
+    -->
+    <changeSet id="20210508213508-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="chips_collection_id"
+                                 baseTableName="chips_collection_chips"
+                                 constraintName="fk_chips_collection_chips__chips_collection_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="chips_collection"/>
+
+        <addForeignKeyConstraint baseColumnNames="chips_id"
+                                 baseTableName="chips_collection_chips"
+                                 constraintName="fk_chips_collection_chips__chips_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="chips"/>
+    </changeSet>
+</databaseChangeLog>

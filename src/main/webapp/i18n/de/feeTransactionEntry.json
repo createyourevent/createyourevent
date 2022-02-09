@@ -1,0 +1,26 @@
+{
+  "createyoureventApp": {
+    "feeTransactionEntry": {
+      "home": {
+        "title": "Fee Transaction Entries",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Fee Transaction Entry erstellen",
+        "createOrEditLabel": "Fee Transaction Entry erstellen oder bearbeiten",
+        "notFound": "Keine Fee Transaction Entries gefunden"
+      },
+      "created": "Fee Transaction Entry erstellt mit ID {{ param }}",
+      "updated": "Fee Transaction Entry aktualisiert mit ID {{ param }}",
+      "deleted": "Fee Transaction Entry gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Fee Transaction Entry {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Fee Transaction Entry"
+      },
+      "id": "ID",
+      "type": "Type",
+      "value": "Value",
+      "feeTransaction": "Fee Transaction"
+    }
+  }
+}

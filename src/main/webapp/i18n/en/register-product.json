@@ -1,0 +1,15 @@
+{
+  "register-product": {
+    "overviewProduct": "Overview products",
+    "addProduct": "Add product",
+    "orders": "Orders",
+    "updateProduct": "Update Product",
+    "dashboard-shop": "Dashboard Shop",
+    "messages.success": "Product successfully created.",
+    "messages.error.fail": "Product not created. There was a problem with creating the product. Please try it again later.",
+    "min-order-quantity": "Minimum order quantity",
+    "price": "Price",
+    "price-per-kilometre": "Price per kilometre",
+    "price-per-unit": "Price per unit"
+  }
+}

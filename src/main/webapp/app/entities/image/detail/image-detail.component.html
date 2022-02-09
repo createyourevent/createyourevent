@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="image">
+      <h2 data-cy="imageDetailsHeading"><span jhiTranslate="createyoureventApp.image.detail.title">Image</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ image.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.image.name">Name</span></dt>
+        <dd>
+          <span>{{ image.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.image.image">Image</span></dt>
+        <dd>
+          <div *ngIf="image.image">
+            <a (click)="openFile(image.image, image.imageContentType)">
+              <img [src]="'data:' + image.imageContentType + ';base64,' + image.image" style="max-width: 100%" alt="image image" />
+            </a>
+            {{ image.imageContentType }}, {{ byteSize(image.image) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.image.user">User</span></dt>
+        <dd>
+          <span>{{ image.user?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.image.product">Product</span></dt>
+        <dd>
+          <div *ngIf="image.product">
+            <a [routerLink]="['/product', image.product?.id, 'view']">{{ image.product?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.image.shop">Shop</span></dt>
+        <dd>
+          <div *ngIf="image.shop">
+            <a [routerLink]="['/shop', image.shop?.id, 'view']">{{ image.shop?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.image.event">Event</span></dt>
+        <dd>
+          <div *ngIf="image.event">
+            <a [routerLink]="['/event', image.event?.id, 'view']">{{ image.event?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.image.service">Service</span></dt>
+        <dd>
+          <div *ngIf="image.service">
+            <a [routerLink]="['/create-your-event-service', image.service?.id, 'view']">{{ image.service?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.image.organization">Organization</span></dt>
+        <dd>
+          <div *ngIf="image.organization">
+            <a [routerLink]="['/organization', image.organization?.id, 'view']">{{ image.organization?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/image', image.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

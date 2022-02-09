@@ -1,0 +1,28 @@
+<div *ngIf="!isMaximum()">
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="reservation-counter.quantity-confirmed-reservations">Quantity confirmed reservations</span></dt>
+        <dd>
+            {{ numberReservations }}
+        </dd>
+        <dt><span jhiTranslate="reservation-counter.quantity-minimum-places">Minimum places</span></dt>
+        <dd>
+            {{ minimumReservations }}
+        </dd>
+        <dt><span jhiTranslate="reservation-counter.quantity-total-reservations">Quantity total reservation</span></dt>
+        <dd>
+            {{ maximumReservations }}
+        </dd>
+        <dt><span jhiTranslate="reservation-counter.tickets">Tickets</span></dt>
+        <dd>
+            {{ tickets }}
+        </dd>
+        <dt><span jhiTranslate="reservation-counter.previous-earnings">Previous earnings</span></dt>
+        <dd>
+            {{ previousEarnings | currency }}
+        </dd>
+    </dl>
+</div>
+<div *ngIf="isMaximum()">
+    <span jhiTranslate="reservation-counter.no-further-reservations-possible">No further reservations possible.</span>
+</div>
+

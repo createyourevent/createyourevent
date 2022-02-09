@@ -1,0 +1,17 @@
+{
+    "tetris": {
+        "commitment": "Der Einsatz für ein Spiel beträgt:",
+        "points": "Punkte",
+        "title": "Tetris - das altbekannte Spiel",
+        "linePoints": "Für jede volle Linie erhalten Sie",
+        "start": "Start",
+        "stop": "Stop",
+        "reset": "Reset",
+        "left": "Links",
+        "down": "Unten",
+        "right": "Rechts",
+        "rotate": "Rotieren",
+        "points_big": "PUNKTE: ",
+        "notEnoughtPoints": "Nicht genügend Punkte um zu spielen."
+    }
+}

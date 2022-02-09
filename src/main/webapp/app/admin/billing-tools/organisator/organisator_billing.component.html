@@ -1,0 +1,141 @@
+<p-table #dt1 [value]="events" dataKey="id" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" styleClass="p-datatable-gridlines"
+[paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+[globalFilterFields]="['id','name','user.id','user.firstName', 'user.lastName', 'billed']">
+<ng-template pTemplate="caption">
+<div class="p-d-flex">
+<button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+<span class="p-input-icon-left p-ml-auto">
+<i class="pi pi-search"></i>
+<input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+</span>
+</div>
+</ng-template>
+<ng-template pTemplate="header">
+<tr>
+<th>
+<div class="p-d-flex p-jc-between p-ai-center">
+   <span jhiTranslate="billing.eventid">Event-ID</span>
+  <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
+</div>
+</th>
+<th>
+<div class="p-d-flex p-jc-between p-ai-center">
+<span jhiTranslate="billing.event">Eventname</span>
+  <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+</div>
+</th>
+<th>
+<div class="p-d-flex p-jc-between p-ai-center">
+<span jhiTranslate="billing.userid">User-ID</span>
+<p-columnFilter type="text" field="user.id" display="menu"></p-columnFilter>
+</div>
+</th>
+<th>
+<div class="p-d-flex p-jc-between p-ai-center">
+<span jhiTranslate="billing.firstName">First name</span>
+<p-columnFilter type="text" field="transactionId.transactionDepositId" display="menu"></p-columnFilter>
+</div>
+</th>
+<th>
+<div class="p-d-flex p-jc-between p-ai-center">
+<span jhiTranslate="billing.lastName">Last name</span>
+<p-columnFilter type="text" field="transactionId.transactionId" display="menu"></p-columnFilter>
+</div>
+</th>
+<th>
+  <div class="p-d-flex p-jc-between p-ai-center">
+  <span jhiTranslate="billing.billed">Billed</span>
+  <p-columnFilter type="boolean" field="billed" display="menu"></p-columnFilter>
+  </div>
+  </th>
+  <th>
+    <div class="p-d-flex p-jc-between p-ai-center">
+    <span jhiTranslate="billing.transactionId">Transaction-Id</span>
+    <p-columnFilter type="text" field="feeTransaction.transactionId.transactionId" display="menu"></p-columnFilter>
+    </div>
+    </th>
+  <th>
+    <div class="p-d-flex p-jc-between p-ai-center">
+    <span jhiTranslate="billing.price">Price</span>
+    <p-columnFilter type="text" field="price" display="menu"></p-columnFilter>
+    </div>
+    </th>
+    <th>
+      <div class="p-d-flex p-jc-between p-ai-center">
+      <span jhiTranslate="billing.total">Total</span>
+      </div>
+      </th>
+      <th>
+        <div class="p-d-flex p-jc-between p-ai-center">
+        <span jhiTranslate="billing.fees">Fees</span>
+        </div>
+        </th>
+        <th>
+          <div class="p-d-flex p-jc-between p-ai-center">
+          <span jhiTranslate="billing.fee">Fee</span>
+          </div>
+          </th>
+</ng-template>
+<ng-template pTemplate="body" let-event>
+<tr>
+<td>{{event.id}}</td>
+<td>{{event.name}}</td>
+<td>{{event.user.id}}</td>
+<td>{{event.user.firstName}}</td>
+<td>{{event.user.lastName}}</td>
+<td class="p-text-center">
+  <i class="pi" [ngClass]="{'true-icon pi-check-circle': event.billed, 'false-icon pi-times-circle': !event.billed}"></i>
+</td>
+<td><span *ngIf="event.feeTransaction">{{ event.feeTransaction.transactionId.transactionId }}</span></td>
+<td>{{ event.price | currency }}</td>
+<td>{{ event.placenumber! * event.price! | currency }}</td>
+<td>{{ feesEvent/100 | percent }}</td>
+<td>{{ event.price! * feesEvent! | currency }}</td>
+</tr>
+</ng-template>
+<ng-template pTemplate="emptymessage">
+<tr>
+<td colspan="11"><span jhiTranslate="billing.no-event">No event found.</span></td>
+</tr>
+</ng-template>
+</p-table>
+
+<hr/>
+
+<div *ngFor="let e of eventsNotPaid">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title background">{{ e.name }}</h5>
+                <table>
+                    <tr class="border">
+                        <td jhiTranslate="billing.eventid" class="bold">Event id</td><td>{{ e.id }}</td>
+                    </tr>
+                    <tr class="border">
+                        <td jhiTranslate="billing.price" class="bold">Price</td><td>{{ e.price | currency }}</td>
+                    </tr>
+                    <tr>
+                        <td jhiTranslate="billing.total" class="bold">Total</td><td>{{ e.placenumber! * e.price! | currency }}</td>
+                    </tr>
+                    <tr class="border">
+                        <td jhiTranslate="billing.fees" class="bold">Fees</td><td>{{ feesEvent/100 | percent }}</td>
+                    </tr>
+                    <tr class="border">
+                        <td jhiTranslate="billing.fee" class="bold">Fee</td><td>{{ e.price! * feesEvent! | currency }}</td>
+                    </tr>
+                    <tr class="border">
+                        <td jhiTranslate="billing.billed" class="bold">Billed</td><td><p-checkbox name="group1" value="{{ e.id }}" [(ngModel)]="selectedIds" (onChange)="changeCheckbox($event)"></p-checkbox></td>
+                    </tr>
+                </table>
+        </div>
+    </div>
+</div>
+
+<div>
+    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button (click)="save()"  class="btn btn-primary">
+        <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+    </button>
+</div>

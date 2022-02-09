@@ -1,0 +1,63 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-1">
+        <addColumn tableName="club">
+            <column name="organization_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-2">
+        <addColumn tableName="hotel">
+            <column name="organization_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-3">
+        <addColumn tableName="restaurant">
+            <column name="organization_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-4">
+        <addUniqueConstraint columnNames="organization_id" constraintName="UC_CLUBORGANIZATION_ID_COL" tableName="club"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-5">
+        <addUniqueConstraint columnNames="organization_id" constraintName="UC_HOTELORGANIZATION_ID_COL" tableName="hotel"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-6">
+        <addUniqueConstraint columnNames="organization_id" constraintName="UC_RESTAURANTORGANIZATION_ID_COL" tableName="restaurant"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-7">
+        <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="hotel" constraintName="FK42qteok1auprsridwf0862d75" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-8">
+        <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="restaurant" constraintName="FKa26uar4ybl5m04b1t7xupq33e" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-9">
+        <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="club" constraintName="FKeg2cr5u2o2l8423b6nn4der6d" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-10">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="restaurant" constraintName="FKf5v6hx7s43ucsp6bpi5onvxfr" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-11">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="hotel" constraintName="FKj0yaimut8d7cynuxxfdnsol8b" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-12">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="club" constraintName="FKm78lmf418j8hc46q6mxe3ojtr" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-13">
+        <dropForeignKeyConstraint baseTableName="club" constraintName="fk_club__user_id"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-14">
+        <dropForeignKeyConstraint baseTableName="hotel" constraintName="fk_hotel__user_id"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-15">
+        <dropForeignKeyConstraint baseTableName="restaurant" constraintName="fk_restaurant__user_id"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-16">
+        <dropColumn columnName="user_id" tableName="club"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-17">
+        <dropColumn columnName="user_id" tableName="hotel"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642450878598-18">
+        <dropColumn columnName="user_id" tableName="restaurant"/>
+    </changeSet>
+</databaseChangeLog>

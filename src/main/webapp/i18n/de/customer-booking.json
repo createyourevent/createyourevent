@@ -1,0 +1,19 @@
+{
+  "customer-booking": {
+    "select-service-or-no-service-map": "Keine Dienstleistung gewählt oder keine Dienstleistungskarte vorhanden in dem Service.",
+    "title": "Buchungen",
+    "select-service": "Wähle Dienstleistung",
+    "date-from": "Von",
+    "date-until": "Bis",
+    "cost-hour": "Stundenansatz",
+    "total-hours": "Total Stunden",
+    "ride-costs": "Fahrtkosten",
+    "kilometre": "Kilometer",
+    "total": "Total",
+    "event": "Event",
+    "organisator": "Organisator",
+    "select-servicemap": "Wähle Dienstleistungskarte",
+    "provisionally": "Provisorische Buchungen",
+    "definitely": "Definitieve Buchungen"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "createyoureventApp": {
+    "serviceOffer": {
+      "home": {
+        "title": "Service Offers",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Service Offer erstellen",
+        "createOrEditLabel": "Service Offer erstellen oder bearbeiten",
+        "notFound": "Keine Service Offers gefunden"
+      },
+      "created": "Service Offer erstellt mit ID {{ param }}",
+      "updated": "Service Offer aktualisiert mit ID {{ param }}",
+      "deleted": "Service Offer gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Service Offer {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Service Offer"
+      },
+      "id": "ID",
+      "title": "Title",
+      "description": "Description",
+      "costHour": "Cost Hour",
+      "serviceMaps": "Service Maps"
+    }
+  }
+}

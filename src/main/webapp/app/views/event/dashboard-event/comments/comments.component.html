@@ -1,0 +1,21 @@
+<div class="alert alert-info" role="alert">
+    <h2 jhiTranslate="dashboard-event.comments-feedback-title">Comments and feedback to this event</h2>
+    <p jhiTranslate="dashboard-event.comments-feedback-info">
+        Below you can see all likes / dislikes that have been given for this product of each individual user. You will also find the email address of the user who has liked there. You can also contact them if you have any questions about the decision.
+    </p>
+</div>
+<hr/>
+  <jhi-admin-comment-box [comments]="comments" (deleted)="onDelete($event)"></jhi-admin-comment-box>
+  <hr/>
+  <jhi-admin-comments-event [jhiEvent]="jhiEvent"></jhi-admin-comments-event>
+
+  <div class="row">
+    <div class="col-md-12">
+        <hr/>
+        <div class="btn-cancel">
+            <button type="button" id="cancel-save" class="btn btn-secondary btn-cancel" (click)="previousState()">
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+          </button>
+        </div>
+    </div>
+</div>

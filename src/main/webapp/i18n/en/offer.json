@@ -1,0 +1,19 @@
+{
+  "offer": {
+    "description": "Description",
+    "start": "Start",
+    "end": "End",
+    "costHour": "Cost's per hour",
+    "total": "Total",
+    "edit": "Edit",
+    "delete": "Delete",
+    "no-record": "No record's found.",
+    "action": "Action",
+    "required": "This field is required",
+    "add-offer": "Add offert entry",
+    "editrow.title": "Add or edit an offert entry",
+    "editrow.delete.title": "Delete this offer entry?",
+    "editrow.delete": "Sure to delete this offer entry?",
+    "total-all-offerts": "Total of all offert's: "
+  }
+}

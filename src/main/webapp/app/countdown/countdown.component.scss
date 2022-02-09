@@ -1,0 +1,41 @@
+.countdown {
+  background-image: url('./../../content/images/banner_countdown.png');
+  width: 500px;
+  height: 149px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 35px;
+  border: 3px solid #fff;
+  box-shadow: 2px 2px black;
+  border-radius: 10px;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 5px 5px 15px 5px #ff8080, -9px 5px 15px 5px #ffe488, -7px -5px 15px 5px #8cff85, 12px -5px 15px 5px #80c7ff,
+    12px 10px 15px 7px #e488ff, -10px 10px 15px 7px #ff616b, -10px -7px 27px 1px #8e5cff, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+  box-shadow: 5px 5px 15px 5px #ff8080, -9px 5px 15px 5px #ffe488, -7px -5px 15px 5px #8cff85, 12px -5px 15px 5px #80c7ff,
+    12px 10px 15px 7px #e488ff, -10px 10px 15px 7px #ff616b, -10px -7px 27px 1px #8e5cff, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+  text-align: center;
+}
+
+.countdown_text {
+  font-size: larger;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 7px #000000;
+  float: both;
+  margin-left: 0px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  margin-top: 0px;
+}
+
+.display {
+  font-family: 'Vast Shadow', cursive;
+  color: #fff;
+  text-shadow: 1px 1px 7px #000000;
+  font-size: large;
+  float: both;
+  margin-left: 0px;
+  margin-top: 0px;
+}

@@ -1,0 +1,51 @@
+{
+  "createyoureventApp": {
+    "product": {
+      "home": {
+        "title": "Products",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Product",
+        "createOrEditLabel": "Create or edit a Product",
+        "notFound": "No Products found"
+      },
+      "created": "A new Product is created with identifier {{ param }}",
+      "updated": "A Product is updated with identifier {{ param }}",
+      "deleted": "A Product is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Product {{ id }}?"
+      },
+      "detail": {
+        "title": "Product"
+      },
+      "id": "ID",
+      "title": "Title",
+      "keywords": "Keywords",
+      "description": "Description",
+      "dateAdded": "Date Added",
+      "dateModified": "Date Modified",
+      "priceType": "Price Type",
+      "rentType": "Rent Type",
+      "price": "Price",
+      "photo": "Photo",
+      "photo2": "Photo 2",
+      "photo3": "Photo 3",
+      "youtube": "Youtube",
+      "active": "Active",
+      "stock": "Stock",
+      "productType": "Product Type",
+      "itemNumber": "Item Number",
+      "status": "Status",
+      "unit": "Unit",
+      "amount": "Amount",
+      "motto": "Motto",
+      "eventProductOrders": "Event Product Orders",
+      "comments": "Comments",
+      "worksheets": "Worksheets",
+      "images": "Images",
+      "mp3s": "Mp 3 S",
+      "shop": "Shop",
+      "tags": "Tags",
+      "deliveryTypes": "Delivery Types"
+    }
+  }
+}

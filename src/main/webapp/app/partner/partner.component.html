@@ -1,0 +1,36 @@
+<h1 jhiTranslate="partners.title">All partners from us</h1>
+
+<div class="alert alert-info" role="alert">
+    <p jhiTranslate="partners.info">
+        Below you can see all of our partnerships that we have concluded in order to maximize your surfing pleasure and efficiency.
+        We thank all our partners for this partnership and hope to have created a win-win situation for everyone.
+    </p>
+</div>
+
+<hr/>
+
+<div class="card">
+    <p-dataView [value]="partners" [paginator]="true" [rows]="10" layout="grid">
+        <ng-template let-partner pTemplate="gridItem">
+            <div class="p-col-12 p-md-4">
+                <div class="product-grid-item card card-container">
+                    <h3 class="title">{{ partner.name }}</h3>
+                    <div class="img">
+                        <img [src]="'data:' + partner.logoContentType + ';base64,' + partner.logo" style="max-width: 250px; max-height: 300px;" alt="partner image"/>
+                    </div>
+                    <div class="address">
+                        {{ formatAddress(partner) }}
+                    </div>
+                    <p>
+                        <span jhiTranslate="partners.phone">Phone:</span> {{ partner.phone }}
+                    </p>
+                    <p>
+                        <span jhiTranslate="partners.webaddress">Webaddress:</span> {{ partner.webaddress }}
+                    </p>
+
+
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>

@@ -1,0 +1,16 @@
+{
+  "product-detail": {
+    "rating": "Rating",
+    "detail": "Detail's",
+    "gallery": "Gallery",
+    "priceType": "Preistyp",
+    "quantity": "Stückzahl",
+    "rentType": "Miettyp",
+    "price": "Preis",
+    "company": "Firma",
+    "delivery-methods": "Lieferarten",
+    "delivery-method": "Lieferart",
+    "min-order-quantity": "Minimumbestellmenge",
+    "price-per-kilometre": "Preis pro Kilometer"
+  }
+}

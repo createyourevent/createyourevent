@@ -1,0 +1,158 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-reservation-heading"
+        data-cy="ReservationCreateUpdateHeading"
+        jhiTranslate="createyoureventApp.reservation.home.createOrEditLabel"
+      >
+        Create or edit a Reservation
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.reservation.date" for="field_date">Date</label>
+          <div class="d-flex">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="datetime-local"
+              class="form-control"
+              name="date"
+              formControlName="date"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.reservation.billed" for="field_billed">Billed</label>
+          <input type="checkbox" class="form-check" name="billed" id="field_billed" data-cy="billed" formControlName="billed" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.reservation.accessEvent" for="field_accessEvent"
+            >Access Event</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="accessEvent"
+            id="field_accessEvent"
+            data-cy="accessEvent"
+            formControlName="accessEvent"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.reservation.accessDate" for="field_accessDate"
+            >Access Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_accessDate"
+              data-cy="accessDate"
+              type="datetime-local"
+              class="form-control"
+              name="accessDate"
+              formControlName="accessDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.reservation.tdTxId" for="field_tdTxId">Td Tx Id</label>
+          <input type="text" class="form-control" name="tdTxId" id="field_tdTxId" data-cy="tdTxId" formControlName="tdTxId" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.reservation.transactionId" for="field_transactionId"
+            >Transaction Id</label
+          >
+          <select
+            class="form-control"
+            id="field_transactionId"
+            data-cy="transactionId"
+            name="transactionId"
+            formControlName="transactionId"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                reservationTransactionIdOption.id === editForm.get('transactionId')!.value?.id
+                  ? editForm.get('transactionId')!.value
+                  : reservationTransactionIdOption
+              "
+              *ngFor="let reservationTransactionIdOption of transactionIdsCollection; trackBy: trackReservationTransactionIdById"
+            >
+              {{ reservationTransactionIdOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.reservation.ticket" for="field_ticket">Ticket</label>
+          <select class="form-control" id="field_ticket" data-cy="ticket" name="ticket" formControlName="ticket">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="ticketOption.id === editForm.get('ticket')!.value?.id ? editForm.get('ticket')!.value : ticketOption"
+              *ngFor="let ticketOption of ticketsCollection; trackBy: trackTicketById"
+            >
+              {{ ticketOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.reservation.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.reservation.event" for="field_event">Event</label>
+          <select class="form-control" id="field_event" data-cy="event" name="event" formControlName="event">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="eventOption.id === editForm.get('event')!.value?.id ? editForm.get('event')!.value : eventOption"
+              *ngFor="let eventOption of eventsSharedCollection; trackBy: trackEventById"
+            >
+              {{ eventOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

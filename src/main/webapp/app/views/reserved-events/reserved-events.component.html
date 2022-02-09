@@ -1,0 +1,54 @@
+<ng-container *jhiHasAnyAuthority="'ROLE_USER'">
+  <div class="favorit" (click)="openFavorits()">
+    <div class="favorits-text">Favorits: {{ numberEvents() }}</div>
+  </div>
+    <div class="favorits" *ngIf="isShowFavorits && reservedEvents.length > 0">
+      <mat-card *ngFor="let event of reservedEvents" gradient class="margin-5">
+        <a (click)="gotoEvent(event.id)">
+          <div class="row">
+            <div class="col-md-5">
+              <div class="row">
+                <div class="col-md-12 bold">
+                  {{ event.name }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  {{ event.motto }}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="event-detail.dateStart">Date Start</span></dt>
+                <dd>
+                    <span>{{ event.dateStart | date:'mediumDate' }}</span>
+                </dd>
+                <dt><span jhiTranslate="event-detail.startTime">Start Time</span></dt>
+                <dd>
+                    <span>{{ event.dateStart | date:'shortTime' }}</span>
+                </dd>
+              </dl>
+            </div>
+            <div class="col-md-3">
+              <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="event-detail.dateEnd">Date End</span></dt>
+                <dd>
+                    <span>{{ event.dateEnd | date:'mediumDate' }}</span>
+                </dd>
+                <dt><span jhiTranslate="event-detail.endTime">End Time</span></dt>
+                <dd>
+                    <span>{{ event.dateEnd | date:'shortTime' }}</span>
+                </dd>
+              </dl>
+            </div>
+            <div class="col-md-1">
+              <a (click)="removeFromFavorits(event.id)">
+                X
+              </a>
+            </div>
+          </div>
+        </a>
+      </mat-card>
+    </div>
+</ng-container>

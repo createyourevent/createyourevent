@@ -1,0 +1,34 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="feeTransactionId">
+      <h2 data-cy="feeTransactionIdDetailsHeading">
+        <span jhiTranslate="createyoureventApp.feeTransactionId.detail.title">Fee Transaction Id</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ feeTransactionId.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.feeTransactionId.transactionId">Transaction Id</span></dt>
+        <dd>
+          <span>{{ feeTransactionId.transactionId }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/fee-transaction-id', feeTransactionId.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

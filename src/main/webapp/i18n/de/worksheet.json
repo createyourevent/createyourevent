@@ -1,0 +1,33 @@
+{
+  "createyoureventApp": {
+    "worksheet": {
+      "home": {
+        "title": "Worksheets",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Worksheet erstellen",
+        "createOrEditLabel": "Worksheet erstellen oder bearbeiten",
+        "notFound": "Keine Worksheets gefunden"
+      },
+      "created": "Worksheet erstellt mit ID {{ param }}",
+      "updated": "Worksheet aktualisiert mit ID {{ param }}",
+      "deleted": "Worksheet gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Worksheet {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Worksheet"
+      },
+      "id": "ID",
+      "description": "Description",
+      "start": "Start",
+      "end": "End",
+      "costHour": "Cost Hour",
+      "total": "Total",
+      "billingType": "Billing Type",
+      "userType": "User Type",
+      "user": "User",
+      "event": "Event",
+      "product": "Product"
+    }
+  }
+}

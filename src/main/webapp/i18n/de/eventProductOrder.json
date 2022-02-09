@@ -1,0 +1,41 @@
+{
+  "createyoureventApp": {
+    "eventProductOrder": {
+      "home": {
+        "title": "Event Product Orders",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Event Product Order erstellen",
+        "createOrEditLabel": "Event Product Order erstellen oder bearbeiten",
+        "notFound": "Keine Event Product Orders gefunden"
+      },
+      "created": "Event Product Order erstellt mit ID {{ param }}",
+      "updated": "Event Product Order aktualisiert mit ID {{ param }}",
+      "deleted": "Event Product Order gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Event Product Order {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Event Product Order"
+      },
+      "id": "ID",
+      "amount": "Amount",
+      "total": "Total",
+      "date": "Date",
+      "rentalPeriod": "Rental Period",
+      "dateFrom": "Date From",
+      "dateUntil": "Date Until",
+      "status": "Status",
+      "billed": "Billed",
+      "seen": "Seen",
+      "approved": "Approved",
+      "sellingPrice": "Selling Price",
+      "user": "User",
+      "feeTransaction": "Fee Transaction",
+      "event": "Event",
+      "product": "Product",
+      "shop": "Shop",
+      "cart": "Cart",
+      "deliveryType": "Delivery Type"
+    }
+  }
+}

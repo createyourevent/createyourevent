@@ -1,0 +1,9 @@
+{
+  "createyoureventApp": {
+    "PriceType": {
+      "null": "",
+      "SELL": "SELL",
+      "RENT": "RENT"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "overview-product": {
+    "no-product-found": "No product found. Please add some products first.",
+    "search-info": "Please insert a searchterm to filter after this one.",
+    "title": "Overview of all product's",
+    "dashboard-product": "Dashboard product"
+  }
+}

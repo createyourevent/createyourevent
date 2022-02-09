@@ -1,0 +1,13 @@
+{
+  "admin-dashboard-supplier-shop": {
+    "calculation-title": "Berechnungen und Bilanz",
+    "calculation-info": "Nachfolgend finden Sie die wichtigsten Bilanz- und Berechnungsdaten für diesen Shop, die für Sie von Interesse sein könnten.",
+    "ratings-title": "Alle Ratings für den Shop",
+    "ratings-info": "Unten sehen Sie alle Likes/Dislikes, welche für diesen  Shop eines jeweils einzelnen User's gegeben wurde. Auch finden Sie dort die Email-Adresse des Users welcher geliked hat. So können Sie auch bei möglichen Fragen bezüglich der Entscheidung mit diesem Kontakt aufnehmen.",
+    "comments-title": "Kommentare und Feedback's",
+    "comments-info": "Unten finden Sie alle Kommentare, welche für diesen Shop abgegeben wurden. Falls Sie auf eine Kommentar persönlich Antworten möchten, können Sie direkt unten dies über die Email-Adresse machen.",
+    "gallery-title": "Gallerie",
+    "gallery-info": "Sie können maximal 10 Bilder Ihres Shop's hier raufladen. Diese Bilder werden auf Ihrer Shop-Profil-Seite angezeigt.",
+    "music-title": "Mp3 Upload für diesen Shop."
+  }
+}

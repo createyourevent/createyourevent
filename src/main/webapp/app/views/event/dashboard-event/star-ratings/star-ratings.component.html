@@ -1,0 +1,47 @@
+<div class="alert alert-info" role="alert">
+    <h2 jhiTranslate="dashboard-event.star-ratings-title">All star-ratings and heart-ratings</h2>
+    <p jhiTranslate="dashboard-event.star-ratings-info">
+        Below are all of the ratings related to the star ratings and the resulting heart rating.
+    </p>
+</div>
+<hr/>
+
+<div class="row">
+    <div class="col-md-8">
+        <p-orderList [value]="eventStarRatings" (onSelectionChange)="onRowSelect($event)">
+            <ng-template let-eventStarRating pTemplate="item">
+                <div>
+                <ng-container *ngIf="user.id !== eventStarRating.user.id">
+                    {{  eventStarRating.stars }} - <a (click)="clickUserName(eventStarRating.user)">{{ eventStarRating.user.email }}</a>
+                </ng-container>
+                <ng-container *ngIf="user.id === eventStarRating.user.id">
+                    {{  eventStarRating.stars }} - {{ eventStarRating.user.email }}
+                </ng-container>
+                </div>
+            </ng-template>
+        </p-orderList>
+    </div>
+    <div class="col-md-4">
+        <ng-template #t let-fill="fill">
+        <span class="heart" [class.full]="fill === 100">
+            <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+        </span>
+        </ng-template>
+
+        <ngb-rating [(rate)]="heartVal" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+
+        <hr>
+        <pre>Rate: <b>{{heartVal}}</b></pre>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <hr/>
+        <div class="btn-cancel">
+            <button type="button" id="cancel-save" class="btn btn-secondary btn-cancel" (click)="previousState()">
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+          </button>
+        </div>
+    </div>
+</div>

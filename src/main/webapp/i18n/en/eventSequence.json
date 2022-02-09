@@ -1,0 +1,23 @@
+{
+  "createyoureventApp": {
+    "eventSequence": {
+      "home": {
+        "title": "Event Sequences",
+        "createLabel": "Create a new Event Sequence",
+        "createOrEditLabel": "Create or edit a Event Sequence",
+        "notFound": "No Event Sequences found"
+      },
+      "created": "A new Event Sequence is created with identifier {{ param }}",
+      "updated": "A Event Sequence is updated with identifier {{ param }}",
+      "deleted": "A Event Sequence is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Event Sequence {{ id }}?"
+      },
+      "detail": {
+        "title": "Event Sequence"
+      },
+      "event": "Event",
+      "eventProductOrder": "Event Product Order"
+    }
+  }
+}

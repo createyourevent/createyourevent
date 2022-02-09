@@ -1,0 +1,12 @@
+{
+    "chips-component": {
+        "info.confirmation": "The game will be taken offline. All chips found by all users will be deleted. And a new round can be loaded.",
+        "confirmation": "Confirmation",
+        "confirmed": "Confirmed",
+        "put-game-offline": "This game round has ended. All chips found for all users have been deleted.",
+        "rejected": "Abgelehnt",
+        "info.rejected": "The operation was rejected.",
+        "cancelled": "Cancelled",
+        "info.cancelled": "The process was canceled."
+    }
+}

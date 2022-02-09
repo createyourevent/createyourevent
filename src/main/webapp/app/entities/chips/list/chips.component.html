@@ -1,0 +1,109 @@
+<div>
+  <h2 id="page-heading" data-cy="ChipsHeading">
+    <span jhiTranslate="createyoureventApp.chips.home.title">Chips</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="createyoureventApp.chips.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-chips"
+        [routerLink]="['/chips/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="createyoureventApp.chips.home.createLabel"> Create a new Chips </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="chips?.length === 0">
+    <span jhiTranslate="createyoureventApp.chips.home.notFound">No chips found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="chips && chips.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="points">
+            <span jhiTranslate="createyoureventApp.chips.points">Points</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="website">
+            <span jhiTranslate="createyoureventApp.chips.website">Website</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="x"><span jhiTranslate="createyoureventApp.chips.x">X</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="y"><span jhiTranslate="createyoureventApp.chips.y">Y</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="image">
+            <span jhiTranslate="createyoureventApp.chips.image">Image</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="color">
+            <span jhiTranslate="createyoureventApp.chips.color">Color</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let chips of chips; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/chips', chips.id, 'view']">{{ chips.id }}</a>
+          </td>
+          <td>{{ chips.points }}</td>
+          <td>{{ chips.website }}</td>
+          <td>{{ chips.x }}</td>
+          <td>{{ chips.y }}</td>
+          <td>
+            <a *ngIf="chips.image" (click)="openFile(chips.image, chips.imageContentType)">
+              <img [src]="'data:' + chips.imageContentType + ';base64,' + chips.image" style="max-height: 30px" alt="chips image" />
+            </a>
+            <span *ngIf="chips.image">{{ chips.imageContentType }}, {{ byteSize(chips.image) }}</span>
+          </td>
+          <td>{{ chips.color }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/chips', chips.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/chips', chips.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(chips)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="chips && chips.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

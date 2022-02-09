@@ -1,0 +1,13 @@
+{
+  "register-organization": {
+    "register": "Registriere einen Organisation auf Create Your Event",
+    "info": "Unten können Sie mit wenigen klick's einen Organisation bei uns registrieren. Bitte füllen Sie alle Angaben die wir benötigen aus. Amschliessend werden wir unsererseits den Antrag überprüfen. Wenn alles in Ordnung ist, werden wir den Organisation aktivieren. Anschliessend können Sie den Organisation in Ihrem Dashboard verwalten. Normalerweise dauert es ca. 1 Tag bis wir den Organisation aktiviert haben. Das Dashboard finden Sie hier: <a href=\"/supplier/dashboard\">Hier klicken</a>",
+    "description": "Beschreibung des Organisations",
+    "address": "Adresse",
+    "organizationType": "Organisationstyp",
+    "messages": {
+      "success": "Organisation-Registrierung erfolgreich. Nach erfolgreicher Überprüfung Ihrer Angaben werden wir den Organisation aktivieren.",
+      "error": "Organisation-Registrierung fehlgeschlagen. Bitte versuchen Sie es später nocheinmal."
+    }
+  }
+}

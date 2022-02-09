@@ -1,0 +1,10 @@
+{
+  "reservation-counter": {
+    "quantity-confirmed-reservations": "Anzahl bestätigter Reservationen:",
+    "quantity-total-reservations": "Anzahl maximaler Teilnehmer:",
+    "reservation-counter.no-further-reservations-possible": "Keine weiteren Reservationen möglich. Ausverkauft!",
+    "previous-earnings": "Vorübergehendes Einkommen von den Reservationen:",
+    "quantity-minimum-places": "Minimale Teilnehmer",
+    "tickets": "Tickets"
+  }
+}

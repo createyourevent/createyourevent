@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="productStarRating">
+      <h2 data-cy="productStarRatingDetailsHeading">
+        <span jhiTranslate="createyoureventApp.productStarRating.detail.title">Product Star Rating</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ productStarRating.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.productStarRating.stars">Stars</span></dt>
+        <dd>
+          <span>{{ productStarRating.stars }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.productStarRating.date">Date</span></dt>
+        <dd>
+          <span>{{ productStarRating.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.productStarRating.comment">Comment</span></dt>
+        <dd>
+          <span>{{ productStarRating.comment }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.productStarRating.product">Product</span></dt>
+        <dd>
+          <div *ngIf="productStarRating.product">
+            <a [routerLink]="['/product', productStarRating.product?.id, 'view']">{{ productStarRating.product?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.productStarRating.user">User</span></dt>
+        <dd>
+          <span>{{ productStarRating.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/product-star-rating', productStarRating.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

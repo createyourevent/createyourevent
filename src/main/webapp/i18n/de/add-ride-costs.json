@@ -1,0 +1,8 @@
+{
+  "add-ride-costs": {
+    "createLabel": "Füge Fahrtkosten hinzu",
+    "createRideCost.info": "Hier können Sie einen Preis eingeben, welchen Sie als Kilometerpreis für diese Service Map berechnen, falls Sie für diese Aufgaben ein Auto benutzen. Die Kosten welche dann berechnet werden sind von der Adresse aus, welche Sie in ihrem Dienstleistungort eingetragen haben, bis zu dem Event, für welchen der Kunde Sie anschliessend bucht.",
+    "pricePerKilometre": "Kosten pro Kilometer",
+    "new.title": "Fahrtkosten"
+  }
+}

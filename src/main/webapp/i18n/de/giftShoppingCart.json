@@ -1,0 +1,27 @@
+{
+  "createyoureventApp": {
+    "giftShoppingCart": {
+      "home": {
+        "title": "Gift Shopping Carts",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Gift Shopping Cart erstellen",
+        "createOrEditLabel": "Gift Shopping Cart erstellen oder bearbeiten",
+        "notFound": "Keine Gift Shopping Carts gefunden"
+      },
+      "created": "Gift Shopping Cart erstellt mit ID {{ param }}",
+      "updated": "Gift Shopping Cart aktualisiert mit ID {{ param }}",
+      "deleted": "Gift Shopping Cart gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Gift Shopping Cart {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Gift Shopping Cart"
+      },
+      "id": "ID",
+      "date": "Date",
+      "amount": "Amount",
+      "user": "User",
+      "gift": "Gift"
+    }
+  }
+}

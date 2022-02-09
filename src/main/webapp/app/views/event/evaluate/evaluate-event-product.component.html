@@ -1,0 +1,119 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="evaluate-event-product.title">Evaluate product from event</span>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h5><span jhiTranslate="evaluate-event-product.eval-prod">Evaluate product:</span>{{ product.title }}<span jhiTranslate="evaluate-event-product.for-event">for event:</span>{{ event.name }}</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 cards">
+                <mat-card class="product-card">
+                    <mat-card-header>
+                    <mat-card-title>{{product.title}}</mat-card-title>
+                    </mat-card-header>
+                    <img mat-card-image [src]="'data:' + product.photoContentType + ';base64,' + product.photo"  alt="Product photo">
+                    <mat-card-content>
+                    <p>
+                        {{product.price | currency}}
+
+                    </p>
+                    <p>
+                        <ng-container *ngIf="product.priceType === 'SELL'">
+                            <div class="marker green">
+                                <p>{{ product.priceType }}</p>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="product.priceType === 'RENT'">
+                            <div class="marker blue">
+                                <p>{{ product.priceType }}:{{ product.rentType }}</p>
+                            </div>
+                        </ng-container>
+                    </p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            <div class="col-md-6">
+                <mat-card class="product-card">
+                    <mat-card-header>
+                    <mat-card-title>{{event.name}}</mat-card-title>
+                    </mat-card-header>
+                    <ng-container *ngIf="event.flyer !== null">
+                        <img mat-card-image [src]="'data:' + event.flyerContentType + ';base64,' + event.flyer"  alt="Event photo">
+                    </ng-container>
+                    <mat-card-content>
+                    <ng-container *ngIf="event.flyer === null">
+                            <p>
+                                {{ event.description }}
+                            </p>
+                    </ng-container>
+                      <dl class="row-md jh-entity-details">
+                        <dt><span jhiTranslate="event-detail.placenumber">Placenumber</span></dt>
+                        <dd>
+                            <span>{{ event.placenumber }}</span>
+                        </dd>
+                        <dt><span jhiTranslate="event-detail.price">Price</span></dt>
+                        <dd>
+                            <span>{{ event.price | currency }}</span>
+                        </dd>
+                      </dl>
+                    </mat-card-content>
+                    <mat-card-actions>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <hr/>
+                <div>
+                    <button mat-icon-button (click)="like()" [disabled]="(rating != null)">
+                        <mat-icon aria-label="Like">thumb_up</mat-icon>
+                     </button>
+                     {{ likes }}
+                     <button mat-icon-button class="primary" (click)="dislike()" [disabled]="(rating != null)">
+                        <mat-icon aria-label="Dislike">thumb_down</mat-icon>
+                     </button>
+                     {{ dislikes }}
+                </div>
+                <hr/>
+
+                <h3><span jhiTranslate="evaluate-event-product.comment">Comments and feedbacks</span></h3>
+                    <textarea class="form-control" rows="3" [formControl]="commentText"></textarea>
+                    <hr/>
+                    <button  class="btn btn-info" (click)="saveComment()" [disabled]="(!commentText.valid)">Save comment</button>
+                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <hr/>
+                    <ng-container *ngFor="let comment of comments">
+                        <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <ng-container *ngIf="comment.user.id !== userLoggedIn.id">
+                                    <a (click)="clickUserName(comment.user)"><span class="bold">{{ comment.user.firstName }} {{ comment.user.lastName }}</span></a> <span class="text-muted">{{ comment.date | date:'mediumDate' }}</span>
+                                </ng-container>
+                                <ng-container *ngIf="comment.user.id === userLoggedIn.id">
+                                    <span class="bold">{{ comment.user.firstName }} {{ comment.user.lastName }}</span> <span class="text-muted">{{ comment.date | date:'mediumDate' }}</span>
+                                </ng-container>
+                            </div>
+                            <div class="panel-body">
+                                {{ comment.comment }}
+                            </div>
+                        </div>
+                        </div>
+                    </ng-container>
+            </div>
+            </div>
+        </div>
+    </div>
+

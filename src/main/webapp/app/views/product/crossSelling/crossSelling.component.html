@@ -1,0 +1,29 @@
+<ng-container *ngIf="loaded">
+    <div class="box_brown">
+        <h3 jhiTranslate="crossSelling.also-bought">Customers who bought this also bought ...</h3>
+        <p-dataView [value]="products" [paginator]="true" [rows]="8" layout="grid">
+            <ng-template let-product pTemplate="gridItem">
+                <div class="p-col-12 p-md-3">
+                    <div class="card card-container">
+                        <a href="/products/{{ product.id }}/view">
+                            <h3 class="title">{{ product.title }}</h3>
+                            <div class="center">
+                                <img [src]="'data:' + product.photoContentType + ';base64,' + product.photo" style="max-height: 250px; max-width: 250px" alt="{{ product.title }}"/>
+                            </div>
+                            <hr/>
+                            <div class="star">
+                                <jhi-price-type [product]="product"></jhi-price-type>
+                                <dl class="row-md jh-entity-details price">
+                                    <dt><span jhiTranslate="product-detail.price">Price</span></dt>
+                                    <dd>
+                                        <span>{{ product.price | currency }} / {{ product.amount }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</span>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </ng-template>
+        </p-dataView>
+    </div>
+</ng-container>

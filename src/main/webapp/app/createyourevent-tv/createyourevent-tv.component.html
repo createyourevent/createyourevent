@@ -1,0 +1,160 @@
+ <h1 id="generatecssdotcom_text" class="title generatecssdotcom_neon">Create Your Event - TV</h1>
+
+<div class="container-tv">
+    <div class="tv">
+        <div class="screen">
+            <div class="screen_rect">
+                <ng-container *ngIf="counter <=  300 && counter > 100">
+                    <ng-container *ngTemplateOutlet="eventMovie"></ng-container>
+                </ng-container>
+                <ng-container *ngIf="counter <= 100 && counter > 95">
+                    <ng-container *ngTemplateOutlet="adsScreen"></ng-container>
+                </ng-container>
+                <ng-container *ngIf="counter <= 95 && counter > 5">
+                    <ng-container *ngTemplateOutlet="productAds"></ng-container>
+                </ng-container>
+                <ng-container *ngIf="counter <= 5 && counter >= 0">
+                    <ng-container *ngTemplateOutlet="adsEndScreen"></ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #eventMovie>
+    <p-carousel [value]="allEvents"  [orientation]="orientation" [autoplayInterval]="autoplayInterval" [verticalViewPortHeight]="verticalViewPortHeight" [circular]="circular" [numVisible]="numVisible" [numScroll]="numScroll">
+        <p-header>
+        </p-header>
+        <ng-template let-event pTemplate="item">
+            <a (click)="goToEvent(event.id)" jhiText="tv.gotoEvent">
+            <div class="container_box_slider">
+                <div class="box_{{ 4 | randomNumber }}">
+                    <span class="black"></span>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card content">
+                                <img class="card-img-top card-img-event-slider" [src]="'data:' + event.flyerContentType + ';base64,' + event.flyer" alt="{{ event.name }}">
+                                <div class="card-body">
+                                  <h6 class="card-title bold"><span class="font-title-event">{{ event.name }}</span></h6>
+                                  <h6 class="card-subtitle">{{event.motto}}</h6>
+                                  <div class="card-text">
+                                    <ng-template #t let-fill="fill">
+                                      <span class="heart" [class.full]="fill === 100">
+                                        <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                                      </span>
+                                    </ng-template>
+                                      <ngb-rating [rate]="getAverage(event.id)" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                                      <br/>
+                                      <span jhiTranslate="event-detail.total-ratings">Total ratings:</span> {{ getRatingsTotal(event.id) }}
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card content">
+                                <div class="card-body">
+                                  <div class="card-text">
+                                    <div>{{ event.dateStart | date:'medium' }}</div>
+                                    <div>{{ event.dateEnd | date:'medium' }}</div>
+                                    <p>
+                                      <dt><span jhiTranslate="event-detail.placenumber">Placenumber</span></dt>
+                                      <dd>
+                                          <span>{{ event.reservations.length }}/{{ event.placenumber }}</span>
+                                      </dd>
+                                      <dt><span jhiTranslate="event-detail.price">Price</span></dt>
+                                      <dd>
+                                          <span>{{ event.price | currency }}</span>
+                                      </dd>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="card content">
+                                <div class="card-body">
+                                  <div class="card-text">
+                                        <ul>
+                                            <ng-container *ngFor="let t of event.tags">
+                                                <li>{{t.tag}}</li>
+                                            </ng-container>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+            </a>
+        </ng-template>
+    </p-carousel>
+</ng-template>
+
+
+<ng-template #adsScreen>
+    <div class="ads">
+        <h2 class="title" jhiTranslate="tv.it-follows">It follows</h2>
+        <div class="logo_holder">
+            <img class="logo" src="../../content/images/create_your_event_logo.png"/>
+        </div>
+        <h2 class="title" jhiTranslate="tv.ads">Advertising</h2>
+    </div>
+</ng-template>
+
+
+<ng-template #productAds>
+<p-carousel [value]="products" styleClass="custom-carousel" [verticalViewPortHeight]="verticalViewPortHeight" [numVisible]="numVisible" [numScroll]="numScroll" [circular]="circular" [autoplayInterval]="autoplayInterval" [responsiveOptions]="responsiveOptions">
+    <p-header>
+    </p-header>
+    <ng-template let-product pTemplate="item">
+    <a href="/products/{{ product.id }}/view">
+        <div class="product-card_{{ 4 | randomNumber }}">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="title">{{ product.title }}</h3>
+                    <div class="center">
+                        <img class="product-image" [src]="'data:' + product.photoContentType + ';base64,' + product.photo" style="max-height: 250px; max-width: 250px" alt="{{ product.title }}"/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="star">
+                        <jhi-price-type [product]="product"></jhi-price-type>
+                        <dl class="row-md jh-entity-details price">
+                            <dt><span jhiTranslate="product-detail.price">Price</span></dt>
+                            <dd>
+                                <span>{{ product.price | currency }} / {{ product.amount }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</span>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="company-image">
+                    <img [src]="'data:' + product.shop.logoContentType + ';base64,' + product.shop.logo" style="max-width: 180px;"  alt="{{ product.shop.name }}"/>
+                  </div>
+                  <hr/>
+                    <ul>
+                        <ng-container *ngFor="let t of product.tags">
+                            <li>{{t.tag}}</li>
+                        </ng-container>
+                    </ul>
+                </div>
+            </div>
+      </div>
+    </a>
+    </ng-template>
+  </p-carousel>
+
+</ng-template>
+
+
+
+<ng-template #adsEndScreen>
+    <div class="ads">
+        <h2 class="title" jhiTranslate="tv.ads">Advertising</h2>
+        <div class="logo_holder">
+            <img class="logo" src="../../content/images/create_your_event_logo.png"/>
+        </div>
+        <h2 class="title" jhiTranslate="tv.end">End</h2>
+    </div>
+</ng-template>

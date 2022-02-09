@@ -1,0 +1,20 @@
+{
+  "admin-calculation-shop": {
+    "title": "Name",
+    "image": "Image",
+    "itemNumber": "Item number",
+    "price": "Price",
+    "quantity": "Amount",
+    "event": "Event",
+    "date": "Date",
+    "total": "Total",
+    "customer": "Customer",
+    "no-product-order": "No product order.",
+    "active": "Active",
+    "stock": "Stock",
+    "priceType": "Price type",
+    "rentType": "Rent type",
+    "dateFrom": "Date from",
+    "dateUntil": "Date until"
+  }
+}

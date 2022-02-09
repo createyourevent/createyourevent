@@ -1,0 +1,12 @@
+<div class="outer">
+    <div class="inner ticker-wood-border ledstrip">
+        <span class="event-ticker" jhiTranslate="ticker.event.info">++ Event-Ticker -- All events that are planned and advertised on www.createyourevent.org ++</span>
+    </div>
+</div>
+  <marquee class="event-ticker-wrap event-ticker ticker" scrollamount="5">
+    <span class="ticker_item" *ngFor="let i of items">
+        <a style="color: {{ i.color }}" href="{{ i.link }}">++{{ i.text }}++</a>
+    </span>
+  </marquee>
+
+

@@ -1,0 +1,118 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="createyoureventApp.chips.home.title">Chips</span>
+        <ng-container *ngIf="value1 === 'off'">
+            <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-chips" [routerLink]="['/adminChips/new']">
+                <fa-icon icon="plus"></fa-icon>
+                <span  jhiTranslate="createyoureventApp.chips.home.createLabel">
+                Create a new Chips
+                </span>
+            </button>
+        </ng-container>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="chips?.length === 0">
+        <span jhiTranslate="createyoureventApp.chips.home.notFound">No chips found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="chips?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="points"><span jhiTranslate="createyoureventApp.chips.points">Points</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="website"><span jhiTranslate="createyoureventApp.chips.website">Website</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="x"><span jhiTranslate="createyoureventApp.chips.x">X</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="y"><span jhiTranslate="createyoureventApp.chips.y">Y</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="y"><span jhiTranslate="createyoureventApp.chips.color">Color</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="image"><span jhiTranslate="createyoureventApp.chips.image">Image</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let chips of chips ;trackBy: trackId">
+                    <td><a [routerLink]="['/adminChips', chips.id, 'view']">{{ chips.id }}</a></td>
+                    <td>{{ chips.points }}</td>
+                    <td>{{ chips.website }}</td>
+                    <td>{{ chips.x }}</td>
+                    <td>{{ chips.y }}</td>
+                    <td>
+                        <div [style]="'width: 15px; height: 15px; border: 1px solid black; background-color: ' + chips.color + ';'"></div>
+                    </td>
+                    <td>
+                        <a *ngIf="chips.image" (click)="openFile(chips.imageContentType, chips.image)">
+                            <img [src]="'data:' + chips.imageContentType + ';base64,' + chips.image" style="max-height: 30px;" alt="chips image"/>
+                        </a>
+                        <span *ngIf="chips.image">{{ chips.imageContentType }}, {{ byteSize(chips.image) }}</span>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <ng-container *ngIf="value1 === 'off'">
+                                <button type="submit"
+                                        [routerLink]="['/adminChips', chips.id, 'view']"
+                                        class="btn btn-info btn-sm">
+                                    <fa-icon icon="eye"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                                </button>
+
+                                <button type="submit"
+                                        [routerLink]="['/adminChips', chips.id, 'edit']"
+                                        class="btn btn-primary btn-sm">
+                                    <fa-icon icon="pencil-alt"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>
+
+                                <button type="submit" (click)="delete(chips)"
+                                        class="btn btn-danger btn-sm">
+                                    <fa-icon icon="times"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                                </button>
+                            </ng-container>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <p-selectButton [options]="stateOptions" [(ngModel)]="value1" optionLabel="label" optionValue="value" (onChange)="switchOnOff($event)"></p-selectButton>
+    </div>
+
+    <div *ngIf="chips?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>
+<hr>
+
+<p-table [value]="usersWithAllChips">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Email</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+        <tr>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.address}}</td>
+            <td>{{user.phone}}</td>
+            <td>{{user.email}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+

@@ -1,0 +1,17 @@
+{
+  "register-shop": {
+    "register": "Register a shop on Create Your Event",
+    "info": "Below you can register a shop with us with a few clicks. Please fill in all the information we need. Afterwards we will check the application on our part. If everything is in order, we will activate the shop. Afterwards you can manage the shop in your dashboard. Normally it takes about 1 day until we have activated the shop. You can find the dashboard here: <a href=\"/supplier/dashboard\">Click here</a>",
+    "description": "Description of the shop",
+    "address": "Address",
+    "productType": "Product type",
+    "messages": {
+      "success": "<strong>Registration shop saved!.</strong> After successfully checking your details, we will activate the shop.",
+      "error": "<strong>Registration failed!.</strong> Please try again later."
+    },
+    "filetype.error": "Filetype error",
+    "filetype.error.info": "Only images can be uploaded.",
+    "filesize.error": "Filesize error",
+    "filesize.error.info": "Too big file for uploading."
+  }
+}

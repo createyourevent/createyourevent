@@ -1,0 +1,29 @@
+{
+  "createyoureventApp": {
+    "productComment": {
+      "home": {
+        "title": "Product Comments",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Product Comment erstellen",
+        "createOrEditLabel": "Product Comment erstellen oder bearbeiten",
+        "notFound": "Keine Product Comments gefunden"
+      },
+      "created": "Product Comment erstellt mit ID {{ param }}",
+      "updated": "Product Comment aktualisiert mit ID {{ param }}",
+      "deleted": "Product Comment gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Product Comment {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Product Comment"
+      },
+      "id": "ID",
+      "comment": "Comment",
+      "date": "Date",
+      "productComments": "Product Comments",
+      "product": "Product",
+      "user": "User",
+      "productComment": "Product Comment"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="adminFeesPrice">
+      <h2 data-cy="adminFeesPriceDetailsHeading">
+        <span jhiTranslate="createyoureventApp.adminFeesPrice.detail.title">Admin Fees Price</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ adminFeesPrice.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.adminFeesPrice.feesOrganisator">Fees Organisator</span></dt>
+        <dd>
+          <span>{{ adminFeesPrice.feesOrganisator }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.adminFeesPrice.feesSupplier">Fees Supplier</span></dt>
+        <dd>
+          <span>{{ adminFeesPrice.feesSupplier }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.adminFeesPrice.feesService">Fees Service</span></dt>
+        <dd>
+          <span>{{ adminFeesPrice.feesService }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.adminFeesPrice.feesOrganizations">Fees Organizations</span></dt>
+        <dd>
+          <span>{{ adminFeesPrice.feesOrganizations }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/admin-fees-price', adminFeesPrice.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

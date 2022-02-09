@@ -1,0 +1,138 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-1">
+        <addColumn tableName="ticket">
+            <column name="access_date" type="datetime(6)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-2">
+        <addColumn tableName="organization">
+            <column name="active_owner" type="bit"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-3">
+        <addColumn tableName="hotel">
+            <column name="menu" type="longtext"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-4">
+        <addColumn tableName="restaurant">
+            <column name="menu" type="longtext"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-5">
+        <addColumn tableName="organization">
+            <column name="place_number" type="integer"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-6">
+        <addColumn tableName="hotel">
+            <column name="places_to_sleep" type="integer"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-7">
+        <addColumn tableName="club">
+            <column name="price_card" type="longtext"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-8">
+        <addColumn tableName="ticket">
+            <column name="ref_no" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-10">
+        <addColumn tableName="ticket">
+            <column name="tickets_used" type="integer"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-13">
+        <dropColumn columnName="active" tableName="club"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-14">
+        <dropColumn columnName="active" tableName="hotel"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-15">
+        <dropColumn columnName="active" tableName="restaurant"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-16">
+        <dropColumn columnName="active_owner" tableName="club"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-17">
+        <dropColumn columnName="active_owner" tableName="hotel"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-18">
+        <dropColumn columnName="active_owner" tableName="restaurant"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-19">
+        <dropColumn columnName="address" tableName="club"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-20">
+        <dropColumn columnName="address" tableName="hotel"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-21">
+        <dropColumn columnName="address" tableName="restaurant"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-22">
+        <dropColumn columnName="description" tableName="club"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-23">
+        <dropColumn columnName="description" tableName="hotel"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-24">
+        <dropColumn columnName="description" tableName="restaurant"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-25">
+        <dropColumn columnName="logo" tableName="club"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-26">
+        <dropColumn columnName="logo" tableName="hotel"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-27">
+        <dropColumn columnName="logo" tableName="restaurant"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-28">
+        <dropColumn columnName="logo_content_type" tableName="club"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-29">
+        <dropColumn columnName="logo_content_type" tableName="hotel"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-30">
+        <dropColumn columnName="logo_content_type" tableName="restaurant"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-31">
+        <dropColumn columnName="motto" tableName="club"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-32">
+        <dropColumn columnName="motto" tableName="hotel"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-33">
+        <dropColumn columnName="motto" tableName="restaurant"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-34">
+        <dropColumn columnName="name" tableName="club"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-35">
+        <dropColumn columnName="name" tableName="hotel"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-36">
+        <dropColumn columnName="name" tableName="restaurant"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-37">
+        <dropColumn columnName="phone" tableName="club"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-38">
+        <dropColumn columnName="phone" tableName="hotel"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-39">
+        <dropColumn columnName="phone" tableName="restaurant"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-40">
+        <dropColumn columnName="web_address" tableName="club"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-41">
+        <dropColumn columnName="web_address" tableName="hotel"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642396370206-42">
+        <dropColumn columnName="web_address" tableName="restaurant"/>
+    </changeSet>
+</databaseChangeLog>

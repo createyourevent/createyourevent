@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="userExtension">
+      <h2 data-cy="userExtensionDetailsHeading">
+        <span jhiTranslate="createyoureventApp.userExtension.detail.title">User Extension</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ userExtension.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.userExtension.address">Address</span></dt>
+        <dd>
+          <span>{{ userExtension.address }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.userExtension.phone">Phone</span></dt>
+        <dd>
+          <span>{{ userExtension.phone }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.userExtension.loggedIn">Logged In</span></dt>
+        <dd>
+          <span>{{ userExtension.loggedIn }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.userExtension.points">Points</span></dt>
+        <dd>
+          <span>{{ userExtension.points }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.userExtension.user">User</span></dt>
+        <dd>
+          <span>{{ userExtension.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/user-extension', userExtension.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

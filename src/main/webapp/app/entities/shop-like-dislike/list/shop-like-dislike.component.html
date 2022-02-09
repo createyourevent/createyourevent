@@ -1,0 +1,124 @@
+<div>
+  <h2 id="page-heading" data-cy="ShopLikeDislikeHeading">
+    <span jhiTranslate="createyoureventApp.shopLikeDislike.home.title">Shop Like Dislikes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="createyoureventApp.shopLikeDislike.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-shop-like-dislike"
+        [routerLink]="['/shop-like-dislike/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="createyoureventApp.shopLikeDislike.home.createLabel"> Create a new Shop Like Dislike </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="shopLikeDislikes?.length === 0">
+    <span jhiTranslate="createyoureventApp.shopLikeDislike.home.notFound">No shopLikeDislikes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="shopLikeDislikes && shopLikeDislikes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="like">
+            <span jhiTranslate="createyoureventApp.shopLikeDislike.like">Like</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dislike">
+            <span jhiTranslate="createyoureventApp.shopLikeDislike.dislike">Dislike</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="date">
+            <span jhiTranslate="createyoureventApp.shopLikeDislike.date">Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="comment">
+            <span jhiTranslate="createyoureventApp.shopLikeDislike.comment">Comment</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="shop.id">
+            <span jhiTranslate="createyoureventApp.shopLikeDislike.shop">Shop</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="user.id">
+            <span jhiTranslate="createyoureventApp.shopLikeDislike.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let shopLikeDislike of shopLikeDislikes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/shop-like-dislike', shopLikeDislike.id, 'view']">{{ shopLikeDislike.id }}</a>
+          </td>
+          <td>{{ shopLikeDislike.like }}</td>
+          <td>{{ shopLikeDislike.dislike }}</td>
+          <td>{{ shopLikeDislike.date | formatMediumDatetime }}</td>
+          <td>{{ shopLikeDislike.comment }}</td>
+          <td>
+            <div *ngIf="shopLikeDislike.shop">
+              <a [routerLink]="['/shop', shopLikeDislike.shop?.id, 'view']">{{ shopLikeDislike.shop?.id }}</a>
+            </div>
+          </td>
+          <td>
+            {{ shopLikeDislike.user?.id }}
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/shop-like-dislike', shopLikeDislike.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/shop-like-dislike', shopLikeDislike.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(shopLikeDislike)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="shopLikeDislikes && shopLikeDislikes.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

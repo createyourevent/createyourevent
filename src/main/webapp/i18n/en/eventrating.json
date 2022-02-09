@@ -1,0 +1,26 @@
+{
+  "createyoureventApp": {
+    "eventrating": {
+      "home": {
+        "title": "Eventratings",
+        "createLabel": "Create a new Eventrating",
+        "createOrEditLabel": "Create or edit a Eventrating",
+        "notFound": "No Eventratings found"
+      },
+      "created": "A new Eventrating is created with identifier {{ param }}",
+      "updated": "A Eventrating is updated with identifier {{ param }}",
+      "deleted": "A Eventrating is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Eventrating {{ id }}?"
+      },
+      "detail": {
+        "title": "Eventrating"
+      },
+      "rating": "Rating",
+      "date": "Date",
+      "comment": "Comment",
+      "event": "Event",
+      "user": "User"
+    }
+  }
+}

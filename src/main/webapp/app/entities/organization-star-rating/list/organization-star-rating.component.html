@@ -1,0 +1,122 @@
+<div>
+  <h2 id="page-heading" data-cy="OrganizationStarRatingHeading">
+    <span jhiTranslate="createyoureventApp.organizationStarRating.home.title">Organization Star Ratings</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="createyoureventApp.organizationStarRating.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-organization-star-rating"
+        [routerLink]="['/organization-star-rating/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="createyoureventApp.organizationStarRating.home.createLabel"> Create a new Organization Star Rating </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="organizationStarRatings?.length === 0">
+    <span jhiTranslate="createyoureventApp.organizationStarRating.home.notFound">No organizationStarRatings found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="organizationStarRatings && organizationStarRatings.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="stars">
+            <span jhiTranslate="createyoureventApp.organizationStarRating.stars">Stars</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="date">
+            <span jhiTranslate="createyoureventApp.organizationStarRating.date">Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="comment">
+            <span jhiTranslate="createyoureventApp.organizationStarRating.comment">Comment</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="organization.id">
+            <span jhiTranslate="createyoureventApp.organizationStarRating.organization">Organization</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="user.id">
+            <span jhiTranslate="createyoureventApp.organizationStarRating.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let organizationStarRating of organizationStarRatings; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/organization-star-rating', organizationStarRating.id, 'view']">{{ organizationStarRating.id }}</a>
+          </td>
+          <td>{{ organizationStarRating.stars }}</td>
+          <td>{{ organizationStarRating.date | formatMediumDatetime }}</td>
+          <td>{{ organizationStarRating.comment }}</td>
+          <td>
+            <div *ngIf="organizationStarRating.organization">
+              <a [routerLink]="['/organization', organizationStarRating.organization?.id, 'view']">{{
+                organizationStarRating.organization?.id
+              }}</a>
+            </div>
+          </td>
+          <td>
+            {{ organizationStarRating.user?.id }}
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/organization-star-rating', organizationStarRating.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/organization-star-rating', organizationStarRating.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(organizationStarRating)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="organizationStarRatings && organizationStarRatings.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

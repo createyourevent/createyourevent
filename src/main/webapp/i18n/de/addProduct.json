@@ -1,0 +1,22 @@
+{
+  "add-product": {
+    "title": "Name",
+    "keywords": "Schlüsselbegriffe",
+    "description": "Beschreibung",
+    "priceType": "Preistyp",
+    "rentType": "Mietart",
+    "price": "Preis",
+    "quantity": "Anzahl",
+    "youtube": "Youtube: (Die VideoId - zum Beispiel wenn der Link https://www.youtube.com/watch?v=KBMO_4Nj4HQ wäre, ist die VideoId KBMO_4Nj4HQ (Alles nach dem v=))",
+    "active": "Aktiv",
+    "itemNumber": "Artikelnummer",
+    "editLabel": "Editiere Produkt",
+    "amount": "Menge",
+    "unit": "Einheit",
+    "stock": "Lagerbestand",
+    "home.editLabel": "Produkt bearbeiten",
+    "info.stock": "Wenn Sie beim Feld Lagerbestand den Wert \"-1\" eintragen, wird keine Inventur geführt. Somit kann der Besucher das Produkt unendlich viel mal kaufen in Ihrem Shop.",
+    "info-purchase-type": "Bitte wählen Sie mindestens eine Bezugsart aus.",
+    "please-wait": "Bitte warten... Das Fenster schliesst automatisch."
+  }
+}

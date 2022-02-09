@@ -1,0 +1,8 @@
+{
+  "admin-fees": {
+    "fees_organizer": "Fee organizer",
+    "fees_supplier": "Fee supplier",
+    "fees_service": "Fee service",
+    "fees_organization": "Fee organizations"
+  }
+}

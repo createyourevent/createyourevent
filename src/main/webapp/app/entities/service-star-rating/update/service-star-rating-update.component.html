@@ -1,0 +1,93 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-service-star-rating-heading"
+        data-cy="ServiceStarRatingCreateUpdateHeading"
+        jhiTranslate="createyoureventApp.serviceStarRating.home.createOrEditLabel"
+      >
+        Create or edit a Service Star Rating
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.serviceStarRating.stars" for="field_stars">Stars</label>
+          <input type="number" class="form-control" name="stars" id="field_stars" data-cy="stars" formControlName="stars" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.serviceStarRating.date" for="field_date">Date</label>
+          <div class="d-flex">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="datetime-local"
+              class="form-control"
+              name="date"
+              formControlName="date"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.serviceStarRating.comment" for="field_comment">Comment</label>
+          <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.serviceStarRating.service" for="field_service">Service</label>
+          <select class="form-control" id="field_service" data-cy="service" name="service" formControlName="service">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                createYourEventServiceOption.id === editForm.get('service')!.value?.id
+                  ? editForm.get('service')!.value
+                  : createYourEventServiceOption
+              "
+              *ngFor="let createYourEventServiceOption of createYourEventServicesSharedCollection; trackBy: trackCreateYourEventServiceById"
+            >
+              {{ createYourEventServiceOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.serviceStarRating.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

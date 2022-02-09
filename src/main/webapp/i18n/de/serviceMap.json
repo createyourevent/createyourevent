@@ -1,0 +1,28 @@
+{
+  "createyoureventApp": {
+    "serviceMap": {
+      "home": {
+        "title": "Service Maps",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Service Map erstellen",
+        "createOrEditLabel": "Service Map erstellen oder bearbeiten",
+        "notFound": "Keine Service Maps gefunden"
+      },
+      "created": "Service Map erstellt mit ID {{ param }}",
+      "updated": "Service Map aktualisiert mit ID {{ param }}",
+      "deleted": "Service Map gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Service Map {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Service Map"
+      },
+      "id": "ID",
+      "title": "Title",
+      "rideCost": "Ride Cost",
+      "serviceOffers": "Service Offers",
+      "eventServiceMapOrders": "Event Service Map Orders",
+      "createYourEventService": "Create Your Event Service"
+    }
+  }
+}

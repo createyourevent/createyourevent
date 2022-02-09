@@ -1,0 +1,30 @@
+{
+  "guest-reservation": {
+    "reservation": "Reservation's",
+    "title": "Reservation's",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "email": "Email",
+    "title-event": "Reservation's for event: ",
+    "info": "Above you will see all reservation's for an event.",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "name": "Name",
+    "address": "Address",
+    "phone": "Phone",
+    "ticket_for": "Ticket for",
+    "pdf": "Download PDF ticket",
+    "location-name": "Location name",
+    "dateStart": "Date start",
+    "dateEnd": "Date end",
+    "category": "Category",
+    "price": "Price",
+    "tickets": "Tickets",
+    "success-mail": "Ticket sent",
+    "success-mail-info": "The ticket was successfully sent to the mail address",
+    "error-mail": "Ticket sent error",
+    "error-mail-info": "There was an error to sent the mail to the mail address",
+    "mail-wrong": "Mail is not valid."
+  }
+}

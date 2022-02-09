@@ -1,0 +1,17 @@
+{
+  "create-organization": {
+    "organization-type": "Organization type",
+    "name": "Name",
+    "menu": "Menucard",
+    "placesToSleep": "Places to sleep",
+    "priceCard": "Price card",
+    "address": "Address",
+    "motto": "Motto",
+    "phone": "Phone",
+    "webAddress": "Webaddress",
+    "placeNumber": "Number of places",
+    "price": "Rent price",
+    "rentType": "Rent type",
+    "description": "Description"
+  }
+}

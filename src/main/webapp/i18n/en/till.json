@@ -1,0 +1,10 @@
+{
+  "till": {
+    "cash-register": "Cash register",
+    "info": "In the till you can see the total of the entrance fees and your investment. You can now buy the products and services below with this total. You can buy as many products and services below until this amount is reached.",
+    "outgoings": "Outgoings",
+    "revenue": "Incomes",
+    "investment": "Investment",
+    "total-for-buying-products": "Total for shopping your products and services"
+  }
+}

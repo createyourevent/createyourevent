@@ -1,0 +1,103 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: rgba(238, 232, 213, 0.125);
+  background-clip: border-box;
+  border: none;
+}
+
+.heart {
+  position: relative;
+  display: inline-block;
+  font-size: 3rem;
+  color: #d3d3d3;
+}
+
+.full {
+  color: red;
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: red;
+}
+
+.bungee {
+  font-family: 'Bungee', cursive;
+}
+
+.star-events {
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#d0e4f7+0,73b1e7+24,0a77d5+50,539fe1+79,87bcea+100;Blue+Pipe+%231 */
+  background: #d0e4f7; /* Old browsers */
+  background: -moz-linear-gradient(left, #d0e4f7 0%, #73b1e7 24%, #0a77d5 50%, #539fe1 79%, #87bcea 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #d0e4f7 0%, #73b1e7 24%, #0a77d5 50%, #539fe1 79%, #87bcea 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to right,
+    #d0e4f7 0%,
+    #73b1e7 24%,
+    #0a77d5 50%,
+    #539fe1 79%,
+    #87bcea 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0e4f7', endColorstr='#87bcea',GradientType=1 ); /* IE6-9 */
+  color: white;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.main-content {
+  padding: 30px;
+}
+
+.img_logo_create_your_event {
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.float-right {
+  float: right;
+}
+
+.font-title-event {
+  font-family: 'Luckiest Guy', cursive;
+  color: white;
+}
+
+.title {
+  font-size: 33px;
+  color: #ff7920;
+  font-weight: bold;
+  text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff, 0 0 40px #ff7920, 0 0 70px #ff7920, 0 0 80px #ff7920, 0 0 100px #ff7920,
+    0 0 170px #ff7920;
+  text-align: center;
+  line-height: 250px;
+}
+
+.apk_link {
+  color: red;
+  text-shadow: 5px 5px black;
+  text-decoration: none;
+  font-size: xx-large;
+  font-weight: bold;
+  font-family: 'Russo One', sans-serif;
+}
+
+.download-link {
+  text-align: center;
+}
+
+.title_font {
+  font-family: 'Vast Shadow', cursive;
+}

@@ -1,0 +1,10 @@
+{
+  "createyoureventApp": {
+    "RentType": {
+      "null": "",
+      "HOURLY": "HOURLY",
+      "HALFDAY": "HALFDAY",
+      "DAY": "DAY"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "overview": {
+    "name": "Name",
+    "description": "Beschreibung",
+    "date-start": "Startdatum",
+    "start-time": "Startzeit",
+    "date-end": "Enddatum",
+    "end-time": "Endzeit",
+    "location": "Lokalität",
+    "address": "Adresse",
+    "food": "Essen",
+    "drink": "Trinken",
+    "real-estate": "Immobilien",
+    "music": "Musik",
+    "lightshow": "Lichtshow's",
+    "decoration": "Dekorationen",
+    "shuttleservice": "Shuttleservice",
+    "view-product": "Produkt anzeigen",
+    "description_location": "Beschreibung Lokalität",
+    "messages.success": "Event erfolgreich registriert. Nach erfolgreicher Prüfung unsererseits wird Ihr Event aktiviert. Und ist dann über das Dashboard einsehbar.",
+    "messages.error": "Eventregistrierung fehlgeschlagen. Bitte versuchen Sie es später nocheinmal.",
+    "services": "Dienstleistungen",
+    "products": "Produkte",
+    "workCosts": "Arbeitskosten",
+    "rideCosts": "Fahrtkosten",
+    "totalService": "Total"
+  }
+}

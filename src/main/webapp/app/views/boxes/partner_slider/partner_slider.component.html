@@ -1,0 +1,22 @@
+<p-carousel [value]="partners" [autoplayInterval]="4000" [numVisible]="4">
+    <ng-template pTemplate="header">
+        <h3 jhiTranslate="routes.partner.title">Partners</h3>
+    </ng-template>
+    <ng-template let-partner pTemplate="item">
+            <div class="product-grid-item card-container">
+                <a href="{{ partner.webaddress }}"><h3 class="title">{{ partner.name }}</h3></a>
+                <div class="img">
+                    <a href="{{ partner.webaddress }}"><img [src]="'data:' + partner.logoContentType + ';base64,' + partner.logo" style="max-width: 250px" alt="partner image"/></a>
+                </div>
+                <ngx-qrcode
+                id="qrcode"
+                [elementType]="elementType"
+                [errorCorrectionLevel]="correctionLevel"
+                [value]="partner | webaddress"
+                alt="partner | webaddress"
+                cssClass="coolQRCode bshadow"></ngx-qrcode>
+            </div>
+    </ng-template>
+</p-carousel>
+
+

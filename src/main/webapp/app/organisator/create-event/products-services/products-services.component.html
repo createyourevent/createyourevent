@@ -1,0 +1,36 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+            <div class="alert alert-info" role="alert">
+                <span jhiTranslate="select-products.choose-products-services">
+                    Please select below all the products and services from which you would like to choose and which you need for your event.
+                    We have done this so that you can narrow down your selection in advance. Then on the following pages you can buy products
+                    first and services second, for as much as your income from this event is.
+                </span>
+              </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+            <div class="alert alert-primary" role="alert">
+                <span jhiTranslate="select-products.select-products">Select products</span>
+            </div>
+            <p-listbox [options]="products" [(ngModel)]="sharedEventService.select_products" [multiple]="true" optionLabel="label" optionValue="value"></p-listbox>
+		</div>
+		<div class="col-md-6">
+            <div class="alert alert-primary" role="alert">
+                <span jhiTranslate="select-products.select-services">Select services</span>
+            </div>
+            <p-listbox [options]="services" [(ngModel)]="sharedEventService.select_services" [multiple]="true" optionLabel="label" optionValue="value"></p-listbox>
+		</div>
+	</div>
+    <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button type="button" id="save-entity" (click)="save()"  class="btn btn-primary">
+            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</div>

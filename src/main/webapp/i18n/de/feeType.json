@@ -1,0 +1,11 @@
+{
+  "createyoureventApp": {
+    "FeeType": {
+      "null": "",
+      "EVENT": "EVENT",
+      "EVENTPRODUCTORDER": "EVENTPRODUCTORDER",
+      "EVENTSERVICEMAPORDER": "EVENTSERVICEMAPORDER",
+      "ORGANIZATIONRESERVATION": "ORGANIZATIONRESERVATION"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "createyoureventApp": {
+    "RentStatus": {
+      "null": "",
+      "BOOKED": "BOOKED",
+      "RENTED": "RENTED",
+      "BACK": "BACK"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "createyoureventApp": {
+    "hotel": {
+      "home": {
+        "title": "Hotels",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Hotel erstellen",
+        "createOrEditLabel": "Hotel erstellen oder bearbeiten",
+        "notFound": "Keine Hotels gefunden"
+      },
+      "created": "Hotel erstellt mit ID {{ param }}",
+      "updated": "Hotel aktualisiert mit ID {{ param }}",
+      "deleted": "Hotel gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Hotel {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Hotel"
+      },
+      "id": "ID",
+      "menu": "Menu",
+      "placesToSleep": "Places To Sleep",
+      "organization": "Organization",
+      "user": "User"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "offer": {
+    "description": "Beschreibung",
+    "start": "Start",
+    "end": "End",
+    "costHour": "Kosten pro Stunde",
+    "total": "Total Kosten",
+    "edit": "Editieren",
+    "delete": "Löschen",
+    "no-record": "Keine Offerten gefunden.",
+    "action": "Aktion",
+    "required": "Dies ist ein Pflichtfeld",
+    "add-offer": "Offerteneintrag hinzufügen",
+    "editrow.title": "Offerteneintrag hinzufügen oder bearbeiten",
+    "editrow.delete.title": "Offerteneintrag löschen?",
+    "editrow.delete": "Diesen Offerteneintrag wirklich löschen?",
+    "total-all-offerts": "Total aller Offerten: "
+  }
+}

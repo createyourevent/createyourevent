@@ -1,0 +1,459 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-event-heading" data-cy="EventCreateUpdateHeading" jhiTranslate="createyoureventApp.event.home.createOrEditLabel">
+        Create or edit a Event
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.description" for="field_description">Description</label>
+          <textarea
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          ></textarea>
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.dateStart" for="field_dateStart">Date Start</label>
+          <div class="d-flex">
+            <input
+              id="field_dateStart"
+              data-cy="dateStart"
+              type="datetime-local"
+              class="form-control"
+              name="dateStart"
+              formControlName="dateStart"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('dateStart')!.invalid && (editForm.get('dateStart')!.dirty || editForm.get('dateStart')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateStart')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('dateStart')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.dateEnd" for="field_dateEnd">Date End</label>
+          <div class="d-flex">
+            <input
+              id="field_dateEnd"
+              data-cy="dateEnd"
+              type="datetime-local"
+              class="form-control"
+              name="dateEnd"
+              formControlName="dateEnd"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('dateEnd')!.invalid && (editForm.get('dateEnd')!.dirty || editForm.get('dateEnd')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateEnd')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('dateEnd')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.category" for="field_category">Category</label>
+          <select class="form-control" name="category" formControlName="category" id="field_category" data-cy="category">
+            <option [ngValue]="null">{{ 'createyoureventApp.EventCategory.null' | translate }}</option>
+            <option *ngFor="let eventCategory of eventCategoryValues" [value]="eventCategory">
+              {{ 'createyoureventApp.EventCategory.' + eventCategory | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('category')!.invalid && (editForm.get('category')!.dirty || editForm.get('category')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('category')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.price" for="field_price">Price</label>
+          <input type="number" class="form-control" name="price" id="field_price" data-cy="price" formControlName="price" />
+          <div *ngIf="editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('price')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('price')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.flyer" for="field_flyer">Flyer</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('flyerContentType')!.value + ';base64,' + editForm.get('flyer')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('flyer')!.value"
+              alt="event image"
+            />
+            <div *ngIf="editForm.get('flyer')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left">{{ editForm.get('flyerContentType')!.value }}, {{ byteSize(editForm.get('flyer')!.value) }}</span>
+              <button
+                type="button"
+                (click)="clearInputImage('flyer', 'flyerContentType', 'file_flyer')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_flyer"
+              data-cy="flyer"
+              (change)="setFileData($event, 'flyer', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="flyer" id="field_flyer" data-cy="flyer" formControlName="flyer" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="flyerContentType"
+            id="field_flyerContentType"
+            formControlName="flyerContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.youtube" for="field_youtube">Youtube</label>
+          <input type="text" class="form-control" name="youtube" id="field_youtube" data-cy="youtube" formControlName="youtube" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.privateOrPublic" for="field_privateOrPublic"
+            >Private Or Public</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="privateOrPublic"
+            id="field_privateOrPublic"
+            data-cy="privateOrPublic"
+            formControlName="privateOrPublic"
+          />
+          <div
+            *ngIf="
+              editForm.get('privateOrPublic')!.invalid &&
+              (editForm.get('privateOrPublic')!.dirty || editForm.get('privateOrPublic')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('privateOrPublic')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.active" for="field_active">Active</label>
+          <input type="checkbox" class="form-check" name="active" id="field_active" data-cy="active" formControlName="active" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.minPlacenumber" for="field_minPlacenumber"
+            >Min Placenumber</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="minPlacenumber"
+            id="field_minPlacenumber"
+            data-cy="minPlacenumber"
+            formControlName="minPlacenumber"
+          />
+          <div
+            *ngIf="
+              editForm.get('minPlacenumber')!.invalid && (editForm.get('minPlacenumber')!.dirty || editForm.get('minPlacenumber')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('minPlacenumber')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('minPlacenumber')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.placenumber" for="field_placenumber">Placenumber</label>
+          <input
+            type="number"
+            class="form-control"
+            name="placenumber"
+            id="field_placenumber"
+            data-cy="placenumber"
+            formControlName="placenumber"
+          />
+          <div *ngIf="editForm.get('placenumber')!.invalid && (editForm.get('placenumber')!.dirty || editForm.get('placenumber')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('placenumber')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('placenumber')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.investment" for="field_investment">Investment</label>
+          <input
+            type="number"
+            class="form-control"
+            name="investment"
+            id="field_investment"
+            data-cy="investment"
+            formControlName="investment"
+          />
+          <div *ngIf="editForm.get('investment')!.invalid && (editForm.get('investment')!.dirty || editForm.get('investment')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('investment')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('investment')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'createyoureventApp.EventStatus.null' | translate }}</option>
+            <option *ngFor="let eventStatus of eventStatusValues" [value]="eventStatus">
+              {{ 'createyoureventApp.EventStatus.' + eventStatus | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.definitelyConfirmed" for="field_definitelyConfirmed"
+            >Definitely Confirmed</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="definitelyConfirmed"
+            id="field_definitelyConfirmed"
+            data-cy="definitelyConfirmed"
+            formControlName="definitelyConfirmed"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.motto" for="field_motto">Motto</label>
+          <input type="text" class="form-control" name="motto" id="field_motto" data-cy="motto" formControlName="motto" />
+          <div *ngIf="editForm.get('motto')!.invalid && (editForm.get('motto')!.dirty || editForm.get('motto')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('motto')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.billed" for="field_billed">Billed</label>
+          <input type="checkbox" class="form-check" name="billed" id="field_billed" data-cy="billed" formControlName="billed" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.stars" for="field_stars">Stars</label>
+          <input type="number" class="form-control" name="stars" id="field_stars" data-cy="stars" formControlName="stars" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.billedOrganisator" for="field_billedOrganisator"
+            >Billed Organisator</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="billedOrganisator"
+            id="field_billedOrganisator"
+            data-cy="billedOrganisator"
+            formControlName="billedOrganisator"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="createyoureventApp.event.billedeCreateYourEvent"
+            for="field_billedeCreateYourEvent"
+            >Billede Create Your Event</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="billedeCreateYourEvent"
+            id="field_billedeCreateYourEvent"
+            data-cy="billedeCreateYourEvent"
+            formControlName="billedeCreateYourEvent"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.location" for="field_location">Location</label>
+          <select class="form-control" id="field_location" data-cy="location" name="location" formControlName="location">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="locationOption.id === editForm.get('location')!.value?.id ? editForm.get('location')!.value : locationOption"
+              *ngFor="let locationOption of locationsCollection; trackBy: trackLocationById"
+            >
+              {{ locationOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.eventDetail" for="field_eventDetail">Event Detail</label>
+          <select class="form-control" id="field_eventDetail" data-cy="eventDetail" name="eventDetail" formControlName="eventDetail">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                eventDetailsOption.id === editForm.get('eventDetail')!.value?.id ? editForm.get('eventDetail')!.value : eventDetailsOption
+              "
+              *ngFor="let eventDetailsOption of eventDetailsCollection; trackBy: trackEventDetailsById"
+            >
+              {{ eventDetailsOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.event.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label jhiTranslate="createyoureventApp.event.reservedUsers" for="field_reservedUsers">Reserved Users</label>
+          <select
+            class="form-control"
+            id="field_reservedUsers"
+            data-cy="reservedUsers"
+            multiple
+            name="reservedUsers"
+            formControlName="reservedUsers"
+          >
+            <option
+              [ngValue]="getSelectedUser(userOption, editForm.get('reservedUsers')!.value)"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+
+<h3 jhiTranslate="till.cash-register">Cash register</h3>
+<p>
+<span jhiTranslate="till.info">
+    Below is a rough estimate of the administration in relation to expenses. If you already have the offers and for this event, these costs will be deducted right here. Views are simply used as the maximum purchase costs.</span>
+</p>
+
+<div class="row">
+<div class="col-md-6">
+    <dt><span jhiTranslate="till.revenue">Revenue from the entrance fee: (Multiplication of the number of entries and the approximate entry price)</span></dt>
+    <dd>
+        <span>{{ incomings | currency }}</span>
+    </dd>
+    <dt><span jhiTranslate="till.investment">Investment: </span></dt>
+    <dd>
+        <span>{{ investment | currency }}</span>
+    </dd>
+</div>
+<div class="col-md-6">
+    <dt><span jhiTranslate="till.total-for-buying-products">Total for buying products: (Investment + Revenue from the entrance fee) </span></dt>
+    <dd>
+        {{ totalToSpend() | currency }}
+    </dd>
+</div>
+</div>

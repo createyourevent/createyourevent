@@ -1,0 +1,33 @@
+<div class="alert alert-info" role="alert">
+    <h2 jhiTranslate="admin-gallery-product.title">Product-Gallery</h2>
+    <p jhiTranslate="admin-gallery-product.info">
+        Below you can insert a maximum of 10 pictures of your product in order to present your goods to the end customer in terms of appearance.
+    </p>
+</div>
+<hr/>
+<ng-container *ngIf="product && user && !(images?.length >= 10)">
+    <p-fileUpload name="files" [url]="url" (onUpload)="onUpload($event)"
+            multiple="multiple" accept="image/*" maxFileSize="1000000" [fileLimit]="fileLimit">
+        <ng-template pTemplate="content">
+            <ul *ngIf="uploadedFiles.length">
+                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+            </ul>
+        </ng-template>
+    </p-fileUpload>
+</ng-container>
+<p>
+    <ng-container *ngFor="let image of images">
+        <div class="image">
+            <img [src]="'data:' + image.imageContentType + ';base64,' + image.image" style="max-height: 150px;" alt="image.name"/>
+
+            <button (click)="deleteImage(image.id)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+            </button>
+        </div>
+    </ng-container>
+</p>
+<hr/>
+<p>
+    <jhi-gallery-product [images]="images"></jhi-gallery-product>
+</p>

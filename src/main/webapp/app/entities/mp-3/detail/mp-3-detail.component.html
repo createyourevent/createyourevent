@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="mp3">
+      <h2 data-cy="mp3DetailsHeading"><span jhiTranslate="createyoureventApp.mp3.detail.title">Mp 3</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ mp3.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.mp3.title">Title</span></dt>
+        <dd>
+          <span>{{ mp3.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.mp3.artists">Artists</span></dt>
+        <dd>
+          <span>{{ mp3.artists }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.mp3.duration">Duration</span></dt>
+        <dd>
+          <span>{{ mp3.duration }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.mp3.url">Url</span></dt>
+        <dd>
+          <span>{{ mp3.url }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.mp3.user">User</span></dt>
+        <dd>
+          <span>{{ mp3.user?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.mp3.product">Product</span></dt>
+        <dd>
+          <div *ngIf="mp3.product">
+            <a [routerLink]="['/product', mp3.product?.id, 'view']">{{ mp3.product?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.mp3.shop">Shop</span></dt>
+        <dd>
+          <div *ngIf="mp3.shop">
+            <a [routerLink]="['/shop', mp3.shop?.id, 'view']">{{ mp3.shop?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.mp3.event">Event</span></dt>
+        <dd>
+          <div *ngIf="mp3.event">
+            <a [routerLink]="['/event', mp3.event?.id, 'view']">{{ mp3.event?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.mp3.service">Service</span></dt>
+        <dd>
+          <div *ngIf="mp3.service">
+            <a [routerLink]="['/create-your-event-service', mp3.service?.id, 'view']">{{ mp3.service?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/mp-3', mp3.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

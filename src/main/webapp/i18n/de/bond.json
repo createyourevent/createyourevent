@@ -1,0 +1,31 @@
+{
+  "createyoureventApp": {
+    "bond": {
+      "home": {
+        "title": "Bonds",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Bond erstellen",
+        "createOrEditLabel": "Bond erstellen oder bearbeiten",
+        "notFound": "Keine Bonds gefunden"
+      },
+      "created": "Bond erstellt mit ID {{ param }}",
+      "updated": "Bond aktualisiert mit ID {{ param }}",
+      "deleted": "Bond gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Bond {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Bond"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "code": "Code",
+      "points": "Points",
+      "creationDate": "Creation Date",
+      "redemptionDate": "Redemption Date",
+      "user": "User",
+      "pointsExchange": "Points Exchange"
+    }
+  }
+}

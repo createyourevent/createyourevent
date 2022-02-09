@@ -1,0 +1,27 @@
+{
+  "createyoureventApp": {
+    "adminFeesPrice": {
+      "home": {
+        "title": "Admin Fees Prices",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Admin Fees Price",
+        "createOrEditLabel": "Create or edit a Admin Fees Price",
+        "notFound": "No Admin Fees Prices found"
+      },
+      "created": "A new Admin Fees Price is created with identifier {{ param }}",
+      "updated": "A Admin Fees Price is updated with identifier {{ param }}",
+      "deleted": "A Admin Fees Price is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Admin Fees Price {{ id }}?"
+      },
+      "detail": {
+        "title": "Admin Fees Price"
+      },
+      "id": "ID",
+      "feesOrganisator": "Fees Organisator",
+      "feesSupplier": "Fees Supplier",
+      "feesService": "Fees Service",
+      "feesOrganizations": "Fees Organizations"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="serviceLikeDislike">
+      <h2 data-cy="serviceLikeDislikeDetailsHeading">
+        <span jhiTranslate="createyoureventApp.serviceLikeDislike.detail.title">Service Like Dislike</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ serviceLikeDislike.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.serviceLikeDislike.like">Like</span></dt>
+        <dd>
+          <span>{{ serviceLikeDislike.like }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.serviceLikeDislike.dislike">Dislike</span></dt>
+        <dd>
+          <span>{{ serviceLikeDislike.dislike }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.serviceLikeDislike.date">Date</span></dt>
+        <dd>
+          <span>{{ serviceLikeDislike.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.serviceLikeDislike.comment">Comment</span></dt>
+        <dd>
+          <span>{{ serviceLikeDislike.comment }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.serviceLikeDislike.createYourEventService">Create Your Event Service</span></dt>
+        <dd>
+          <div *ngIf="serviceLikeDislike.createYourEventService">
+            <a [routerLink]="['/create-your-event-service', serviceLikeDislike.createYourEventService?.id, 'view']">{{
+              serviceLikeDislike.createYourEventService?.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.serviceLikeDislike.user">User</span></dt>
+        <dd>
+          <span>{{ serviceLikeDislike.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/service-like-dislike', serviceLikeDislike.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

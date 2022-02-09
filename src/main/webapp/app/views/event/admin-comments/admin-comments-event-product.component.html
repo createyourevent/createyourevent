@@ -1,0 +1,134 @@
+<div class="modal-header">
+    <h4 class="modal-title"><span jhiTranslate="admin-comments-event-product.comments-ratings-product-event">Comments and ratings from the product for an event</span></h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <mat-tab-group>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <span jhiTranslate="admin-comments-event-product.admin-comments">Admin Comments</span>
+          </ng-template>
+          <div class="alert alert-info" role="alert">
+            <h2 jhiTranslate="admin-comments-event-product.comments-title">Comments between product and event</h2>
+            <p jhiTranslate="admin-comments-event-product.comments-info">
+                Below you will find all comments that were written between a product and an event. Here you can also delete inappropriate comments.
+            </p>
+        </div>
+        <hr/>
+          <p>
+            <p-table [value]="comments" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th jhiTranslate="admin-comment-box.comment">Comment</th>
+                        <th jhiTranslate="admin-comment-box.date">Date</th>
+                        <th jhiTranslate="admin-comment-box.email">Email</th>
+                        <th jhiTranslate="admin-comment-box.action">Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-comment>
+                    <tr>
+                        <td>{{comment.comment}}</td>
+                        <td>{{comment.date | date:'mediumDate'}}</td>
+                        <ng-container *ngIf="userLoggedIn.id !== comment.user.id">
+                            <td><a (click)="clickUserName(comment.user)">{{comment.user.email}}</a></td>
+                        </ng-container>
+                        <ng-container *ngIf="userLoggedIn.id === comment.user.id">
+                            <td>{{ comment.user.email }}</td>
+                        </ng-container>
+                        <td>
+                            <button type="submit" (click)="deleteComment(comment.id)" class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="paginatorleft">
+                    <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+                </ng-template>
+                <ng-template pTemplate="paginatorright">
+                    <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+                </ng-template>
+            </p-table>
+          </p>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <span jhiTranslate="dashboard-event.comments-feedback">Comments and feedback</span>
+          </ng-template>
+          <div class="alert alert-info" role="alert">
+            <h2 jhiTranslate="dashboard-event.comments-feedback-title">Comments and feedback to this event</h2>
+            <p jhiTranslate="dashboard-event.comments-feedback-info">
+                Below you can see all likes / dislikes that have been given for this product of each individual user. You will also find the email address of the user who has liked there. You can also contact them if you have any questions about the decision.
+            </p>
+        </div>
+        <hr/>
+
+
+
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                  <div class="box">
+                    <h5 jhiTranslate="admin_like_dislike.likes">Like's</h5>
+                    <div *ngFor="let like of likes">
+                      <table>
+                        <tr>
+                            <ng-container *ngIf="userLoggedIn.id !== like.user!.id!">
+                                <td><a (click)="clickUserName(like.user!)">{{ like.user!.email! }}</a></td>
+                            </ng-container>
+                            <ng-container *ngIf="userLoggedIn.id === like.user!.id!">
+                                <td>{{ like.user!.email! }}</td>
+                            </ng-container>
+                          <td>{{ like.date!.toString() | date:'mediumDate'}}</td>
+                          <td>
+                            <button type="submit" (click)="deleteLikes(like.id!)" class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="box">
+                    <h5 jhiTranslate="admin_like_dislike.dislikes">Dislike's</h5>
+                    <div *ngFor="let dislike of dislikes">
+                        <table>
+                          <tr>
+                            <ng-container *ngIf="userLoggedIn.id !== dislike.user!.id">
+                                <td><a (click)="clickUserName(dislike!.user!)">{{ dislike.user!.email! }}</a></td>
+                            </ng-container>
+                            <ng-container *ngIf="userLoggedIn.id === dislike.user!.id">
+                                <td>{{ dislike.user!.email }}</td>
+                            </ng-container>
+                            <td>{{ dislike.date!.toString()| date:'mediumDate' }}</td>
+                            <td>
+                              <button type="submit" (click)="deleteDislikes(dislike.id!)" class="btn btn-danger btn-sm">
+                                  <fa-icon icon="times"></fa-icon>
+                                  <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                              </button>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </mat-tab>
+
+    </mat-tab-group>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>

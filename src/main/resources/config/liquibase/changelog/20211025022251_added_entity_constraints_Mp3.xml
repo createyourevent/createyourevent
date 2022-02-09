@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+    <!--
+        Added the constraints for entity Mp3.
+    -->
+    <changeSet id="20211025022251-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="mp_3"
+                                 constraintName="fk_mp_3__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="mp_3"
+                                 constraintName="fk_mp_3__product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+
+        <addForeignKeyConstraint baseColumnNames="shop_id"
+                                 baseTableName="mp_3"
+                                 constraintName="fk_mp_3__shop_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="shop"/>
+
+        <addForeignKeyConstraint baseColumnNames="event_id"
+                                 baseTableName="mp_3"
+                                 constraintName="fk_mp_3__event_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="event"/>
+
+        <addForeignKeyConstraint baseColumnNames="service_id"
+                                 baseTableName="mp_3"
+                                 constraintName="fk_mp_3__service_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="create_your_event_service"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,103 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+            <h5><span jhiTranslate="guest-reservation.title-event"></span>{{event.name}}</h5>
+            <p>
+                <span jhiTranslate="guest-reservation.info">Info</span>
+            </p>
+            <hr/>
+            <div class="cards" *ngFor="let reservation of reservations">
+                <mat-card class="reservation-card">
+                    <mat-card-header>
+                    <mat-card-title>Reservation: {{reservation.id}}</mat-card-title>
+                    </mat-card-header>
+
+                    <mat-card-content>
+                        <dl class="row-md jh-entity-details">
+                            <dt><span jhiTranslate="guest-reservation.firstname">Firstname</span></dt>
+                            <dd>
+                                <span>{{reservation.user!.firstName}} </span>
+                            </dd>
+                            <dt><span jhiTranslate="guest-reservation.lastname">Lastname</span></dt>
+                            <dd>
+                                <span>{{reservation.user!.lastName}}</span>
+                            </dd>
+                            <dt><span jhiTranslate="guest-reservation.email">Email</span></dt>
+                            <dd>
+                                <span>{{ reservation.user!.email }}</span>
+                            </dd>
+                            <dt><span jhiTranslate="guest-reservation.tickets">Tickets</span></dt>
+                            <dd>
+                                <span>{{ reservation.ticket.ticketsUsed }} / {{ reservation.ticket.amount }}</span>
+                            </dd>
+                        </dl>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button id="view-reservation" class="btn btn-primary" [routerLink]="['/organisator/guest-reservation', reservation.id, 'view']">
+                            <fa-icon icon="plus"></fa-icon>
+                            <span  jhiTranslate="guest-reservation.view">
+                            View this reservation
+                            </span>
+                        </button>
+                        <button type="submit" (click)="delete(reservation)"
+                        class="btn btn-danger btn-sm">
+                            <fa-icon icon="times"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="guest-reservation.delete">Delete</span>
+                        </button>
+                    </mat-card-actions>
+              </mat-card>
+            </div>
+	  </div>
+    </div>
+    <div class="row">
+		<div class="col-md-12">
+            <hr/>
+            <div class="title-box">
+                <h5><span jhiTranslate="event-detail.calculation">Calculation</span></h5>
+            </div>
+            <div class="box">
+              <div class="row">
+                <div class="col-md-6">
+                    <dl class="row-md jh-entity-details">
+                    <dt><span jhiTranslate="event-detail.placenumber">Placenumber</span></dt>
+                    <dd>
+                        <span>{{ event.placenumber }}</span>
+                    </dd>
+                    <dt><span jhiTranslate="event-detail.price">Price</span></dt>
+                    <dd>
+                        <span>{{ event.price | currency }}</span>
+                    </dd>
+                    <dt><span jhiTranslate="event-detail.total-entrance-fee">Total entrance fee</span></dt>
+                    <dd>
+                        <span>{{ totalEntranceFee | currency }}</span>
+                    </dd>
+                    <dt><span jhiTranslate="event-detail.total-cost">Total cost's</span></dt>
+                    <dd>
+                        <span>{{ totalCost | currency }}</span>
+                    </dd>
+                    <dt><span jhiTranslate="event-detail.earnings-entrance-fee"></span></dt>
+                    <dd>
+                        <span>{{ profit | currency }}</span>
+                    </dd>
+                </dl>
+                </div>
+                <div class="col-md-6">
+                    <jhi-reservation-counter [minimumReservations]="minimumReservations" [tickets]="tickets" [numberReservations]="numberReservations" [maximumReservations]="maximumReservations" [previousEarnings]="previousEarnings"></jhi-reservation-counter>
+                </div>
+            </div>
+        </div>
+            <hr/>
+            <div class="btn-cancel">
+                <button type="button" id="cancel-save" class="btn btn-secondary btn-cancel" (click)="previousState()">
+                  <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+              </button>
+            </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+		</div>
+		<div class="col-md-6">
+		</div>
+	</div>
+</div>

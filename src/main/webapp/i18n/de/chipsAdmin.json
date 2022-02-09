@@ -1,0 +1,24 @@
+{
+  "createyoureventApp": {
+    "chipsAdmin": {
+      "home": {
+        "title": "Chips Admins",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Chips Admin erstellen",
+        "createOrEditLabel": "Chips Admin erstellen oder bearbeiten",
+        "notFound": "Keine Chips Admins gefunden"
+      },
+      "created": "Chips Admin erstellt mit ID {{ param }}",
+      "updated": "Chips Admin aktualisiert mit ID {{ param }}",
+      "deleted": "Chips Admin gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Chips Admin {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Chips Admin"
+      },
+      "id": "ID",
+      "gameActive": "Game Active"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "createyoureventApp": {
+    "product": {
+      "home": {
+        "title": "Products",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Product erstellen",
+        "createOrEditLabel": "Product erstellen oder bearbeiten",
+        "notFound": "Keine Products gefunden"
+      },
+      "created": "Product erstellt mit ID {{ param }}",
+      "updated": "Product aktualisiert mit ID {{ param }}",
+      "deleted": "Product gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Product {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Product"
+      },
+      "id": "ID",
+      "title": "Title",
+      "keywords": "Keywords",
+      "description": "Description",
+      "dateAdded": "Date Added",
+      "dateModified": "Date Modified",
+      "priceType": "Price Type",
+      "rentType": "Rent Type",
+      "price": "Price",
+      "photo": "Photo",
+      "photo2": "Photo 2",
+      "photo3": "Photo 3",
+      "youtube": "Youtube",
+      "active": "Active",
+      "stock": "Stock",
+      "productType": "Product Type",
+      "itemNumber": "Item Number",
+      "status": "Status",
+      "unit": "Unit",
+      "amount": "Amount",
+      "motto": "Motto",
+      "eventProductOrders": "Event Product Orders",
+      "comments": "Comments",
+      "worksheets": "Worksheets",
+      "images": "Images",
+      "mp3s": "Mp 3 S",
+      "shop": "Shop",
+      "tags": "Tags",
+      "deliveryTypes": "Delivery Types"
+    }
+  }
+}

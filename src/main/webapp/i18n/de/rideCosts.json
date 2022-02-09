@@ -1,0 +1,25 @@
+{
+  "createyoureventApp": {
+    "rideCosts": {
+      "home": {
+        "title": "Ride Costs",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Ride Costs erstellen",
+        "createOrEditLabel": "Ride Costs erstellen oder bearbeiten",
+        "notFound": "Keine Ride Costs gefunden"
+      },
+      "created": "Ride Costs erstellt mit ID {{ param }}",
+      "updated": "Ride Costs aktualisiert mit ID {{ param }}",
+      "deleted": "Ride Costs gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Ride Costs {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Ride Costs"
+      },
+      "id": "ID",
+      "pricePerKilometre": "Price Per Kilometre",
+      "serviceMap": "Service Map"
+    }
+  }
+}

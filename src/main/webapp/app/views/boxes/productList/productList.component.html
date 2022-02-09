@@ -1,0 +1,38 @@
+<p-orderList [value]="products" [listStyle]="{'max-height':'34rem'}" header="{{ 'productList.list-of-products' | translate}}" filterBy="title" filterPlaceholder="{{ 'productList.filter-by-name' | translate}}" [dragdrop]="true">
+  <ng-template let-product pTemplate="item">
+      <div class="product-item">
+          <div class="image-container">
+            <div *ngIf="product.photo">
+              <a (click)="openFile(product?.photoContentType!, product?.photo)">
+                  <img [src]="'data:' + product.photoContentType + ';base64,' + product.photo" alt="{{ product.title }}"/>
+              </a>
+            </div>
+          </div>
+          <div class="product-list-detail">
+              <h5 class="p-mb-2">{{ product.title }}</h5>
+              <jhi-price-type [product]="product"></jhi-price-type>
+              <span class="product-category">{{product.category}}</span>
+          </div>
+          <div class="product-list-price-stock">
+            <h6 class="p-mb-2"><span>{{ product.price | currency }} / {{ product.amount }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</span></h6>
+            <ng-container *ngIf="product.stock < 0">
+              <dt><span jhiTranslate="product_slider.stock">Stock</span></dt>
+              <dd>
+                  <span jhiTranslation="select-products.infinite">Infinite</span>
+              </dd>
+          </ng-container>
+          <ng-container *ngIf="product.stock >= 0">
+              <dt><span jhiTranslate="product_slider.stock">Stock</span></dt>
+              <dd>
+                  <span>{{ product.stock }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</span>
+              </dd>
+          </ng-container>
+        </div>
+          <div class="product-list-action">
+            <button type="button" class="btn btn-secondary" (click)="goToProduct(product.id)">
+              <fa-icon icon="arrow-right"></fa-icon>&nbsp;<span jhiTranslate="entity.action.view">View</span>
+          </button>
+          </div>
+      </div>
+  </ng-template>
+</p-orderList>

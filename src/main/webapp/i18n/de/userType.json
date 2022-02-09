@@ -1,0 +1,12 @@
+{
+  "createyoureventApp": {
+    "UserType": {
+      "null": "",
+      "USER": "USER",
+      "SUPPLIER": "SUPPLIER",
+      "ORGANIZOR": "ORGANIZOR",
+      "SERVICE": "SERVICE",
+      "ORGANIZER": "ORGANIZER"
+    }
+  }
+}

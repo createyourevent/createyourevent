@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="serviceMap">
+      <h2 data-cy="serviceMapDetailsHeading"><span jhiTranslate="createyoureventApp.serviceMap.detail.title">Service Map</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ serviceMap.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.serviceMap.title">Title</span></dt>
+        <dd>
+          <span>{{ serviceMap.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.serviceMap.rideCost">Ride Cost</span></dt>
+        <dd>
+          <div *ngIf="serviceMap.rideCost">
+            <a [routerLink]="['/ride-costs', serviceMap.rideCost?.id, 'view']">{{ serviceMap.rideCost?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.serviceMap.createYourEventService">Create Your Event Service</span></dt>
+        <dd>
+          <div *ngIf="serviceMap.createYourEventService">
+            <a [routerLink]="['/create-your-event-service', serviceMap.createYourEventService?.id, 'view']">{{
+              serviceMap.createYourEventService?.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/service-map', serviceMap.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

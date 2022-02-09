@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="serviceOffer">
+      <h2 data-cy="serviceOfferDetailsHeading"><span jhiTranslate="createyoureventApp.serviceOffer.detail.title">Service Offer</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ serviceOffer.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.serviceOffer.title">Title</span></dt>
+        <dd>
+          <span>{{ serviceOffer.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.serviceOffer.description">Description</span></dt>
+        <dd>
+          <span>{{ serviceOffer.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.serviceOffer.costHour">Cost Hour</span></dt>
+        <dd>
+          <span>{{ serviceOffer.costHour }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.serviceOffer.serviceMaps">Service Maps</span></dt>
+        <dd>
+          <div *ngIf="serviceOffer.serviceMaps">
+            <a [routerLink]="['/service-map', serviceOffer.serviceMaps?.id, 'view']">{{ serviceOffer.serviceMaps?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/service-offer', serviceOffer.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

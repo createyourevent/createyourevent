@@ -1,0 +1,60 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3">
+            <p-card>
+                <p-header>
+                    <img [src]="'data:' + product.photoContentType + ';base64,' + product.photo"  alt="product image"/>
+                </p-header>
+                  {{ product.title }}
+                  <hr/>
+                  <div [innerHtml]="product.description"></div>
+                  <hr/>
+                  <dl class="row-md jh-entity-details">
+                    <dt><span jhiTranslate="admin-calculation-product.itemNumber">Item Number</span></dt>
+                    <dd>
+                        <span>{{ product.itemNumber }}</span>
+                    </dd>
+                    <hr/>
+                    <dt><span jhiTranslate="admin-calculation-product.price">Price</span></dt>
+                    <dd>
+                        <span>{{ product.price | currency }} / {{ product.amount }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</span>
+                    </dd>
+                    <dt><span jhiTranslate="admin-calculation-product.stock">stock</span></dt>
+                    <dd>
+                        <span>{{ product.stock }}</span>
+                    </dd>
+                  </dl>
+                <p-footer>
+
+                </p-footer>
+            </p-card>
+		</div>
+		<div class="col-md-9">
+            <p-table [value]="eventProductOrders" styleClass="p-datatable-striped" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th jhiTranslate="admin-calculation-product.event">Event</th>
+                        <th jhiTranslate="admin-calculation-product.date">Date</th>
+                        <th jhiTranslate="admin-calculation-product.stock">Stock</th>
+                        <th jhiTranslate="admin-calculation-product.total">Total</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-epo>
+                    <tr>
+                        <td>{{ epo.event.name }}</td>
+                        <td>{{ epo.date | date:'medium' }}</td>
+                        <td>{{ epo.amount }}</td>
+                        <td>{{ epo.total | currency }}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="paginatorleft">
+                    <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+                </ng-template>
+                <ng-template pTemplate="paginatorright">
+                    <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+                </ng-template>
+            </p-table>
+		</div>
+	</div>
+</div>

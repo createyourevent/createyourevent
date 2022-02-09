@@ -1,0 +1,27 @@
+{
+  "createyoureventApp": {
+    "feeBalance": {
+      "home": {
+        "title": "Fee Balances",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Fee Balance",
+        "createOrEditLabel": "Create or edit a Fee Balance",
+        "notFound": "No Fee Balances found"
+      },
+      "created": "A new Fee Balance is created with identifier {{ param }}",
+      "updated": "A Fee Balance is updated with identifier {{ param }}",
+      "deleted": "A Fee Balance is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Fee Balance {{ id }}?"
+      },
+      "detail": {
+        "title": "Fee Balance"
+      },
+      "id": "ID",
+      "date": "Date",
+      "type": "Type",
+      "total": "Total",
+      "user": "User"
+    }
+  }
+}

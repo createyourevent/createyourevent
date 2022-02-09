@@ -1,0 +1,32 @@
+.cards {
+  width: 220px;
+  float: left;
+  margin: 10px;
+}
+
+.order-card {
+  width: 200px;
+  min-height: 400px;
+  margin: 5px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.btn {
+  margin: 3px;
+}
+
+.border-box {
+  border: 1px solid black;
+  border-radius: 5px;
+  /* background-color: darkblue; */
+  color: black;
+  margin: 5px;
+  padding: 5px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.clear {
+  clear: both;
+}

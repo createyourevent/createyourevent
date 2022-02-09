@@ -1,0 +1,13 @@
+{
+  "rent": {
+    "title": "Erhaltene Mieten",
+    "event": "Event",
+    "date": "Datum",
+    "date-from": "Datum von",
+    "date-until": "Datum bis",
+    "rent": "Miete",
+    "seen": "Gesehen",
+    "approved": "Bestätigt",
+    "total": "Total"
+  }
+}

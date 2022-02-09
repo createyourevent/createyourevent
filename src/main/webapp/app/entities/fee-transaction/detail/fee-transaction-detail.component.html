@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="feeTransaction">
+      <h2 data-cy="feeTransactionDetailsHeading">
+        <span jhiTranslate="createyoureventApp.feeTransaction.detail.title">Fee Transaction</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ feeTransaction.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.feeTransaction.date">Date</span></dt>
+        <dd>
+          <span>{{ feeTransaction.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.feeTransaction.transactionId">Transaction Id</span></dt>
+        <dd>
+          <div *ngIf="feeTransaction.transactionId">
+            <a [routerLink]="['/fee-transaction-id', feeTransaction.transactionId?.id, 'view']">{{ feeTransaction.transactionId?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.feeTransaction.eventProductOrder">Event Product Order</span></dt>
+        <dd>
+          <div *ngIf="feeTransaction.eventProductOrder">
+            <a [routerLink]="['/event-product-order', feeTransaction.eventProductOrder?.id, 'view']">{{
+              feeTransaction.eventProductOrder?.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.feeTransaction.eventServiceMapOrder">Event Service Map Order</span></dt>
+        <dd>
+          <div *ngIf="feeTransaction.eventServiceMapOrder">
+            <a [routerLink]="['/event-service-map-order', feeTransaction.eventServiceMapOrder?.id, 'view']">{{
+              feeTransaction.eventServiceMapOrder?.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.feeTransaction.event">Event</span></dt>
+        <dd>
+          <div *ngIf="feeTransaction.event">
+            <a [routerLink]="['/event', feeTransaction.event?.id, 'view']">{{ feeTransaction.event?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.feeTransaction.organizationReservation">Organization Reservation</span></dt>
+        <dd>
+          <div *ngIf="feeTransaction.organizationReservation">
+            <a [routerLink]="['/organization-reservation', feeTransaction.organizationReservation?.id, 'view']">{{
+              feeTransaction.organizationReservation?.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.feeTransaction.user">User</span></dt>
+        <dd>
+          <span>{{ feeTransaction.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/fee-transaction', feeTransaction.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

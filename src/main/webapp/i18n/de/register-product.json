@@ -1,0 +1,15 @@
+{
+  "register-product": {
+    "overviewProduct": "Übersicht Produkte",
+    "addProduct": "Füge Produkt hinzu",
+    "orders": "Bestellungen",
+    "updateProduct": "Aktualisiere Produkt",
+    "dashboard-shop": "Dashboard Shop",
+    "messages.success": "Produkt erfolgreich erstellt",
+    "messages.error.fail": "Produkt konnte nicht erstellt werden. Bitte versuchen Sie es später nocheinmal.",
+    "min-order-quantity": "Minimumbestellmenge",
+    "price": "Preis",
+    "price-per-kilometre": "Preis pro Kilometer",
+    "price-per-unit": "Preis pro Einheit"
+  }
+}

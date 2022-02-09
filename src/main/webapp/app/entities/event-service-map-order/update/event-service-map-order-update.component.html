@@ -1,0 +1,187 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-event-service-map-order-heading"
+        data-cy="EventServiceMapOrderCreateUpdateHeading"
+        jhiTranslate="createyoureventApp.eventServiceMapOrder.home.createOrEditLabel"
+      >
+        Create or edit a Event Service Map Order
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventServiceMapOrder.date" for="field_date">Date</label>
+          <div class="d-flex">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="datetime-local"
+              class="form-control"
+              name="date"
+              formControlName="date"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventServiceMapOrder.dateFrom" for="field_dateFrom"
+            >Date From</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateFrom"
+              data-cy="dateFrom"
+              type="datetime-local"
+              class="form-control"
+              name="dateFrom"
+              formControlName="dateFrom"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventServiceMapOrder.dateUntil" for="field_dateUntil"
+            >Date Until</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateUntil"
+              data-cy="dateUntil"
+              type="datetime-local"
+              class="form-control"
+              name="dateUntil"
+              formControlName="dateUntil"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventServiceMapOrder.costHour" for="field_costHour"
+            >Cost Hour</label
+          >
+          <input type="number" class="form-control" name="costHour" id="field_costHour" data-cy="costHour" formControlName="costHour" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventServiceMapOrder.rideCosts" for="field_rideCosts"
+            >Ride Costs</label
+          >
+          <input type="number" class="form-control" name="rideCosts" id="field_rideCosts" data-cy="rideCosts" formControlName="rideCosts" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventServiceMapOrder.total" for="field_total">Total</label>
+          <input type="number" class="form-control" name="total" id="field_total" data-cy="total" formControlName="total" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventServiceMapOrder.totalHours" for="field_totalHours"
+            >Total Hours</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="totalHours"
+            id="field_totalHours"
+            data-cy="totalHours"
+            formControlName="totalHours"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventServiceMapOrder.kilometre" for="field_kilometre"
+            >Kilometre</label
+          >
+          <input type="number" class="form-control" name="kilometre" id="field_kilometre" data-cy="kilometre" formControlName="kilometre" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventServiceMapOrder.billed" for="field_billed">Billed</label>
+          <input type="checkbox" class="form-check" name="billed" id="field_billed" data-cy="billed" formControlName="billed" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventServiceMapOrder.seen" for="field_seen">Seen</label>
+          <input type="checkbox" class="form-check" name="seen" id="field_seen" data-cy="seen" formControlName="seen" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventServiceMapOrder.approved" for="field_approved"
+            >Approved</label
+          >
+          <input type="checkbox" class="form-check" name="approved" id="field_approved" data-cy="approved" formControlName="approved" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventServiceMapOrder.event" for="field_event">Event</label>
+          <select class="form-control" id="field_event" data-cy="event" name="event" formControlName="event">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="eventOption.id === editForm.get('event')!.value?.id ? editForm.get('event')!.value : eventOption"
+              *ngFor="let eventOption of eventsSharedCollection; trackBy: trackEventById"
+            >
+              {{ eventOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventServiceMapOrder.serviceMap" for="field_serviceMap"
+            >Service Map</label
+          >
+          <select class="form-control" id="field_serviceMap" data-cy="serviceMap" name="serviceMap" formControlName="serviceMap">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                serviceMapOption.id === editForm.get('serviceMap')!.value?.id ? editForm.get('serviceMap')!.value : serviceMapOption
+              "
+              *ngFor="let serviceMapOption of serviceMapsSharedCollection; trackBy: trackServiceMapById"
+            >
+              {{ serviceMapOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventServiceMapOrder.cart" for="field_cart">Cart</label>
+          <select class="form-control" id="field_cart" data-cy="cart" name="cart" formControlName="cart">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="cartOption.id === editForm.get('cart')!.value?.id ? editForm.get('cart')!.value : cartOption"
+              *ngFor="let cartOption of cartsSharedCollection; trackBy: trackCartById"
+            >
+              {{ cartOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

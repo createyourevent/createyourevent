@@ -1,0 +1,83 @@
+<p-table [value]="products" dataKey="title" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]">
+    <ng-template pTemplate="header" let-product>
+        <tr>
+            <th style="width: 3rem"></th>
+            <th pSortableColumn="title" jhiTranslate="admin-calculation-shop.title">Title <p-sortIcon field="title"></p-sortIcon></th>
+            <th jhiTranslate="admin-calculation-shop.image">Image</th>
+            <th pSortableColumn="itemNumber" jhiTranslate="admin-calculation-shop.itemNumber">Item number <p-sortIcon field="itemNumber"></p-sortIcon></th>
+            <th pSortableColumn="priceType" jhiTranslate="admin-calculation-shop.priceType">Price Type<p-sortIcon field="priceType"></p-sortIcon></th>
+            <th pSortableColumn="rentType" jhiTranslate="admin-calculation-shop.rentType">Rent Type <p-sortIcon field="rentType"></p-sortIcon></th>
+            <th pSortableColumn="price" jhiTranslate="admin-calculation-shop.price">Price <p-sortIcon field="price"></p-sortIcon></th>
+            <th pSortableColumn="quantity" jhiTranslate="admin-calculation-shop.quantity">Quantity <p-sortIcon field="quantity"></p-sortIcon></th>
+            <th pSortableColumn="stock" jhiTranslate="admin-calculation-shop.stock">Stock <p-sortIcon field="stock"></p-sortIcon></th>
+            <th jhiTranslate="admin-calculation-shop.active">Active</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product let-expanded="expanded">
+        <tr>
+            <td>
+                <button type="button" pButton pRipple [pRowToggler]="product" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+            </td>
+            <td>{{ product.title }}</td>
+            <td><img [src]="'data:' + product.photoContentType + ';base64,' + product.photo" width="100" class="p-shadow-4" [alt]="product.name"/></td>
+            <td>{{ product.itemNumber }}</td>
+            <td>{{ product.priceType }}</td>
+            <td>{{ product.rentType }}</td>
+            <td>{{ product.price | currency }}</td>
+            <td>/ {{ product.amount }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</td>
+            <td><input class="input-stock" type="number" value="{{ product.stock }}" (change)="setStock($event, product.id)"></td>
+            <td><p-inputSwitch [(ngModel)]="product.active" (onChange)="handleChange($event, product.id)"></p-inputSwitch></td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-product>
+        <tr>
+            <td colspan="7">
+                <div class="p-p-3">
+                    <p-table [value]="product.eventProductOrders" dataKey="id" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="event" jhiTranslate="admin-calculation-shop.event">Event <p-sortIcon field="event"></p-sortIcon></th>
+                                <th pSortableColumn="date" jhiTranslate="admin-calculation-shop.date">Date <p-sortIcon field="date"></p-sortIcon></th>
+                                <th pSortableColumn="dateFrom" jhiTranslate="admin-calculation-shop.dateFrom">Date from<p-sortIcon field="dateFrom"></p-sortIcon></th>
+                                <th pSortableColumn="dateUntil" jhiTranslate="admin-calculation-shop.dateUntil">Date until<p-sortIcon field="dateUntil"></p-sortIcon></th>
+                                <th pSortableColumn="quantity" jhiTranslate="admin-calculation-shop.quantity">Amount <p-sortIcon field="quantity"></p-sortIcon></th>
+                                <th pSortableColumn="total" jhiTranslate="admin-calculation-shop.total">Total <p-sortIcon field="total"></p-sortIcon></th>
+                                <th pSortableColumn="customer" jhiTranslate="admin-calculation-shop.customer">Customer <p-sortIcon field="user.email"></p-sortIcon></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-eventProductOrder>
+                            <tr>
+                                <td><a href="/events/{{ eventProductOrder.event.id }}/view">{{ eventProductOrder.event.name }}</a></td>
+                                <td>{{ eventProductOrder.date | date:'medium' }}</td>
+                                <td>{{ eventProductOrder.dateFrom | date:'medium' }}</td>
+                                <td>{{ eventProductOrder.dateUntil | date:'medium' }}</td>
+                                <td>{{ eventProductOrder.amount }}</td>
+                                <td>{{ eventProductOrder.total | currency }}</td>
+                                <td><a (click)="clickUserName(eventProductOrder.user)">{{ eventProductOrder.user.email}}</a></td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="6" jhiTranslate="admin-calculation-shop.no-product-order">There are no order for this product yet.</td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="paginatorleft">
+                            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+                        </ng-template>
+                        <ng-template pTemplate="paginatorright">
+                            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

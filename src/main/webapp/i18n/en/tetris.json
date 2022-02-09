@@ -1,0 +1,17 @@
+{
+    "tetris": {
+        "commitment": "The commitment for this game is:",
+        "points": "points",
+        "title": "Tetris - the retrogame",
+        "linePoints": "For every full line you get",
+        "start": "Start",
+        "stop": "Stop",
+        "reset": "Reset",
+        "left": "Left",
+        "down": "Down",
+        "right": "Right",
+        "rotate": "Rotate",
+        "points_big": "POINTS: ",
+        "notEnoughtPoints": "Not enought points to play"
+    }
+}

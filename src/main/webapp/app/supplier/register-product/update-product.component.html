@@ -1,0 +1,306 @@
+<p-toast></p-toast>
+<div class="row justify-content-center">
+    <div class="col-8">
+
+            <h2 id="jhi-product-heading" jhiTranslate="add-product.home.editLabel">Edit a Product</h2>
+                <jhi-alert-error></jhi-alert-error>
+                <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="add-product.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                           formControlName="title"/>
+                    <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('title')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="createyoureventApp.product.motto" for="field_motto">Motto</label>
+                    <input type="text" class="form-control" name="motto" id="field_motto"
+                           formControlName="motto"/>
+                    <div *ngIf="editForm.get('motto')!.invalid && (editForm.get('motto')!.dirty || editForm.get('motto')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('motto')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="add-product.itemNumber" for="field_itemNumber">Item Number</label>
+                    <input type="text" class="form-control" name="itemNumber" id="field_itemNumber"
+                           formControlName="itemNumber"/>
+                </div>
+                <!--
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="add-product.keywords" for="field_keywords">Keywords</label>
+                    <tag-input class="form-control tags-product" name="keywords" id="field_keywords"
+                    formControlName="keywords"></tag-input>
+                </div>
+                -->
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="createyoureventApp.product.keywords" for="field_keywords">Keywords</label>
+                    <tag-input [(ngModel)]='items' [maxItems]='4' [ngModelOptions]="{standalone: true}"></tag-input>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="add-product.description" for="field_description">Description</label>
+                    <quill-editor [styles]="{height: '350px'}" formControlName="description" [modules]="modules" (onEditorCreated)="getEditorInstance($event)">
+                        <!--
+                        <quill-view format="text" theme="snow">
+                            <quill-view-html [content]="description" theme="snow"></quill-view-html>
+                        </quill-view>
+                        -->
+                    </quill-editor>
+                    <input type="file" style="display: none" id="fileInputField"/>
+                    <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('description')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="add-product.priceType" for="field_priceType">Price Type</label>
+                    <select class="form-control" name="priceType" formControlName="priceType" id="field_priceType" (change)="setPriceType($event)">
+                        <option value="SELL">{{ 'createyoureventApp.PriceType.SELL' | translate }}</option>
+                        <option value="RENT">{{ 'createyoureventApp.PriceType.RENT' | translate }}</option>
+                    </select>
+                </div>
+
+                <div *ngIf="isRenting">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="add-product.rentType" for="field_rentType">Rent Type</label>
+                        <select class="form-control" name="rentType" formControlName="rentType" id="field_rentType">
+                            <option value="HOURLY">{{ 'createyoureventApp.RentType.HOURLY' | translate }}</option>
+                            <option value="HALFDAY">{{ 'createyoureventApp.RentType.HALFDAY' | translate }}</option>
+                            <option value="DAY">{{ 'createyoureventApp.RentType.DAY' | translate }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="add-product.price" for="field_price">Price</label>
+                            <input type="number" class="form-control"  name="price" id="field_price"
+                                   formControlName="price"/>
+                            <div *ngIf="editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)">
+                                <small class="form-text text-danger"
+                                        *ngIf="editForm.get('price')?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                    [hidden]="!editForm.get('price')?.errors?.number" jhiTranslate="entity.validation.number">
+                                    This field should be a number.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        /
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" style="display:block" jhiTranslate="add-product.amount" for="field_amount">Amount</label>
+                            <input type="number" class="form-control" style="display:block" name="amount" id="field_amount"
+                                   formControlName="amount"/>
+                            <div *ngIf="editForm.get('amount')!.invalid && (editForm.get('amount')!.dirty || editForm.get('amount')!.touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="editForm.get('amount')?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                    [hidden]="!editForm.get('amount')?.errors?.number" jhiTranslate="entity.validation.number">
+                                    This field should be a number.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="form-control-label"  jhiTranslate="add-product.unit" for="field_unit">Unit</label>
+                            <select class="form-control"  name="unit" formControlName="unit" id="field_unit">
+                                <option value="ITEM">{{ 'createyoureventApp.Unit.ITEM' | translate }}</option>
+                                <option value="GRAM">{{ 'createyoureventApp.Unit.GRAM' | translate }}</option>
+                                <option value="KILOGRAM">{{ 'createyoureventApp.Unit.KILOGRAM' | translate }}</option>
+                                <option value="TONNE">{{ 'createyoureventApp.Unit.TONNE' | translate }}</option>
+                                <option value="MILLIMETER">{{ 'createyoureventApp.Unit.MILLIMETER' | translate }}</option>
+                                <option value="CENTIMETER">{{ 'createyoureventApp.Unit.CENTIMETER' | translate }}</option>
+                                <option value="METER">{{ 'createyoureventApp.Unit.METER' | translate }}</option>
+                                <option value="MILILITER">{{ 'createyoureventApp.Unit.MILILITER' | translate }}</option>
+                                <option value="CENTILITER">{{ 'createyoureventApp.Unit.CENTILITER' | translate }}</option>
+                                <option value="DECILITER">{{ 'createyoureventApp.Unit.DECILITER' | translate }}</option>
+                                <option value="LITER">{{ 'createyoureventApp.Unit.LITER' | translate }}</option>
+                            </select>
+                            <div *ngIf="editForm.get('unit')!.invalid && (editForm.get('unit')!.dirty || editForm.get('unit')!.touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="editForm.get('unit')?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="add-product.stock" for="field_stock">Stock</label>
+                    <input type="number" class="form-control" name="stock" id="field_stock"
+                           formControlName="stock"/>
+                    <div *ngIf="editForm.get('stock')!.invalid && (editForm.get('stock')!.dirty || editForm.get('stock')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('stock')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('stock')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+
+                <ng-container *ngIf="showDeliveryTypes">
+                  <div class="row border">
+                      <div class="col-md-2">
+                          <label for="pickup">{{ 'createyoureventApp.DeliveryTypes.PICKUP' | translate }}</label>
+                          <p-checkbox name="selectedDeliveryTypes" value="PICKUP" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedDeliveryTypes" inputId="pickup"></p-checkbox>
+                      </div>
+                      <div class="col-md-10">
+                          <label for="float-input-1" jhiTranslate="register-product.min-order-quantity">Minimum order quantity</label>
+                          <input type="text" pInputText id="float-input-1" [ngModelOptions]="{standalone: true}" [(ngModel)]="minOrderQuantityPickup" />
+                      </div>
+                      <!--
+                      <div class="col-md-5">
+                          <label for="float-input-2" jhiTranslate="register-product.price">Price</label>
+                          <input id="float-input-2" type="text" pInputText [(ngModel)]="pricePickup">
+                      </div>
+                      -->
+                  </div>
+                  <div class="row border">
+                      <div class="col-md-2">
+                          <label for="delivery">{{ 'createyoureventApp.DeliveryTypes.DELIVERY' | translate }}</label>
+                          <p-checkbox name="selectedDeliveryTypes" value="DELIVERY" [(ngModel)]="selectedDeliveryTypes" inputId="delivery" [ngModelOptions]="{standalone: true}"></p-checkbox>
+                      </div>
+                      <div class="col-md-4">
+                          <label for="float-input-3" jhiTranslate="register-product.min-order-quantity">Minimum order quantity</label>
+                          <input type="text" pInputText id="float-input-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="minOrderQuantityDelivery" />
+                      </div>
+                      <div class="col-md-3">
+                          <label for="float-input-4" jhiTranslate="register-product.price">Price</label>
+                          <input type="text" pInputText id="float-input-4" [ngModelOptions]="{standalone: true}" [(ngModel)]="priceDelivery" />
+                      </div>
+                      <div class="col-md-3">
+                          <label for="float-input-7" jhiTranslate="register-product.price-per-kilometre">Price per kilometre</label>
+                          <input type="text" pInputText id="float-input-7" [ngModelOptions]="{standalone: true}" [(ngModel)]="priceDeliveryKilometre" />
+                      </div>
+                  </div>
+                  <div class="row border">
+                      <div class="col-md-2">
+                          <label for="shipping">{{ 'createyoureventApp.DeliveryTypes.SHIPPING' | translate }}</label>
+                          <p-checkbox name="selectedDeliveryTypes" value="SHIPPING" [(ngModel)]="selectedDeliveryTypes" inputId="shipping" [ngModelOptions]="{standalone: true}"></p-checkbox>
+                      </div>
+                      <div class="col-md-6">
+                          <label for="float-input-5" jhiTranslate="register-product.min-order-quantity">Minimum order quantity</label>
+                          <input type="text" pInputText id="float-input-5" [ngModelOptions]="{standalone: true}" [(ngModel)]="minOrderQuantityShipping" />
+                      </div>
+                      <div class="col-md-4">
+                          <label for="float-input-6" jhiTranslate="register-product.price-per-unit">Price per unit</label>
+                          <input type="text" pInputText id="float-input-6" [ngModelOptions]="{standalone: true}" [(ngModel)]="priceShipping" />
+                      </div>
+                  </div>
+                </ng-container>
+
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="createyoureventApp.product.photo" for="field_photo">Photo</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('photoContentType')!.value + ';base64,' + editForm.get('photo')!.value" style="max-height: 100px;" *ngIf="editForm.get('photo')!.value" alt="product image"/>
+                        <div *ngIf="editForm.get('photo')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('photoContentType')!.value }}, {{ byteSize(editForm.get('photo')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('photo', 'photoContentType', 'file_photo')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_photo" (change)="setFileData($event, 'photo', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="photo" id="field_photo"
+                           formControlName="photo"/>
+                    <input type="hidden" class="form-control" name="photoContentType" id="field_photoContentType"
+                           formControlName="photoContentType" />
+                    <div *ngIf="editForm.get('photo')!.invalid && (editForm.get('photo')!.dirty || editForm.get('photo')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('photo')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="createyoureventApp.product.photo2" for="field_photo2">Photo 2</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('photo2ContentType')!.value + ';base64,' + editForm.get('photo2')!.value" style="max-height: 100px;" *ngIf="editForm.get('photo2')!.value" alt="product image"/>
+                        <div *ngIf="editForm.get('photo2')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('photo2ContentType')!.value }}, {{ byteSize(editForm.get('photo2')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('photo2', 'photo2ContentType', 'file_photo2')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_photo2" (change)="setFileData($event, 'photo2', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="photo2" id="field_photo2"
+                           formControlName="photo2"/>
+                    <input type="hidden" class="form-control" name="photo2ContentType" id="field_photo2ContentType"
+                           formControlName="photo2ContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="createyoureventApp.product.photo3" for="field_photo3">Photo 3</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('photo3ContentType')!.value + ';base64,' + editForm.get('photo3')!.value" style="max-height: 100px;" *ngIf="editForm.get('photo3')!.value" alt="product image"/>
+                        <div *ngIf="editForm.get('photo3')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('photo3ContentType')!.value }}, {{ byteSize(editForm.get('photo3')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('photo3', 'photo3ContentType', 'file_photo3')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_photo3" (change)="setFileData($event, 'photo3', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="photo3" id="field_photo3"
+                           formControlName="photo3"/>
+                    <input type="hidden" class="form-control" name="photo3ContentType" id="field_photo3ContentType"
+                           formControlName="photo3ContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="add-product.youtube" for="field_youtube">Youtube</label>
+                    <input type="text" class="form-control" name="youtube" id="field_youtube"
+                           formControlName="youtube"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="add-product.active" for="field_active">Active</label>
+                    <input type="checkbox" class="form-control" name="active" id="field_active"
+                           formControlName="active"/>
+                </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving || selectedDeliveryTypes.length === 0" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

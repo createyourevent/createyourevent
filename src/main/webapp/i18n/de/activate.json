@@ -1,0 +1,10 @@
+{
+  "activate": {
+    "title": "Aktivierung",
+    "messages": {
+      "success": "<strong>Ihr Benutzer wurde aktiviert.</strong> Bitte ",
+      "error": "<strong>Ihr Benutzer konnte nicht aktiviert werden.</strong> Bitte benutzen Sie die Registrierungsmaske, um sich zu registrieren.",
+      "redirect": "Die Seite wir automatisch in 10 Sekunden weitergeleitet auf die Einstellungen. Bitte füllen Sie dieses Formular komplett aus, damit alle Funktionen einwandfrei funktionieren. Wir werden die Daten nicht weiterverwenden. Diese Angaben dienen allein dafür, dass die Seite einwandfrei funktioniert mit Distanzen und Kommentaren und anderem. Wir bitten um Sie dafür um Verständnis, dass wir diese Angaben für uns benötigen."
+    }
+  }
+}

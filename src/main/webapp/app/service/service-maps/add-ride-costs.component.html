@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" (ngSubmit)="save()" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-ride-costs-heading" jhiTranslate="add-ride-costs.createLabel">Create or edit a Ride Costs</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div jhiTranslate="add-ride-costs.createRideCost.info">
+                    Here you can enter a price, which you calculate as the kilometer price for this service map if you use a car for these tasks.
+                    The costs which are then calculated are from the address that you have entered in your service location up to the event for which
+                    the customer then books you.
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="add-ride-costs.pricePerKilometre" for="field_pricePerKilometre">Price Per Kilometre</label>
+                    <input type="number" class="form-control" name="pricePerKilometre" id="field_pricePerKilometre"
+                           formControlName="pricePerKilometre"/>
+                    <div *ngIf="editForm.get('pricePerKilometre')!.invalid && (editForm.get('pricePerKilometre')!.dirty || editForm.get('pricePerKilometre')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('pricePerKilometre')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('pricePerKilometre')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

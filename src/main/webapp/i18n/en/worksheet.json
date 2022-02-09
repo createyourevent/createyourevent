@@ -1,0 +1,33 @@
+{
+  "createyoureventApp": {
+    "worksheet": {
+      "home": {
+        "title": "Worksheets",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Worksheet",
+        "createOrEditLabel": "Create or edit a Worksheet",
+        "notFound": "No Worksheets found"
+      },
+      "created": "A new Worksheet is created with identifier {{ param }}",
+      "updated": "A Worksheet is updated with identifier {{ param }}",
+      "deleted": "A Worksheet is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Worksheet {{ id }}?"
+      },
+      "detail": {
+        "title": "Worksheet"
+      },
+      "id": "ID",
+      "description": "Description",
+      "start": "Start",
+      "end": "End",
+      "costHour": "Cost Hour",
+      "total": "Total",
+      "billingType": "Billing Type",
+      "userType": "User Type",
+      "user": "User",
+      "event": "Event",
+      "product": "Product"
+    }
+  }
+}

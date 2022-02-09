@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity FeeTransaction.
+    -->
+    <changeSet id="20210713055114-2" author="jhipster">
+        <validCheckSum>ANY</validCheckSum>
+        <addForeignKeyConstraint baseColumnNames="transaction_id_id"
+                                 baseTableName="fee_transaction"
+                                 constraintName="fk_fee_transaction__transaction_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fee_transaction_id"/>
+
+        <addForeignKeyConstraint baseColumnNames="event_product_order_id"
+                                 baseTableName="fee_transaction"
+                                 constraintName="fk_fee_transaction__event_product_order_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="event_product_order"/>
+
+        <addForeignKeyConstraint baseColumnNames="event_service_map_order_id"
+                                 baseTableName="fee_transaction"
+                                 constraintName="fk_fee_transaction__event_service_map_order_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="event_service_map_order"/>
+
+        <addForeignKeyConstraint baseColumnNames="event_id"
+                                 baseTableName="fee_transaction"
+                                 constraintName="fk_fee_transaction__event_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="event"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="fee_transaction"
+                                 constraintName="fk_fee_transaction__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+    </changeSet>
+</databaseChangeLog>

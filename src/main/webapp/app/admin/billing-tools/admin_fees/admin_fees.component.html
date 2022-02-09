@@ -1,0 +1,24 @@
+<table>
+    <tr>
+        <td><span jhiTranslate="admin-fees.fees_organizer">Fees organisator</span></td><td><p-inputNumber [(ngModel)]="feesOrganisator" prefix="%"></p-inputNumber></td>
+    </tr>
+    <tr>
+        <td><span jhiTranslate="admin-fees.fees_supplier">Fees supplier</span></td><td><p-inputNumber [(ngModel)]="feesSupplier" prefix="%"></p-inputNumber></td>
+    </tr>
+    <tr>
+        <td><span jhiTranslate="admin-fees.fees_service">Fees service</span></td><td><p-inputNumber [(ngModel)]="feesService" prefix="%"></p-inputNumber></td>
+    </tr>
+    <tr>
+      <td><span jhiTranslate="admin-fees.fees_organization">Fees organization</span></td><td><p-inputNumber [(ngModel)]="feesOrganization" prefix="%"></p-inputNumber></td>
+  </tr>
+</table>
+
+<div>
+    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button (click)="save()"  class="btn btn-primary">
+        <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+    </button>
+</div>

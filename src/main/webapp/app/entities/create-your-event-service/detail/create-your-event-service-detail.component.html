@@ -1,0 +1,85 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="createYourEventService">
+      <h2 data-cy="createYourEventServiceDetailsHeading">
+        <span jhiTranslate="createyoureventApp.createYourEventService.detail.title">Create Your Event Service</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ createYourEventService.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.createYourEventService.name">Name</span></dt>
+        <dd>
+          <span>{{ createYourEventService.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.createYourEventService.logo">Logo</span></dt>
+        <dd>
+          <div *ngIf="createYourEventService.logo">
+            <a (click)="openFile(createYourEventService.logo, createYourEventService.logoContentType)">
+              <img
+                [src]="'data:' + createYourEventService.logoContentType + ';base64,' + createYourEventService.logo"
+                style="max-width: 100%"
+                alt="createYourEventService image"
+              />
+            </a>
+            {{ createYourEventService.logoContentType }}, {{ byteSize(createYourEventService.logo) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.createYourEventService.active">Active</span></dt>
+        <dd>
+          <span>{{ createYourEventService.active }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.createYourEventService.activeOwner">Active Owner</span></dt>
+        <dd>
+          <span>{{ createYourEventService.activeOwner }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.createYourEventService.description">Description</span></dt>
+        <dd>
+          <span>{{ createYourEventService.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.createYourEventService.address">Address</span></dt>
+        <dd>
+          <span>{{ createYourEventService.address }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.createYourEventService.motto">Motto</span></dt>
+        <dd>
+          <span>{{ createYourEventService.motto }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.createYourEventService.phone">Phone</span></dt>
+        <dd>
+          <span>{{ createYourEventService.phone }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.createYourEventService.webAddress">Web Address</span></dt>
+        <dd>
+          <span>{{ createYourEventService.webAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.createYourEventService.category">Category</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'createyoureventApp.ServiceCategory.' + createYourEventService.category }}">{{
+            createYourEventService.category
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.createYourEventService.user">User</span></dt>
+        <dd>
+          <span>{{ createYourEventService.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/create-your-event-service', createYourEventService.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

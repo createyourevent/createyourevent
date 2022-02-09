@@ -1,0 +1,13 @@
+{
+  "register-organization": {
+    "register": "Register a organization on Create Your Event",
+    "info": "Below you can register a organization with us with a few clicks. Please fill in all the information we need. Afterwards we will check the application on our part. If everything is in order, we will activate the organization. Afterwards you can manage the organization in your dashboard. Normally it takes about 1 day until we have activated the organization. You can find the dashboard here: <a href=\"/organization/dashboard\">Click here</a>",
+    "description": "Description of the organization",
+    "address": "Address",
+    "productType": "Product type",
+    "messages": {
+      "success": "<strong>Registration organization saved!.</strong> After successfully checking your details, we will activate the organization.",
+      "error": "<strong>Registration failed!.</strong> Please try again later."
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "createyoureventApp": {
+    "eventStarRating": {
+      "home": {
+        "title": "Event Star Ratings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Event Star Rating",
+        "createOrEditLabel": "Create or edit a Event Star Rating",
+        "notFound": "No Event Star Ratings found"
+      },
+      "created": "A new Event Star Rating is created with identifier {{ param }}",
+      "updated": "A Event Star Rating is updated with identifier {{ param }}",
+      "deleted": "A Event Star Rating is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Event Star Rating {{ id }}?"
+      },
+      "detail": {
+        "title": "Event Star Rating"
+      },
+      "id": "ID",
+      "stars": "Stars",
+      "date": "Date",
+      "comment": "Comment",
+      "event": "Event",
+      "user": "User"
+    }
+  }
+}

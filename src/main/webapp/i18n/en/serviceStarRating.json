@@ -1,0 +1,28 @@
+{
+  "createyoureventApp": {
+    "serviceStarRating": {
+      "home": {
+        "title": "Service Star Ratings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Service Star Rating",
+        "createOrEditLabel": "Create or edit a Service Star Rating",
+        "notFound": "No Service Star Ratings found"
+      },
+      "created": "A new Service Star Rating is created with identifier {{ param }}",
+      "updated": "A Service Star Rating is updated with identifier {{ param }}",
+      "deleted": "A Service Star Rating is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Service Star Rating {{ id }}?"
+      },
+      "detail": {
+        "title": "Service Star Rating"
+      },
+      "id": "ID",
+      "stars": "Stars",
+      "date": "Date",
+      "comment": "Comment",
+      "service": "Service",
+      "user": "User"
+    }
+  }
+}

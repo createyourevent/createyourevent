@@ -1,0 +1,152 @@
+<div class="row justify-content-center">
+  <p-toast></p-toast>
+    <div class="col-8">
+        <div *ngIf="reservation">
+            <h2><span jhiTranslate="createyoureventApp.reservation.detail.title">Reservation</span> {{ reservation.id }}</h2>
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <div *ngFor="let t of countTickets">
+
+              <table id="reservationPDF-{{t}}">
+                <tr>
+                    <td colspan="2">
+                        <div class="box">
+                            <h2 jhiTranslate="guest-reservation.ticket_for">Ticket for</h2>
+                            <h3>{{ event.name }}</h3>
+                            <div>{{ t + 1 }}/{{ ticket.amount }}</div>
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="box">
+                            <ngx-qrcode
+                            [elementType]="elementType"
+                            [errorCorrectionLevel]="correctionLevel"
+                            [value]="value"
+                            alt="Print@home from Create Your Event"
+                            cssClass="bshadow"></ngx-qrcode>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box">
+                            <img src="./../../../content/images/logo_rund_createyourevent.png" height="132px">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                    <div class="box">
+                        <dl class="row-md jh-entity-details">
+                            <dt><span jhiTranslate="guest-reservation.name">Name: </span></dt>
+                            <dd>
+                                {{ user.firstName }} {{ user.lastName }}
+                            </dd>
+                            <dt><span jhiTranslate="guest-reservation.address">Address: </span></dt>
+                            <dd>
+                                {{ user.address}}
+                            </dd>
+                            <dt><span jhiTranslate="guest-reservation.phone">Phone: </span></dt>
+                            <dd>
+                                {{ user.phone}}
+                            </dd>
+                            <dt><span jhiTranslate="guest-reservation.email">Email: </span></dt>
+                            <dd>
+                                {{ user.email }}
+                            </dd>
+                        </dl>
+                    </div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="box">
+                        <h5>{{ event.name}}</h5>
+                        <dl class="row-md jh-entity-details">
+                            <dt><span jhiTranslate="guest-reservation.category">Category</span></dt>
+                            <dd>
+                                <span jhiTranslate="{{ 'createyoureventApp.EventCategory.' + event.category }}">{{ event.category }}</span>
+                            </dd>
+                            <dt><span jhiTranslate="guest-reservation.price">Price</span></dt>
+                            <dd>
+                                <span>{{ event.price | currency}}</span>
+                            </dd>
+                        </dl>
+                    </div>
+                    </td>
+                    <td>
+                        <div class="box">
+                        <dl class="row-md jh-entity-details">
+                            <dt><span jhiTranslate="guest-reservation.dateStart">Date Start</span></dt>
+                            <dd>
+                                <span>{{ event.dateStart!.toString() | date }} {{ event.dateStart!.toString() | date:'shortTime' }}</span>
+                            </dd>
+                        </dl>
+                        <dl class="row-md jh-entity-details">
+                        <dt><span jhiTranslate="guest-reservation.dateEnd">Date End</span></dt>
+                        <dd>
+                            <span>{{ event.dateEnd!.toString() | date }} {{ event.dateEnd!.toString() | date:'shortTime' }}</span>
+                        </dd>
+                    </dl>
+                    </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="box">
+                                <h5><span jhiTranslate="event-detail.location">Location</span></h5>
+                                <dl class="row-md jh-entity-details">
+                                <dt><span jhiTranslate="guest-reservation.location-name">Location name</span></dt>
+                                <dd>
+                                    <span>{{ location.name }}</span>
+                                </dd>
+                                <dt><span jhiTranslate="guest-reservation.address">Address</span></dt>
+                                <dd>
+                                    <span>{{ address.address }}</span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+            </div>
+            </div>
+            <hr/>
+            <div class="row">
+              <div class="col-md-12">
+            <button
+            (click)="generatePDF()"
+            class="btn btn-info">
+                <fa-icon icon="arrow-down"></fa-icon>&nbsp;<span jhiTranslate="guest-reservation.pdf">PDF</span>
+            </button>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+          </div>
+        </div>
+        <hr/>
+        <div class="col-md-12 box">
+          <h5 jhiTranslate="tickets.send-mail-title">Send the ticket as an email to a friend</h5>
+          <p jhiTranslate="tickets.send-mail-info">
+            Below you can send this ticket to a friend or acquaintance. The ticket is valid as many times as you have ordered tickets for it.
+            For example, if you have bought 5 tickets, you can validate this ticket 5 times at the event until it is no longer valid.
+          </p>
+          <hr/>
+          <div class="p-field">
+            <label for="username2">Mail</label>
+            <input [(ngModel)]="mailaddress" type="email" aria-describedby="mail-help" class="ng-invalid ng-dirty" pInputText email/>
+            <!--<small id="mail-help" class="p-error">{{ 'guest-reservation.mail-wrong' | translate }}</small>-->
+          </div>
+          <hr/>
+          <button pButton  icon="pi pi-send" iconPos="left" class="btn btn-info" type="button" (click)="handleClick($event, reservation.id)" jhiTranslate="tickets.send-ticket">Send ticket to mail</button>
+        </div>
+      </div>
+    </div>

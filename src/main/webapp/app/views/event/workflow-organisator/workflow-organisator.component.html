@@ -1,0 +1,264 @@
+<ng-container *ngIf="definitelyAndConfirmed">
+    <div class="alert alert-primary" role="alert">
+        <p jhiTranslate="workflow-organisator.confirmed">
+        </p>
+    </div>
+</ng-container>
+
+
+<ng-container *ngIf="jhiEvent && !definitelyAndConfirmed">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 jhiTranslate="workflow-organisator.title">Processstatus reservation</h1>
+                <div class="alert alert-info" role="alert">
+                    <p jhiTranslate="workflow-organisator.info">
+                        This tab is to set the workflow-process of the reservation. There are 2 status which could be set.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <ng-container *ngIf="is7DaysBeforEvent() && !jhiEvent.definitelyConfirmed">
+          <hr/>
+          <!--
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 jhiTranslate="workflow-organisator.title-confirm">Will this event take place?</h5>
+                    <div class="alert alert-danger" role="alert">
+                        <p jhiTranslate="workflow-organisator.info-confirm">
+                                This event takes place in 7 days. Please confirm this event within the next 2 days.
+                                If it has not been confirmed up to 5 days before the event, this event will be automatically deleted.
+                        </p>
+                        <button (click)="setDefinitly()" jhiTranslate="workflow-organisator.definitly"></button>
+                    </div>
+                </div>
+            </div>
+          <hr/>
+          -->
+        </ng-container>
+        <div class="row">
+          <ng-container *ngIf="jhiEvent.organizationReservations.length > 0">
+              <ng-container *ngIf="!disabledOfProducts && !disabledOfServicemaps && minReservations && !disabledOfOrganizationReservation">
+                <div class="col-md-10">
+                    <span jhiTranslate="workflow-organisator.setDefinitly">Set definitly</span>
+                </div>
+                <div class="col-md-2">
+                    <p-inputSwitch (click)="setStatusDefinitly()" [disabled]="status || minReservations" [(ngModel)]="checked"></p-inputSwitch>
+                </div>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="jhiEvent.organizationReservations.length === null || jhiEvent.organizationReservations.length === 0">
+            <ng-container *ngIf="!disabledOfProducts && !disabledOfServicemaps && minReservations">
+              <div class="col-md-10">
+                  <span jhiTranslate="workflow-organisator.setDefinitly">Set definitly</span>
+              </div>
+              <div class="col-md-2">
+                  <p-inputSwitch (click)="setStatusDefinitly()" [disabled]="status || minReservations" [(ngModel)]="checked"></p-inputSwitch>
+              </div>
+          </ng-container>
+        </ng-container>
+
+
+        <ng-container *ngIf="jhiEvent.organizationReservations.length > 0">
+          <ng-container *ngIf="disabledOfProducts || disabledOfServicemaps || !minReservations || disabledOfOrganizationReservation">
+            <div class="alert alert-danger" role="alert">
+                <div class="col-md-10">
+                    <span jhiTranslate="workflow-organisator.seen-and-approved"></span>
+                </div>
+            </div>
+        </ng-container>
+      </ng-container>
+
+        <ng-container *ngIf="jhiEvent.organizationReservations.length === null || jhiEvent.organizationReservations.length === 0">
+            <ng-container *ngIf="disabledOfProducts || disabledOfServicemaps || !minReservations">
+                <div class="alert alert-danger" role="alert">
+                    <div class="col-md-10">
+                        <span jhiTranslate="workflow-organisator.seen-and-approved"></span>
+                    </div>
+                </div>
+            </ng-container>
+          </ng-container>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6 box_blue_diagonal">
+                <span jhiTranslate="workflow-organisator.eventProductOrders" class="bold">All products for this event and its status:</span>
+                <div class="row box-container-title">
+                    <div class="col-md-4" class="border bold center-text">
+                        <span jhiTranslate="workflow-organisator.product">Product</span>
+                    </div>
+                    <div class="col-md-4" class="border bold center-text">
+                        <span jhiTranslate="workflow-organisator.seen">Seen</span>
+                    </div>
+                    <div class="col-md-4" class="border bold center-text">
+                        <span jhiTranslate="workflow-organisator.approved">Approved</span>
+                    </div>
+                </div>
+                <div class="row box-container" *ngFor="let epo of eventProductOrders">
+                    <div class="col-md-4" class="border padding-5">
+                        <div><a href="/products/{{ epo.product.id }}/view">{{ epo.product!.title }}</a></div>
+                        <div><a href="/supplier/shop/{{ epo.product.shop.id }}/overview">{{ epo.product.shop.name }}</a></div>
+                        <ng-container *ngIf="user.id !== epo.product.shop.user.id">
+                            <div><span jhiTranslate="workflow-organisator.owner">Owner:</span><a (click)="clickUserName(epo.product.shop.user!)">{{ epo.product.shop.user.lastName }} {{ epo.product.shop.user.firstName }}</a></div>
+                        </ng-container>
+                        <ng-container *ngIf="user.id === epo.product.shop.user.id">
+                            <div><span jhiTranslate="workflow-organisator.owner">Owner:</span><a>{{ epo.product.shop.user.lastName }} {{ epo.product.shop.user.firstName }}</a></div>
+                        </ng-container>
+                    </div>
+                    <div class="col-md-4" class="border center-text">
+                        <ng-container *ngIf="epo.seen === null || epo.seen === false">
+                            <fa-icon icon="times"></fa-icon>
+                        </ng-container>
+                        <ng-container *ngIf="epo.seen  === true">
+                          <fa-icon icon="check"></fa-icon>
+                        </ng-container>
+                    </div>
+                    <div class="col-md-4" class="border center-text">
+                        <ng-container *ngIf="epo.approved === null || epo.approved === false">
+                            <fa-icon icon="times"></fa-icon>
+                        </ng-container>
+                        <ng-container *ngIf="epo.approved  === true">
+                            <fa-icon icon="check"></fa-icon>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 box_green_diagonal">
+                <span jhiTranslate="workflow-organisator.eventServiceMapOrders" class="bold">All servicemaps for this event and its status:</span>
+                <div class="row box-container-title">
+                    <div class="col-md-4" class="border bold center-text">
+                        <span jhiTranslate="workflow-organisator.servicemap">Servicemap</span>
+                    </div>
+                    <div class="col-md-4" class="border bold center-text">
+                        <span jhiTranslate="workflow-organisator.seen">Seen</span>
+                    </div>
+                    <div class="col-md-4" class="border bold center-text">
+                        <span jhiTranslate="workflow-organisator.approved">Approved</span>
+                    </div>
+                </div>
+                <div class="row box-container" *ngFor="let esmo of eventServiceMapOrders">
+                    <div class="col-md-4" class="border padding-5">
+                      <div><a href="/services/{{ esmo.serviceMap.createYourEventService.id }}/viewService">{{ esmo.serviceMap!.title }}</a></div>
+                        <ng-container *ngIf="user.id !== esmo.serviceMap.createYourEventService.user.id">
+                          <div><span jhiTranslate="workflow-organisator.owner">Owner:</span><a (click)="clickUserName(esmo.serviceMap.createYourEventService.user)">{{ esmo.serviceMap.createYourEventService.user.lastName }} {{ esmo.serviceMap.createYourEventService.user.firstName }}</a></div>
+                      </ng-container>
+                      <ng-container *ngIf="user.id === esmo.serviceMap.createYourEventService.user.id">
+                          <div><span jhiTranslate="workflow-organisator.owner">Owner:</span><a>{{ esmo.serviceMap.createYourEventService.user.lastName }} {{ esmo.serviceMap.createYourEventService.user.firstName }}</a></div>
+                      </ng-container>
+                    </div>
+                    <div class="col-md-4" class="border center-text">
+                        <ng-container *ngIf="esmo.seen === null || esmo.seen === false">
+                            <fa-icon icon="times"></fa-icon>
+                        </ng-container>
+                        <ng-container *ngIf="esmo.seen  === true">
+                            <fa-icon icon="check"></fa-icon>
+                        </ng-container>
+                    </div>
+                    <div class="col-md-4" class="border center-text">
+                        <ng-container *ngIf="esmo.approved === null || esmo.approved === false">
+                            <fa-icon icon="times"></fa-icon>
+                        </ng-container>
+                        <ng-container *ngIf="esmo.approved  === true">
+                            <fa-icon icon="check"></fa-icon>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="box_brown  padding-5" *ngIf="jhiEvent.organizationReservations.length > 0">
+          <div class="row">
+            <div class="col-md-12 ">
+              <span jhiTranslate="workflow-organisator.organization-info">
+                If you have hired an organization for this event, it must first be marked as seen and confirmed by
+                the landlord so that the event can be switched to definitive.
+                </span>
+              </div>
+            </div>
+              <div class="row box-container-title">
+                <div class="col-md-4" class="border bold center-text">
+                    <span jhiTranslate="workflow-organisator.organization">Organization</span>
+                </div>
+                <div class="col-md-4" class="border bold center-text">
+                    <span jhiTranslate="workflow-organisator.seen">Seen</span>
+                </div>
+                <div class="col-md-4" class="border bold center-text">
+                    <span jhiTranslate="workflow-organisator.approved">Approved</span>
+                </div>
+            </div>
+              <div class="row  box-container-title">
+              <div class="col-md-4" class="border center-text">
+                <ng-container *ngIf="jhiEvent.organizationReservations[0].organization.organizationType === 'CLUB'">
+                  <div><a href="/organization/{{ jhiEvent.organizationReservations[0].organization.club.id }}/{{ jhiEvent.organizationReservations[0].organization.organizationType | lowercase }}">{{ jhiEvent.organizationReservations[0].organization.name }}</a></div>
+                </ng-container>
+                <ng-container *ngIf="jhiEvent.organizationReservations[0].organization.organizationType === 'BUILDING'">
+                  <div><a href="/organization/{{ jhiEvent.organizationReservations[0].organization.building.id }}/{{ jhiEvent.organizationReservations[0].organization.organizationType | lowercase }}">{{ jhiEvent.organizationReservations[0].organization.name }}</a></div>
+                </ng-container>
+                <ng-container *ngIf="jhiEvent.organizationReservations[0].organization.organizationType === 'RESTAURANT'">
+                  <div><a href="/organization/{{ jhiEvent.organizationReservations[0].organization.restaurant.id }}/{{ jhiEvent.organizationReservations[0].organization.organizationType | lowercase }}">{{ jhiEvent.organizationReservations[0].organization.name }}</a></div>
+                </ng-container>
+                <ng-container *ngIf="jhiEvent.organizationReservations[0].organization.organizationType === 'HOTEL'">
+                  <div><a href="/organization/{{ jhiEvent.organizationReservations[0].organization.hotel.id }}/{{ jhiEvent.organizationReservations[0].organization.organizationType | lowercase }}">{{ jhiEvent.organizationReservations[0].organization.name }}</a></div>
+                </ng-container>
+                <ng-container *ngIf="jhiEvent.organizationReservations[0].organization.organizationType === 'BAR'">
+                  <div><a href="/organization/{{ jhiEvent.organizationReservations[0].organization.bar.id }}/{{ jhiEvent.organizationReservations[0].organization.organizationType | lowercase }}">{{ jhiEvent.organizationReservations[0].organization.name }}</a></div>
+                </ng-container>
+
+                  <ng-container *ngIf="user.id !== jhiEvent.organizationReservations[0].organization.user.id">
+                    <div><span jhiTranslate="workflow-organisator.owner">Owner:</span><a (click)="clickUserName(esmo.serviceMap.createYourEventService.user)">{{ jhiEvent.organizationReservations[0].organization.user.lastName }} {{ jhiEvent.organizationReservations[0].organization.user.firstName }}</a></div>
+                </ng-container>
+                <ng-container *ngIf="user.id === jhiEvent.organizationReservations[0].organization.user.id">
+                    <div><span jhiTranslate="workflow-organisator.owner">Owner:</span><a>{{ jhiEvent.organizationReservations[0].organization.user.lastName }} {{ jhiEvent.organizationReservations[0].organization.user.firstName }}</a></div>
+                </ng-container>
+              </div>
+              <div class="col-md-4" class="border center-text">
+                  <ng-container *ngIf="jhiEvent.organizationReservations[0].seen === null || jhiEvent.organizationReservations[0].seen === false">
+                      <fa-icon icon="times"></fa-icon>
+                  </ng-container>
+                  <ng-container *ngIf="jhiEvent.organizationReservations[0].seen  === true">
+                      <fa-icon icon="check"></fa-icon>
+                  </ng-container>
+              </div>
+              <div class="col-md-4" class="border center-text">
+                  <ng-container *ngIf="jhiEvent.organizationReservations[0].approved === null || jhiEvent.organizationReservations[0].approved === false">
+                      <fa-icon icon="times"></fa-icon>
+                  </ng-container>
+                  <ng-container *ngIf="jhiEvent.organizationReservations[0].approved  === true">
+                      <fa-icon icon="check"></fa-icon>
+                  </ng-container>
+              </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="box_yellow">
+          <div class="row">
+            <div class="col-md-12">
+              <span jhiTranslate="workflow-organisator.reservations-info">
+                Below you can see how many reservations have been made so far.
+                You can only definitely confirm the event once the minimum number of reservations has been received.
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 bold">
+              <span jhiTranslate="workflow-organisator.number-reservations">Number of reservations</span>
+            </div>
+            <div class="col-md-6">
+              {{ reservations }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 bold">
+              <span jhiTranslate="workflow-organisator.minimum-reservations">Minimum reservations</span>
+            </div>
+            <div class="col-md-6">
+              {{ jhiEvent.minPlacenumber }}
+            </div>
+          </div>
+        </div>
+
+    </div>
+</ng-container>
+
+

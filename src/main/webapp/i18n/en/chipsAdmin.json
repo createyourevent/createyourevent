@@ -1,0 +1,24 @@
+{
+  "createyoureventApp": {
+    "chipsAdmin": {
+      "home": {
+        "title": "Chips Admins",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Chips Admin",
+        "createOrEditLabel": "Create or edit a Chips Admin",
+        "notFound": "No Chips Admins found"
+      },
+      "created": "A new Chips Admin is created with identifier {{ param }}",
+      "updated": "A Chips Admin is updated with identifier {{ param }}",
+      "deleted": "A Chips Admin is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Chips Admin {{ id }}?"
+      },
+      "detail": {
+        "title": "Chips Admin"
+      },
+      "id": "ID",
+      "gameActive": "Game Active"
+    }
+  }
+}

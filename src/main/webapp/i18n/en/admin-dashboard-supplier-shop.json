@@ -1,0 +1,13 @@
+{
+  "admin-dashboard-supplier-shop": {
+    "calculation-title": "Calculation",
+    "calculation-info": "Below are the most important balance sheet and calculation data for this shop, which could be of interest to you.",
+    "ratings-title": "All user ratings",
+    "ratings-info": "Below you can see all likes / dislikes that have been given for this shop of each individual user. You will also find the email address of the user who has liked there. You can also contact them if you have any questions about the decision.",
+    "comments-title": "Comments and feedbacks",
+    "comments-info": "Below you will find all comments that have been made for this shop. If you would like to reply personally to a comment, you can do so directly below via the email address.",
+    "gallery-title": "Admin gallery",
+    "gallery-info": "Here you could upload maximal 10 images for the shop. This is to present your shop better in the internet.",
+    "music-title": "Mp3 upload for this shop."
+  }
+}

@@ -1,0 +1,11 @@
+export enum UserType {
+  USER = 'USER',
+
+  SUPPLIER = 'SUPPLIER',
+
+  ORGANIZOR = 'ORGANIZOR',
+
+  SERVICE = 'SERVICE',
+
+  ORGANIZER = 'ORGANIZER',
+}

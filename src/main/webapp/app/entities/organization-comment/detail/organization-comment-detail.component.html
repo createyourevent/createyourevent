@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="organizationComment">
+      <h2 data-cy="organizationCommentDetailsHeading">
+        <span jhiTranslate="createyoureventApp.organizationComment.detail.title">Organization Comment</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ organizationComment.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organizationComment.comment">Comment</span></dt>
+        <dd>
+          <span>{{ organizationComment.comment }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organizationComment.date">Date</span></dt>
+        <dd>
+          <span>{{ organizationComment.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organizationComment.organization">Organization</span></dt>
+        <dd>
+          <div *ngIf="organizationComment.organization">
+            <a [routerLink]="['/organization', organizationComment.organization?.id, 'view']">{{ organizationComment.organization?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organizationComment.user">User</span></dt>
+        <dd>
+          <span>{{ organizationComment.user?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organizationComment.event">Event</span></dt>
+        <dd>
+          <div *ngIf="organizationComment.event">
+            <a [routerLink]="['/organization', organizationComment.event?.id, 'view']">{{ organizationComment.event?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.organizationComment.organizationComment">Organization Comment</span></dt>
+        <dd>
+          <div *ngIf="organizationComment.organizationComment">
+            <a [routerLink]="['/organization-comment', organizationComment.organizationComment?.id, 'view']">{{
+              organizationComment.organizationComment?.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/organization-comment', organizationComment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

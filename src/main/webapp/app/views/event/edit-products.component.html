@@ -1,0 +1,102 @@
+<p-toast key="myKey1"></p-toast>
+<div class="card">
+  <h5><span jhiTranslate="edit-products.edit-product-for">Edit product for </span>{{ jhiEvent.name }} <span jhiTranslate="edit-products.from">from</span>{{ jhiEvent.dateStart | date: 'medium' }} - {{ jhiEvent.dateEnd | date: 'medium' }}</h5>
+  <p-table [value]="eventProductOrders" sortField="shop.productType" sortMode="single" (onSort)="onSort()" dataKey="shop.productType">
+      <ng-template pTemplate="header">
+          <tr>
+              <th jhiTranslate="edit-products.product-image">Productimage</th>
+              <th jhiTranslate="edit-products.product-name">Productname</th>
+              <th jhiTranslate="edit-products.seen">Seen</th>
+              <th jhiTranslate="edit-products.approved">Approved</th>
+              <th jhiTranslate="edit-products.amount">Amount</th>
+              <th jhiTranslate="edit-products.total">Total</th>
+              <th jhiTranslate="edit-products.selling-price">Selling price</th>
+              <th jhiTranslate="edit-products.rent-date">Rent date</th>
+              <th jhiTranslate="edit-products.action">Action</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-eventProductOrder let-rowIndex="rowIndex" let-columns="columns" let-expanded="expanded">
+          <tr *ngIf="rowGroupMetadata[eventProductOrder.product.productType].index === rowIndex">
+              <td colspan="9">
+                  <button type="button" pButton pRipple [pRowToggler]="eventProductOrder" class="p-button-text p-button-rounded p-button-plain p-mr-2" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                  <span style="font-weight:bold" class="p-text-bold p-ml-2">{{ eventProductOrder.product.productType }}</span>
+              </td>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="rowexpansion" let-eventProductOrder let-columns="columns" let-rowIndex="rowIndex">
+          <tr>
+              <td>
+                <div *ngIf="eventProductOrder.product.photo">
+                  <a (click)="openFile(eventProductOrder.product?.photoContentType!, eventProductOrder.product?.photo)">
+                      <img [src]="'data:' + eventProductOrder.product.photoContentType + ';base64,' + eventProductOrder.product.photo" style="max-width: 100px;" alt="product image"/>
+                  </a>
+                </div>
+              </td>
+              <td>
+                {{ eventProductOrder.product.title }}
+              </td>
+              <td>
+                <ng-container *ngIf="eventProductOrder.seen === null || eventProductOrder.seen === false">
+                  <fa-icon icon="times"></fa-icon>
+                </ng-container>
+                <ng-container *ngIf="eventProductOrder.seen  === true">
+                    <fa-icon icon="check"></fa-icon>
+                </ng-container>
+                </td>
+              <td>
+                <ng-container *ngIf="eventProductOrder.approved === null || eventProductOrder.approved === false">
+                  <fa-icon icon="times"></fa-icon>
+              </ng-container>
+              <ng-container *ngIf="eventProductOrder.approved  === true">
+                  <fa-icon icon="check"></fa-icon>
+              </ng-container>
+              </td>
+              <td>
+                  <input class="amount-input" type="number" (blur)="onBlurAmountEvent($event, eventProductOrder.id)" [disabled]="eventProductOrder.approved" [value]="eventProductOrder.amount" id="change-amount--{{ eventProductOrder.id }}" /> {{ "createyoureventApp.Unit." + eventProductOrder.product.unit  | translate }}
+              </td>
+              <td>
+                {{ eventProductOrder.total | currency }}
+              </td>
+              <td>
+                <input currencyMask (blur)="onBlurEvent($event, eventProductOrder.id)" [options]="{ prefix: 'CHF ', thousands: '´', decimal: '.',  inputMode: 'NATURAL' }"  class="selling-price-input" [disabled]="eventProductOrder.approved" [(ngModel)]="eventProductOrder.sellingPrice" />
+              </td>
+              <td>
+                <ng-container *ngIf="eventProductOrder.product.priceType === 'RENT'">
+                  <table>
+                    <tr>
+                        <td>{{ eventProductOrder.dateFrom | date: 'medium' }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ eventProductOrder.dateUntil | date: 'medium' }}</td>
+                    </tr>
+                </table>
+              </ng-container>
+              </td>
+              <td>
+                <ng-container *ngIf="eventProductOrder.approved  !== true">
+                  <button type="submit" (click)="delete(eventProductOrder)" class="btn btn-danger btn-sm">
+                      <fa-icon icon="times"></fa-icon>
+                      <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </ng-container>
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
+</div>
+<hr/>
+
+<button type="submit"
+  (click)="previousState()"
+  class="btn btn-info">
+  <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+</button>
+
+<ng-container *ngIf=" showAddProductButton()">
+  <button class="btn btn-info" (click)="addProduct()">
+    <fa-icon icon="plus"></fa-icon>
+    <span  jhiTranslate="edit-products.add-product">
+      Add product
+    </span>
+  </button>
+</ng-container>

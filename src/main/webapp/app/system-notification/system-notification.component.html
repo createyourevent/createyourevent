@@ -1,0 +1,58 @@
+<ng-container *jhiHasAnyAuthority="'ROLE_USER'">
+    <div class="system-notification" (click)="openNotifications()"></div>
+
+        <div class="totalMessage">{{ totalMessages }}</div>
+
+    <div class="chat-notification-system" *ngIf="eventsIn7days.length > 0 || eventsWithDistanceAndSevenDays.length > 0 || tickets.length > 0" [hidden]="isShowMessages">
+        <div class="alert alert-danger" role="alert" *ngIf="eventsIn7days.length > 0">
+            <div jhiTranslate="system-notification.events-in-seven-days">You still have to definitely confirm the following events, which are organized by you.</div>
+            <ul class="circle">
+                <li *ngFor="let event of eventsIn7days"><a href="/events/{{ event.id }}/dashboard-event/workflow">{{ event.name }}</a></li>
+            </ul>
+        </div>
+        <div class="alert alert-primary" role="alert" *ngIf="eventsWithDistanceAndSevenDays.length > 0">
+            <div jhiTranslate="system-notification.events-in-seven-days-with-distance">Events this week with distance of 20km.</div>
+            <ul class="diamond">
+                <li *ngFor="let event of eventsWithDistanceAndSevenDays"><a href="/events/{{ event.id }}/view">{{ event.name }}</a></li>
+            </ul>
+        </div>
+        <div class="alert alert-secondary" role="alert" *ngIf="tickets.length > 0">
+            <div jhiTranslate="system-notification.pay-tickets">You must pay this tickets:</div>
+            <ul class="circle">
+                <li *ngFor="let ticket of tickets"><a href="/account/tickets">{{ ticket.event!.name }}</a></li>
+            </ul>
+        </div>
+        <div class="alert alert-info" role="alert" *ngIf="shopsNotSeen.length > 0">
+          <div jhiTranslate="system-notification.event-product-orders">You have product orders that you have not yet seen.</div>
+          <ul class="diamond">
+              <li *ngFor="let shop of shopsNotSeen"><a href="/supplier/orders/{{ shop.id }}">{{ shop.name }}</a></li>
+          </ul>
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="serviceMapsNotSeen.length > 0">
+          <div jhiTranslate="system-notification.service-orders">You haven't seen any service bookings.</div>
+          <ul class="circle">
+              <li *ngFor="let ser of serviceMapsNotSeen"><a href="/service/{{ ser.createYourEventService.id }}/customer-booking/{{ ser.id }}">{{ ser.title }}</a></li>
+          </ul>
+        </div>
+        <div class="alert alert-info" role="alert" *ngIf="organizationsNotSeen.length > 0">
+            <div jhiTranslate="system-notification.organization-reservations">You haven't seen any organization reservations</div>
+            <ul class="diamond">
+              <ng-container *ngFor="let org of organizationsNotSeen">
+                <ng-container *ngIf="org.organization.organizationType === 'RESTAURANT'">
+                  <li><a href="/organization/{{ org.organization.restaurant.id }}/rent-{{ org.organization.organizationType | lowercase }}">{{ org.organization.name }}</a></li>
+                </ng-container>
+                <ng-container *ngIf="org.organization.organizationType === 'CLUB'">
+                  <li><a href="/organization/{{ org.organization.club.id }}/rent-{{ org.organization.organizationType | lowercase }}">{{ org.organization.name }}</a></li>
+                </ng-container>
+                <ng-container *ngIf="org.organization.organizationType === 'HOTEL'">
+                  <li><a href="/organization/{{ org.organization.hotel.id }}/rent-{{ org.organization.organizationType | lowercase }}">{{ org.organization.name }}</a></li>
+                </ng-container>
+                <ng-container *ngIf="org.organization.organizationType === 'BUILDING'">
+                  <li><a href="/organization/{{ org.organization.building.id }}/rent-{{ org.organization.organizationType | lowercase }}">{{ org.organization.name }}</a></li>
+                </ng-container>
+              </ng-container>
+            </ul>
+          </div>
+    </div>
+</ng-container>
+

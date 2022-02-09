@@ -1,0 +1,6 @@
+{
+  "fieldnames": {
+    "address": "Address",
+    "address.info": "Please enter the address in the following format: '(street house-number, zip-code city, country)'. Example: (Musterstrasse 165, 8200 Schaffhausen, Switzerland)"
+  }
+}

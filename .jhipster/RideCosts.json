@@ -1,0 +1,29 @@
+{
+  "name": "RideCosts",
+  "fields": [
+    {
+      "fieldName": "pricePerKilometre",
+      "fieldType": "Float",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "serviceMap",
+      "otherEntityRelationshipName": "rideCost",
+      "relationshipName": "serviceMap",
+      "ownerSide": false
+    }
+  ],
+  "entityTableName": "ride_costs",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211025022206"
+}

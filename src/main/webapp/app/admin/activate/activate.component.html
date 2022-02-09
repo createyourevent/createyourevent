@@ -1,0 +1,37 @@
+<mat-tab-group>
+    <mat-tab label="{{ 'createyourevent.activate.events' | translate }}">
+        <table>
+            <tr *ngFor="let e of events">
+                <td>{{e.name }}</td>
+                <td><p-checkbox (onChange)="changeEvent($event, e.id)" name="events" value="val-{{ e.id }}" [(ngModel)]="selectedValuesEvents"></p-checkbox></td>
+                <td><button (click)="deleteEvent($event, e.id)">Delete</button></td>
+            </tr>
+        </table>
+    </mat-tab>
+    <mat-tab label="{{ 'createyourevent.activate.shops' | translate }}">
+        <table>
+            <tr *ngFor="let s of shops">
+                <td>{{s.name }}</td>
+                <td><p-checkbox (onChange)="changeShop($event, s.id)" name="shops" value="val-{{ s.id }}" [(ngModel)]="selectedValuesShops"></p-checkbox></td>
+            </tr>
+        </table>
+    </mat-tab>
+    <mat-tab label="{{ 'createyourevent.activate.services' | translate }}">
+        <table>
+            <tr *ngFor="let e of services">
+                <td>{{e.name }}</td>
+                <td><p-checkbox (onChange)="changeService($event, e.id)" name="services" value="val-{{ e.id }}" [(ngModel)]="selectedValuesServices"></p-checkbox></td>
+            </tr>
+        </table>
+    </mat-tab>
+    <mat-tab label="{{ 'createyourevent.activate.organization' | translate }}">
+      <table>
+          <tr *ngFor="let e of organizations">
+              <td>{{e.name }}</td>
+              <td><p-checkbox (onChange)="changeOrganization($event, e.id)" name="organizations" value="val-{{ e.id }}" [(ngModel)]="selectedValuesOrganizations"></p-checkbox></td>
+          </tr>
+      </table>
+  </mat-tab>
+  </mat-tab-group>
+
+

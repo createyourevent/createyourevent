@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+    <!--
+        Added the constraints for entity EventProductOrder.
+    -->
+    <changeSet id="20211025022227-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="event_product_order"
+                                 constraintName="fk_event_product_order__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="event_id"
+                                 baseTableName="event_product_order"
+                                 constraintName="fk_event_product_order__event_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="event"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="event_product_order"
+                                 constraintName="fk_event_product_order__product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+
+        <addForeignKeyConstraint baseColumnNames="shop_id"
+                                 baseTableName="event_product_order"
+                                 constraintName="fk_event_product_order__shop_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="shop"/>
+
+        <addForeignKeyConstraint baseColumnNames="cart_id"
+                                 baseTableName="event_product_order"
+                                 constraintName="fk_event_product_order__cart_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cart"/>
+
+        <addForeignKeyConstraint baseColumnNames="delivery_type_id"
+                                 baseTableName="event_product_order"
+                                 constraintName="fk_event_product_order__delivery_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="delivery_type"/>
+    </changeSet>
+</databaseChangeLog>

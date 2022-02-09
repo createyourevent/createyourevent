@@ -1,0 +1,25 @@
+{
+  "createyoureventApp": {
+    "eventDetails": {
+      "home": {
+        "title": "Event Details",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Event Details erstellen",
+        "createOrEditLabel": "Event Details erstellen oder bearbeiten",
+        "notFound": "Keine Event Details gefunden"
+      },
+      "created": "Event Details erstellt mit ID {{ param }}",
+      "updated": "Event Details aktualisiert mit ID {{ param }}",
+      "deleted": "Event Details gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Event Details {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Event Details"
+      },
+      "id": "ID",
+      "totalEntranceFee": "Total Entrance Fee",
+      "event": "Event"
+    }
+  }
+}

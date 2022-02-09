@@ -1,0 +1,14 @@
+{
+    "cashbox": {
+        "total-products": "Total Produkte",
+        "total-services": "Total Dienstleistungen",
+        "total": "Total",
+        "pay-cc": "Bezahlen mit Kreditkarte",
+        "cc-owner": "Kreditkarteninhaber",
+        "pay": "Bezahlen",
+        "payment-successfull": "Bezahlung erfolgreich",
+        "cc-form.successful.info": "Die Bezahlung mittels Kreditkarte war erfolgreich.",
+        "cc-form.error": "Fehler in Bezahlung",
+        "cc-form.error.info": "Die Bezahlung mittels Kreditkarte schlug fehl."
+    }
+}

@@ -1,0 +1,10 @@
+{
+  "till": {
+    "cash-register": "Kasse",
+    "info": "In der Kasse sehen Sie das Total aus den Eintrittspreisen und ihrem Investment. Sie können nun untenstehende Produkte und Dienstleistungen einkaufen mit diesem Total.Sie können unten so viele Produkte und Dienstleistungen einkaufen, bis dieser Betrag erreicht ist.",
+    "outgoings": "Ausgaben",
+    "revenue": "Einnahmen",
+    "investment": "Investment",
+    "total-for-buying-products": "Total für das Einkaufen Ihrer Produkte und Dienstleistungen"
+  }
+}

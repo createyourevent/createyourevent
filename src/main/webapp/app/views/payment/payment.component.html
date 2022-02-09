@@ -1,0 +1,55 @@
+<p-toast></p-toast>
+<ng-container *ngIf="value <= 0">
+    <div class="alert alert-warning" role="alert">
+        <span jhiTranslate="payment.all-paid">Everything is paid for. Thank you very much for that.</span>
+      </div>
+</ng-container>
+<ng-container *ngIf="value > 0">
+    <div class="box_white">
+    <!--
+    <mat-toolbar color="secondary" section-content-header class="card-toolbar">
+        <span>Credit card terminal</span>
+    </mat-toolbar>
+    <form novalidate [formGroup]="ccGroup" class="card-form">
+        <div class="p-field p-grid">
+            <label for="card" jhiTranslate="billing.cc-owner">Credit card owner</label>
+            <div class="p-col">
+                <input id="card" type="text" formControlName="name" placeholder="Jane Doe">
+            </div>
+        </div>
+        <div class="card-frame">
+            <div>
+                <ngx-stripe-card style="width: 300px" [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
+            </div>
+        </div>
+        <button pButton pRipple type="button" label="{{ 'billing.pay' | translate }}" class="p-button-rounded" (click)="pay()"></button>
+    </form>
+    <hr/>
+        <mat-toolbar color="secondary" section-content-header class="card-toolbar">
+            <span>Paypal terminal</span>
+        </mat-toolbar>
+        <div class="paypal-buttons">
+            <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+        </div>
+        <hr/>
+      -->
+        <mat-toolbar color="secondary" section-content-header class="card-toolbar">
+          <span>Datatrans Terminal</span>
+        </mat-toolbar>
+        <datatrans-component [production]="production" [transactionId]="value | transactionId: type : id | async" (onLoaded)="onLoaded($event)" (onOpened)="onOpened($event)" (onCancelled)="onCancelled($event)" (onError)="onError($event)"></datatrans-component>
+      <hr/>
+      <div class="container-fluid">
+        <div class="row logo_payment">
+          <div class="col-md-3">
+            <img src="../../../content/images/payment_logo/ssl.png"/>
+          </div>
+          <div class="col-md-4">
+            <img src="../../../content/images/payment_logo/postfinance.jpg"/>
+          </div>
+          <div class="col-md-4">
+            <img src="../../../content/images/payment_logo/visamaster.png"/>
+          </div>
+        </div>
+      </div>
+      </div>
+</ng-container>

@@ -1,0 +1,22 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+            <h5><span jhiTranslate="distance.distance"></span>{{ distance }} Km</h5>
+            <p-knob [(ngModel)]="distance" [step]="5" (onChange)="changeSliderRadius($event)" class="slider"></p-knob>
+        </div>
+        <div class="col-md-4">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+        <jhi-event-slider   orientation="horizontal" numVisible="4" numScroll="1" circular="true" verticalViewPortHeight="600" autoplayInterval="3000" [events]="eventsWithDistance"></jhi-event-slider>
+		</div>
+	</div>
+</div>
+
+
+
+
+

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
+    <head>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <h3><span th:text="#{ticket.for}">Ticket for</span>  <span th:text="${eventname}">Event</span></h3>
+
+        <p th:text="#{ticket.text}">
+          Hello, you will find the ticket as PDF-Attachment from this event.
+          Please print it out and bring it with you to this event.
+
+          Thank you very much.
+
+          With much love
+          Your Create Your Event Team
+        </p>
+    </body>
+</html>

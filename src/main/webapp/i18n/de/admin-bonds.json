@@ -1,0 +1,18 @@
+{
+  "admin-bonds": {
+    "add-bond": "Wertpunktepapier hinzufügen",
+    "overview-bonds": "Übersicht Wertpunktepapiere",
+    "points": "Punkte",
+    "user": "Benutzer",
+    "name": "Titel",
+    "description": "Beschreibung",
+    "generate-bond": "Erzeuge Wertpapier",
+    "fill-out-all-fields": "Bitte alle Felder ausfüllen",
+    "redemption-date": "Einlösungsdatum",
+    "creation-date": "Erstellungsdatum",
+    "code": "Code",
+    "print": "Drucken",
+    "voucher-code": "Gutschein Code",
+    "delete": "Löschen"
+  }
+}

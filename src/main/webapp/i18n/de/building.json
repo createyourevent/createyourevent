@@ -1,0 +1,25 @@
+{
+  "createyoureventApp": {
+    "building": {
+      "home": {
+        "title": "Buildings",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Building erstellen",
+        "createOrEditLabel": "Building erstellen oder bearbeiten",
+        "notFound": "Keine Buildings gefunden"
+      },
+      "created": "Building erstellt mit ID {{ param }}",
+      "updated": "Building aktualisiert mit ID {{ param }}",
+      "deleted": "Building gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Building {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Building"
+      },
+      "id": "ID",
+      "surface": "Surface",
+      "organization": "Organization"
+    }
+  }
+}

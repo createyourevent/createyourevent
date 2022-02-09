@@ -1,0 +1,17 @@
+{
+  "orders": {
+    "title": "Alle Bestellungen und Reservationen für Ihren Shop.",
+    "info": "Unten finden Sie alle Bestellung und Reservationen zu den Produkten in Ihrem Shop. Hier können Sie gleich, ",
+    "eventproductorder": "Eventbestellung: ",
+    "productname": "Produktname",
+    "quantity": "Menge",
+    "event": "Event",
+    "customer": "Kunde",
+    "dateFrom": "Datum von",
+    "dateUntil": "Datum bis",
+    "provisionally": "Provisorische Bestellungen",
+    "definitely": "Definitieve Bestellungen",
+    "seen": "Gesehen",
+    "approved": "Bestätigt"
+  }
+}

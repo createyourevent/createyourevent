@@ -1,0 +1,46 @@
+.card {
+  box-shadow: 10px 10px 7px -3px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 10px 7px -3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 7px -3px rgba(0, 0, 0, 0.75);
+  padding: 10px;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#d2ff52+0,91e842+100;Neon */
+  background: #d2ff52; /* Old browsers */
+  background: -moz-linear-gradient(top, #d2ff52 0%, #91e842 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #d2ff52 0%, #91e842 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #d2ff52 0%, #91e842 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2ff52', endColorstr='#91e842',GradientType=0 ); /* IE6-9 */
+  height: 800px;
+  margin: 10px auto;
+}
+
+.center {
+  text-align: center;
+  margin: 5px auto;
+}
+
+.title {
+  color: black;
+  font-family: 'Knewave', cursive;
+}
+
+.info {
+  color: black;
+  white-space: inherit;
+}
+
+.heart {
+  position: relative;
+  display: inline-block;
+  font-size: 3rem;
+  color: #d3d3d3;
+}
+
+.full {
+  color: red;
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: red;
+}

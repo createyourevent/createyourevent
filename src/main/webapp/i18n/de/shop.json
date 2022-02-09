@@ -1,0 +1,40 @@
+{
+  "createyoureventApp": {
+    "shop": {
+      "home": {
+        "title": "Shops",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Shop erstellen",
+        "createOrEditLabel": "Shop erstellen oder bearbeiten",
+        "notFound": "Keine Shops gefunden"
+      },
+      "created": "Shop erstellt mit ID {{ param }}",
+      "updated": "Shop aktualisiert mit ID {{ param }}",
+      "deleted": "Shop gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Shop {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Shop"
+      },
+      "id": "ID",
+      "name": "Name",
+      "productType": "Product Type",
+      "logo": "Logo",
+      "active": "Active",
+      "activeOwner": "Active Owner",
+      "description": "Description",
+      "address": "Address",
+      "motto": "Motto",
+      "phone": "Phone",
+      "webAddress": "Web Address",
+      "product": "Product",
+      "eventProductOrders": "Event Product Orders",
+      "images": "Images",
+      "mp3s": "Mp 3 S",
+      "user": "User",
+      "comments": "Comments",
+      "tags": "Tags"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="shopComment">
+      <h2 data-cy="shopCommentDetailsHeading"><span jhiTranslate="createyoureventApp.shopComment.detail.title">Shop Comment</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ shopComment.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shopComment.comment">Comment</span></dt>
+        <dd>
+          <span>{{ shopComment.comment }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shopComment.date">Date</span></dt>
+        <dd>
+          <span>{{ shopComment.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shopComment.shop">Shop</span></dt>
+        <dd>
+          <div *ngIf="shopComment.shop">
+            <a [routerLink]="['/shop', shopComment.shop?.id, 'view']">{{ shopComment.shop?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shopComment.user">User</span></dt>
+        <dd>
+          <span>{{ shopComment.user?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shopComment.shopComment">Shop Comment</span></dt>
+        <dd>
+          <div *ngIf="shopComment.shopComment">
+            <a [routerLink]="['/shop-comment', shopComment.shopComment?.id, 'view']">{{ shopComment.shopComment?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/shop-comment', shopComment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

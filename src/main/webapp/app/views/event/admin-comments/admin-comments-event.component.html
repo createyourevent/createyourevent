@@ -1,0 +1,238 @@
+<ng-container *ngIf="jhiEvent">
+    <p-accordion>
+
+        <p-accordionTab>
+            <p-header>
+                <span jhiTranslate="admin-comments-event.productcomments">Comments for the products of the event</span>
+            </p-header>
+
+            <div class="box">
+                <div class="row">
+                    <ng-container *ngIf="realEstateProducts.length > 0">
+                        <mat-toolbar color="primary">
+                            <span>{{'overview.real-estate' | translate}}</span>
+                        </mat-toolbar>
+                    </ng-container>
+                    <ng-container *ngFor="let epo of realEstateProducts">
+                     <mat-card class="product-card">
+                        <mat-card-header>
+                        <mat-card-title>{{epo.product.title}}</mat-card-title>
+                        </mat-card-header>
+                        <img mat-card-image [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"  alt="Product photo">
+                        <mat-card-content>
+                            <p>
+                                {{epo.product.price | currency}}
+                            </p>
+                            <p>
+                                <jhi-price-type [product]="epo.product"></jhi-price-type>
+                            </p>
+                            <hr/>
+                            <p>
+                                <span jhiTranslation="select-products.quantity">Total:</span>{{ epo.total | currency}}
+                            </p>
+                            <hr/>
+                        </mat-card-content>
+                            <mat-card-actions>
+                                <button class="btn btn-lg btn-primary btn-rating" jhiTranslate="admin-comments-event.comments" (click)="open(epo.product)">Comment's</button>
+                            </mat-card-actions>
+                      </mat-card>
+                    </ng-container>
+                </div>
+
+                <div class="row">
+                    <ng-container *ngIf="foodProducts.length > 0">
+                        <mat-toolbar color="primary">
+                            <span>{{'overview.food' | translate}}</span>
+                        </mat-toolbar>
+                    </ng-container>
+                    <ng-container *ngFor="let epo of foodProducts">
+                        <mat-card class="product-card">
+                            <mat-card-header>
+                            <mat-card-title>{{epo.product.title}}</mat-card-title>
+                            </mat-card-header>
+                            <img mat-card-image [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"  alt="Product photo">
+                            <mat-card-content>
+                                <p>
+                                    {{epo.product.price | currency}}
+                                </p>
+                                <p>
+                                    <jhi-price-type [product]="epo.product"></jhi-price-type>
+                                </p>
+                                <hr/>
+                                <p>
+                                  <span jhiTranslation="select-products.quantity">Total:</span>{{ (epo.quantity * epo.product.price) | currency}}
+                                </p>
+                                <hr/>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button class="btn btn-lg btn-primary btn-rating" jhiTranslate="admin-comments-event.comments" (click)="open(epo.product)">Comment's</button>
+                            </mat-card-actions>
+                      </mat-card>
+                    </ng-container>
+                </div>
+
+                <div class="row">
+                    <ng-container *ngIf="drinkProducts.length > 0">
+                        <mat-toolbar color="primary">
+                            <span>{{'overview.drink' | translate}}</span>
+                        </mat-toolbar>
+                    </ng-container>
+                    <ng-container *ngFor="let epo of drinkProducts">
+                        <mat-card class="product-card">
+                            <mat-card-header>
+                            <mat-card-title>{{epo.product.title}}</mat-card-title>
+                            </mat-card-header>
+                            <img mat-card-image [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"  alt="Product photo">
+                            <mat-card-content>
+                                <p>
+                                    {{epo.product.price | currency}}
+                                </p>
+                                <p>
+                                    <jhi-price-type [product]="epo.product"></jhi-price-type>
+                                </p>
+                                <hr/>
+                                <p>
+                                  <span jhiTranslation="select-products.quantity">Total:</span>{{ (epo.quantity * epo.product.price) | currency}}
+                                </p>
+                                <hr/>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button class="btn btn-lg btn-primary btn-rating" jhiTranslate="admin-comments-event.comments" (click)="open(epo.product)">Comment's</button>
+                            </mat-card-actions>
+                      </mat-card>
+                    </ng-container>
+                </div>
+
+                <div class="row">
+                    <ng-container *ngIf="musicProducts.length > 0">
+                        <mat-toolbar color="primary">
+                            <span>{{'overview.music' | translate}}</span>
+                        </mat-toolbar>
+                    </ng-container>
+                    <ng-container *ngFor="let epo of musicProducts">
+                        <mat-card class="product-card">
+                            <mat-card-header>
+                            <mat-card-title>{{epo.product.title}}</mat-card-title>
+                            </mat-card-header>
+                            <img mat-card-image [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"  alt="Product photo">
+                            <mat-card-content>
+                                <p>
+                                    {{epo.product.price | currency}}
+                                </p>
+                                <p>
+                                    <jhi-price-type [product]="epo.product"></jhi-price-type>
+                                </p>
+                                <hr/>
+                                <p>
+                                  <span jhiTranslation="select-products.quantity">Total:</span>{{ (epo.quantity * epo.product.price) | currency}}
+                                </p>
+                                <hr/>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button class="btn btn-lg btn-primary btn-rating" jhiTranslate="admin-comments-event.comments" (click)="open(epo.product)">Comment's</button>
+                            </mat-card-actions>
+                      </mat-card>
+                    </ng-container>
+                </div>
+
+                <div class="row">
+                    <ng-container *ngIf="lightshowProducts.length > 0">
+                        <mat-toolbar color="primary">
+                            <span>{{'overview.lightshow' | translate}}</span>
+                        </mat-toolbar>
+                    </ng-container>
+                    <ng-container *ngFor="let epo of lightshowProducts">
+                        <mat-card class="product-card">
+                            <mat-card-header>
+                            <mat-card-title>{{epo.product.title}}</mat-card-title>
+                            </mat-card-header>
+                            <img mat-card-image [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"  alt="Product photo">
+                            <mat-card-content>
+                                <p>
+                                    {{epo.product.price | currency}}
+                                </p>
+                                <p>
+                                    <jhi-price-type [product]="epo.product"></jhi-price-type>
+                                </p>
+                                <hr/>
+                                <p>
+                                  <span jhiTranslation="select-products.quantity">Total:</span>{{ (epo.quantity * epo.product.price) | currency}}
+                                </p>
+                                <hr/>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button class="btn btn-lg btn-primary btn-rating" jhiTranslate="admin-comments-event.comments" (click)="open(epo.product)">Comment's</button>
+                            </mat-card-actions>
+                      </mat-card>
+                    </ng-container>
+                </div>
+
+                <div class="row">
+                    <ng-container *ngIf="decorationProducts.length > 0">
+                        <mat-toolbar color="primary">
+                            <span>{{'overview.decoration' | translate}}</span>
+                        </mat-toolbar>
+                    </ng-container>
+                    <ng-container *ngFor="let epo of decorationProducts">
+                        <mat-card class="product-card">
+                            <mat-card-header>
+                            <mat-card-title>{{epo.product.title}}</mat-card-title>
+                            </mat-card-header>
+                            <img mat-card-image [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"  alt="Product photo">
+                            <mat-card-content>
+                                <p>
+                                    {{epo.product.price | currency}}
+                                </p>
+                                <p>
+                                    <jhi-price-type [product]="epo.product"></jhi-price-type>
+                                </p>
+                                <hr/>
+                                <p>
+                                  <span jhiTranslation="select-products.quantity">Total:</span>{{ (epo.quantity * epo.product.price) | currency}}
+                                </p>
+                                <hr/>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button class="btn btn-lg btn-primary btn-rating" jhiTranslate="admin-comments-event.comments" (click)="open(epo.product)">Comment's</button>
+                            </mat-card-actions>
+                      </mat-card>
+                    </ng-container>
+                </div>
+
+                <div class="row">
+                    <ng-container *ngIf="miscellaneousProducts.length > 0">
+                        <mat-toolbar color="primary">
+                            <span>{{'overview.miscellaneous' | translate}}</span>
+                        </mat-toolbar>
+                    </ng-container>
+                    <ng-container *ngFor="let epo of miscellaneousProducts">
+                        <mat-card class="product-card">
+                            <mat-card-header>
+                            <mat-card-title>{{epo.product.title}}</mat-card-title>
+                            </mat-card-header>
+                            <img mat-card-image [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"  alt="Product photo">
+                            <mat-card-content>
+                                <p>
+                                    {{epo.product.price | currency}}
+                                </p>
+                                <p>
+                                    <jhi-price-type [product]="epo.product"></jhi-price-type>
+                                </p>
+                                <hr/>
+                                <p>
+                                  <span jhiTranslation="select-products.quantity">Total:</span>{{ (epo.amount * epo.product.price) | currency}}
+                                </p>
+                                <hr/>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button class="btn btn-lg btn-primary btn-rating" jhiTranslate="admin-comments-event.comments" (click)="open(epo.product)">Comment's</button>
+                            </mat-card-actions>
+                      </mat-card>
+                    </ng-container>
+                </div>
+            </div>
+
+
+        </p-accordionTab>
+    </p-accordion>
+</ng-container>

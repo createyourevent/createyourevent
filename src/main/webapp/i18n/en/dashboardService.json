@@ -1,0 +1,14 @@
+{
+  "dashboardService": {
+    "gotoServiceMaps": "Servicemaps",
+    "name": "Name",
+    "logo": "Logo",
+    "motto": "Motto",
+    "home.title": "Services",
+    "dashboard-service": "Dashboard",
+    "home.notFound": "No service found. Please create first a service.",
+    "customer-booking": "Bookings",
+    "gotoServiceOffers": "Service offers",
+    "service-active": "The service was activated / deactivated"
+  }
+}

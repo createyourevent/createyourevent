@@ -1,0 +1,234 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-event-product-order-heading"
+        data-cy="EventProductOrderCreateUpdateHeading"
+        jhiTranslate="createyoureventApp.eventProductOrder.home.createOrEditLabel"
+      >
+        Create or edit a Event Product Order
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.amount" for="field_amount">Amount</label>
+          <input type="number" class="form-control" name="amount" id="field_amount" data-cy="amount" formControlName="amount" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.total" for="field_total">Total</label>
+          <input type="number" class="form-control" name="total" id="field_total" data-cy="total" formControlName="total" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.date" for="field_date">Date</label>
+          <div class="d-flex">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="datetime-local"
+              class="form-control"
+              name="date"
+              formControlName="date"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.rentalPeriod" for="field_rentalPeriod"
+            >Rental Period</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="rentalPeriod"
+            id="field_rentalPeriod"
+            data-cy="rentalPeriod"
+            formControlName="rentalPeriod"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.dateFrom" for="field_dateFrom"
+            >Date From</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateFrom"
+              data-cy="dateFrom"
+              type="datetime-local"
+              class="form-control"
+              name="dateFrom"
+              formControlName="dateFrom"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.dateUntil" for="field_dateUntil"
+            >Date Until</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateUntil"
+              data-cy="dateUntil"
+              type="datetime-local"
+              class="form-control"
+              name="dateUntil"
+              formControlName="dateUntil"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'createyoureventApp.RentStatus.null' | translate }}</option>
+            <option *ngFor="let rentStatus of rentStatusValues" [value]="rentStatus">
+              {{ 'createyoureventApp.RentStatus.' + rentStatus | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.billed" for="field_billed">Billed</label>
+          <input type="checkbox" class="form-check" name="billed" id="field_billed" data-cy="billed" formControlName="billed" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.seen" for="field_seen">Seen</label>
+          <input type="checkbox" class="form-check" name="seen" id="field_seen" data-cy="seen" formControlName="seen" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.approved" for="field_approved"
+            >Approved</label
+          >
+          <input type="checkbox" class="form-check" name="approved" id="field_approved" data-cy="approved" formControlName="approved" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.sellingPrice" for="field_sellingPrice"
+            >Selling Price</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="sellingPrice"
+            id="field_sellingPrice"
+            data-cy="sellingPrice"
+            formControlName="sellingPrice"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.event" for="field_event">Event</label>
+          <select class="form-control" id="field_event" data-cy="event" name="event" formControlName="event">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="eventOption.id === editForm.get('event')!.value?.id ? editForm.get('event')!.value : eventOption"
+              *ngFor="let eventOption of eventsSharedCollection; trackBy: trackEventById"
+            >
+              {{ eventOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.product" for="field_product">Product</label>
+          <select class="form-control" id="field_product" data-cy="product" name="product" formControlName="product">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="productOption.id === editForm.get('product')!.value?.id ? editForm.get('product')!.value : productOption"
+              *ngFor="let productOption of productsSharedCollection; trackBy: trackProductById"
+            >
+              {{ productOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.shop" for="field_shop">Shop</label>
+          <select class="form-control" id="field_shop" data-cy="shop" name="shop" formControlName="shop">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="shopOption.id === editForm.get('shop')!.value?.id ? editForm.get('shop')!.value : shopOption"
+              *ngFor="let shopOption of shopsSharedCollection; trackBy: trackShopById"
+            >
+              {{ shopOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.cart" for="field_cart">Cart</label>
+          <select class="form-control" id="field_cart" data-cy="cart" name="cart" formControlName="cart">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="cartOption.id === editForm.get('cart')!.value?.id ? editForm.get('cart')!.value : cartOption"
+              *ngFor="let cartOption of cartsSharedCollection; trackBy: trackCartById"
+            >
+              {{ cartOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.eventProductOrder.deliveryType" for="field_deliveryType"
+            >Delivery Type</label
+          >
+          <select class="form-control" id="field_deliveryType" data-cy="deliveryType" name="deliveryType" formControlName="deliveryType">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                deliveryTypeOption.id === editForm.get('deliveryType')!.value?.id ? editForm.get('deliveryType')!.value : deliveryTypeOption
+              "
+              *ngFor="let deliveryTypeOption of deliveryTypesSharedCollection; trackBy: trackDeliveryTypeById"
+            >
+              {{ deliveryTypeOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

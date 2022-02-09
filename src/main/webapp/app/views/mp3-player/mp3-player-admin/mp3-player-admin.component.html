@@ -1,0 +1,53 @@
+<p-toast></p-toast>
+
+<div class="card">
+    <p-fileUpload name="files[]" [url]="url" (onUpload)="onUpload($event)"
+            multiple="multiple" accept="audio/*" maxFileSize="15000000" fileLimit="3">
+            <ng-template pTemplate="content">
+                <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                </ul>
+            </ng-template>
+          </p-fileUpload>
+    <hr/>
+    <ng-container *ngFor="let mp3 of mp3s">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-12 bold">
+              <span jhiTranslate="mp3-player-admin.artist">Artist: </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              {{ mp3.artists }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-12 bold">
+              <span jhiTranslate="mp3-player-admin.title">Title: </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              {{ mp3.title }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <button (click)="deleteMp3(mp3.id, shop, product, jhiEvent,service)" class="btn btn-danger btn-sm">
+            <fa-icon icon="times"></fa-icon>
+            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+        </button>
+        </div>
+      </div>
+    </ng-container>
+    <hr/>
+
+    <ngx-audio-player [playlist]="msaapPlaylist" [displayTitle]="msaapDisplayTitle" [autoPlay]="false"
+    muted="muted" [displayPlaylist]="msaapDisplayPlayList" [pageSizeOptions]="pageSizeOptions" (trackEnded)="onEnded($event)"
+        [displayVolumeControls]="msaapDisplayVolumeControls" [displayRepeatControls]="msaapDisplayRepeatControls"
+        [disablePositionSlider]="msaapDisablePositionSlider" [displayArtist]="msaapDisplayArtist"
+        [displayDuration]="msaapDisplayDuration" [expanded]="true"></ngx-audio-player>

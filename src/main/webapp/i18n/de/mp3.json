@@ -1,0 +1,32 @@
+{
+  "createyoureventApp": {
+    "mp3": {
+      "home": {
+        "title": "Mp 3 S",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Mp 3 erstellen",
+        "createOrEditLabel": "Mp 3 erstellen oder bearbeiten",
+        "notFound": "Keine Mp 3 S gefunden"
+      },
+      "created": "Mp 3 erstellt mit ID {{ param }}",
+      "updated": "Mp 3 aktualisiert mit ID {{ param }}",
+      "deleted": "Mp 3 gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Mp 3 {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Mp 3"
+      },
+      "id": "ID",
+      "title": "Title",
+      "artists": "Artists",
+      "duration": "Duration",
+      "url": "Url",
+      "user": "User",
+      "product": "Product",
+      "shop": "Shop",
+      "event": "Event",
+      "service": "Service"
+    }
+  }
+}

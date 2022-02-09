@@ -1,0 +1,9 @@
+{
+  "inFavorits": {
+    "title": "Favorit of users",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "mail": "Email",
+    "chatwindow": "Chat window"
+  }
+}

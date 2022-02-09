@@ -1,0 +1,1275 @@
+<div class="container-fluid">
+    <p-toast key="myKey1"></p-toast>
+	<div class="row selectedProductsBox">
+		<div class="col-md-12">
+
+            <div class="box">
+                <jhi-till [incomings]="revenue" [outgoings]="calcTotalCosts()" [investment]="investment"></jhi-till>
+                <hr/>
+                <h3 jhiTranslate="select-services.order-cart">Order cart</h3>
+                <table>
+                    <tr>
+                      <td><span jhiTranslate="select-products.cost-location">Total location:</span></td><td>{{ totalLocationCosts | currency }}</td>
+                    </tr>
+                    <tr>
+                        <td><span jhiTranslate="select-services.total-products">Total products:</span></td><td>{{ sharedEventService.totalProducts | currency }}</td>
+                    </tr>
+                    <tr>
+                        <td><span jhiTranslate="select-services.total-services">Total services:</span></td><td>{{ sharedEventService.totalServices | currency }}</td>
+                    </tr>
+                    <tr>
+                        <td><span jhiTranslate="select-services.total-ride-costs">Total ride-costs:</span></td><td>{{ sharedEventService.calcRideCosts() | currency }}</td>
+                    </tr>
+                    <tr style="border-top: 1px solid black">
+                        <td><span jhiTranslate="select-services.total-delivery-costs">Total delivery costs:</span></td><td>{{ sharedEventService.totalDeliveryCosts + sharedEventService.totalDeliveryRideCosts | currency }}</td>
+                    </tr>
+                    <tr>
+                        <td><span jhiTranslate="select-services.total-shipping">Total shipping:</span></td><td>{{ sharedEventService.totalShipping| currency }}</td>
+                    </tr>
+                    <tr style="border-top: 1px solid black">
+                        <td style="font-weight: bold;" ><span jhiTranslate="select-services.total-cart">Total in cart:</span></td><td>{{ sharedEventService.calcTotalInCart() | currency }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="box">
+                <div *ngIf="selectedEventProductOrders.length === 0">
+                    <p>
+                        <span jhiTranslate="select-products.no-selected-product">No product selected. Please add some products from down.</span>
+                    </p>
+                </div>
+                <p-scrollPanel *ngIf="selectedEventProductOrders.length > 0" [style]="{width: '100%', height: '750px'}">
+                    <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
+                <ng-container *ngFor="let epo of selectedEventProductOrders" class="cards">
+                    <mat-card fxFlex="0 1 calc(20% - 32px)">
+                        <mat-card-header>
+                        <mat-card-title>{{epo.product!.title}}</mat-card-title>
+                        <mat-card-subtitle>{{ epo.product!.motto }}</mat-card-subtitle>
+                        </mat-card-header>
+                        <div class="img_div">
+                          <img class="card-image" mat-card-image [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"  alt="{{ epo.product.title }}" >
+                        </div>
+                        <mat-card-content>
+                                <jhi-price-type [product]="epo.product"></jhi-price-type>
+                                <p>{{ epo.product!.price | currency }} / {{ epo.product!.amount }} {{ "createyoureventApp.Unit." +epo. product!.unit  | translate }}</p>
+                        <hr/>
+                        <span jhiTranslate="select-products.amount">Quantity</span><input type="number" (input)="onValChange($event.target.value, $event.target.id)" id="quantity-selectedProduct---{{epo.product.id}}" value="{{ epo.amount }}" disabled="disabled">
+                        <ng-container *ngIf="epo.product!.priceType === 'RENT'">
+                                <hr/>
+                                <div jhiTranslate="select-products.dateFrom">Date from:</div>
+                                <div>{{ epo.dateFrom!.toString() | date: 'medium' }}</div>
+                            <hr/>
+                                <div jhiTranslate="select-products.dateUntil">Date until:</div>
+                                <div>{{ epo.dateUntil!.toString() | date: 'medium' }}</div>
+                                <hr/>
+                        </ng-container>
+                            <hr/>
+                            <span jhiTranslate="select-products.total">Total for time: </span>  {{ epo.total | currency }}
+                        <ng-container *ngIf="epo.sellingPrice !== null && epo.sellingPrice !== undefined">
+                          <hr/>
+                          <span jhiTranslate="select-products.selling-price">Selling price:</span>
+                          <p>
+                            <span>{{ epo.sellingPrice | currency }}</span>
+                          </p>
+                        </ng-container>
+                        <hr/>
+                          <span jhiTranslate="select-products.deliveryType">Delivery type</span>
+                          <p>
+                            <span jhiTranslate="{{ 'createyoureventApp.DeliveryTypes.' + epo.deliveryType.deliveryType }}">{{ epo.deliveryType.deliveryType }}</span>
+                          </p>
+                        <hr/>
+                        </mat-card-content>
+                        <mat-card-actions>
+                        <button id="overview-product" class="btn btn-primary" (click)="removeFromProductlist(epo.product.id)" [disabled]="isRemoving">
+                            <fa-icon icon="plus"></fa-icon>
+                            <span  jhiTranslate="select-products.remove-productlist-product">
+                            Remove from productlist
+                            </span>
+                        </button>
+                        </mat-card-actions>
+                    </mat-card>
+                </ng-container>
+                    </div>
+                </p-scrollPanel>
+            </div>
+		</div>
+    </div>
+
+
+
+
+	<div class="row box">
+		<div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-info" role="alert">
+                        <h2 jhiTranslate="select-products.distance-slider">Radius-Filter for the product's (Shop's)</h2>
+                        <p jhiTranslate="select-products.distance-info">
+                            Below you can sort the products by distance. Say how far the shop is from the location of the event. All products within this radius are displayed. If you set the slider to 0, all products on our platform will be displayed.
+                        </p>
+                    </div>
+                    <h5><span jhiTranslate="distance.distance"></span>{{ distanceSlider }} Km</h5>
+                    <p-knob [(ngModel)]="distanceSlider" [step]="5" (onChange)="changeSliderRadius($event)" class="slider"></p-knob>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+
+            <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+
+                <ng-container *ngIf="selectedItems.includes('real_estate')">
+                <ngb-panel>
+                  <ng-template ngbPanelTitle>
+                      <span>&#9733; <b><span jhiTranslate="select-products.real-estate-shop">Real Estate</span></b> &#9733;</span>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                     <div>
+                        <span jhiTranslate="select-products.search-info">Please insert a searchterm to filter after this one.</span><input [(ngModel)]="searchTextRealEstate" placeholder="search text goes here">
+                    </div>
+                      <hr/>
+                      <p-scrollPanel [style]="{width: '100%', height: '750px'}">
+                        <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
+                      <ng-container *ngFor="let product of productsRealEstate | filter : searchTextRealEstate">
+
+
+                        <div class="scene">
+                          <div class="flipcard  flipcard-{{ product.id }}">
+
+                          <mat-card class="card__face card__face--front">
+                              <mat-card-header>
+                              <mat-card-title>{{ product.title }}</mat-card-title>
+                              <mat-card-subtitle>{{ product.motto }}</mat-card-subtitle>
+                              </mat-card-header>
+                                  <div class="img_div">
+                                    <img class="card-image" mat-card-image [src]="'data:' + product.photoContentType + ';base64,' + product.photo"  alt="{{ product.title }}" >
+                                  </div>
+                              <mat-card-content>
+                                <jhi-price-type [product]="product"></jhi-price-type>
+                                <p>{{ product.price | currency }} / {{ product.amount }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</p>
+                            <ng-container *ngIf="product.priceType === 'RENT'">
+                                    <table>
+                                        <tr>
+                                            <td><span jhiTranslate="select-products.dateFrom">Date from:</span></td><td><input id="field_dateStart-{{product.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span jhiTranslate="select-products.timeFrom">Time from:</span></td><td><input id="field_timeStart-{{product.id}}" type="time"  placeholder="HH:mm"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span jhiTranslate="select-products.dateUntil">Date until:</span></td><td><input id="field_dateEnd-{{product.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span jhiTranslate="select-products.timeUntil">Time until:</span></td><td> <input id="field_timeEnd-{{product.id}}" type="time"  placeholder="HH:mm"/></td>
+                                        </tr>
+                                    </table>
+                                </ng-container>
+                          <hr/>
+                          <p>
+                            <span jhiTranslate="select-products.amounts">Amount</span><input type="number" id="quantity-product-{{product.id}}" value="1">
+                          </p>
+                          <hr/>
+                            <ng-container *ngIf="product.stock >= 0">
+                                <p>
+                                    <span jhiTranslate="select-products.available">Available: </span> {{product.stock }} {{ "createyoureventApp.Unit." + product.unit  | translate }}
+                                </p>
+                            </ng-container>
+                            <ng-container *ngIf="0 > product.stock">
+                                <p>
+                                    <span jhiTranslate="select-products.infinite">Infinite</span>
+                                </p>
+                            </ng-container>
+                          <hr/>
+                          <label for="deliveryType" jhiTranslate="select-products.deliveryType">Delivery type:</label>
+                          <select name="deliveryType" id="deliveryType---{{ product.id }}" (change)="setDeliveryValues($event.target.value, product.id)">
+                            <option value="0" jhiTranslate="select-products.please-select">Please select</option>
+                            <ng-container *ngFor="let dm of product.deliveryTypes">
+                                <option value="{{ dm.deliveryType }}---{{ dm.id }}">{{ 'createyoureventApp.DeliveryTypes.' + dm.deliveryType | translate }}</option>
+                            </ng-container>
+                        </select>
+                        <div class="row">
+                          <div class="col-md-12 bold">
+                              <span jhiTranslate="select-products.delivery-informations">Delivery informations</span>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-12">
+                              <span jhiTranslate="select-products.minimum-order-quantity">Minimum order quantity:</span>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-12 italic">
+                              <span id="minimum-{{ product.id }}"></span>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-12">
+                              <span jhiTranslate="select-products.price">Price:</span>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-12 italic">
+                              <span id="price-{{ product.id }}"></span>
+                          </div>
+                      </div>
+                      <ng-congainer *ngIf="product.priceType === 'SELL'">
+                        <hr/>
+                        <label for="checkSellingPrice" jhiTranslate="select-products.check-selling-price">Activate selling price</label>
+                        <input type="checkbox" id="checkSellingPrice---{{ product.id }}" name="checkSellingPrice">
+                        <label for="sellingPrice" jhiTranslate="select-products.selling-price">Selling price: </label>
+                        <input currencyMask [disabled]="getDisabledSellingPrice(product.id)" id="sellingPrice---{{ product.id }}" name="sellingPrice" [options]="{ prefix: 'CHF', thousands: '´', decimal: ',',  inputMode: 'NATURAL' }"/>
+                      </ng-congainer>
+                              </mat-card-content>
+                              <mat-card-actions>
+                                <button class="btn btn-primary" (click)="flipCard(product.id)" [disabled]="isAdding">
+                                  <fa-icon icon="industry"></fa-icon>
+                                  <span  jhiTranslate="select-products.supplier">
+                                  Supplier
+                                  </span>
+                              </button>
+                              <button id="overview-product" class="btn btn-primary" [routerLink]="['/products', product.id, 'view']" [disabled]="isAdding">
+                                  <fa-icon icon="eye"></fa-icon>
+                                  <span  jhiTranslate="overview.view-product">
+                                  View
+
+                                  </span>
+                              </button>
+                              <button id="overview-product" class="btn btn-primary" (click)="addToProductlist(product.id)" [disabled]="isAdding">
+                                  <fa-icon icon="plus"></fa-icon>
+                                  <span  jhiTranslate="select-products.add-to-productlist">
+                                  Add to productlist
+                                  </span>
+                              </button>
+                              <ng-container *ngIf="product.priceType === 'RENT'">
+                                <button id="overview-product" class="btn btn-primary" (click)="rentCalendar(product.id)" [disabled]="isAdding">
+                                  <fa-icon icon="calendar"></fa-icon>
+                                  <span  jhiTranslate="select-products.rent-calendar">
+                                  Rent calendar
+                                  </span>
+                              </button>
+                              </ng-container>
+
+                              </mat-card-actions>
+                          </mat-card>
+
+                          <mat-card class="card__face card__face--back">
+                            <mat-card-header>
+                              <div mat-card-avatar class="example-header-image"></div>
+                              <mat-card-title>{{ product.shop.name }}</mat-card-title>
+                              <mat-card-subtitle>{{ product.shop.motto }}</mat-card-subtitle>
+                            </mat-card-header>
+                            <img mat-card-image class="card-image" [src]="'data:' + product.shop.logoContentType + ';base64,' + product.shop.logo" alt="{{ product.shop.name }}">
+                            <mat-card-content>
+                              <p id="address_box-{{ product.id }}" class="address">
+                                {{ formatAddress(product.shop.address) }}
+                              </p>
+                              <p>{{ product.shop.phone }}</p>
+                              <p><a href="{{ product.shop.webAddress }}">{{ product.shop.webAddress }}</a></p>
+                            </mat-card-content>
+                            <mat-card-actions>
+                              <button class="btn btn-info" (click)="gotoSupplier(product.shop.id)" [disabled]="isAdding">
+                                <fa-icon icon="box"></fa-icon>
+                                <span jhiTranslate="select-products.profile-of">Profile of</span> {{ product.shop.name }}
+                            </button>
+                              <button class="btn btn-primary" (click)="flipCard(product.id)" [disabled]="isAdding">
+                                <fa-icon icon="box"></fa-icon>
+                                <span  jhiTranslate="select-products.product">
+                                Product
+                                </span>
+                            </button>
+                            </mat-card-actions>
+                          </mat-card>
+
+                       </div>
+                     </div>
+                      </ng-container>
+                            </div>
+                      </p-scrollPanel>
+                    </ng-template>
+                  </ngb-panel>
+                </ng-container>
+
+                <ng-container *ngIf="selectedItems.includes('food')">
+                  <ngb-panel>
+                      <ng-template ngbPanelTitle>
+                          <span>&#9733; <b><span jhiTranslate="select-products.food-shop">Food</span></b> &#9733;</span>
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                        <div>
+                            <span jhiTranslate="select-products.search-info">Please insert a searchterm to filter after this one.</span><input [(ngModel)]="searchTextFood" placeholder="search text goes here">
+                        </div>
+                            <hr/>
+                            <p-scrollPanel [style]="{width: '100%', height: '750px'}">
+                                <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
+                          <ng-container *ngFor="let product of productsFood | filter : searchTextFood">
+
+
+
+
+
+
+                            <div class="scene">
+                              <div class="flipcard flipcard-{{ product.id }}">
+
+
+                                  <mat-card class="card__face card__face--front">
+                                    <mat-card-header>
+                                    <mat-card-title>{{product.title}}</mat-card-title>
+                                    <mat-card-subtitle>{{ product.motto }}</mat-card-subtitle>
+                                  </mat-card-header>
+                                    <div class="img_div">
+                                      <img class="card-image" mat-card-image [src]="'data:' + product.photoContentType + ';base64,' + product.photo"  alt="{{ product.title }}" >
+                                    </div>
+                                  <mat-card-content>
+                                          <jhi-price-type [product]="product"></jhi-price-type>
+                                          <p>{{ product.price | currency }} / {{ product.amount }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</p>
+                                      <ng-container *ngIf="product.priceType === 'RENT'">
+                                              <table>
+                                                  <tr>
+                                                      <td><span jhiTranslate="select-products.dateFrom">Date from:</span></td><td><input id="field_dateStart-{{product.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td><span jhiTranslate="select-products.timeFrom">Time from:</span></td><td><input id="field_timeStart-{{product.id}}" type="time"  placeholder="HH:mm"/></td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td><span jhiTranslate="select-products.dateUntil">Date until:</span></td><td><input id="field_dateEnd-{{product.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td><span jhiTranslate="select-products.timeUntil">Time until:</span></td><td> <input id="field_timeEnd-{{product.id}}" type="time"  placeholder="HH:mm"/></td>
+                                                  </tr>
+                                              </table>
+                                          </ng-container>
+                                    <hr/>
+                                    <p>
+                                      <span jhiTranslate="select-products.amounts">Amount</span><input type="number" id="quantity-product-{{product.id}}" value="1">
+                                    </p>
+                                    <hr/>
+                                      <ng-container *ngIf="product.stock >= 0">
+                                          <p>
+                                              <span jhiTranslate="select-products.available">Available: </span> {{product.stock }} {{ "createyoureventApp.Unit." + product.unit  | translate }}
+                                          </p>
+                                      </ng-container>
+                                      <ng-container *ngIf="0 > product.stock">
+                                          <p>
+                                              <span jhiTranslate="select-products.infinite">Infinite</span>
+                                          </p>
+                                      </ng-container>
+                                    <hr/>
+                                    <label for="deliveryType" jhiTranslate="select-products.deliveryType">Delivery type:</label>
+                                    <select name="deliveryType" id="deliveryType---{{ product.id }}" (change)="setDeliveryValues($event.target.value, product.id)">
+                                      <option value="0" jhiTranslate="select-products.please-select">Please select</option>
+                                      <ng-container *ngFor="let dm of product.deliveryTypes">
+                                          <option value="{{ dm.deliveryType }}---{{ dm.id }}">{{ 'createyoureventApp.DeliveryTypes.' + dm.deliveryType | translate }}</option>
+                                      </ng-container>
+                                  </select>
+                                  <div class="row">
+                                    <div class="col-md-12 bold">
+                                        <span jhiTranslate="select-products.delivery-informations">Delivery informations</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span jhiTranslate="select-products.minimum-order-quantity">Minimum order quantity:</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 italic">
+                                        <span id="minimum-{{ product.id }}"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span jhiTranslate="select-products.price">Price:</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 italic">
+                                        <span id="price-{{ product.id }}"></span>
+                                    </div>
+                                </div>
+                                <ng-congainer *ngIf="product.priceType === 'SELL'">
+                                  <hr/>
+                                  <label for="checkSellingPrice" jhiTranslate="select-products.check-selling-price">Activate selling price</label>
+                                  <input type="checkbox" id="checkSellingPrice---{{ product.id }}" name="checkSellingPrice">
+                                  <label for="sellingPrice" jhiTranslate="select-products.selling-price">Selling price: </label>
+                                  <input currencyMask [disabled]="getDisabledSellingPrice(product.id)" id="sellingPrice---{{ product.id }}" name="sellingPrice" [options]="{ prefix: 'CHF', thousands: '´', decimal: ',',  inputMode: 'NATURAL' }"/>
+                                </ng-congainer>
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                     <button class="btn btn-primary" (click)="flipCard(product.id)" [disabled]="isAdding">
+                                        <fa-icon icon="industry"></fa-icon>
+                                        <span  jhiTranslate="select-products.supplier">
+                                        Supplier
+                                        </span>
+                                    </button>
+                                    <button id="overview-product" class="btn btn-primary" [routerLink]="['/products', product.id, 'view']" [disabled]="isAdding">
+                                        <fa-icon icon="eye"></fa-icon>
+                                        <span  jhiTranslate="overview.view-product">
+                                        View
+
+                                        </span>
+                                    </button>
+                                    <button id="overview-product" class="btn btn-primary" (click)="addToProductlist(product.id)" [disabled]="isAdding">
+                                        <fa-icon icon="plus"></fa-icon>
+                                        <span  jhiTranslate="select-products.add-to-productlist">
+                                        Add to productlist
+                                        </span>
+                                    </button>
+                                    </mat-card-actions>
+                                </mat-card>
+
+
+                                <mat-card class="card__face card__face--back">
+                                  <mat-card-header>
+                                    <div mat-card-avatar class="example-header-image"></div>
+                                    <mat-card-title>{{ product.shop.name }}</mat-card-title>
+                                    <mat-card-subtitle>{{ product.shop.motto }}</mat-card-subtitle>
+                                  </mat-card-header>
+                                  <img mat-card-image class="card-image" [src]="'data:' + product.shop.logoContentType + ';base64,' + product.shop.logo" alt="{{ product.shop.name }}">
+                                  <mat-card-content>
+                                    <p id="address_box-{{ product.id }}" class="address">
+                                      {{ formatAddress(product.shop.address) }}
+                                    </p>
+                                    <p>{{ product.shop.phone }}</p>
+                                    <p><a href="{{ product.shop.webAddress }}">{{ product.shop.webAddress }}</a></p>
+                                  </mat-card-content>
+                                  <mat-card-actions>
+                                  <button class="btn btn-info" (click)="gotoSupplier(product.shop.id)" [disabled]="isAdding">
+                                      <fa-icon icon="box"></fa-icon>
+                                      <span jhiTranslate="select-products.profile-of">Profile of</span> {{ product.shop.name }}
+                                  </button>
+                                    <button class="btn btn-primary" (click)="flipCard(product.id)" [disabled]="isAdding">
+                                      <fa-icon icon="box"></fa-icon>
+                                      <span  jhiTranslate="select-products.product">
+                                      Product
+                                      </span>
+                                  </button>
+                                  </mat-card-actions>
+                                </mat-card>
+
+                          </div>
+                          </div>
+                          </ng-container>
+                                </div>
+                            </p-scrollPanel>
+                        </ng-template>
+                      </ngb-panel>
+                    </ng-container>
+
+                  <ng-container *ngIf="selectedItems.includes('drink')">
+                  <ngb-panel>
+                      <ng-template ngbPanelTitle>
+                          <span>&#9733; <b><span jhiTranslate="select-products.drink-shop">Drink</span></b> &#9733;</span>
+                          </ng-template>
+                          <ng-template ngbPanelContent>
+                        <div>
+                            <span jhiTranslate="select-products.search-info">Please insert a searchterm to filter after this one.</span><input [(ngModel)]="searchTextDrink" placeholder="search text goes here">
+                        </div>
+                        <hr/>
+                        <p-scrollPanel [style]="{width: '100%', height: '750px'}">
+                            <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
+                          <ng-container *ngFor="let product of productsDrink | filter : searchTextDrink">
+                            <div class="scene">
+                              <div class="flipcard  flipcard-{{ product.id }}">
+
+
+                              <mat-card class="card__face card__face--front">
+                                  <mat-card-header>
+                                  <mat-card-title>{{product.title}}</mat-card-title>
+                                  <mat-card-subtitle>{{ product.motto }}</mat-card-subtitle>
+                                </mat-card-header>
+                                  <div class="img_div">
+                                    <img class="card-image" mat-card-image [src]="'data:' + product.photoContentType + ';base64,' + product.photo"  alt="{{ product.title }}" >
+                                  </div>
+                                <mat-card-content>
+                                  <jhi-price-type [product]="product"></jhi-price-type>
+                                  <p>{{ product.price | currency }} / {{ product.amount }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</p>
+                              <ng-container *ngIf="product.priceType === 'RENT'">
+                                      <table>
+                                          <tr>
+                                              <td><span jhiTranslate="select-products.dateFrom">Date from:</span></td><td><input id="field_dateStart-{{product.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
+                                          </tr>
+                                          <tr>
+                                              <td><span jhiTranslate="select-products.timeFrom">Time from:</span></td><td><input id="field_timeStart-{{product.id}}" type="time"  placeholder="HH:mm"/></td>
+                                          </tr>
+                                          <tr>
+                                              <td><span jhiTranslate="select-products.dateUntil">Date until:</span></td><td><input id="field_dateEnd-{{product.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
+                                          </tr>
+                                          <tr>
+                                              <td><span jhiTranslate="select-products.timeUntil">Time until:</span></td><td> <input id="field_timeEnd-{{product.id}}" type="time"  placeholder="HH:mm"/></td>
+                                          </tr>
+                                      </table>
+                                  </ng-container>
+                            <hr/>
+                            <p>
+                              <span jhiTranslate="select-products.amounts">Amount</span><input type="number" id="quantity-product-{{product.id}}" value="1">
+                            </p>
+                            <hr/>
+                              <ng-container *ngIf="product.stock >= 0">
+                                  <p>
+                                      <span jhiTranslate="select-products.available">Available: </span> {{product.stock }} {{ "createyoureventApp.Unit." + product.unit  | translate }}
+                                  </p>
+                              </ng-container>
+                              <ng-container *ngIf="0 > product.stock">
+                                  <p>
+                                      <span jhiTranslate="select-products.infinite">Infinite</span>
+                                  </p>
+                              </ng-container>
+                            <hr/>
+                            <label for="deliveryType" jhiTranslate="select-products.deliveryType">Delivery type:</label>
+                            <select name="deliveryType" id="deliveryType---{{ product.id }}" (change)="setDeliveryValues($event.target.value, product.id)">
+                              <option value="0" jhiTranslate="select-products.please-select">Please select</option>
+                              <ng-container *ngFor="let dm of product.deliveryTypes">
+                                  <option value="{{ dm.deliveryType }}---{{ dm.id }}">{{ 'createyoureventApp.DeliveryTypes.' + dm.deliveryType | translate }}</option>
+                              </ng-container>
+                          </select>
+                          <div class="row">
+                            <div class="col-md-12 bold">
+                                <span jhiTranslate="select-products.delivery-informations">Delivery informations</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span jhiTranslate="select-products.minimum-order-quantity">Minimum order quantity:</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 italic">
+                                <span id="minimum-{{ product.id }}"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span jhiTranslate="select-products.price">Price:</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 italic">
+                                <span id="price-{{ product.id }}"></span>
+                            </div>
+                        </div>
+                        <ng-congainer *ngIf="product.priceType === 'SELL'">
+                          <hr/>
+                          <label for="checkSellingPrice" jhiTranslate="select-products.check-selling-price">Activate selling price</label>
+                          <input type="checkbox" id="checkSellingPrice---{{ product.id }}" name="checkSellingPrice">
+                          <label for="sellingPrice" jhiTranslate="select-products.selling-price">Selling price: </label>
+                          <input currencyMask [disabled]="getDisabledSellingPrice(product.id)" id="sellingPrice---{{ product.id }}" name="sellingPrice" [options]="{ prefix: 'CHF', thousands: '´', decimal: ',',  inputMode: 'NATURAL' }"/>
+                        </ng-congainer>
+                                  </mat-card-content>
+                                  <mat-card-actions>
+                                    <button class="btn btn-primary" (click)="flipCard(product.id)" [disabled]="isAdding">
+                                      <fa-icon icon="industry"></fa-icon>
+                                      <span  jhiTranslate="select-products.supplier">
+                                      Supplier
+                                      </span>
+                                  </button>
+                                  <button id="overview-product" class="btn btn-primary" [routerLink]="['/products', product.id, 'view']" [disabled]="isAdding">
+                                      <fa-icon icon="eye"></fa-icon>
+                                      <span  jhiTranslate="overview.view-product">
+                                      View
+
+                                      </span>
+                                  </button>
+                                  <button id="overview-product" class="btn btn-primary" (click)="addToProductlist(product.id)" [disabled]="isAdding">
+                                      <fa-icon icon="plus"></fa-icon>
+                                      <span  jhiTranslate="select-products.add-to-productlist">
+                                      Add to productlist
+                                      </span>
+                                  </button>
+                                  </mat-card-actions>
+                              </mat-card>
+
+                              <mat-card class="card__face card__face--back">
+                                <mat-card-header>
+                                  <div mat-card-avatar class="example-header-image"></div>
+                                  <mat-card-title>{{ product.shop.name }}</mat-card-title>
+                                  <mat-card-subtitle>{{ product.shop.motto }}</mat-card-subtitle>
+                                </mat-card-header>
+                                <img mat-card-image class="card-image" [src]="'data:' + product.shop.logoContentType + ';base64,' + product.shop.logo" alt="{{ product.shop.name }}">
+                                <mat-card-content>
+                                  <pre class="address">
+                                    {{ formatAddress(product.shop.address) }}
+                                  </pre>
+                                  <p>{{ product.shop.phone }}</p>
+                                  <p><a href="{{ product.shop.webAddress }}">{{ product.shop.webAddress }}</a></p>
+                                </mat-card-content>
+                                <mat-card-actions>
+                                  <button class="btn btn-info" (click)="gotoSupplier(product.shop.id)" [disabled]="isAdding">
+                                    <fa-icon icon="box"></fa-icon>
+                                    <span jhiTranslate="select-products.profile-of">Profile of</span> {{ product.shop.name }}
+                                  </button>
+                                  <button class="btn btn-primary" (click)="flipCard(product.id)" [disabled]="isAdding">
+                                    <fa-icon icon="box"></fa-icon>
+                                    <span  jhiTranslate="select-products.product">
+                                    Product
+                                    </span>
+                                </button>
+                                </mat-card-actions>
+                              </mat-card>
+
+                            </div>
+                          </div>
+                          </ng-container>
+                            </div>
+                        </p-scrollPanel>
+                          </ng-template>
+                      </ngb-panel>
+                      </ng-container>
+
+                   <ng-container *ngIf="selectedItems.includes('music')">
+                  <ngb-panel>
+                      <ng-template ngbPanelTitle>
+                          <span>&#9733; <b><span jhiTranslate="select-products.music-shop">Music</span></b> &#9733;</span>
+                          </ng-template>
+                          <ng-template ngbPanelContent>
+                            <div>
+                                <span jhiTranslate="select-products.search-info">Please insert a searchterm to filter after this one.</span><input [(ngModel)]="searchTextMusic" placeholder="search text goes here">
+                            </div>
+                            <hr/>
+                            <p-scrollPanel [style]="{width: '100%', height: '750px'}">
+                            <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
+                          <ng-container *ngFor="let product of productsMusic | filter : searchTextMusic">
+                            <div class="scene">
+                              <div class="flipcard  flipcard-{{ product.id }}">
+
+
+                              <mat-card class="card__face card__face--front">
+                                  <mat-card-header>
+                                  <mat-card-title>{{product.title}}</mat-card-title>
+                                  <mat-card-subtitle>{{ product.motto }}</mat-card-subtitle>
+                                </mat-card-header>
+                                  <div class="img_div">
+                                    <img class="card-image" mat-card-image [src]="'data:' + product.photoContentType + ';base64,' + product.photo"  alt="{{ product.title }}" >
+                                  </div>
+                                <mat-card-content>
+                                  <jhi-price-type [product]="product"></jhi-price-type>
+                                  <p>{{ product.price | currency }} / {{ product.amount }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</p>
+                              <ng-container *ngIf="product.priceType === 'RENT'">
+                                      <table>
+                                          <tr>
+                                              <td><span jhiTranslate="select-products.dateFrom">Date from:</span></td><td><input id="field_dateStart-{{product.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
+                                          </tr>
+                                          <tr>
+                                              <td><span jhiTranslate="select-products.timeFrom">Time from:</span></td><td><input id="field_timeStart-{{product.id}}" type="time"  placeholder="HH:mm"/></td>
+                                          </tr>
+                                          <tr>
+                                              <td><span jhiTranslate="select-products.dateUntil">Date until:</span></td><td><input id="field_dateEnd-{{product.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
+                                          </tr>
+                                          <tr>
+                                              <td><span jhiTranslate="select-products.timeUntil">Time until:</span></td><td> <input id="field_timeEnd-{{product.id}}" type="time"  placeholder="HH:mm"/></td>
+                                          </tr>
+                                      </table>
+                                  </ng-container>
+                            <hr/>
+                            <p>
+                              <span jhiTranslate="select-products.amounts">Amount</span><input type="number" id="quantity-product-{{product.id}}" value="1">
+                            </p>
+                            <hr/>
+                              <ng-container *ngIf="product.stock >= 0">
+                                  <p>
+                                      <span jhiTranslate="select-products.available">Available: </span> {{product.stock }} {{ "createyoureventApp.Unit." + product.unit  | translate }}
+                                  </p>
+                              </ng-container>
+                              <ng-container *ngIf="0 > product.stock">
+                                  <p>
+                                      <span jhiTranslate="select-products.infinite">Infinite</span>
+                                  </p>
+                              </ng-container>
+                            <hr/>
+                            <label for="deliveryType" jhiTranslate="select-products.deliveryType">Delivery type:</label>
+                            <select name="deliveryType" id="deliveryType---{{ product.id }}" (change)="setDeliveryValues($event.target.value, product.id)">
+                              <option value="0" jhiTranslate="select-products.please-select">Please select</option>
+                              <ng-container *ngFor="let dm of product.deliveryTypes">
+                                  <option value="{{ dm.deliveryType }}---{{ dm.id }}">{{ 'createyoureventApp.DeliveryTypes.' + dm.deliveryType | translate }}</option>
+                              </ng-container>
+                          </select>
+                          <div class="row">
+                            <div class="col-md-12 bold">
+                                <span jhiTranslate="select-products.delivery-informations">Delivery informations</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span jhiTranslate="select-products.minimum-order-quantity">Minimum order quantity:</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 italic">
+                                <span id="minimum-{{ product.id }}"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span jhiTranslate="select-products.price">Price:</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 italic">
+                                <span id="price-{{ product.id }}"></span>
+                            </div>
+                        </div>
+                        <ng-congainer *ngIf="product.priceType === 'SELL'">
+                          <hr/>
+                          <label for="checkSellingPrice" jhiTranslate="select-products.check-selling-price">Activate selling price</label>
+                          <input type="checkbox" id="checkSellingPrice---{{ product.id }}" name="checkSellingPrice">
+                          <label for="sellingPrice" jhiTranslate="select-products.selling-price">Selling price: </label>
+                          <input currencyMask [disabled]="getDisabledSellingPrice(product.id)" id="sellingPrice---{{ product.id }}" name="sellingPrice" [options]="{ prefix: 'CHF', thousands: '´', decimal: ',',  inputMode: 'NATURAL' }"/>
+                        </ng-congainer>
+                                  </mat-card-content>
+                                  <mat-card-actions>
+                                    <button class="btn btn-primary" (click)="flipCard(product.id)" [disabled]="isAdding">
+                                      <fa-icon icon="industry"></fa-icon>
+                                      <span  jhiTranslate="select-products.supplier">
+                                      Supplier
+                                      </span>
+                                  </button>
+                                  <button id="overview-product" class="btn btn-primary" [routerLink]="['/products', product.id, 'view']" [disabled]="isAdding">
+                                      <fa-icon icon="eye"></fa-icon>
+                                      <span  jhiTranslate="overview.view-product">
+                                      View
+
+                                      </span>
+                                  </button>
+                                  <button id="overview-product" class="btn btn-primary" (click)="addToProductlist(product.id)" [disabled]="isAdding">
+                                      <fa-icon icon="plus"></fa-icon>
+                                      <span  jhiTranslate="select-products.add-to-productlist">
+                                      Add to productlist
+                                      </span>
+                                  </button>
+                                  </mat-card-actions>
+                              </mat-card>
+
+                              <mat-card class="card__face card__face--back">
+                                <mat-card-header>
+                                  <div mat-card-avatar class="example-header-image"></div>
+                                  <mat-card-title>{{ product.shop.name }}</mat-card-title>
+                                  <mat-card-subtitle>{{ product.shop.motto }}</mat-card-subtitle>
+                                </mat-card-header>
+                                <img mat-card-image class="card-image" [src]="'data:' + product.shop.logoContentType + ';base64,' + product.shop.logo" alt="{{ product.shop.name }}">
+                                <mat-card-content>
+                                  <pre class="address">
+                                    {{ formatAddress(product.shop.address) }}
+                                  </pre>
+                                  <p>{{ product.shop.phone }}</p>
+                                  <p><a href="{{ product.shop.webAddress }}">{{ product.shop.webAddress }}</a></p>
+                                </mat-card-content>
+                                <mat-card-actions>
+                                  <button class="btn btn-info" (click)="gotoSupplier(product.shop.id)" [disabled]="isAdding">
+                                    <fa-icon icon="box"></fa-icon>
+                                    <span jhiTranslate="select-products.profile-of">Profile of</span> {{ product.shop.name }}
+                                 </button>
+                                  <button class="btn btn-primary" (click)="flipCard(product.id)" [disabled]="isAdding">
+                                    <fa-icon icon="box"></fa-icon>
+                                    <span  jhiTranslate="select-products.product">
+                                    Product
+                                    </span>
+                                </button>
+                                </mat-card-actions>
+                              </mat-card>
+
+                            </div>
+                          </div>
+                          </ng-container>
+                            </div>
+                            </p-scrollPanel>
+                          </ng-template>
+                      </ngb-panel>
+                    </ng-container>
+
+                    <ng-container *ngIf="selectedItems.includes('lightshow')">
+                  <ngb-panel>
+                      <ng-template ngbPanelTitle>
+                          <span>&#9733; <b><span jhiTranslate="select-products.lightshow-shop">Lightshow</span></b> &#9733;</span>
+                          </ng-template>
+                          <ng-template ngbPanelContent>
+                            <div>
+                                <span jhiTranslate="select-products.search-info">Please insert a searchterm to filter after this one.</span><input [(ngModel)]="searchTextLightshow" placeholder="search text goes here">
+                            </div>
+                            <hr/>
+                            <p-scrollPanel [style]="{width: '100%', height: '750px'}">
+                            <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
+                          <ng-container *ngFor="let product of productsLightshow | filter : searchTextLightshow">
+                            <div class="scene">
+                              <div class="flipcard  flipcard-{{ product.id }}">
+
+
+                              <mat-card class="card__face card__face--front">
+                                  <mat-card-header>
+                                  <mat-card-title>{{product.title}}</mat-card-title>
+                                  <mat-card-subtitle>{{ product.motto }}</mat-card-subtitle>
+                                </mat-card-header>
+                                  <div class="img_div">
+                                    <img class="card-image" mat-card-image [src]="'data:' + product.photoContentType + ';base64,' + product.photo"  alt="{{ product.title }}" >
+                                  </div>
+                                <mat-card-content>
+                                  <jhi-price-type [product]="product"></jhi-price-type>
+                                  <p>{{ product.price | currency }} / {{ product.amount }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</p>
+                              <ng-container *ngIf="product.priceType === 'RENT'">
+                                      <table>
+                                          <tr>
+                                              <td><span jhiTranslate="select-products.dateFrom">Date from:</span></td><td><input id="field_dateStart-{{product.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
+                                          </tr>
+                                          <tr>
+                                              <td><span jhiTranslate="select-products.timeFrom">Time from:</span></td><td><input id="field_timeStart-{{product.id}}" type="time"  placeholder="HH:mm"/></td>
+                                          </tr>
+                                          <tr>
+                                              <td><span jhiTranslate="select-products.dateUntil">Date until:</span></td><td><input id="field_dateEnd-{{product.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
+                                          </tr>
+                                          <tr>
+                                              <td><span jhiTranslate="select-products.timeUntil">Time until:</span></td><td> <input id="field_timeEnd-{{product.id}}" type="time"  placeholder="HH:mm"/></td>
+                                          </tr>
+                                      </table>
+                                  </ng-container>
+                            <hr/>
+                            <p>
+                              <span jhiTranslate="select-products.amounts">Amount</span><input type="number" id="quantity-product-{{product.id}}" value="1">
+                            </p>
+                            <hr/>
+                              <ng-container *ngIf="product.stock >= 0">
+                                  <p>
+                                      <span jhiTranslate="select-products.available">Available: </span> {{product.stock }} {{ "createyoureventApp.Unit." + product.unit  | translate }}
+                                  </p>
+                              </ng-container>
+                              <ng-container *ngIf="0 > product.stock">
+                                  <p>
+                                      <span jhiTranslate="select-products.infinite">Infinite</span>
+                                  </p>
+                              </ng-container>
+                            <hr/>
+                            <label for="deliveryType" jhiTranslate="select-products.deliveryType">Delivery type:</label>
+                            <select name="deliveryType" id="deliveryType---{{ product.id }}" (change)="setDeliveryValues($event.target.value, product.id)">
+                              <option value="0" jhiTranslate="select-products.please-select">Please select</option>
+                              <ng-container *ngFor="let dm of product.deliveryTypes">
+                                  <option value="{{ dm.deliveryType }}---{{ dm.id }}">{{ 'createyoureventApp.DeliveryTypes.' + dm.deliveryType | translate }}</option>
+                              </ng-container>
+                          </select>
+                          <div class="row">
+                            <div class="col-md-12 bold">
+                                <span jhiTranslate="select-products.delivery-informations">Delivery informations</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span jhiTranslate="select-products.minimum-order-quantity">Minimum order quantity:</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 italic">
+                                <span id="minimum-{{ product.id }}"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span jhiTranslate="select-products.price">Price:</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 italic">
+                                <span id="price-{{ product.id }}"></span>
+                            </div>
+                        </div>
+                        <ng-congainer *ngIf="product.priceType === 'SELL'">
+                          <hr/>
+                          <label for="checkSellingPrice" jhiTranslate="select-products.check-selling-price">Activate selling price</label>
+                          <input type="checkbox" id="checkSellingPrice---{{ product.id }}" name="checkSellingPrice">
+                          <label for="sellingPrice" jhiTranslate="select-products.selling-price">Selling price: </label>
+                          <input currencyMask [disabled]="getDisabledSellingPrice(product.id)" id="sellingPrice---{{ product.id }}" name="sellingPrice" [options]="{ prefix: 'CHF', thousands: '´', decimal: ',',  inputMode: 'NATURAL' }"/>
+                        </ng-congainer>
+                                  </mat-card-content>
+                                  <mat-card-actions>
+                                    <button class="btn btn-primary" (click)="flipCard(product.id)" [disabled]="isAdding">
+                                      <fa-icon icon="industry"></fa-icon>
+                                      <span  jhiTranslate="select-products.supplier">
+                                      Supplier
+                                      </span>
+                                  </button>
+                                  <button id="overview-product" class="btn btn-primary" [routerLink]="['/products', product.id, 'view']" [disabled]="isAdding">
+                                      <fa-icon icon="eye"></fa-icon>
+                                      <span  jhiTranslate="overview.view-product">
+                                      View
+
+                                      </span>
+                                  </button>
+                                  <button id="overview-product" class="btn btn-primary" (click)="addToProductlist(product.id)" [disabled]="isAdding">
+                                      <fa-icon icon="plus"></fa-icon>
+                                      <span  jhiTranslate="select-products.add-to-productlist">
+                                      Add to productlist
+                                      </span>
+                                  </button>
+                                  </mat-card-actions>
+                              </mat-card>
+
+                              <mat-card class="card__face card__face--back">
+                                <mat-card-header>
+                                  <div mat-card-avatar class="example-header-image"></div>
+                                  <mat-card-title>{{ product.shop.name }}</mat-card-title>
+                                  <mat-card-subtitle>{{ product.shop.motto }}</mat-card-subtitle>
+                                </mat-card-header>
+                                <img mat-card-image class="card-image" [src]="'data:' + product.shop.logoContentType + ';base64,' + product.shop.logo" alt="{{ product.shop.name }}">
+                                <mat-card-content>
+                                  <pre class="address">
+                                    {{ formatAddress(product.shop.address) }}
+                                  </pre>
+                                  <p>{{ product.shop.phone }}</p>
+                                  <p><a href="{{ product.shop.webAddress }}">{{ product.shop.webAddress }}</a></p>
+                                </mat-card-content>
+                                <mat-card-actions>
+                                <button class="btn btn-info" (click)="gotoSupplier(product.shop.id)" [disabled]="isAdding">
+                                    <fa-icon icon="box"></fa-icon>
+                                    <span jhiTranslate="select-products.profile-of">Profile of</span> {{ product.shop.name }}
+                                </button>
+                                  <button class="btn btn-primary" (click)="flipCard(product.id)" [disabled]="isAdding">
+                                    <fa-icon icon="box"></fa-icon>
+                                    <span  jhiTranslate="select-products.product">
+                                    Product
+                                    </span>
+                                </button>
+                                </mat-card-actions>
+                              </mat-card>
+
+                            </div>
+                          </div>
+                          </ng-container>
+                            </div>
+                            </p-scrollPanel>
+                          </ng-template>
+                      </ngb-panel>
+                </ng-container>
+
+                <ng-container *ngIf="selectedItems.includes('decoration')">
+                  <ngb-panel>
+                      <ng-template ngbPanelTitle>
+                          <span>&#9733; <b><span jhiTranslate="select-products.decoration-shop">Decoration</span></b> &#9733;</span>
+                          </ng-template>
+                          <ng-template ngbPanelContent>
+                            <div>
+                                <span jhiTranslate="select-products.search-info">Please insert a searchterm to filter after this one.</span><input [(ngModel)]="searchTextDecoration" placeholder="search text goes here">
+                            </div>
+                            <hr/>
+                            <p-scrollPanel [style]="{width: '100%', height: '750px'}">
+                            <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
+                          <ng-container *ngFor="let product of productsDecoration | filter : searchTextDecoration">
+                            <div class="scene">
+                              <div class="flipcard  flipcard-{{ product.id }}">
+
+
+                              <mat-card class="card__face card__face--front">
+                                  <mat-card-header>
+                                  <mat-card-title>{{product.title}}</mat-card-title>
+                                  <mat-card-subtitle>{{ product.motto }}</mat-card-subtitle>
+                                </mat-card-header>
+                                   <div class="img_div">
+                                    <img class="card-image" mat-card-image [src]="'data:' + product.photoContentType + ';base64,' + product.photo"  alt="{{ product.title }}" >
+                                  </div>
+                                <mat-card-content>
+                                  <jhi-price-type [product]="product"></jhi-price-type>
+                                  <p>{{ product.price | currency }} / {{ product.amount }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</p>
+                              <ng-container *ngIf="product.priceType === 'RENT'">
+                                      <table>
+                                          <tr>
+                                              <td><span jhiTranslate="select-products.dateFrom">Date from:</span></td><td><input id="field_dateStart-{{product.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
+                                          </tr>
+                                          <tr>
+                                              <td><span jhiTranslate="select-products.timeFrom">Time from:</span></td><td><input id="field_timeStart-{{product.id}}" type="time"  placeholder="HH:mm"/></td>
+                                          </tr>
+                                          <tr>
+                                              <td><span jhiTranslate="select-products.dateUntil">Date until:</span></td><td><input id="field_dateEnd-{{product.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
+                                          </tr>
+                                          <tr>
+                                              <td><span jhiTranslate="select-products.timeUntil">Time until:</span></td><td> <input id="field_timeEnd-{{product.id}}" type="time"  placeholder="HH:mm"/></td>
+                                          </tr>
+                                      </table>
+                                  </ng-container>
+                            <hr/>
+                            <p>
+                              <span jhiTranslate="select-products.amounts">Amount</span><input type="number" id="quantity-product-{{product.id}}" value="1">
+                            </p>
+                            <hr/>
+                              <ng-container *ngIf="product.stock >= 0">
+                                  <p>
+                                      <span jhiTranslate="select-products.available">Available: </span> {{product.stock }} {{ "createyoureventApp.Unit." + product.unit  | translate }}
+                                  </p>
+                              </ng-container>
+                              <ng-container *ngIf="0 > product.stock">
+                                  <p>
+                                      <span jhiTranslate="select-products.infinite">Infinite</span>
+                                  </p>
+                              </ng-container>
+                            <hr/>
+                            <label for="deliveryType" jhiTranslate="select-products.deliveryType">Delivery type:</label>
+                            <select name="deliveryType" id="deliveryType---{{ product.id }}" (change)="setDeliveryValues($event.target.value, product.id)">
+                              <option value="0" jhiTranslate="select-products.please-select">Please select</option>
+                              <ng-container *ngFor="let dm of product.deliveryTypes">
+                                  <option value="{{ dm.deliveryType }}---{{ dm.id }}">{{ 'createyoureventApp.DeliveryTypes.' + dm.deliveryType | translate }}</option>
+                              </ng-container>
+                          </select>
+                          <div class="row">
+                            <div class="col-md-12 bold">
+                                <span jhiTranslate="select-products.delivery-informations">Delivery informations</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span jhiTranslate="select-products.minimum-order-quantity">Minimum order quantity:</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 italic">
+                                <span id="minimum-{{ product.id }}"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span jhiTranslate="select-products.price">Price:</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 italic">
+                                <span id="price-{{ product.id }}"></span>
+                            </div>
+                        </div>
+                        <ng-congainer *ngIf="product.priceType === 'SELL'">
+                          <hr/>
+                          <label for="checkSellingPrice" jhiTranslate="select-products.check-selling-price">Activate selling price</label>
+                          <input type="checkbox" id="checkSellingPrice---{{ product.id }}" name="checkSellingPrice">
+                          <label for="sellingPrice" jhiTranslate="select-products.selling-price">Selling price: </label>
+                          <input currencyMask [disabled]="getDisabledSellingPrice(product.id)" id="sellingPrice---{{ product.id }}" name="sellingPrice" [options]="{ prefix: 'CHF', thousands: '´', decimal: ',',  inputMode: 'NATURAL' }"/>
+                        </ng-congainer>
+                                  </mat-card-content>
+                                  <mat-card-actions>
+                                    <button class="btn btn-primary" (click)="flipCard(product.id)" [disabled]="isAdding">
+                                      <fa-icon icon="industry"></fa-icon>
+                                      <span  jhiTranslate="select-products.supplier">
+                                      Supplier
+                                      </span>
+                                  </button>
+                                  <button id="overview-product" class="btn btn-primary" [routerLink]="['/products', product.id, 'view']" [disabled]="isAdding">
+                                      <fa-icon icon="eye"></fa-icon>
+                                      <span  jhiTranslate="overview.view-product">
+                                      View
+
+                                      </span>
+                                  </button>
+                                  <button id="overview-product" class="btn btn-primary" (click)="addToProductlist(product.id)" [disabled]="isAdding">
+                                      <fa-icon icon="plus"></fa-icon>
+                                      <span  jhiTranslate="select-products.add-to-productlist">
+                                      Add to productlist
+                                      </span>
+                                  </button>
+                                  </mat-card-actions>
+                              </mat-card>
+
+                              <mat-card class="card__face card__face--back">
+                                <mat-card-header>
+                                  <div mat-card-avatar class="example-header-image"></div>
+                                  <mat-card-title>{{ product.shop.name }}</mat-card-title>
+                                  <mat-card-subtitle>{{ product.shop.motto }}</mat-card-subtitle>
+                                </mat-card-header>
+                                <img mat-card-image class="card-image" [src]="'data:' + product.shop.logoContentType + ';base64,' + product.shop.logo" alt="{{ product.shop.name }}">
+                                <mat-card-content>
+                                  <pre class="address">
+                                    {{ formatAddress(product.shop.address) }}
+                                  </pre>
+                                  <p>{{ product.shop.phone }}</p>
+                                  <p><a href="{{ product.shop.webAddress }}">{{ product.shop.webAddress }}</a></p>
+                                </mat-card-content>
+                                <mat-card-actions>
+                                  <button class="btn btn-info" (click)="gotoSupplier(product.shop.id)" [disabled]="isAdding">
+                                    <fa-icon icon="box"></fa-icon>
+                                    <span jhiTranslate="select-products.profile-of">Profile of</span> {{ product.shop.name }}
+                                 </button>
+                                  <button class="btn btn-primary" (click)="flipCard(product.id)" [disabled]="isAdding">
+                                    <fa-icon icon="box"></fa-icon>
+                                    <span  jhiTranslate="select-products.product">
+                                    Product
+                                    </span>
+                                </button>
+                                </mat-card-actions>
+                              </mat-card>
+
+                            </div>
+                          </div>
+                          </ng-container>
+                            </div>
+                            </p-scrollPanel>
+                          </ng-template>
+                      </ngb-panel>
+                  </ng-container>
+
+                  <ng-container *ngIf="selectedItems.includes('miscellaneous')">
+                    <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                            <span>&#9733; <b><span jhiTranslate="select-products.miscellaneous-shop">Miscellaneous</span></b> &#9733;</span>
+                            </ng-template>
+                            <ng-template ngbPanelContent>
+                              <div>
+                                  <span jhiTranslate="select-products.search-info">Please insert a searchterm to filter after this one.</span><input [(ngModel)]="searchTextMiscellaneous" placeholder="search text goes here">
+                              </div>
+                              <hr/>
+                              <p-scrollPanel [style]="{width: '100%', height: '750px'}">
+                              <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
+                            <ng-container *ngFor="let product of productsMiscellaneous | filter : searchTextMiscellaneous">
+                              <div class="scene">
+                                <div class="flipcard  flipcard-{{ product.id }}">
+
+
+                                <mat-card class="card__face card__face--front">
+                                    <mat-card-header>
+                                    <mat-card-title>{{ product.title }}</mat-card-title>
+                                    <mat-card-subtitle>{{ product.motto }}</mat-card-subtitle>
+                                  </mat-card-header>
+                                  <div class="img_div">
+                                    <img class="card-image" mat-card-image [src]="'data:' + product.photoContentType + ';base64,' + product.photo"  alt="{{ product.title }}" >
+                                  </div>
+                                  <mat-card-content>
+                                        <jhi-price-type [product]="product"></jhi-price-type>
+                                        <p>{{ product.price | currency }} / {{ product.amount }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</p>
+                                    <ng-container *ngIf="product.priceType === 'RENT'">
+                                            <table>
+                                                <tr>
+                                                    <td><span jhiTranslate="select-products.dateFrom">Date from:</span></td><td><input id="field_dateStart-{{product.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span jhiTranslate="select-products.timeFrom">Time from:</span></td><td><input id="field_timeStart-{{product.id}}" type="time"  placeholder="HH:mm"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span jhiTranslate="select-products.dateUntil">Date until:</span></td><td><input id="field_dateEnd-{{product.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span jhiTranslate="select-products.timeUntil">Time until:</span></td><td> <input id="field_timeEnd-{{product.id}}" type="time"  placeholder="HH:mm"/></td>
+                                                </tr>
+                                            </table>
+                                        </ng-container>
+                                  <hr/>
+                                  <p>
+                                    <span jhiTranslate="select-products.amounts">Amount</span><input type="number" id="quantity-product-{{product.id}}" value="1">
+                                  </p>
+                                  <hr/>
+                                    <ng-container *ngIf="product.stock >= 0">
+                                        <p>
+                                            <span jhiTranslate="select-products.available">Available: </span> {{product.stock }} {{ "createyoureventApp.Unit." + product.unit  | translate }}
+                                        </p>
+                                    </ng-container>
+                                    <ng-container *ngIf="0 > product.stock">
+                                        <p>
+                                            <span jhiTranslate="select-products.infinite">Infinite</span>
+                                        </p>
+                                    </ng-container>
+                                  <hr/>
+                                  <label for="deliveryType" jhiTranslate="select-products.deliveryType">Delivery type:</label>
+                                  <select name="deliveryType" id="deliveryType---{{ product.id }}" (change)="setDeliveryValues($event.target.value, product.id)">
+                                    <option value="0" jhiTranslate="select-products.please-select">Please select</option>
+                                    <ng-container *ngFor="let dm of product.deliveryTypes">
+                                        <option value="{{ dm.deliveryType }}---{{ dm.id }}">{{ 'createyoureventApp.DeliveryTypes.' + dm.deliveryType | translate }}</option>
+                                    </ng-container>
+                                </select>
+                                <div class="row">
+                                  <div class="col-md-12 bold">
+                                      <span jhiTranslate="select-products.delivery-informations">Delivery informations</span>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-12">
+                                      <span jhiTranslate="select-products.minimum-order-quantity">Minimum order quantity:</span>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-12 italic">
+                                      <span id="minimum-{{ product.id }}"></span>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-12">
+                                      <span jhiTranslate="select-products.price">Price:</span>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-12 italic">
+                                      <span id="price-{{ product.id }}"></span>
+                                  </div>
+                              </div>
+                              <ng-congainer *ngIf="product.priceType === 'SELL'">
+                                <hr/>
+                                <label for="checkSellingPrice" jhiTranslate="select-products.check-selling-price">Activate selling price</label>
+                                <input type="checkbox" id="checkSellingPrice---{{ product.id }}" name="checkSellingPrice">
+                                <label for="sellingPrice" jhiTranslate="select-products.selling-price">Selling price: </label>
+                                <input currencyMask [disabled]="getDisabledSellingPrice(product.id)" id="sellingPrice---{{ product.id }}" name="sellingPrice" [options]="{ prefix: 'CHF', thousands: '´', decimal: ',',  inputMode: 'NATURAL' }"/>
+                              </ng-congainer>
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                      <button class="btn btn-primary" (click)="flipCard(product.id)" [disabled]="isAdding">
+                                        <fa-icon icon="industry"></fa-icon>
+                                        <span  jhiTranslate="select-products.supplier">
+                                        Supplier
+                                        </span>
+                                    </button>
+                                    <button id="overview-product" class="btn btn-primary" [routerLink]="['/products', product.id, 'view']" [disabled]="isAdding">
+                                        <fa-icon icon="eye"></fa-icon>
+                                        <span  jhiTranslate="overview.view-product">
+                                        View
+
+                                        </span>
+                                    </button>
+                                    <button id="overview-product" class="btn btn-primary" (click)="addToProductlist(product.id)" [disabled]="isAdding">
+                                        <fa-icon icon="plus"></fa-icon>
+                                        <span  jhiTranslate="select-products.add-to-productlist">
+                                        Add to productlist
+                                        </span>
+                                    </button>
+                                    </mat-card-actions>
+                                </mat-card>
+                                <mat-card class="card__face card__face--back">
+                                  <mat-card-header>
+                                    <div mat-card-avatar class="example-header-image"></div>
+                                    <mat-card-title>{{ product.shop.name }}</mat-card-title>
+                                    <mat-card-subtitle>{{ product.shop.motto }}</mat-card-subtitle>
+                                  </mat-card-header>
+                                  <img mat-card-image class="card-image" [src]="'data:' + product.shop.logoContentType + ';base64,' + product.shop.logo" alt="{{ product.shop.name }}">
+                                  <mat-card-content>
+                                    <pre class="address">
+                                      {{ formatAddress(product.shop.address) }}
+                                    </pre>
+                                    <p>{{ product.shop.phone }}</p>
+                                    <p><a href="{{ product.shop.webAddress }}">{{ product.shop.webAddress }}</a></p>
+                                  </mat-card-content>
+                                  <mat-card-actions>
+                                    <button class="btn btn-info" (click)="gotoSupplier(product.shop.id)" [disabled]="isAdding">
+                                      <fa-icon icon="box"></fa-icon>
+                                      <span jhiTranslate="select-products.profile-of">Profile of</span> {{ product.shop.name }}
+                                    </button>
+                                    <button class="btn btn-primary" (click)="flipCard(product.id)" [disabled]="isAdding">
+                                      <fa-icon icon="box"></fa-icon>
+                                      <span  jhiTranslate="select-products.product">
+                                      Product
+                                      </span>
+                                  </button>
+                                  </mat-card-actions>
+                                </mat-card>
+
+                              </div>
+                            </div>
+                            </ng-container>
+                              </div>
+                              </p-scrollPanel>
+                            </ng-template>
+                        </ngb-panel>
+                    </ng-container>
+                </ngb-accordion>
+            </div>
+        </div>
+        <hr/>
+
+        <div>
+            <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button" id="save-entity" class="btn btn-primary" (click)="save()" [disabled]="isSaving">
+                <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="select-products.services">Go to services</span>
+            </button>
+        </div>
+</div>
+
+
+

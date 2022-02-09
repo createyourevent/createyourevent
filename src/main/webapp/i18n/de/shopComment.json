@@ -1,0 +1,29 @@
+{
+  "createyoureventApp": {
+    "shopComment": {
+      "home": {
+        "title": "Shop Comments",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Shop Comment erstellen",
+        "createOrEditLabel": "Shop Comment erstellen oder bearbeiten",
+        "notFound": "Keine Shop Comments gefunden"
+      },
+      "created": "Shop Comment erstellt mit ID {{ param }}",
+      "updated": "Shop Comment aktualisiert mit ID {{ param }}",
+      "deleted": "Shop Comment gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Shop Comment {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Shop Comment"
+      },
+      "id": "ID",
+      "comment": "Comment",
+      "date": "Date",
+      "shopComments": "Shop Comments",
+      "shop": "Shop",
+      "user": "User",
+      "shopComment": "Shop Comment"
+    }
+  }
+}

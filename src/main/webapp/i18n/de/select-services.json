@@ -1,0 +1,28 @@
+{
+  "select-services": {
+    "category": "Kategorie",
+    "add-to-cart": "Zu Warenliste hinzufügen",
+    "remove-from-cart": "Aus dem Korb entfernen",
+    "choose-category": "Wähle Kategorie",
+    "total-hours": "Total Stunden",
+    "total-work-costs": "Total Arbeitskosten",
+    "total-ride-costs": "Total Fahrtkosten",
+    "service-cart": "Dienstleistungs-Warenkorb",
+    "kilometre": "Kilometer",
+    "distance-slider": "Radius-Filter für die Dienstleistungsmappen",
+    "distance-info": "Mit dem Slider unten können Sie bestimmen, welche Dienstleistungsmappen Sie anzeigen möchten aufgrund der Distanz vom Event hin zur Dienstleistungsfirma. Wenn Sie den Slider auf 0 stellen, zeigt es Ihnen alle Dienstleistungsmappen an.",
+    "total-products": "Total Produkte",
+    "total-services": "Total Dienstleistungen",
+    "total-cart": "Total in Bestellliste",
+    "order-cart": "Bestell-Warenkorb",
+    "total-delivery-costs": "Total Lieferkosten",
+    "total-shipping": "Total Versandkosten",
+    "servicemap": "Servicekarte",
+    "service": "Dienstleister",
+    "category-info": "Bitte wählen Sie die Kategorie aus, aus welcher Sie Ihre Dienstleistungen wählen möchten. Anschliessend können Sie aus den untenstehenden Dienstleistungsofferten die gewünschten oder benötigten Dienstleistungen auswählen. ",
+    "error_free_space": "Entschuldigung, für dieses Datum sind wir nicht mehr frei.",
+    "error_rent_dates": "Sie müssen die Auftragsdaten ausfüllen.",
+    "total-entry": "Total Eintritte",
+    "total-to-buy": "Total um einzukaufen"
+  }
+}

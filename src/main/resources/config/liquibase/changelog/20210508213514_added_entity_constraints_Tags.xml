@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Tags.
+    -->
+    <changeSet id="20210508213514-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="event_id"
+                                 baseTableName="tags"
+                                 constraintName="fk_tags__event_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="event"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="tags"
+                                 constraintName="fk_tags__product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+
+        <addForeignKeyConstraint baseColumnNames="shop_id"
+                                 baseTableName="tags"
+                                 constraintName="fk_tags__shop_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="shop"/>
+
+        <addForeignKeyConstraint baseColumnNames="service_id"
+                                 baseTableName="tags"
+                                 constraintName="fk_tags__service_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="create_your_event_service"/>
+
+        <addForeignKeyConstraint baseColumnNames="organization_id"
+                                 baseTableName="tags"
+                                 constraintName="fk_tags__organization_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organization"/>
+    </changeSet>
+</databaseChangeLog>

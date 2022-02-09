@@ -1,0 +1,30 @@
+{
+  "createyoureventApp": {
+    "eventProductRating": {
+      "home": {
+        "title": "Event Product Ratings",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Event Product Rating erstellen",
+        "createOrEditLabel": "Event Product Rating erstellen oder bearbeiten",
+        "notFound": "Keine Event Product Ratings gefunden"
+      },
+      "created": "Event Product Rating erstellt mit ID {{ param }}",
+      "updated": "Event Product Rating aktualisiert mit ID {{ param }}",
+      "deleted": "Event Product Rating gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Event Product Rating {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Event Product Rating"
+      },
+      "id": "ID",
+      "like": "Like",
+      "dislike": "Dislike",
+      "date": "Date",
+      "comment": "Comment",
+      "product": "Product",
+      "event": "Event",
+      "user": "User"
+    }
+  }
+}

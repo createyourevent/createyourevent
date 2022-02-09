@@ -1,0 +1,57 @@
+{
+  "createyoureventApp": {
+    "event": {
+      "home": {
+        "title": "Events",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Event erstellen",
+        "createOrEditLabel": "Event erstellen oder bearbeiten",
+        "notFound": "Keine Events gefunden"
+      },
+      "created": "Event erstellt mit ID {{ param }}",
+      "updated": "Event aktualisiert mit ID {{ param }}",
+      "deleted": "Event gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Event {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Event"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "dateStart": "Date Start",
+      "dateEnd": "Date End",
+      "category": "Category",
+      "price": "Price",
+      "flyer": "Flyer",
+      "youtube": "Youtube",
+      "privateOrPublic": "Private Or Public",
+      "active": "Active",
+      "minPlacenumber": "Min Placenumber",
+      "placenumber": "Placenumber",
+      "investment": "Investment",
+      "status": "Status",
+      "definitelyConfirmed": "Definitely Confirmed",
+      "motto": "Motto",
+      "billed": "Billed",
+      "stars": "Stars",
+      "billedOrganisator": "Billed Organisator",
+      "billedeCreateYourEvent": "Billede Create Your Event",
+      "location": "Location",
+      "eventDetail": "Event Detail",
+      "eventProductOrders": "Event Product Orders",
+      "reservations": "Reservations",
+      "comments": "Comments",
+      "worksheets": "Worksheets",
+      "eventServiceMapOrders": "Event Service Map Orders",
+      "images": "Images",
+      "mp3s": "Mp 3 S",
+      "user": "User",
+      "reservedUsers": "Reserved Users",
+      "feeTransaction": "Fee Transaction",
+      "tags": "Tags",
+      "organizationReservations": "Organization Reservations"
+    }
+  }
+}

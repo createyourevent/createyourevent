@@ -1,0 +1,18 @@
+{
+  "admin-bonds": {
+    "add-bond": "Add bond",
+    "overview-bonds": "Overview bonds",
+    "points": "Points",
+    "user": "User",
+    "name": "Title",
+    "description": "Description",
+    "generate-bond": "Generate bond",
+    "fill-out-all-fields": "Please fill out all fields",
+    "redemption-date": "Redemption date",
+    "creation-date": "Creation date",
+    "code": "Code",
+    "print": "Print",
+    "voucher-code": "Voucher code",
+    "delete": "Delete"
+  }
+}

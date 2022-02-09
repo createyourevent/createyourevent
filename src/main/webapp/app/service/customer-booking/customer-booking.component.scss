@@ -1,0 +1,28 @@
+.cards {
+  width: 300px;
+  float: left;
+  margin: 10px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.tr-border {
+  border: 1px solid black;
+}
+
+.border-box {
+  border: 1px solid black;
+  border-radius: 5px;
+  /* background-color: darkblue; */
+  color: black;
+  margin: 5px;
+  padding: 5px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.clear {
+  clear: both;
+}

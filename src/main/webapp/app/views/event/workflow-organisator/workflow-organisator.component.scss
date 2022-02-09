@@ -1,0 +1,26 @@
+.border {
+    border: 1px solid black;
+}
+
+.box-container-title {
+    display: grid;
+    grid-template-columns: 70% 15% 15%;
+    
+}
+
+.box-container {
+    display: grid;
+    grid-template-columns: 70% 15% 15%;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.padding-5 {
+    padding-left: 5px;
+}

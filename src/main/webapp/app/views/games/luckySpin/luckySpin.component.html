@@ -1,0 +1,40 @@
+<h1 class="faster-one" jhiTranslate="luckySpin.title" class="faster-one">Wheel of fortune</h1>
+
+<div class="outer"><div class="display"><h2 class="codystar size_stake margin-auto"><span jhiTranslate="luckySpin.stake">Today's stake is:</span> {{ commitmentPoints_wheeloffortune }} {{ 'luckySpin.points' | translate }}</h2></div></div>
+
+<div class="outer">
+    <div class="inner">
+        <ngx-wheel
+        #wheel
+        width='600'
+        height='600'
+        spinDuration='8'
+        [disableSpinOnClick]='true'
+        [items]='items'
+        [innerRadius]='50'
+        pointerStrokeColor='red'
+        pointerFillColor='purple'
+        [idToLandOn]='idToLandOn'
+        (onSpinStart)='before()'
+        (onSpinComplete)='after()'
+        [textAlignment]='textAlignment'
+        [textOrientation]='textOrientation'
+      >
+      </ngx-wheel>
+    </div>
+</div>
+
+
+<ng-container *ngIf="!enoughtPoints">
+    <div class="outer"><div class="btn_center"><span jhiTranslate="luckySpin.not-enought-points" class="faster-one-family">Not enought points to play</span></div></div>
+</ng-container>
+<ng-container *ngIf="enoughtPoints && !turning">
+    <div class="outer"><div class="btn_center"><button (click)="turnWheel()" jhiTranslate="luckySpin.turnWheel" class="btn">Turn the wheel.</button></div></div>
+</ng-container>
+<ng-container *ngIf="enoughtPoints && turning">
+    <div class="outer"><div class="btn_center"><button jhiTranslate="luckySpin.turnWheel" class="btn">Turn the wheel.</button></div></div>
+</ng-container>
+
+
+
+

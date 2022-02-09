@@ -1,0 +1,66 @@
+<div class="container_ticket">
+  <widget type="ticket">
+    <div class="top">
+      <div class="eventname">{{ reservation.event!.name }}</div>
+      <div class="center-content">
+        <img src="../../../../content/images/dance_ticket.png" alt="" />
+        <div class="deetz">
+          <div class="row">
+            <div class="col-md-3">
+              <span jhiTranslate="tickets.date" class="bold">Date</span>
+            </div>
+            <div class="col-md-9">
+              {{ reservation.event!.dateStart.toString() | date: 'medium' }} - {{ reservation.event.dateEnd.toString() | date: 'medium' }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <span jhiTranslate="tickets.price" class="bold">Price</span>
+            </div>
+            <div class="col-md-9">
+              {{ reservation.event.price | currency }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <span jhiTranslate="tickets.location" class="bold">Location</span>
+            </div>
+            <div class="col-md-9">
+              {{ reservation.event.location.name }}
+            </div>
+          </div>
+          <hr/>
+          <div class="row">
+            <div class="col-md-3">
+              <span jhiTranslate="tickets.name" class="bold">Name</span>
+            </div>
+            <div class="col-md-9">
+              {{ reservation.user.firstName }} {{reservation.user.lastName}}
+            </div>
+          </div>
+        </div>
+     </div>
+    </div>
+    <div class="clear"></div>
+    <div class="rip"></div>
+    <div class="bottom">
+      <ng-container *ngIf="!successfullPayment">
+      <ng-container *ngIf="id && type">
+        <jhi-payment [value]="genround((0.8 * reservation.event!.price!), 0.05)" [type]="type" [id]="id"></jhi-payment>
+      </ng-container>
+      </ng-container>
+      <ng-container *ngIf="successfullPayment">
+        <div class="alert alert-success" role="alert">
+          <span jhiTranslate="payment.all-paid">Everything is paid for. Thank you very much for that.</span>
+        </div>
+      </ng-container>
+  </div>
+  </widget>
+  <div class="margin-10">
+    <button type="submit"
+    (click)="previousState()"
+    class="btn btn-info">
+    <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+    </button>
+  </div>
+</div>

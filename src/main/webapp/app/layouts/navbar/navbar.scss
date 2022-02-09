@@ -1,0 +1,95 @@
+@import '~bootstrap/scss/functions';
+@import '~bootswatch/dist/cosmo/variables';
+@import '~bootstrap/scss/variables';
+
+/* ==========================================================================
+Navbar
+========================================================================== */
+
+.dropdown-menu {
+  color: white;
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#1b1b1b+0,383838+13,4e4e4e+24,0a0a0a+47,010101+50,0d0d0d+54,959595+100 */
+background: #1b1b1b; /* Old browsers */
+background: -moz-linear-gradient(top,  #1b1b1b 0%, #383838 13%, #4e4e4e 24%, #0a0a0a 47%, #010101 50%, #0d0d0d 54%, #959595 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #1b1b1b 0%,#383838 13%,#4e4e4e 24%,#0a0a0a 47%,#010101 50%,#0d0d0d 54%,#959595 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #1b1b1b 0%,#383838 13%,#4e4e4e 24%,#0a0a0a 47%,#010101 50%,#0d0d0d 54%,#959595 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1b1b1b', endColorstr='#959595',GradientType=0 ); /* IE6-9 */
+border-radius: 10px !important;
+}
+
+.dropdown-item {
+  color: white;
+}
+
+.navbar-version {
+  font-size: 0.65em;
+  color: $navbar-dark-color;
+}
+
+.profile-image {
+  height: 1.75em;
+  width: 1.75em;
+}
+
+.navbar {
+  padding: 0.2rem 1rem;
+  .dropdown-item.active,
+  .dropdown-item.active:focus,
+  .dropdown-item.active:hover {
+    background-color: $dark;
+  }
+
+  ul.navbar-nav {
+    .nav-item {
+      margin-left: 0.5em;
+    }
+  }
+
+  a.nav-link {
+    font-weight: 400;
+  }
+
+  .navbar-toggler {
+    &:hover {
+      color: $navbar-dark-hover-color;
+    }
+  }
+}
+
+/* ==========================================================================
+Logo styles
+========================================================================== */
+.logo-img {
+  height: 45px;
+  width: 45px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url('../../../content/images/create_your_event_logo_45.png') no-repeat center center;
+  background-size: contain;
+}
+
+:root {
+  /* setting var for nav height, you can do this however you want */
+  --sticky-nav-height: 83px;
+}
+
+.sticky-nav-wrapper {
+  /* set min height on wrapper so that the page
+     doesn't awkwardly snap and lose height */
+  min-height: var(--sticky-nav-height);
+}
+
+.sticky-nav {
+  height: var(--sticky-nav-height);
+
+  /* other styles */
+}
+
+.navbar {
+  width: 100%;
+  z-index: 50;
+}
+
+.sticky-margin {
+  top: 83px !important;
+}

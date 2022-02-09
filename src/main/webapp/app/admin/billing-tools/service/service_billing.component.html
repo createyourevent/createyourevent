@@ -1,0 +1,141 @@
+<p-table #dt1 [value]="serviceMapsOrders" dataKey="id" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" styleClass="p-datatable-gridlines"
+[paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+[globalFilterFields]="['id','serviceMap.createYourEventService.name', 'serviceMap.id', 'user.id','user.firstName', 'user.lastName', 'billed', 'total']">
+<ng-template pTemplate="caption">
+<div class="p-d-flex">
+<button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+<span class="p-input-icon-left p-ml-auto">
+<i class="pi pi-search"></i>
+<input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+</span>
+</div>
+</ng-template>
+<ng-template pTemplate="header">
+<tr>
+<th>
+<div class="p-d-flex p-jc-between p-ai-center">
+   <span jhiTranslate="billing.orderid">Order-ID</span>
+  <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
+</div>
+</th>
+<th>
+<div class="p-d-flex p-jc-between p-ai-center">
+<span jhiTranslate="billing.service">Servicename</span>
+  <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+</div>
+</th>
+<th>
+  <div class="p-d-flex p-jc-between p-ai-center">
+  <span jhiTranslate="billing.serviceid">Servicemap-Id</span>
+    <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+  </div>
+</th>
+<th>
+<div class="p-d-flex p-jc-between p-ai-center">
+<span jhiTranslate="billing.userid">User-ID</span>
+<p-columnFilter type="text" field="user.id" display="menu"></p-columnFilter>
+</div>
+</th>
+<th>
+<div class="p-d-flex p-jc-between p-ai-center">
+<span jhiTranslate="billing.firstName">First name</span>
+<p-columnFilter type="text" field="transactionId.transactionDepositId" display="menu"></p-columnFilter>
+</div>
+</th>
+<th>
+<div class="p-d-flex p-jc-between p-ai-center">
+<span jhiTranslate="billing.lastName">Last name</span>
+<p-columnFilter type="text" field="transactionId.transactionId" display="menu"></p-columnFilter>
+</div>
+</th>
+<th>
+  <div class="p-d-flex p-jc-between p-ai-center">
+  <span jhiTranslate="billing.billed">Billed</span>
+  <p-columnFilter type="boolean" field="billed" display="menu"></p-columnFilter>
+  </div>
+  </th>
+  <th>
+    <div class="p-d-flex p-jc-between p-ai-center">
+    <span jhiTranslate="billing.billed">Transaction-Id</span>
+    <p-columnFilter type="text" field="feeTransaction.transactionId.transactionId" display="menu"></p-columnFilter>
+    </div>
+    </th>
+    <th>
+      <div class="p-d-flex p-jc-between p-ai-center">
+      <span jhiTranslate="billing.total">Total</span>
+      </div>
+      </th>
+      <th>
+        <div class="p-d-flex p-jc-between p-ai-center">
+        <span jhiTranslate="billing.fees">Fees</span>
+        </div>
+        </th>
+        <th>
+          <div class="p-d-flex p-jc-between p-ai-center">
+          <span jhiTranslate="billing.fee">Fee</span>
+          </div>
+          </th>
+</ng-template>
+<ng-template pTemplate="body" let-serviceMapsOrder>
+<tr>
+<td>{{serviceMapsOrder.id}}</td>
+<td>{{ serviceMapsOrder.serviceMap.createYourEventService.name }}</td>
+<td>{{ serviceMapsOrder.serviceMap.id }}</td>
+<td>{{serviceMapsOrder.serviceMap.createYourEventService.user.id}}</td>
+<td>{{serviceMapsOrder.serviceMap.createYourEventService.user.firstName}}</td>
+<td>{{serviceMapsOrder.serviceMap.createYourEventService.user.lastName}}</td>
+<td class="p-text-center">
+  <i class="pi" [ngClass]="{'true-icon pi-check-circle': serviceMapsOrder.billed, 'false-icon pi-times-circle': !serviceMapsOrder.billed}"></i>
+</td>
+<td>{{ serviceMapsOrder.feeTransaction.transactionId.transactionId }}</td>
+<td>{{ serviceMapsOrder.total | currency }}</td>
+<td>{{ serviceFees/100 | percent }}</td>
+<td>{{ serviceMapsOrder.total! * serviceFees! | currency }}</td>
+</tr>
+</ng-template>
+<ng-template pTemplate="emptymessage">
+<tr>
+<td colspan="11"><span jhiTranslate="billing.no-event">No event found.</span></td>
+</tr>
+</ng-template>
+</p-table>
+
+<hr/>
+
+<div *ngFor="let e of serviceMapsOrders">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title background">{{ e.serviceMap.createYourEventService.name }}</h5>
+            <table>
+                <tr class="border">
+                    <td jhiTranslate="billing.service" class="bold">Servicename</td><td>{{ e.serviceMap.title }}</td>
+                </tr>
+                <tr class="border">
+                    <td jhiTranslate="billing.serviceid" class="bold">Servicemap ID</td><td>{{ e.serviceMap.id }}</td>
+                </tr>
+                <tr class="border">
+                    <td jhiTranslate="billing.price" class="bold">Price</td><td>{{ e.total | currency }}</td>
+                </tr>
+                <tr class="border">
+                    <td jhiTranslate="billing.fees" class="bold">Fees</td><td>{{ serviceFees/100 | percent }}</td>
+                </tr>
+                <tr class="border">
+                    <td jhiTranslate="billing.fee" class="bold">Fee</td><td>{{ e.total / 100 * serviceFees | currency}}</td>
+                </tr>
+                <tr class="border">
+                    <td jhiTranslate="billing.billed" class="bold">Billed</td><td><p-checkbox name="group1" value="{{ e.id }}" [(ngModel)]="selectedIds" (onChange)="changeCheckbox($event)"></p-checkbox></td>
+                </tr>
+            </table>
+        </div>
+      </div>
+</div>
+
+<div>
+    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button (click)="save()"  class="btn btn-primary">
+        <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+    </button>
+</div>

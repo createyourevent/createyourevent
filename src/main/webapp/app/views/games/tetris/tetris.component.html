@@ -1,0 +1,84 @@
+<h1 class="tetris-title" jhiTranslate="tetris.title">Play Tetris and win points</h1>
+
+<div class="container-fluid tetris-container">
+	<ng-container *ngIf="enoughtPoints">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="alert alert-info" role="alert">
+					<span class="point-font" jhiTranslate="tetris.commitment">The commitment for this game is:</span> <span class="point-font">{{ commitment }}</span> <span class="point-font" jhiTranslate="tetris.points">points</span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="alert alert-info" role="alert">
+					<span class="point-font" jhiTranslate="tetris.linePoints">For every full line you get</span> <span class="point-font">{{ linePoints }}</span> <span class="point-font" jhiTranslate="tetris.points">points</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="alert alert-primary" role="alert">
+					<span class="point-font" jhiTranslate="tetris.points_big">Points:</span>  <span class="point-font">{{totalPoints}}</span>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="alert alert-warning" role="alert">
+					<span class="game-status">{{ status }}</span>
+				</div>
+			</div>
+		</div>
+	</ng-container>
+	<ng-container *ngIf="!enoughtPoints">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="alert alert-danger" role="alert">
+					<span class="point-font" jhiTranslate="tetris.notEnoughtPoints">Not enought points to play!</span>
+				  </div>
+			</div>
+		</div>
+	</ng-container>
+	<ng-container *ngIf="enoughtPoints">
+		<div class="row">
+			<div class="col-md-6">
+				<tetris-core class="tetris-core" #game (lineCleared)="onLineCleared()" (gameOver)="gameOver()"></tetris-core>
+			</div>
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-md-4">
+						<button jhiTranslate="tetris.start" class="control_button margin-auto" (click)="startGame()" [disabled]="playing">Start</button>
+					</div>
+					<div class="col-md-4">
+						<button jhiTranslate="tetris.stop" class="control_button" (click)="stopGame()">Stop</button>
+					</div>
+					<div class="col-md-4">
+						<button jhiTranslate="tetris.reset" class="control_button" (click)="resetGame()">Reset</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<button jhiTranslate="tetris.left" class="direction_button" (click)="game.actionLeft()">Left</button>
+					</div>
+					<div class="col-md-4">
+						<button jhiTranslate="tetris.down" class="direction_button" (click)="game.actionDown()">Down</button>
+					</div>
+					<div class="col-md-4">
+						<button jhiTranslate="tetris.right" class="direction_button" (click)="game.actionRight()">Right</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<img src="../../../../content/images/star_tetris.png" />
+					</div>
+					<div class="col-md-4">
+						<button jhiTranslate="tetris.rotate" class="rotate_button" (click)="game.actionRotate()">Rotate</button>
+					</div>
+					<div class="col-md-4">
+						<img src="../../../../content/images/star_tetris.png" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</ng-container>
+</div>

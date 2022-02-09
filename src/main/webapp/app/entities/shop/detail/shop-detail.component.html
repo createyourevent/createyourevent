@@ -1,0 +1,77 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="shop">
+      <h2 data-cy="shopDetailsHeading"><span jhiTranslate="createyoureventApp.shop.detail.title">Shop</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ shop.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shop.name">Name</span></dt>
+        <dd>
+          <span>{{ shop.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shop.productType">Product Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'createyoureventApp.ProductType.' + shop.productType }}">{{ shop.productType }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shop.logo">Logo</span></dt>
+        <dd>
+          <div *ngIf="shop.logo">
+            <a (click)="openFile(shop.logo, shop.logoContentType)">
+              <img [src]="'data:' + shop.logoContentType + ';base64,' + shop.logo" style="max-width: 100%" alt="shop image" />
+            </a>
+            {{ shop.logoContentType }}, {{ byteSize(shop.logo) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shop.active">Active</span></dt>
+        <dd>
+          <span>{{ shop.active }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shop.activeOwner">Active Owner</span></dt>
+        <dd>
+          <span>{{ shop.activeOwner }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shop.description">Description</span></dt>
+        <dd>
+          <span>{{ shop.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shop.address">Address</span></dt>
+        <dd>
+          <span>{{ shop.address }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shop.motto">Motto</span></dt>
+        <dd>
+          <span>{{ shop.motto }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shop.phone">Phone</span></dt>
+        <dd>
+          <span>{{ shop.phone }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shop.webAddress">Web Address</span></dt>
+        <dd>
+          <span>{{ shop.webAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shop.user">User</span></dt>
+        <dd>
+          <span>{{ shop.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/shop', shop.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

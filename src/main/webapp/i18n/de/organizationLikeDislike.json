@@ -1,0 +1,30 @@
+{
+  "createyoureventApp": {
+    "organizationLikeDislike": {
+      "home": {
+        "title": "Organization Like Dislikes",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Organization Like Dislike erstellen",
+        "createOrEditLabel": "Organization Like Dislike erstellen oder bearbeiten",
+        "notFound": "Keine Organization Like Dislikes gefunden"
+      },
+      "created": "Organization Like Dislike erstellt mit ID {{ param }}",
+      "updated": "Organization Like Dislike aktualisiert mit ID {{ param }}",
+      "deleted": "Organization Like Dislike gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Organization Like Dislike {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Organization Like Dislike"
+      },
+      "id": "ID",
+      "like": "Like",
+      "dislike": "Dislike",
+      "date": "Date",
+      "comment": "Comment",
+      "organization": "Organization",
+      "event": "Event",
+      "user": "User"
+    }
+  }
+}

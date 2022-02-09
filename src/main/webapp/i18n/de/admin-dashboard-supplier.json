@@ -1,0 +1,19 @@
+{
+  "admin-dashboard-supplier": {
+    "calculation": "Kalkulation",
+    "comments-feedback": "Kommentare und Feedback",
+    "ratings": "Rating's",
+    "gallery": "Gallerie",
+    "ratings-title": "Alle Userrating's",
+    "ratings-info": "Unten sehen Sie alle Likes/Dislikes, welche für dieses Produkt eines jeweils einzelnen User's gegeben wurde. Auch finden Sie dort die Email-Adresse des Users welcher geliked hat. So können Sie auch bei möglichen Fragen bezüglich der Entscheidung mit diesem Kontakt aufnehmen.",
+    "comments-title": "Alle Kommentare dieses Produkte's",
+    "comments-info": "Unten finden Sie alle Kommentare, welche für dieses Produkt abgegeben wurden. Falls Sie auf eine Kommentar persönlich Antworten möchten, können Sie direkt unten dies über die Email-Adresse machen.",
+    "calculation-title": "Bilanz und Berechnungen für dieses Produkt",
+    "calculation-info": "Nachfolgend finden Sie die wichtigsten Bilanz- und Berechnungsdaten für dieses Produkt, die für Sie von Interesse sein könnten.",
+    "reservation": "Reservationen",
+    "reservation-title": "Alle Produktreservation",
+    "reservation-info": "Unten sehen Sie alle Reservationen, welche für diesen Shop bestellt wurden. Weiter können Sie unten bei einer Rückgabe diese wieder im Lager einbuchen.",
+    "music-title": "MP3 Upload für dieses Produkt",
+    "mp3": "MP3"
+  }
+}

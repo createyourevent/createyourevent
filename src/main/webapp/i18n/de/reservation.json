@@ -1,0 +1,32 @@
+{
+  "createyoureventApp": {
+    "reservation": {
+      "home": {
+        "title": "Reservations",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Reservation erstellen",
+        "createOrEditLabel": "Reservation erstellen oder bearbeiten",
+        "notFound": "Keine Reservations gefunden"
+      },
+      "created": "Reservation erstellt mit ID {{ param }}",
+      "updated": "Reservation aktualisiert mit ID {{ param }}",
+      "deleted": "Reservation gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Reservation {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Reservation"
+      },
+      "id": "ID",
+      "date": "Date",
+      "billed": "Billed",
+      "accessEvent": "Access Event",
+      "accessDate": "Access Date",
+      "tdTxId": "Td Tx Id",
+      "transactionId": "Transaction Id",
+      "ticket": "Ticket",
+      "user": "User",
+      "event": "Event"
+    }
+  }
+}

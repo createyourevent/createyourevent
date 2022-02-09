@@ -1,0 +1,108 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="eventProductOrder">
+      <h2 data-cy="eventProductOrderDetailsHeading">
+        <span jhiTranslate="createyoureventApp.eventProductOrder.detail.title">Event Product Order</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ eventProductOrder.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.amount">Amount</span></dt>
+        <dd>
+          <span>{{ eventProductOrder.amount }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.total">Total</span></dt>
+        <dd>
+          <span>{{ eventProductOrder.total }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.date">Date</span></dt>
+        <dd>
+          <span>{{ eventProductOrder.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.rentalPeriod">Rental Period</span></dt>
+        <dd>
+          <span>{{ eventProductOrder.rentalPeriod }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.dateFrom">Date From</span></dt>
+        <dd>
+          <span>{{ eventProductOrder.dateFrom | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.dateUntil">Date Until</span></dt>
+        <dd>
+          <span>{{ eventProductOrder.dateUntil | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'createyoureventApp.RentStatus.' + eventProductOrder.status }}">{{ eventProductOrder.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.billed">Billed</span></dt>
+        <dd>
+          <span>{{ eventProductOrder.billed }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.seen">Seen</span></dt>
+        <dd>
+          <span>{{ eventProductOrder.seen }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.approved">Approved</span></dt>
+        <dd>
+          <span>{{ eventProductOrder.approved }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.sellingPrice">Selling Price</span></dt>
+        <dd>
+          <span>{{ eventProductOrder.sellingPrice }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.user">User</span></dt>
+        <dd>
+          <span>{{ eventProductOrder.user?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.event">Event</span></dt>
+        <dd>
+          <div *ngIf="eventProductOrder.event">
+            <a [routerLink]="['/event', eventProductOrder.event?.id, 'view']">{{ eventProductOrder.event?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.product">Product</span></dt>
+        <dd>
+          <div *ngIf="eventProductOrder.product">
+            <a [routerLink]="['/product', eventProductOrder.product?.id, 'view']">{{ eventProductOrder.product?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.shop">Shop</span></dt>
+        <dd>
+          <div *ngIf="eventProductOrder.shop">
+            <a [routerLink]="['/shop', eventProductOrder.shop?.id, 'view']">{{ eventProductOrder.shop?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.cart">Cart</span></dt>
+        <dd>
+          <div *ngIf="eventProductOrder.cart">
+            <a [routerLink]="['/cart', eventProductOrder.cart?.id, 'view']">{{ eventProductOrder.cart?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductOrder.deliveryType">Delivery Type</span></dt>
+        <dd>
+          <div *ngIf="eventProductOrder.deliveryType">
+            <a [routerLink]="['/delivery-type', eventProductOrder.deliveryType?.id, 'view']">{{ eventProductOrder.deliveryType?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/event-product-order', eventProductOrder.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

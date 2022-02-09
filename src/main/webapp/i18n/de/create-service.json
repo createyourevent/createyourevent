@@ -1,0 +1,7 @@
+{
+  "create-service": {
+    "title": "Dienstleistung registrieren",
+    "messages.success": "Dienstleistung erfolgreich registriert. Wir werden die Dienstleistung nach eigener Kontrolle noch freischalten.",
+    "messages.error.fail": "Die Registrierung Ihrer Dienstleistung konnte nicht durchgeführt werden. Bitte versuchen Sie es später nocheinmal"
+  }
+}

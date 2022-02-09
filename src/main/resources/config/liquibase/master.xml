@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    <property name="now" value="now()" dbms="mysql, mariadb"/>
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql, mariadb"/>
+    <property name="clobType" value="clob" dbms="h2"/>
+    <property name="clobType" value="clob" dbms="mysql, oracle, mssql, mariadb, postgresql"/>
+    <property name="uuidType" value="varchar(36)" dbms="h2, mysql, mariadb"/>
+    <property name="datetimeType" value="datetime(6)" dbms="mysql, mariadb"/>
+    <property name="datetimeType" value="datetime" dbms="oracle, mssql, postgresql, h2"/>
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213429_added_entity_Point.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213430_added_entity_UserPointAssociation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213431_added_entity_Organization.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213432_added_entity_Worksheet.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213433_added_entity_AdminFeesPrice.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213434_added_entity_Shop.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213435_added_entity_Restaurant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213436_added_entity_Club.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213437_added_entity_CreateYourEventService.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213438_added_entity_ServiceOffer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213439_added_entity_ServiceMap.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213440_added_entity_RideCosts.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213441_added_entity_Order.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213442_added_entity_ShopComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213443_added_entity_EventDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213444_added_entity_Reservation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213445_added_entity_Product.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213446_added_entity_DeliveryType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213447_added_entity_ShopLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213448_added_entity_ServiceLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213449_added_entity_ProductLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213450_added_entity_ProductComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213451_added_entity_OrganizationLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213452_added_entity_OrganizationComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213453_added_entity_ServiceComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213454_added_entity_EventLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213455_added_entity_EventComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213456_added_entity_EventProductRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213457_added_entity_EventStarRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213458_added_entity_ShopStarRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213459_added_entity_ProductStarRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213500_added_entity_ServiceStarRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213501_added_entity_EventProductOrder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213502_added_entity_EventServiceMapOrder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213503_added_entity_Cart.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213504_added_entity_EventProductRatingComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213505_added_entity_Event.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213506_added_entity_Image.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213507_added_entity_Chips.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213508_added_entity_ChipsCollectionChips.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213509_added_entity_ChipsCollection.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213510_added_entity_ChipsAdmin.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213511_added_entity_Location.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213512_added_entity_Address.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213513_added_entity_Contact.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213514_added_entity_Tags.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213515_added_entity_Gift.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213516_added_entity_GiftShoppingCart.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213517_added_entity_Property.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213518_added_entity_Partner.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213519_added_entity_UserExtension.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210614143342_added_entity_Mp3.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210704230428_added_entity_Hotel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210713055114_added_entity_FeeTransaction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210713055115_added_entity_FeeTransactionEntry.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210722201900_added_entity_PointsExchange.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210722201901_added_entity_Bond.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210729090955_added_entity_FeeBalance.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210919041151_added_entity_ReservationTransactionId.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210919041152_added_entity_FeeTransactionId.xml" relativeToChangelogFile="false"/>
+    <!--
+    <include file="config/liquibase/changelog/20211025022152_added_entity_Point.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022153_added_entity_PointsExchange.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022154_added_entity_Bond.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022155_added_entity_UserPointAssociation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022156_added_entity_Organization.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022157_added_entity_Worksheet.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022158_added_entity_AdminFeesPrice.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022159_added_entity_Shop.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022200_added_entity_Restaurant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022201_added_entity_Club.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022202_added_entity_Hotel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022203_added_entity_CreateYourEventService.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022204_added_entity_ServiceOffer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022205_added_entity_ServiceMap.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022206_added_entity_RideCosts.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022207_added_entity_Order.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022208_added_entity_ShopComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022209_added_entity_EventDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022210_added_entity_Reservation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022211_added_entity_Product.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022212_added_entity_DeliveryType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022213_added_entity_ShopLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022214_added_entity_ServiceLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022215_added_entity_ProductLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022216_added_entity_ProductComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022217_added_entity_OrganizationLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022218_added_entity_OrganizationComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022219_added_entity_ServiceComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022220_added_entity_EventLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022221_added_entity_EventComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022222_added_entity_EventProductRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022223_added_entity_EventStarRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022224_added_entity_ShopStarRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022225_added_entity_ProductStarRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022226_added_entity_ServiceStarRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022227_added_entity_EventProductOrder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022228_added_entity_EventServiceMapOrder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022229_added_entity_ReservationTransactionId.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022230_added_entity_FeeTransactionId.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022231_added_entity_FeeTransaction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022232_added_entity_FeeTransactionEntry.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022233_added_entity_Cart.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022234_added_entity_EventProductRatingComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022235_added_entity_Event.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022236_added_entity_Image.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022237_added_entity_Chips.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022238_added_entity_FeeBalance.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022239_added_entity_ChipsCollectionChips.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022240_added_entity_ChipsCollection.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022241_added_entity_ChipsAdmin.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022242_added_entity_Location.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022243_added_entity_Address.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022244_added_entity_Contact.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022245_added_entity_Tags.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022246_added_entity_Gift.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022247_added_entity_GiftShoppingCart.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022248_added_entity_Property.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022249_added_entity_Partner.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022250_added_entity_UserExtension.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022251_added_entity_Mp3.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211218031205_added_entity_Ticket.xml" relativeToChangelogFile="false"/>
+    -->
+    <include file="config/liquibase/changelog/20220120023522_added_entity_OrganizationReservation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220120023523_added_entity_Building.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220120023524_added_entity_OrganizationStarRating.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20210508213430_added_entity_constraints_UserPointAssociation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213431_added_entity_constraints_Organization.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213432_added_entity_constraints_Worksheet.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213434_added_entity_constraints_Shop.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213437_added_entity_constraints_CreateYourEventService.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213438_added_entity_constraints_ServiceOffer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213439_added_entity_constraints_ServiceMap.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213442_added_entity_constraints_ShopComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213444_added_entity_constraints_Reservation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213445_added_entity_constraints_Product.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213446_added_entity_constraints_DeliveryType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213447_added_entity_constraints_ShopLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213448_added_entity_constraints_ServiceLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213449_added_entity_constraints_ProductLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213450_added_entity_constraints_ProductComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213451_added_entity_constraints_OrganizationLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213452_added_entity_constraints_OrganizationComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213453_added_entity_constraints_ServiceComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213454_added_entity_constraints_EventLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213455_added_entity_constraints_EventComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213456_added_entity_constraints_EventProductRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213457_added_entity_constraints_EventStarRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213458_added_entity_constraints_ShopStarRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213459_added_entity_constraints_ProductStarRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213500_added_entity_constraints_ServiceStarRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213501_added_entity_constraints_EventProductOrder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213502_added_entity_constraints_EventServiceMapOrder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213504_added_entity_constraints_EventProductRatingComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213505_added_entity_constraints_Event.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213506_added_entity_constraints_Image.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213508_added_entity_constraints_ChipsCollectionChips.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213509_added_entity_constraints_ChipsCollection.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213511_added_entity_constraints_Location.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213514_added_entity_constraints_Tags.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213516_added_entity_constraints_GiftShoppingCart.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213519_added_entity_constraints_UserExtension.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210614143342_added_entity_constraints_Mp3.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213435_added_entity_constraints_Restaurant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210508213436_added_entity_constraints_Club.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210704230428_added_entity_constraints_Hotel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210713055114_added_entity_constraints_FeeTransaction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210713055115_added_entity_constraints_FeeTransactionEntry.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210722201901_added_entity_constraints_Bond.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210729090955_added_entity_constraints_FeeBalance.xml" relativeToChangelogFile="false"/>
+    <!--
+    <include file="config/liquibase/changelog/20211025022154_added_entity_constraints_Bond.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022155_added_entity_constraints_UserPointAssociation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022156_added_entity_constraints_Organization.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022157_added_entity_constraints_Worksheet.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022159_added_entity_constraints_Shop.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022200_added_entity_constraints_Restaurant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022201_added_entity_constraints_Club.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022202_added_entity_constraints_Hotel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022203_added_entity_constraints_CreateYourEventService.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022204_added_entity_constraints_ServiceOffer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022205_added_entity_constraints_ServiceMap.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022208_added_entity_constraints_ShopComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022210_added_entity_constraints_Reservation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022211_added_entity_constraints_Product.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022212_added_entity_constraints_DeliveryType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022213_added_entity_constraints_ShopLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022214_added_entity_constraints_ServiceLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022215_added_entity_constraints_ProductLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022216_added_entity_constraints_ProductComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022217_added_entity_constraints_OrganizationLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022218_added_entity_constraints_OrganizationComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022219_added_entity_constraints_ServiceComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022220_added_entity_constraints_EventLikeDislike.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022221_added_entity_constraints_EventComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022222_added_entity_constraints_EventProductRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022223_added_entity_constraints_EventStarRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022224_added_entity_constraints_ShopStarRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022225_added_entity_constraints_ProductStarRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022226_added_entity_constraints_ServiceStarRating.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022227_added_entity_constraints_EventProductOrder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022228_added_entity_constraints_EventServiceMapOrder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022231_added_entity_constraints_FeeTransaction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022232_added_entity_constraints_FeeTransactionEntry.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022234_added_entity_constraints_EventProductRatingComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022235_added_entity_constraints_Event.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022236_added_entity_constraints_Image.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022238_added_entity_constraints_FeeBalance.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022239_added_entity_constraints_ChipsCollectionChips.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022240_added_entity_constraints_ChipsCollection.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022242_added_entity_constraints_Location.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022245_added_entity_constraints_Tags.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022247_added_entity_constraints_GiftShoppingCart.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022250_added_entity_constraints_UserExtension.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211025022251_added_entity_constraints_Mp3.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211218031205_added_entity_constraints_Ticket.xml" relativeToChangelogFile="false"/>
+    -->
+    <include file="config/liquibase/changelog/20220120023522_added_entity_constraints_OrganizationReservation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220120023523_added_entity_constraints_Building.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220120023524_added_entity_constraints_OrganizationStarRating.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
+
+    <include file="config/liquibase/changelog/20211218050816_changelog.xml" relativeToChangelogFile="false"/>
+     <include file="config/liquibase/changelog/20220103184148_changelog.xml" relativeToChangelogFile="false"/>
+     <include file="config/liquibase/changelog/20220117051236_changelog.xml" relativeToChangelogFile="false"/>
+     <include file="config/liquibase/changelog/20220117202104_changelog.xml" relativeToChangelogFile="false"/>
+
+
+
+
+
+</databaseChangeLog>

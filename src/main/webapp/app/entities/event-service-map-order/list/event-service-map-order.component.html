@@ -1,0 +1,162 @@
+<div>
+  <h2 id="page-heading" data-cy="EventServiceMapOrderHeading">
+    <span jhiTranslate="createyoureventApp.eventServiceMapOrder.home.title">Event Service Map Orders</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="createyoureventApp.eventServiceMapOrder.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-event-service-map-order"
+        [routerLink]="['/event-service-map-order/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="createyoureventApp.eventServiceMapOrder.home.createLabel"> Create a new Event Service Map Order </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="eventServiceMapOrders?.length === 0">
+    <span jhiTranslate="createyoureventApp.eventServiceMapOrder.home.notFound">No eventServiceMapOrders found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="eventServiceMapOrders && eventServiceMapOrders.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="date">
+            <span jhiTranslate="createyoureventApp.eventServiceMapOrder.date">Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateFrom">
+            <span jhiTranslate="createyoureventApp.eventServiceMapOrder.dateFrom">Date From</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateUntil">
+            <span jhiTranslate="createyoureventApp.eventServiceMapOrder.dateUntil">Date Until</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="costHour">
+            <span jhiTranslate="createyoureventApp.eventServiceMapOrder.costHour">Cost Hour</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="rideCosts">
+            <span jhiTranslate="createyoureventApp.eventServiceMapOrder.rideCosts">Ride Costs</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="total">
+            <span jhiTranslate="createyoureventApp.eventServiceMapOrder.total">Total</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="totalHours">
+            <span jhiTranslate="createyoureventApp.eventServiceMapOrder.totalHours">Total Hours</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="kilometre">
+            <span jhiTranslate="createyoureventApp.eventServiceMapOrder.kilometre">Kilometre</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="billed">
+            <span jhiTranslate="createyoureventApp.eventServiceMapOrder.billed">Billed</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="seen">
+            <span jhiTranslate="createyoureventApp.eventServiceMapOrder.seen">Seen</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="approved">
+            <span jhiTranslate="createyoureventApp.eventServiceMapOrder.approved">Approved</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="event.id">
+            <span jhiTranslate="createyoureventApp.eventServiceMapOrder.event">Event</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="serviceMap.id">
+            <span jhiTranslate="createyoureventApp.eventServiceMapOrder.serviceMap">Service Map</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="cart.id">
+            <span jhiTranslate="createyoureventApp.eventServiceMapOrder.cart">Cart</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let eventServiceMapOrder of eventServiceMapOrders; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/event-service-map-order', eventServiceMapOrder.id, 'view']">{{ eventServiceMapOrder.id }}</a>
+          </td>
+          <td>{{ eventServiceMapOrder.date | formatMediumDatetime }}</td>
+          <td>{{ eventServiceMapOrder.dateFrom | formatMediumDatetime }}</td>
+          <td>{{ eventServiceMapOrder.dateUntil | formatMediumDatetime }}</td>
+          <td>{{ eventServiceMapOrder.costHour }}</td>
+          <td>{{ eventServiceMapOrder.rideCosts }}</td>
+          <td>{{ eventServiceMapOrder.total }}</td>
+          <td>{{ eventServiceMapOrder.totalHours }}</td>
+          <td>{{ eventServiceMapOrder.kilometre }}</td>
+          <td>{{ eventServiceMapOrder.billed }}</td>
+          <td>{{ eventServiceMapOrder.seen }}</td>
+          <td>{{ eventServiceMapOrder.approved }}</td>
+          <td>
+            <div *ngIf="eventServiceMapOrder.event">
+              <a [routerLink]="['/event', eventServiceMapOrder.event?.id, 'view']">{{ eventServiceMapOrder.event?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="eventServiceMapOrder.serviceMap">
+              <a [routerLink]="['/service-map', eventServiceMapOrder.serviceMap?.id, 'view']">{{ eventServiceMapOrder.serviceMap?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="eventServiceMapOrder.cart">
+              <a [routerLink]="['/cart', eventServiceMapOrder.cart?.id, 'view']">{{ eventServiceMapOrder.cart?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/event-service-map-order', eventServiceMapOrder.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/event-service-map-order', eventServiceMapOrder.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(eventServiceMapOrder)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="eventServiceMapOrders && eventServiceMapOrders.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,115 @@
+.mat-card {
+  margin: 20px;
+  width: 200px;
+}
+
+.btn-rating {
+  margin-bottom: 15px;
+}
+
+.star_big {
+  background-image: url('../../../content/images/star_250.png');
+  background-size: 250px 250px;
+  background-repeat: repeat-x;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 30px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.border {
+  border: 1px solid black !important;
+}
+
+.larger {
+  font-size: larger;
+}
+
+.price {
+  color: red;
+  font-family: 'Knewave', cursive;
+}
+
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 3rem;
+  color: #d3d3d3;
+}
+.full {
+  color: red;
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: red;
+}
+
+.feedback {
+  margin: 20px;
+}
+
+.box {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  width: 100%;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  padding: 10px;
+  border: 1px solid;
+}
+
+.margin-top {
+  margin-top: 20px;
+}
+
+.margin-bottom {
+  margin-bottom: 20px;
+}
+
+.user_comment {
+  list-style-type: none;
+}
+
+.comment_body {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 3px auto;
+  width: calc(100% - 75px);
+  min-height: 65px;
+  margin-left: 10px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  color: #555;
+  background-color: white;
+  border-bottom: 2px solid lighten(grey, 15%);
+}
+
+.margin-auto {
+  margin: auto;
+}
+
+.picsum-img-wrapper {
+  margin: 0 auto;
+  text-align: center;
+  border: 3px solid white;
+}
+
+.carousel {
+  -webkit-box-shadow: 8px 9px 9px -1px #000000;
+  box-shadow: 8px 9px 9px -1px #000000;
+  border-radius: 8px;
+}
+
+.bold {
+  font-weight: bold;
+}

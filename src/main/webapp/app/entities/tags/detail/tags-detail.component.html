@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="tags">
+      <h2 data-cy="tagsDetailsHeading"><span jhiTranslate="createyoureventApp.tags.detail.title">Tags</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ tags.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.tags.tag">Tag</span></dt>
+        <dd>
+          <span>{{ tags.tag }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.tags.event">Event</span></dt>
+        <dd>
+          <div *ngIf="tags.event">
+            <a [routerLink]="['/event', tags.event?.id, 'view']">{{ tags.event?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.tags.product">Product</span></dt>
+        <dd>
+          <div *ngIf="tags.product">
+            <a [routerLink]="['/product', tags.product?.id, 'view']">{{ tags.product?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.tags.shop">Shop</span></dt>
+        <dd>
+          <div *ngIf="tags.shop">
+            <a [routerLink]="['/shop', tags.shop?.id, 'view']">{{ tags.shop?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.tags.service">Service</span></dt>
+        <dd>
+          <div *ngIf="tags.service">
+            <a [routerLink]="['/create-your-event-service', tags.service?.id, 'view']">{{ tags.service?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.tags.organization">Organization</span></dt>
+        <dd>
+          <div *ngIf="tags.organization">
+            <a [routerLink]="['/organization', tags.organization?.id, 'view']">{{ tags.organization?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/tags', tags.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

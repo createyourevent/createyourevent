@@ -1,0 +1,29 @@
+{
+  "createyoureventApp": {
+    "eventComment": {
+      "home": {
+        "title": "Event Comments",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Event Comment erstellen",
+        "createOrEditLabel": "Event Comment erstellen oder bearbeiten",
+        "notFound": "Keine Event Comments gefunden"
+      },
+      "created": "Event Comment erstellt mit ID {{ param }}",
+      "updated": "Event Comment aktualisiert mit ID {{ param }}",
+      "deleted": "Event Comment gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Event Comment {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Event Comment"
+      },
+      "id": "ID",
+      "comment": "Comment",
+      "date": "Date",
+      "eventComments": "Event Comments",
+      "event": "Event",
+      "user": "User",
+      "eventComment": "Event Comment"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+<ng-container *ngFor="let shop of shops">
+    <div class="card text-center shop-card">
+        <div class="card-header">
+            <img class="card-img-top" [src]="'data:' + shop.logoContentType + ';base64,' + shop.logo"  style="max-height: 259px;" alt="shop image"/>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{shop.name}}</h5>
+          <p class="card-text">{{shop.motto}}</p>
+        </div>
+        <div class="card-footer text-muted">
+            <button id="overview-product" class="btn btn-primary" [routerLink]="[shop.id, 'overviewProduct']">
+                <fa-icon icon="plus"></fa-icon>
+                <span  jhiTranslate="register-product.overviewProduct">
+                Overview Products
+                </span>
+            </button>
+            <button id="jh-add-product" class="btn btn-primary" [routerLink]="[shop.id, 'addProduct']">
+                <fa-icon icon="plus"></fa-icon>
+                <span  jhiTranslate="register-product.addProduct">
+                Add Product
+                </span>
+            </button>
+            <button id="jh-orders" class="btn btn-primary" [routerLink]="['/supplier/orders/', shop.id]">
+                <fa-icon icon="plus"></fa-icon>
+                <span  jhiTranslate="register-product.orders">
+                Orders
+                </span>
+            </button>
+        </div>
+      </div>
+</ng-container>

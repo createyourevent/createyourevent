@@ -1,0 +1,17 @@
+{
+  "register-shop": {
+    "register": "Registriere einen Shop auf Create Your Event",
+    "info": "Unten können Sie mit wenigen klick's einen Shop bei uns registrieren. Bitte füllen Sie alle Angaben die wir benötigen aus. Amschliessend werden wir unsererseits den Antrag überprüfen. Wenn alles in Ordnung ist, werden wir den Shop aktivieren. Anschliessend können Sie den Shop in Ihrem Dashboard verwalten. Normalerweise dauert es ca. 1 Tag bis wir den Shop aktiviert haben. Das Dashboard finden Sie hier: <a href=\"/supplier/dashboard\">Hier klicken</a>",
+    "description": "Beschreibung des Shops",
+    "address": "Adresse",
+    "productType": "Produkttyp",
+    "messages": {
+      "success": "Shop-Registrierung erfolgreich. Nach erfolgreicher Überprüfung Ihrer Angaben werden wir den Shop aktivieren.",
+      "error": "Shop-Registrierung fehlgeschlagen. Bitte versuchen Sie es später nocheinmal."
+    },
+    "filetype.error": "Dateityp Fehler",
+    "filetype.error.info": "Nur Bilder können heraufgeladen werden.",
+    "filesize.error": "Dateigrösse Fehler",
+    "filesize.error.info": "Maximal 500KB sind für ein Bild erlaubt."
+  }
+}

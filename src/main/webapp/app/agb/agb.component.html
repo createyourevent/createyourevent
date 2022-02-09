@@ -1,0 +1,37 @@
+<h1 jhiTranslate="agb.title">General Terms and Conditions (GTC)</h1>
+<div class="alert alert-info bold" role="alert" jhiTranslate="agb.infotext">
+  Please read the "General Terms and Conditions (GTC)" below completely, as they differ greatly from the GTCs that still exist today.
+  We have to assume that you have read the terms and conditions completely and understood them.
+  So far, we have only translated these terms and conditions into German, as this is our contractual language which we use.
+</div>
+<p>
+  <iframe #myAgb class="iframe-agb" src="https://docs.google.com/document/d/e/2PACX-1vQMDvSsv1pbcMkMLEH6rQucDdwbkK5fq8yD-6o5g7H1VYsOCwAuRXms7ck9oCRbE6aGzgEnc4Xcdk5t/pub?embedded=true"></iframe>
+</p>
+<ng-container *jhiHasAnyAuthority="'ROLE_USER'">
+  <hr/>
+  <span jhiTranslate="agb.accepting">Please accept the terms and conditions</span> <p-inputSwitch [(ngModel)]="user.agb" (onChange)="switchAGB()" [disabled]="user.agb"></p-inputSwitch>
+  <hr/>
+
+  <div class="alert alert-success" role="alert" jhiTranslate="agb.goto-settings">
+    Below you can go to the settings after confirming the terms and conditions, which still have to be specified so that our platform can function properly.
+  </div>
+
+  <button
+  type="submit"
+  [routerLink]="['/settings']"
+  class="btn btn-primary btn-sm"
+  [disabled]="!user.agb"
+  >
+  <fa-icon icon="sliders-h"></fa-icon>
+  <span class="d-none d-md-inline" jhiTranslate="navbar.settings">Settings</span>
+  </button>
+
+  <button
+  type="submit"
+  [routerLink]="['/']"
+  class="btn btn-primary btn-sm"
+  >
+  <fa-icon icon="power-off"></fa-icon>
+  <span class="d-none d-md-inline" jhiTranslate="navbar.cancel">Cancel</span>
+  </button>
+</ng-container>

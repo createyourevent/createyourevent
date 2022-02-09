@@ -1,0 +1,153 @@
+<div>
+  <h2 id="page-heading" data-cy="FeeTransactionHeading">
+    <span jhiTranslate="createyoureventApp.feeTransaction.home.title">Fee Transactions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="createyoureventApp.feeTransaction.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-fee-transaction"
+        [routerLink]="['/fee-transaction/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="createyoureventApp.feeTransaction.home.createLabel"> Create a new Fee Transaction </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="feeTransactions?.length === 0">
+    <span jhiTranslate="createyoureventApp.feeTransaction.home.notFound">No feeTransactions found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="feeTransactions && feeTransactions.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="date">
+            <span jhiTranslate="createyoureventApp.feeTransaction.date">Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="transactionId.id">
+            <span jhiTranslate="createyoureventApp.feeTransaction.transactionId">Transaction Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="eventProductOrder.id">
+            <span jhiTranslate="createyoureventApp.feeTransaction.eventProductOrder">Event Product Order</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="eventServiceMapOrder.id">
+            <span jhiTranslate="createyoureventApp.feeTransaction.eventServiceMapOrder">Event Service Map Order</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="event.id">
+            <span jhiTranslate="createyoureventApp.feeTransaction.event">Event</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="organizationReservation.id">
+            <span jhiTranslate="createyoureventApp.feeTransaction.organizationReservation">Organization Reservation</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="user.id">
+            <span jhiTranslate="createyoureventApp.feeTransaction.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let feeTransaction of feeTransactions; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/fee-transaction', feeTransaction.id, 'view']">{{ feeTransaction.id }}</a>
+          </td>
+          <td>{{ feeTransaction.date | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="feeTransaction.transactionId">
+              <a [routerLink]="['/fee-transaction-id', feeTransaction.transactionId?.id, 'view']">{{ feeTransaction.transactionId?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="feeTransaction.eventProductOrder">
+              <a [routerLink]="['/event-product-order', feeTransaction.eventProductOrder?.id, 'view']">{{
+                feeTransaction.eventProductOrder?.id
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="feeTransaction.eventServiceMapOrder">
+              <a [routerLink]="['/event-service-map-order', feeTransaction.eventServiceMapOrder?.id, 'view']">{{
+                feeTransaction.eventServiceMapOrder?.id
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="feeTransaction.event">
+              <a [routerLink]="['/event', feeTransaction.event?.id, 'view']">{{ feeTransaction.event?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="feeTransaction.organizationReservation">
+              <a [routerLink]="['/organization-reservation', feeTransaction.organizationReservation?.id, 'view']">{{
+                feeTransaction.organizationReservation?.id
+              }}</a>
+            </div>
+          </td>
+          <td>
+            {{ feeTransaction.user?.id }}
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/fee-transaction', feeTransaction.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/fee-transaction', feeTransaction.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(feeTransaction)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="feeTransactions && feeTransactions.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

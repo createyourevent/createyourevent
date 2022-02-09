@@ -1,0 +1,10 @@
+{
+  "admin-calculation-product": {
+    "itemNumber": "Artikelnummer",
+    "price": "Preis",
+    "stock": "Menge an Lager",
+    "event": "Event",
+    "date": "Datum",
+    "total": "Total"
+  }
+}

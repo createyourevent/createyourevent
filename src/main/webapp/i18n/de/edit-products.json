@@ -1,0 +1,29 @@
+{
+    "edit-products": {
+        "edit-products-form-event": "Editiere die Produktbestellungen für den Event",
+        "product-image": "Produktbild",
+        "product-name": "Produktname",
+        "seen": "Gesehen",
+        "approved": "Bestätigt",
+        "amount": "Menge",
+        "total": "Total",
+        "action": "Aktion",
+        "add-product": "Produkt hinzufügen",
+        "stock": "Lager",
+        "price": "Preis",
+        "rent-date": "Mietdatum",
+        "price-type": "Preistyp",
+        "update": "Aktualisieren",
+        "add-product-for": "Produkt hinzufügen für Event ",
+        "from": " vom ",
+        "edit-product-for": "Bearbeite Produkt vom ",
+        "error": "Fehler",
+        "not-enought-quantity-in-time": "Dieses Produkt ist in dieser Zeit leider nicht verfügbar",
+        "product-updated": "Produkt aktualisiert",
+        "success": "Erfolgreich",
+        "not-allowed-amount": "Es müssen mehr als 0 Produkte gewählt werden. Bitte geben Sie eine gültige Menge ein.",
+        "selling-price": "Verkaufspreis",
+        "not-allowed-selling-price": "Nicht erlaubter Verkaufspreis.",
+        "selling-price-updated":  "Verkaufspreis aktualisiert."
+    }
+}

@@ -1,0 +1,22 @@
+{
+  "dashboard-event": {
+    "calculation": "Calculation",
+    "comments-feedback": "Comments and feedback",
+    "dashboard": "Dashboard",
+    "ratings": "Rating's",
+    "workflow": "Workflow event",
+    "gallery-admin": "Administration gallery",
+    "create-an-event": "You have to create an event first.",
+    "ratings-title": "Administration Ratings from that event",
+    "ratings-info": "Below you can see which users have liked and disliked this event. In this way you can iterate with the displayed users, which is why they gave a dislike, for example. So you can still try to change your mind if you still adjust the event.",
+    "calculation-title": "Calculation and balance sheet figures",
+    "calculation-info": "Below you can see the most important key figures for this event in one view. On the basis of this, you can quickly see whether this event is worthwhile for you if it is carried out.",
+    "comments-feedback-title": "Comments and feedback to this event",
+    "comments-feedback-info": "Below you will find all comments and feedback on this event summarized on this page. You can use this to make this event better the next time or optimize this event together with your suppliers and guests. Hopefully everyone will enjoy themselves on this occasion.",
+    "star-ratings-title": "Star and heart ratings",
+    "star-ratings-info": "Below are all of the ratings related to the star ratings and the resulting heart rating.",
+    "dashboard-for-event": "Dashboard for event",
+    "mp3-admin": "MP3",
+    "favorits": "In favorits"
+  }
+}

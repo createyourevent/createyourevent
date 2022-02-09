@@ -1,0 +1,14 @@
+{
+  "dashboardService": {
+    "gotoServiceMaps": "Dienstleistungmappen",
+    "name": "Name",
+    "logo": "Logo",
+    "motto": "Leitsatz",
+    "home.title": "Dienstleistungen",
+    "dashboard-service": "Dashboard",
+    "home.notFound": "Keine Dienstleistung gefunden. Bitte erstellen Sie zuerst eine Dienstleistung.",
+    "customer-booking": "Buchungen",
+    "gotoServiceOffers": "Dienstleistungsofferten",
+    "service-active": "Die Dienstleistung wurde aktiviert / deaktiviert."
+  }
+}

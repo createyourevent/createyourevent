@@ -1,0 +1,102 @@
+<h1 jhiTranslate="rent.title">Rent received</h1>
+
+<p-table #dt1 [value]="organizationReservations" dataKey="id" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" styleClass="p-datatable-gridlines"
+[paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+[globalFilterFields]="['user.id','user.firstName','user.lastName','event.name','date','dateFrom','dateUntil','total','seen','approved']">
+<ng-template pTemplate="caption">
+  <div class="p-d-flex">
+      <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+      <span class="p-input-icon-left p-ml-auto">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+      </span>
+  </div>
+</ng-template>
+<ng-template pTemplate="header">
+  <tr>
+      <th>
+          <div class="p-d-flex p-jc-between p-ai-center">
+               <span jhiTranslate="transactions.userId">User-ID</span>
+              <p-columnFilter type="text" field="user.id" display="menu"></p-columnFilter>
+          </div>
+      </th>
+      <th>
+          <div class="p-d-flex p-jc-between p-ai-center">
+            <span jhiTranslate="transactions.firstname">Firstname</span>
+              <p-columnFilter type="text" field="user.firstName" display="menu"></p-columnFilter>
+          </div>
+      </th>
+      <th>
+        <div class="p-d-flex p-jc-between p-ai-center">
+          <span jhiTranslate="transactions.lastname">Lastname</span>
+            <p-columnFilter type="text" field="user.firstName" display="menu"></p-columnFilter>
+        </div>
+    </th>
+    <th>
+      <div class="p-d-flex p-jc-between p-ai-center">
+        <span jhiTranslate="rent.event">Event</span>
+          <p-columnFilter type="text" field="event.name" display="menu"></p-columnFilter>
+      </div>
+  </th>
+  <th>
+    <div class="flex justify-content-center align-items-center">
+      <span jhiTranslate="rent.date">Date</span>
+        <p-columnFilter type="date" field="date" display="menu"></p-columnFilter>
+    </div>
+</th>
+<th>
+  <div class="flex justify-content-center align-items-center">
+    <span jhiTranslate="rent.date-from">Date from</span>
+      <p-columnFilter type="date" field="dateFrom" display="menu"></p-columnFilter>
+  </div>
+</th>
+<th>
+  <div class="flex justify-content-center align-items-center">
+    <span jhiTranslate="rent.date-until">Date until</span>
+      <p-columnFilter type="date" field="dateUntil" display="menu"></p-columnFilter>
+  </div>
+</th>
+<th>
+  <div class="flex justify-content-center align-items-center">
+    <span jhiTranslate="rent.total">Total</span>
+      <p-columnFilter type="numeric" field="balance" display="menu" currency="USD"></p-columnFilter>
+  </div>
+</th>
+<th style="width: 8rem">
+  <div class="flex justify-content-center align-items-center">
+    <span jhiTranslate="rent.seen">Seen</span>
+      <p-columnFilter type="boolean" field="verified" display="menu"></p-columnFilter>
+  </div>
+</th>
+<th style="width: 8rem">
+  <div class="flex justify-content-center align-items-center">
+    <span jhiTranslate="rent.approved">Approved</span>
+      <p-columnFilter type="boolean" field="verified" display="menu"></p-columnFilter>
+  </div>
+</th>
+  </tr>
+</ng-template>
+  <ng-template pTemplate="body" let-reservation>
+      <tr>
+          <td>{{reservation.user.id}}</td>
+          <td>{{reservation.user.firstName}}</td>
+          <td>{{reservation.user.lastName}}</td>
+          <td>{{reservation.event.name}}</td>
+          <td>{{reservation.date | date:'medium'}}</td>
+          <td>{{reservation.dateFrom | date:'medium'}}</td>
+          <td>{{reservation.dateUntil | date:'medium'}}</td>
+          <td>{{reservation.total | currency}}</td>
+          <td>
+            <p-inputSwitch [(ngModel)]="reservation.seen" (onChange)="switchSeen($event, reservation.id)" [disabled]="reservation.seen"></p-inputSwitch>
+          </td>
+          <td>
+            <p-inputSwitch [(ngModel)]="reservation.approved" (onChange)="switchApproved($event, reservation.id)" [disabled]="reservation.approved || !reservation.seen"></p-inputSwitch>
+          </td>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+        <td colspan="10"><span jhiTranslate="transactions.no-reservations">No reservation found.</span></td>
+    </tr>
+</ng-template>
+</p-table>

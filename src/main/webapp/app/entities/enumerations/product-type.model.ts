@@ -1,0 +1,15 @@
+export enum ProductType {
+  REAL_ESTATE = 'REAL_ESTATE',
+
+  FOOD = 'FOOD',
+
+  DRINK = 'DRINK',
+
+  MUSIC = 'MUSIC',
+
+  LIGHTSHOW = 'LIGHTSHOW',
+
+  DECORATION = 'DECORATION',
+
+  MISCELLANEOUS = 'MISCELLANEOUS',
+}

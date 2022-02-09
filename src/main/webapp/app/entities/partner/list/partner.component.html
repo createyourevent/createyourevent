@@ -1,0 +1,131 @@
+<div>
+  <h2 id="page-heading" data-cy="PartnerHeading">
+    <span jhiTranslate="createyoureventApp.partner.home.title">Partners</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="createyoureventApp.partner.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-partner"
+        [routerLink]="['/partner/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="createyoureventApp.partner.home.createLabel"> Create a new Partner </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="partners?.length === 0">
+    <span jhiTranslate="createyoureventApp.partner.home.notFound">No partners found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="partners && partners.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="name">
+            <span jhiTranslate="createyoureventApp.partner.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="address">
+            <span jhiTranslate="createyoureventApp.partner.address">Address</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="phone">
+            <span jhiTranslate="createyoureventApp.partner.phone">Phone</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="logo">
+            <span jhiTranslate="createyoureventApp.partner.logo">Logo</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="mail">
+            <span jhiTranslate="createyoureventApp.partner.mail">Mail</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="webaddress">
+            <span jhiTranslate="createyoureventApp.partner.webaddress">Webaddress</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="sponsorshipAmount">
+            <span jhiTranslate="createyoureventApp.partner.sponsorshipAmount">Sponsorship Amount</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="active">
+            <span jhiTranslate="createyoureventApp.partner.active">Active</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let partner of partners; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/partner', partner.id, 'view']">{{ partner.id }}</a>
+          </td>
+          <td>{{ partner.name }}</td>
+          <td>{{ partner.address }}</td>
+          <td>{{ partner.phone }}</td>
+          <td>
+            <a *ngIf="partner.logo" (click)="openFile(partner.logo, partner.logoContentType)">
+              <img [src]="'data:' + partner.logoContentType + ';base64,' + partner.logo" style="max-height: 30px" alt="partner image" />
+            </a>
+            <span *ngIf="partner.logo">{{ partner.logoContentType }}, {{ byteSize(partner.logo) }}</span>
+          </td>
+          <td>{{ partner.mail }}</td>
+          <td>{{ partner.webaddress }}</td>
+          <td>{{ partner.sponsorshipAmount }}</td>
+          <td>{{ partner.active }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/partner', partner.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/partner', partner.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(partner)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="partners && partners.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

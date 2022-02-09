@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="chipsCollectionChips">
+      <h2 data-cy="chipsCollectionChipsDetailsHeading">
+        <span jhiTranslate="createyoureventApp.chipsCollectionChips.detail.title">Chips Collection Chips</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ chipsCollectionChips.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.chipsCollectionChips.chipsCollection">Chips Collection</span></dt>
+        <dd>
+          <div *ngIf="chipsCollectionChips.chipsCollection">
+            <a [routerLink]="['/chips-collection', chipsCollectionChips.chipsCollection?.id, 'view']">{{
+              chipsCollectionChips.chipsCollection?.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.chipsCollectionChips.chips">Chips</span></dt>
+        <dd>
+          <div *ngIf="chipsCollectionChips.chips">
+            <a [routerLink]="['/chips', chipsCollectionChips.chips?.id, 'view']">{{ chipsCollectionChips.chips?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/chips-collection-chips', chipsCollectionChips.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

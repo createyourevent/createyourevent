@@ -1,0 +1,7 @@
+{
+  "create-service": {
+    "title": "Register service",
+    "messages.success": "Service successfully registered. We will activate the service after our own control.",
+    "messages.error.fail": "The registration of your service could not be carried out. Please try again later"
+  }
+}

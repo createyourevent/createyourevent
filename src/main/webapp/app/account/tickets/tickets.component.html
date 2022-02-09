@@ -1,0 +1,133 @@
+<p-tabView>
+  <p-tabPanel header="{{ 'tickets.unpaid-tickets' | translate }}">
+      <ng-container *ngIf="reservationsNotBilled === null || reservationsNotBilled.length === 0">
+        <div class="alert alert-info" role="alert">
+          <span jhiTranslate="tickets.no-unpaid-tickets">No upaid tickets</span>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="reservationsNotBilled !== null && reservationsNotBilled.length > 0">
+      <div class="container_ticket">
+       <div class="ticket-container" *ngFor="let reservation of reservationsNotBilled">
+        <widget type="ticket">
+          <div class="top">
+             <div class="eventname">{{ reservation.event.name }}</div>
+             <img src="../../../content/images/dance_ticket.png" alt="" />
+             <div class="deetz">
+              <div class="row">
+                <div class="col-md-3">
+                  <span jhiTranslate="tickets.date" class="bold">Date</span>
+                </div>
+                <div class="col-md-9">
+                  {{ reservation.event.dateStart | date: 'medium' }} - {{ reservation.event.dateEnd | date: 'medium' }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <span jhiTranslate="tickets.price" class="bold">Price</span>
+                </div>
+                <div class="col-md-9">
+                  {{ reservation.event.price | currency }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <span jhiTranslate="tickets.location" class="bold">Location</span>
+                </div>
+                <div class="col-md-9">
+                  {{ reservation.event.location.name }}
+                </div>
+              </div>
+              <hr/>
+              <div class="row">
+                <div class="col-md-3">
+                  <span jhiTranslate="tickets.name" class="bold">Name</span>
+                </div>
+                <div class="col-md-9">
+                  {{ reservation.user.firstName }} {{reservation.user.lastName}}
+                </div>
+              </div>
+             </div>
+          </div>
+          <div class="rip"></div>
+          <div class="bottom">
+            <button pButton pRipple type="button" label="{{ 'tickets.pay-ticket' | translate }}" icon="pi pi-star" style="font-size: 2rem"  class="p-button-rounded p-button-info" (click)="pay(reservation.id)"></button>
+        </div>
+       </widget>
+       </div>
+       <div class="clear"></div>
+      </div>
+    </ng-container>
+  </p-tabPanel>
+  <p-tabPanel header="{{ 'tickets.paid-tickets' | translate }}">
+
+    <ng-container *ngIf="reservationsBilled === null || reservationsBilled.length === 0">
+      <div class="alert alert-info" role="alert">
+        <span jhiTranslate="tickets.no-paid-tickets">No upaid tickets</span>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="reservationsBilled  !== null && reservationsBilled.length > 0">
+      <div class="container_ticket">
+      <div class="ticket-container" *ngFor="let reservation of reservationsBilled">
+      <widget type="ticket">
+        <div class="number-of-tickets">
+          <span jhiTranslate="tickets.count">Number of tickets:</span> {{ reservation.ticket.amount }}
+        </div>
+        <div class="top">
+           <div class="eventname">{{ reservation.event.name }}</div>
+           <img src="../../../content/images/dance_ticket.png" alt="" />
+           <div class="deetz">
+            <div class="row">
+              <div class="col-md-3">
+                <span jhiTranslate="tickets.date" class="bold">Date</span>
+              </div>
+              <div class="col-md-9">
+                {{ reservation.event.dateStart | date: 'medium' }} - {{ reservation.event.dateEnd | date: 'medium' }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <span jhiTranslate="tickets.price" class="bold">Price</span>
+              </div>
+              <div class="col-md-9">
+                {{ reservation.event.price | currency }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <span jhiTranslate="tickets.location" class="bold">Location</span>
+              </div>
+              <div class="col-md-9">
+                {{ reservation.event.location.name }}
+              </div>
+            </div>
+            <hr/>
+            <div class="row">
+              <div class="col-md-3">
+                <span jhiTranslate="tickets.name" class="bold">Name</span>
+              </div>
+              <div class="col-md-9">
+                {{ reservation.user.firstName }} {{reservation.user.lastName}}
+              </div>
+            </div>
+           </div>
+        </div>
+        <div class="rip"></div>
+        <div class="bottom">
+        <div class="row">
+          <div class="col-md-12">
+            <button id="view-reservation" class="btn btn-primary" [routerLink]="['/organisator/guest-reservation', reservation.id, 'view']">
+              <fa-icon icon="plus"></fa-icon>
+              <span  jhiTranslate="tickets.view-ticket">
+              View ticket
+              </span>
+          </button>
+          </div>
+        </div>
+      </div>
+     </widget>
+     </div>
+     <div class="clear"></div>
+    </div>
+    </ng-container>
+  </p-tabPanel>
+</p-tabView>

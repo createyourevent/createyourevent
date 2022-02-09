@@ -1,0 +1,58 @@
+<div class="container text-center">
+
+    <button class="add-button" mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary"><span jhiTranslate="offer.add-offer">Add offer</span></button>
+
+    <table mat-table [dataSource]="worksheets" #mytable class="my-table mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef><span jhiTranslate="offer.description">Description</span></th>
+        <td mat-cell *matCellDef="let element"> {{ element.description }} </td>
+    </ng-container>
+x
+    <!-- Start Column -->
+    <ng-container matColumnDef="start">
+        <th mat-header-cell *matHeaderCellDef><span jhiTranslate="offer.start">Start</span></th>
+        <td mat-cell *matCellDef="let element"> {{ element.start | date: 'medium' }} </td>
+    </ng-container>
+
+    <!-- End Column -->
+    <ng-container matColumnDef="end">
+        <th mat-header-cell *matHeaderCellDef><span jhiTranslate="offer.end">End</span></th>
+        <td mat-cell *matCellDef="let element"> {{ element.end | date: 'medium' }} </td>
+    </ng-container>
+
+    <!-- Cost per hour Column -->
+    <ng-container matColumnDef="costHour">
+        <th mat-header-cell *matHeaderCellDef><span jhiTranslate="offer.costHour">Cost's per hour</span></th>
+        <td mat-cell *matCellDef="let element"> {{ element.costHour | currency }} </td>
+    </ng-container>
+
+    <!-- Total cost's Column -->
+    <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef><span jhiTranslate="offer.total">Total cost's</span></th>
+        <td mat-cell *matCellDef="let element"> {{ element.total | currency }} </td>
+    </ng-container>
+
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef><span jhiTranslate="offer.action">Action</span></th>
+        <td mat-cell *matCellDef="let element" class="action-link">
+          <a (click)="openDialog('Update',element)" class="btn btn-primary" role="button"><span jhiTranslate="offer.edit">Edit</span></a>
+          <a (click)="openDialog('Delete',element)" class="btn btn-info" role="button"><span jhiTranslate="offer.delete">Delete</span></a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div class="alert alert-info" role="alert">
+        <span class="total-all-offerts" jhiTranslate="offer.total-all-offerts">Total of all offert's:</span><span class="total-all-offerts">{{ getTotalCost() | currency }}</span>
+      </div>
+  </div>

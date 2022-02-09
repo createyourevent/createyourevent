@@ -1,0 +1,7 @@
+{
+  "distance": {
+    "title": "Max. Distanz der Event's zum Standpunkt",
+    "info": "Below you can use the switch to specify which events you want to be displayed in which area.",
+    "distance": "Distance: "
+  }
+}

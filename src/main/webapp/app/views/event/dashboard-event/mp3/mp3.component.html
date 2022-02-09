@@ -1,0 +1,13 @@
+<span jhiTranslate="admin-dashboard-supplier.mp3">MP3</span>
+<jhi-mp3-player-admin [jhiEvent]="jhiEvent" [user]="user" url="/api/music/{{jhiEvent.id}}/{{user.id}}/event"></jhi-mp3-player-admin>
+
+<div class="row">
+    <div class="col-md-12">
+        <hr/>
+        <div class="btn-cancel">
+            <button type="button" id="cancel-save" class="btn btn-secondary btn-cancel" (click)="previousState()">
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+          </button>
+        </div>
+    </div>
+</div>

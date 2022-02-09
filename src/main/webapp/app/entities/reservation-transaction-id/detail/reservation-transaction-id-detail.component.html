@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="reservationTransactionId">
+      <h2 data-cy="reservationTransactionIdDetailsHeading">
+        <span jhiTranslate="createyoureventApp.reservationTransactionId.detail.title">Reservation Transaction Id</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ reservationTransactionId.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.reservationTransactionId.transactionDepositId">Transaction Deposit Id</span></dt>
+        <dd>
+          <span>{{ reservationTransactionId.transactionDepositId }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.reservationTransactionId.transactionId">Transaction Id</span></dt>
+        <dd>
+          <span>{{ reservationTransactionId.transactionId }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/reservation-transaction-id', reservationTransactionId.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

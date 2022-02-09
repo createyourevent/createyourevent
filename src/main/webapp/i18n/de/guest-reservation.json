@@ -1,0 +1,30 @@
+{
+  "guest-reservation": {
+    "reservation": "Reservationen",
+    "title": "Reservationen",
+    "firstname": "Vorname",
+    "lastname": "Nachname",
+    "email": "Email",
+    "title-event": "Reservationen für den Event ",
+    "info": "Unten sehen Sie alle Reservationen für diesen Event.",
+    "view": "Ansicht",
+    "edit": "Aktualisieren",
+    "delete": "Löschen",
+    "name": "Name",
+    "address": "Adresse",
+    "phone": "Telefon",
+    "ticket_for": "Ticket für",
+    "pdf": "Download PDF Ticket",
+    "location-name": "Lokalitätenname",
+    "dateStart": "Startdatum",
+    "dateEnd": "Enddatum",
+    "category": "Kategorie",
+    "price": "Preis",
+    "tickets": "Tickets",
+    "success-mail": "Ticket gesendet",
+    "success-mail-info": "Ticket wurde erfolgreich an die Mailadresse gesendet.",
+    "error-mail": "Ticket senden fehlgeschlagen",
+    "error-mail-info": "Ticket wurde nicht erfolgreich an die Mailadresse gesendet.",
+    "mail-wrong": "Mail nicht valid."
+  }
+}

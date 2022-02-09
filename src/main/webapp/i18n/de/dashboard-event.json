@@ -1,0 +1,23 @@
+{
+  "dashboard-event": {
+    "calculation": "Berechnungen",
+    "comments-feedback": "Kommentare und Feedback",
+    "dashboard": "Dashboard",
+    "ratings": "Bewertungen (Rating's)",
+    "workflow": "Workflow Event",
+    "gallery-admin": "Administration Gallery",
+    "create-an-event": "Sie müssen zuerst einen Event erstellen.",
+    "ratings-title": "Administration Ratings von dem Event",
+    "ratings-info": "Unten sehen Sie welche User bei diesem Event geliked und welche disliked haben. So können Sie mit den Angezeigten Benutzern in Iteraktion treten, wesshalb derjenige zum Beispiel ein Dislike gegeben hat. So können Sie diesen noch versuchen, umzustimmen falls Sie den Event noch anpassen.",
+    "calculation-title": "Kalkulations- und Bilanzzahlen",
+    "calculation-info": "Unten können Sie die wichtigsten Kennzahlen zu diesem Event auf einer View betrachten. Anhand dieser können Sie schnell erkennen, ob sich dieser Event für Sie lohnt, wenn er ausgeführt wird. ",
+    "comments-feedback-title": "Kommentare und Feedbacks zu diesem Event und dessen Produkten",
+    "comments-feedback-info": "Unten finden Sie alle Kommentare und Feedbacks zu diesem Event zusammengefasst auf dieser Seite. Anhand dieser können Sie diesen Event das nächste mal besser machen oder aber diesen Event noch optimieren mit Ihren Lieferanten und Gästen zusammen. So kommen an diesem Anlass hoffentlich alle auf Ihren Genuss. ",
+    "star-ratings-title": "Stern- und Herzbewertung",
+    "star-ratings-info": "Unten finden Sie alle Bewertungen bezüglich den Star-Bewertungen  und der daraus resultierenden Herzbewertung. ",
+    "dashboard-for-event": "Dashboard für den Event",
+    "mp3-admin": "MP3",
+    "favorits": "In Favoriten"
+
+  }
+}

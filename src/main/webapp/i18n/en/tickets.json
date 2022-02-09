@@ -1,0 +1,25 @@
+{
+    "tickets": {
+        "unpaid-tickets": "Unpaid tickets",
+        "paid-tickets": "Paid tickets",
+        "info-buy-ticket": "Please pay the ticket 7 days befor",
+        "cc-owner": "Creditcard owner",
+        "pay": "Pay ticket",
+        "view-ticket": "View ticket",
+        "no-unpaid-tickets": "No upaid tickets",
+        "no-paid-tickets": "No paids tickets",
+        "date": "Date",
+        "price": "Price",
+        "location": "Location",
+        "name": "Name",
+        "cc-form.error": "Mistake in credit-card",
+        "cc-form.error.info": "Mistake in credit-card. Please check your credit-card details.",
+        "payment-successfull": "Payment successfull",
+        "payment-successfull.info": "The payment for this ticket was successfully. Thank you.",
+        "pay-ticket": "Pay ticket",
+        "count": "Number of tickets:",
+        "send-mail-title": "Send the ticket as an email to a friend",
+        "send-mail-info": "Below you can send this ticket to a friend or acquaintance. The ticket is valid as many times as you have ordered tickets for it. For example, if you have bought 5 tickets, you can validate this ticket 5 times at the event until it is no longer valid. \n Please note that if you have bought 3 tickets, for example, you will only send one to the specified email address. That would mean that if you send this mail to someone else, they will simply receive a copy of the three. If you now want to deliver them all, you have to repeat this step 3 times.",
+        "send-ticket": "Send ticket to mail"
+      }
+}

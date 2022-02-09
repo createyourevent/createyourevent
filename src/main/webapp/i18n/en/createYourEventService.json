@@ -1,0 +1,38 @@
+{
+  "createyoureventApp": {
+    "createYourEventService": {
+      "home": {
+        "title": "Create Your Event Services",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Create Your Event Service",
+        "createOrEditLabel": "Create or edit a Create Your Event Service",
+        "notFound": "No Create Your Event Services found"
+      },
+      "created": "A new Create Your Event Service is created with identifier {{ param }}",
+      "updated": "A Create Your Event Service is updated with identifier {{ param }}",
+      "deleted": "A Create Your Event Service is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Create Your Event Service {{ id }}?"
+      },
+      "detail": {
+        "title": "Create Your Event Service"
+      },
+      "id": "ID",
+      "name": "Name",
+      "logo": "Logo",
+      "active": "Active",
+      "activeOwner": "Active Owner",
+      "description": "Description",
+      "address": "Address",
+      "motto": "Motto",
+      "phone": "Phone",
+      "webAddress": "Web Address",
+      "category": "Category",
+      "serviceMaps": "Service Maps",
+      "images": "Images",
+      "mp3s": "Mp 3 S",
+      "user": "User",
+      "tags": "Tags"
+    }
+  }
+}

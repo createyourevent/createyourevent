@@ -1,0 +1,9 @@
+{
+  "countdown": {
+    "days": "days",
+    "hours": "hours",
+    "minutes": "minutes",
+    "seconds": "seconds",
+    "text": "This event starts in:"
+  }
+}

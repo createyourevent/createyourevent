@@ -1,0 +1,36 @@
+<h1 jhiTranslate="chips-overview.overview-chips">Overview for the "Find the chip"-Game</h1>
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vT1cTBX39xbDdsOr7EObYwCN5rEXC6g5PP1IPQYSoGzDE9utDLwnNIi4WliwO75YcV52wJVf57NKmLF/pub?w=960&amp;h=540">
+
+<div class="alert alert-info" role="alert">
+    <p>
+        <span class="font-weight"><span class="point-font point-chips" jhiTranslate="chips-overview.how-many-points">In this round you could find maximum points:</span> {{ totalPoints }} <span class="point-font" jhiTranslate="chips-overview.points"></span></span>
+    </p>
+    <p>
+        <span class="font-weight"><span class="point-font point-chips" jhiTranslate="chips-overview.how-many-coins">In this round you must find:</span> {{ totalCoins}} <span class="point-font" jhiTranslate="chips-overview.coins"></span></span>
+    </p>
+</div>
+<hr/>
+
+<h2 jhiTranslate="chips-overview.founded-chips">Founded chips</h2>
+
+<ng-container *ngIf="allChips.length === foundedChips.length">
+  <hr/>
+    <div class="alert alert-success" role="alert">
+        <span class="point-font" jhiTranslate="chips-overview.all-chips-found">Congratulations. All chips founded.</span>
+     </div>
+  <hr/>
+</ng-container>
+
+<ng-container *ngFor="let chips of foundedChips">
+ <div>
+    <p-card header="{{ chips.website }}" class="point-card">
+        <div class="point-container container_chip">
+            <img class="chip_img" [src]="'data:' + chips.imageContentType + ';base64,' + chips.image" />
+            <div [style]="'color: ' + chips.color + ';'" class="centered">{{ chips.points }}</div>
+        </div>
+    </p-card>
+ </div>
+</ng-container>
+<div class="clear"></div>
+

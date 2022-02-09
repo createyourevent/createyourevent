@@ -1,0 +1,28 @@
+{
+  "createyoureventApp": {
+    "shopStarRating": {
+      "home": {
+        "title": "Shop Star Ratings",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Shop Star Rating erstellen",
+        "createOrEditLabel": "Shop Star Rating erstellen oder bearbeiten",
+        "notFound": "Keine Shop Star Ratings gefunden"
+      },
+      "created": "Shop Star Rating erstellt mit ID {{ param }}",
+      "updated": "Shop Star Rating aktualisiert mit ID {{ param }}",
+      "deleted": "Shop Star Rating gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Shop Star Rating {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Shop Star Rating"
+      },
+      "id": "ID",
+      "stars": "Stars",
+      "date": "Date",
+      "comment": "Comment",
+      "shop": "Shop",
+      "user": "User"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "createyoureventApp": {
+    "reservationTransactionId": {
+      "home": {
+        "title": "Reservation Transaction Ids",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Reservation Transaction Id",
+        "createOrEditLabel": "Create or edit a Reservation Transaction Id",
+        "notFound": "No Reservation Transaction Ids found"
+      },
+      "created": "A new Reservation Transaction Id is created with identifier {{ param }}",
+      "updated": "A Reservation Transaction Id is updated with identifier {{ param }}",
+      "deleted": "A Reservation Transaction Id is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Reservation Transaction Id {{ id }}?"
+      },
+      "detail": {
+        "title": "Reservation Transaction Id"
+      },
+      "id": "ID",
+      "transactionDepositId": "Transaction Deposit Id",
+      "transactionId": "Transaction Id",
+      "reservation": "Reservation"
+    }
+  }
+}

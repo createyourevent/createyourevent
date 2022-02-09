@@ -1,0 +1,29 @@
+{
+  "createyoureventApp": {
+    "serviceLikeDislike": {
+      "home": {
+        "title": "Service Like Dislikes",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Service Like Dislike erstellen",
+        "createOrEditLabel": "Service Like Dislike erstellen oder bearbeiten",
+        "notFound": "Keine Service Like Dislikes gefunden"
+      },
+      "created": "Service Like Dislike erstellt mit ID {{ param }}",
+      "updated": "Service Like Dislike aktualisiert mit ID {{ param }}",
+      "deleted": "Service Like Dislike gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Service Like Dislike {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Service Like Dislike"
+      },
+      "id": "ID",
+      "like": "Like",
+      "dislike": "Dislike",
+      "date": "Date",
+      "comment": "Comment",
+      "createYourEventService": "Create Your Event Service",
+      "user": "User"
+    }
+  }
+}

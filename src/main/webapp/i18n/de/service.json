@@ -1,0 +1,21 @@
+{
+  "createyoureventApp": {
+    "service": {
+      "home": {
+        "title": "Services",
+        "createLabel": "Service erstellen",
+        "createOrEditLabel": "Service erstellen oder bearbeiten",
+        "notFound": "No Services found"
+      },
+      "created": "Service erstellt mit ID {{ param }}",
+      "updated": "Service aktualisiert mit ID {{ param }}",
+      "deleted": "Service gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Service {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Service"
+      }
+    }
+  }
+}

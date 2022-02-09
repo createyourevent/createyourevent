@@ -1,0 +1,28 @@
+{
+  "createyoureventApp": {
+    "productStarRating": {
+      "home": {
+        "title": "Product Star Ratings",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Product Star Rating erstellen",
+        "createOrEditLabel": "Product Star Rating erstellen oder bearbeiten",
+        "notFound": "Keine Product Star Ratings gefunden"
+      },
+      "created": "Product Star Rating erstellt mit ID {{ param }}",
+      "updated": "Product Star Rating aktualisiert mit ID {{ param }}",
+      "deleted": "Product Star Rating gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Product Star Rating {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Product Star Rating"
+      },
+      "id": "ID",
+      "stars": "Stars",
+      "date": "Date",
+      "comment": "Comment",
+      "product": "Product",
+      "user": "User"
+    }
+  }
+}

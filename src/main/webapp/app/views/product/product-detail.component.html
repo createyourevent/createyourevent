@@ -1,0 +1,198 @@
+<mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span jhiTranslate="product-detail.detail">Detail's</span>
+      </ng-template>
+
+
+      <div class="container-fluid">
+        <div class="row box_green">
+            <div class="col-md-8">
+                <h1><span class="title">{{ product.title }}</span></h1>
+                <h2><span>{{ product.motto }}</span></h2>
+            </div>
+            <div class="col-md-4">
+                <ngb-carousel *ngIf="imagesUrl">
+                    <ng-template ngbSlide>
+                      <div class="picsum-img-wrapper" [style]="'background-color: ' + color">
+                        <a (click)="openFile(product?.photoContentType!, product?.photo)">
+                         <img [src]="imagesUrl[0]" alt="Product" style="max-width: 250px;">
+                        </a>
+                      </div>
+                    </ng-template>
+                   <ng-container *ngIf="imagesUrl[1] != null">
+                    <ng-template ngbSlide>
+                      <div class="picsum-img-wrapper" [style]="'background-color: ' + color">
+                        <a (click)="openFile(product?.photo2ContentType!, product?.photo2)">
+                         <img [src]="imagesUrl[1]" alt="Product 2" style="max-width: 250px;">
+                        </a>
+                      </div>
+                    </ng-template>
+                   </ng-container>
+                   <ng-container *ngIf="imagesUrl[2] != null">
+                    <ng-template ngbSlide>
+                      <div class="picsum-img-wrapper" [style]="'background-color: ' + color">
+                        <a (click)="openFile(product?.photo3ContentType!, product?.photo3)">
+                            <img [src]="imagesUrl[2]" alt="Product 3" style="max-width: 250px;">
+                        </a>
+                      </div>
+                    </ng-template>
+                   </ng-container>
+                  </ngb-carousel>
+            </div>
+        </div>
+
+
+
+
+        <div class="row box">
+            <div class="col-md-4">
+
+                <div class="star_big">
+                    <jhi-price-type [product]="product"></jhi-price-type>
+                    <dl class="row-md jh-entity-details price">
+                        <dt><span jhiTranslate="product-detail.price">Price</span></dt>
+                        <dd>
+                            <span>{{ product.price | currency }} / {{ product.amount }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</span>
+                        </dd>
+                    </dl>
+              </div>
+
+            </div>
+            <div class="col-md-8">
+                <div class="bold larger text-center" jhiTranslate="product-detail.delivery-methods">Delivery types</div>
+                    <div class="row border">
+                        <div class="col-md-3 bold" jhiTranslate="product-detail.delivery-method">
+                            Delivery method
+                        </div>
+                        <div class="col-md-4 bold" jhiTranslate="product-detail.min-order-quantity">
+                            Minimum order quantity
+                        </div>
+                        <div class="col-md-2 bold" jhiTranslate="product-detail.price">
+                            Costs
+                        </div>
+                        <div class="col-md-3 bold" jhiTranslate="product-detail.price-per-kilometre">
+                            Costs per kilometre
+                        </div>
+                    </div>
+                    <ng-container *ngFor="let deliveryMethod of deliveryMethods">
+                        <div class="row border">
+                            <div class="col-md-3">
+                                <span jhiTranslate="{{ 'createyoureventApp.DeliveryTypes.' + deliveryMethod.deliveryType }}">{{ deliveryMethod.deliveryType }}</span>
+                            </div>
+                            <div class="col-md-4">
+                                {{ deliveryMethod.minimumOrderQuantity }}
+                            </div>
+                            <div class="col-md-2">
+                                {{ deliveryMethod.price | currency}}
+                            </div>
+                            <div class="col-md-3">
+                                {{ deliveryMethod.pricePerKilometre | currency}}
+                            </div>
+                        </div>
+                    </ng-container>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row box">
+                    <div class="col-md-12">
+                        <div class="ql-snow">
+                            <div class="ql-editor">
+                                <div [innerHTML]="product.description | safeHtml"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row box">
+                    <div class="col-md-12">
+
+                        <dl class="row-md jh-entity-details">
+                            <dt><h2 jhiTranslate="product-detail.company">Company</h2></dt>
+                            <dd>
+                                <a (click)="gotoShop(product.shop.id)">
+                                    <h3>{{ product.shop.name }}</h3>
+                                </a>
+                            </dd>
+                        </dl>
+                        <dd>
+                            <a (click)="gotoShop(product.shop.id)">
+                                <img class="img-thumbnail" [src]="'data:' + product.shop.logoContentType + ';base64,' + product.shop.logo" style="max-width: 100%;" alt="shop image"/>
+                            </a>
+                        </dd>
+                        <dd>
+                            <a (click)="gotoShop(product.shop.id)">
+                                <span>{{ product.shop.webAddress }}</span>
+                            </a>
+                        </dd>
+                    </div>
+                </div>
+                <ng-container *jhiHasAnyAuthority="'ROLE_USER'">
+                  <hr/>
+                  <jhi-add-product-to-event></jhi-add-product-to-event>
+                </ng-container>
+                <hr/>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    <ng-container *ngIf="product.youtube !== null && product.youtube !== ''">
+                        <div class="box margin-auto">
+                            <youtube-player videoId="{{ product.youtube }}"></youtube-player>
+                        </div>
+                    </ng-container>
+                </p>
+            </div>
+        </div>
+    </div>
+    </mat-tab>
+
+            <ng-container *ngIf="images?.length > 0">
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <span jhiTranslate="product-detail.gallery">Gallery</span>
+                    </ng-template>
+                    <jhi-gallery-product [images]="images"></jhi-gallery-product>
+                </mat-tab>
+            </ng-container>
+
+                <ng-container *ngIf="mp3s.length > 0">
+                  <mat-tab>
+                      <ng-template mat-tab-label>
+                          <span jhiTranslate="create-your-event-service-detail.mp3-player">MP3 player</span>
+                      </ng-template>
+                      <jhi-mp3-player [user]="user" [product]="product" [mp3s]="mp3s"></jhi-mp3-player>
+                  </mat-tab>
+              </ng-container>
+            </mat-tab-group>
+
+            <ng-container *jhiHasAnyAuthority="'ROLE_USER'">
+                <hr/>
+                    <jhi-like-dislike [like]="like" [dislike]="dislike" [disabled]="rated" (liked)="onVoted($event)"></jhi-like-dislike>
+                    <jhi-star-rating [val]="stars" (rated)="onChangesStars($event)" [disabled]="ratedStars"></jhi-star-rating>
+                <hr/>
+            </ng-container>
+
+            <jhi-cross-selling [product]="product"></jhi-cross-selling>>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+            <hr/>
+            <ng-container *jhiHasAnyAuthority="'ROLE_USER'">
+                <jhi-comment-box [comments]="comments" (comment)="onCommented($event)" (answer)="onAnswered($event)"></jhi-comment-box>
+            </ng-container>

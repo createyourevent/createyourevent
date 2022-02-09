@@ -1,0 +1,11 @@
+{
+  "createyoureventApp": {
+    "OrganizationType": {
+      "null": "",
+      "RESTAURANT": "RESTAURANT",
+      "HOTEL": "HOTEL",
+      "CLUB": "CLUB",
+      "BUILDING": "BUILDING"
+    }
+  }
+}

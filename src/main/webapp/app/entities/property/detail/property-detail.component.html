@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="property">
+      <h2 data-cy="propertyDetailsHeading"><span jhiTranslate="createyoureventApp.property.detail.title">Property</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ property.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.property.key">Key</span></dt>
+        <dd>
+          <span>{{ property.key }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.property.value">Value</span></dt>
+        <dd>
+          <span>{{ property.value }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/property', property.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

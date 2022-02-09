@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="eventProductRatingComment">
+      <h2 data-cy="eventProductRatingCommentDetailsHeading">
+        <span jhiTranslate="createyoureventApp.eventProductRatingComment.detail.title">Event Product Rating Comment</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ eventProductRatingComment.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductRatingComment.comment">Comment</span></dt>
+        <dd>
+          <span>{{ eventProductRatingComment.comment }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductRatingComment.date">Date</span></dt>
+        <dd>
+          <span>{{ eventProductRatingComment.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductRatingComment.user">User</span></dt>
+        <dd>
+          <span>{{ eventProductRatingComment.user?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductRatingComment.event">Event</span></dt>
+        <dd>
+          <div *ngIf="eventProductRatingComment.event">
+            <a [routerLink]="['/event', eventProductRatingComment.event?.id, 'view']">{{ eventProductRatingComment.event?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.eventProductRatingComment.product">Product</span></dt>
+        <dd>
+          <div *ngIf="eventProductRatingComment.product">
+            <a [routerLink]="['/product', eventProductRatingComment.product?.id, 'view']">{{ eventProductRatingComment.product?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/event-product-rating-comment', eventProductRatingComment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<p-galleria [(value)]="images" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '800px'}" [numVisible]="7">
+    <ng-template pTemplate="item" let-item>
+        <img [src]="'data:' + item.imageContentType + ';base64,' + item.image" style="width: 100%; display: block;"/>
+    </ng-template>
+    <ng-template pTemplate="thumbnail" let-item>
+        <div class="p-grid p-nogutter p-justify-center">
+            <img [src]="'data:' + item.imageContentType + ';base64,' + item.image" style="max-width: 80px; display: block;"/>
+        </div>
+    </ng-template>
+</p-galleria>

@@ -1,0 +1,28 @@
+{
+  "name": "ChipsCollectionChips",
+  "fields": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "chipsCollection",
+      "otherEntityRelationshipName": "chipsCollectionChips",
+      "relationshipName": "chipsCollection"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "chips",
+      "otherEntityRelationshipName": "chipsCollectionChips",
+      "relationshipName": "chips"
+    }
+  ],
+  "entityTableName": "chips_collection_chips",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211025022239"
+}

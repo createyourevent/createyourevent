@@ -1,0 +1,28 @@
+{
+  "overview": {
+    "name": "Name",
+    "description": "Description",
+    "date-start": "Start date",
+    "start-time": "Start time",
+    "date-end": "Date end",
+    "end-time": "End time",
+    "location": "Location",
+    "address": "Address",
+    "food": "Food item's",
+    "drink": "Drink item's",
+    "real-estate": "Real Estate item's",
+    "music": "Music item's",
+    "lightshow": "Lightshow item's",
+    "decoration": "Decoration item's",
+    "shuttleservice": "Shuttleservice item's",
+    "view-product": "View product",
+    "description_location": "Description location",
+    "messages.success": "Registration event saved! After successfully checking your details, we will activate the event. You will find it then on your dashboard.",
+    "messages.error": "Registration failed! Please try again later.",
+    "services": "Services",
+    "products": "Products",
+    "workCosts": "Workcosts",
+    "rideCosts": "Ridecosts",
+    "totalService": "Total"
+  }
+}

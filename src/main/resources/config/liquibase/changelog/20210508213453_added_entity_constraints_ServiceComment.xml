@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity ServiceComment.
+    -->
+    <changeSet id="20210508213453-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="create_your_event_service_id"
+                                 baseTableName="service_comment"
+                                 constraintName="fk_service_comment__create_your_event_service_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="create_your_event_service"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="service_comment"
+                                 constraintName="fk_service_comment__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="service_comment_id"
+                                 baseTableName="service_comment"
+                                 constraintName="fk_service_comment__service_comment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="service_comment"/>
+    </changeSet>
+</databaseChangeLog>

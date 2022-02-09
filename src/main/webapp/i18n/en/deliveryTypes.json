@@ -1,0 +1,10 @@
+{
+  "createyoureventApp": {
+    "DeliveryTypes": {
+      "null": "",
+      "PICKUP": "PICKUP",
+      "DELIVERY": "DELIVERY",
+      "SHIPPING": "SHIPPING"
+    }
+  }
+}

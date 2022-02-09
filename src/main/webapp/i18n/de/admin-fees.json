@@ -1,0 +1,8 @@
+{
+  "admin-fees": {
+    "fees_organizer": "Organisator Gebühren",
+    "fees_supplier": "Lieferant Gebühren",
+    "fees_service": "Dienstleistung Gebühren",
+    "fees_organization": "Organisation Gebühren"
+  }
+}

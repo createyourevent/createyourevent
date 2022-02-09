@@ -1,0 +1,17 @@
+{
+  "create-organization": {
+    "organization-type": "Organisationstyp",
+    "name": "Name",
+    "menu": "Menukarte",
+    "placesToSleep": "Anzahl Betten",
+    "priceCard": "Preiskarte",
+    "address": "Adresse",
+    "motto": "Leitsatz",
+    "phone": "Telefon",
+    "webAddress": "Webadresse",
+    "placeNumber": "Anzahl Plätze",
+    "price": "Mietpreis",
+    "rentType": "Mietart",
+    "description": "Beschreibung"
+  }
+}

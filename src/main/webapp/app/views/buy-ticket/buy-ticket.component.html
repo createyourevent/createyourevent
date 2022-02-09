@@ -1,0 +1,14 @@
+<p-toast></p-toast>
+<h1><span jhiTranslate="buy-ticket.title">Buy tickets for</span> {{ jhiEvent.name }}</h1>
+
+<p jhiTranslate="buy-ticket.info">
+  Please insert how many tickets you will buy and press submit.
+</p>
+
+<div class="p-formgroup-inline">
+  <div class="p-field">
+      <label for="amount" class="p-sr-only">Amount</label>
+      <input (change)="changeAmount($event.target.value)" id="amount" [(ngModel)]="amount" type="number" pInputText>
+  </div>
+  <button pButton type="button" (click)="openPayment()" label="Buy ticket" [disabled]="!enoughtTickets()"></button>
+</div>

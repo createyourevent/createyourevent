@@ -1,0 +1,17 @@
+{
+  "createyoureventApp": {
+    "ServiceCategory": {
+      "null": "",
+      "SECURITAS": "SECURITAS",
+      "SHUTTLESERVICE": "SHUTTLESERVICE",
+      "SANITARY": "SANITARY",
+      "CLEANINGSERVICE": "CLEANINGSERVICE",
+      "PLUMBER": "PLUMBER",
+      "DISCJOKEY": "DISCJOKEY",
+      "BAND": "BAND",
+      "ELECTRONICSTECHNICIAN": "ELECTRONICSTECHNICIAN",
+      "COMPUTERSCIENTIST": "COMPUTERSCIENTIST",
+      "MISCELLANEOUS": "MISCELLANEOUS"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+    "cashbox": {
+        "total-products": "Total products",
+        "total-services": "Total services",
+        "total": "Total",
+        "pay-cc": "Pay with credit card",
+        "cc-owner": "Credid card owner",
+        "pay": "Pay",
+        "payment-successfull": "Payment successfull",
+        "cc-form.successful.info": "The payment for this event was successfully.",
+        "cc-form.error": "Payment error",
+        "cc-form.error.info": "The payment with creditcard has got an error."
+        
+    }
+}

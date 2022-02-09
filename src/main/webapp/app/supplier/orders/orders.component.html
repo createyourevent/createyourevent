@@ -1,0 +1,135 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+            <h5><span jhiTranslate="orders.title"></span>{{shop.name}}</h5>
+            <p>
+                <span jhiTranslate="orders.info">Info</span>
+            </p>
+            <hr/>
+            <p-tabView>
+                <p-tabPanel header="{{ 'orders.provisionally' | translate }}">
+
+                    <div class="cards" *ngFor="let epo of provisionallySoldProducts">
+                        <mat-card class="order-card">
+                            <mat-card-header>
+                            <mat-card-title><span jhiTranslate="orders.eventproductorder">Eventproductorder:</span> {{epo.id}}</mat-card-title>
+                            </mat-card-header>
+
+                            <mat-card-content>
+                                <dl class="row-md jh-entity-details">
+                                    <dt><span jhiTranslate="orders.productname">Produktname</span></dt>
+                                    <dd>
+                                        <a href="/products/{{epo.product.id}}/view"><span>{{epo.product.title}} </span></a>
+                                    </dd>
+                                    <dt><span jhiTranslate="orders.quantity">Quantity</span></dt>
+                                    <dd>
+                                        <span>{{epo.amount}}</span> {{ "createyoureventApp.Unit." + epo.product.unit  | translate }}
+                                    </dd>
+                                    <hr/>
+                                    <ng-container *ngIf="epo.dateFrom && epo.dateUntil">
+                                        <dt><span jhiTranslate="orders.dateFrom">Date from</span></dt>
+                                        <dd>
+                                            <span>{{epo.dateFrom | date: 'mediumDate'}}</span>
+                                        </dd>
+                                        <hr/>
+                                        <dt><span jhiTranslate="orders.dateUntil">Date until</span></dt>
+                                        <dd>
+                                            <span>{{epo.dateUntil | date: 'mediumDate'}}</span>
+                                        </dd>
+                                        <hr/>
+                                    </ng-container>
+                                    <dt><span jhiTranslate="orders.event">Event</span></dt>
+                                    <dd>
+                                        <a href="/events/{{epo.event.id}}/view"><span>{{ epo.event.name }}</span></a>
+                                    </dd>
+                                    <hr/>
+                                    <dt><span jhiTranslate="orders.customer">Customer</span></dt>
+                                    <dd>
+                                        <a (click)="clickUserName(epo.user)"><span >{{ epo.user.firstName }} {{ epo.user.lastName }}</span></a>
+                                    </dd>
+                                </dl>
+                                <hr/>
+                                <div class="border-box">
+                                    <span jhiTranslate="orders.seen">Seen</span>
+                                    <p-toggleButton (onChange)="seenChange($event, epo.id)" [(ngModel)]="epo.seen" [disabled]="epo.seen" onIcon="pi pi-check" offIcon="pi pi-times"></p-toggleButton>
+                                </div>
+                                <div class="border-box">
+                                    <span jhiTranslate="orders.approved">Approved</span>
+                                    <p-toggleButton (onChange)="approvedChange($event, epo.id)" [(ngModel)]="epo.approved" [disabled]="epo.approved || !epo.seen || clickSeen" onIcon="pi pi-check" offIcon="pi pi-times"></p-toggleButton>
+                                </div>
+                            </mat-card-content>
+                            <mat-card-actions>
+                            </mat-card-actions>
+                      </mat-card>
+                    </div>
+                    <div class="clear"></div>
+                </p-tabPanel>
+                <p-tabPanel header="{{ 'orders.definitely' | translate }}">
+
+                    <div class="cards" *ngFor="let epo of selledProducts">
+                        <mat-card class="order-card">
+                            <mat-card-header>
+                            <mat-card-title><span jhiTranslate="orders.eventproductorder">Eventproductorder:</span> {{epo.id}}</mat-card-title>
+                            </mat-card-header>
+
+                            <mat-card-content>
+                                <dl class="row-md jh-entity-details">
+                                    <dt><span jhiTranslate="orders.productname">Produktname</span></dt>
+                                    <dd>
+                                        <a href="/products/{{epo.product.id}}/view"><span>{{epo.product.title}} </span></a>
+                                    </dd>
+                                    <dt><span jhiTranslate="orders.quantity">Quantity</span></dt>
+                                    <dd>
+                                        <span>{{epo.amount}}</span>
+                                    </dd>
+                                    <hr/>
+                                    <ng-container *ngIf="epo.dateFrom && epo.dateUntil">
+                                        <dt><span jhiTranslate="orders.dateFrom">Date from</span></dt>
+                                        <dd>
+                                            <span>{{epo.dateFrom | date: 'mediumDate'}}</span>
+                                        </dd>
+                                        <hr/>
+                                        <dt><span jhiTranslate="orders.dateUntil">Date until</span></dt>
+                                        <dd>
+                                            <span>{{epo.dateUntil | date: 'mediumDate'}}</span>
+                                        </dd>
+                                        <hr/>
+                                    </ng-container>
+                                    <dt><span jhiTranslate="orders.event">Event</span></dt>
+                                    <dd>
+                                        <a href="/events/{{epo.event.id}}/view"><span>{{ epo.event.name }}</span></a>
+                                    </dd>
+                                    <hr/>
+                                    <dt><span jhiTranslate="orders.customer">Customer</span></dt>
+                                    <dd>
+                                        <span>{{ epo.user.firstName }} {{ epo.user.lastName }}</span>
+                                    </dd>
+                                </dl>
+                            </mat-card-content>
+                            <mat-card-actions>
+                            </mat-card-actions>
+                      </mat-card>
+                    </div>
+                    <div class="clear"></div>
+                </p-tabPanel>
+            </p-tabView>
+
+	  </div>
+    </div>
+    <div class="row">
+		<div class="col-md-12">
+            <hr/>
+            <div class="btn-cancel">
+                <button type="button" id="cancel-save" class="btn btn-secondary btn-cancel" (click)="previousState()">
+                  <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+              </button>
+            </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+		</div>
+		<div class="col-md-6">
+		</div>
+	</div>
+</div>

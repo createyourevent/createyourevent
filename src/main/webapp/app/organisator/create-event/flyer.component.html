@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+
+            <h2 id="jhi-event-heading" jhiTranslate="createyoureventApp.event.home.createOrEditLabel">Create or edit a Event</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <form name="editForm" role="form" novalidate  [formGroup]="editForm">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="createyoureventApp.event.flyer" for="field_flyer">Flyer</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('flyerContentType')!.value + ';base64,' + editForm.get('flyer')!.value" style="max-height: 500px;" *ngIf="editForm.get('flyer')!.value" alt="event image"/>
+                        <div *ngIf="editForm.get('flyer')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('flyerContentType')!.value }}, {{ byteSize(editForm.get('flyer')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('flyer', 'flyerContentType', 'file_flyer')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_flyer" (change)="setFileData($event, 'flyer', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="flyer" id="field_flyer"
+                           formControlName="flyer"/>
+                    <input type="hidden" class="form-control" name="flyerContentType" id="field_flyerContentType"
+                           formControlName="flyerContentType" />
+                    <div *ngIf="editForm.get('flyer')!.invalid">
+                        <small class="form-text text-danger"
+                            *ngIf="editForm.get('flyer')?.errors?.maxFileSize" jhiTranslate="messages.fileSize">
+                            This file is too big.
+                        </small>
+                    </div>
+                </div>
+
+                <div>
+                    <span jhiTranslate="flyer.youtube.info">Add VideoId from URL from Youtube:</span>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="createyoureventApp.event.youtube" for="field_youtube">Youtube</label>
+                        <input type="text" class="form-control" name="youtube" id="field_youtube"
+                               formControlName="youtube"/>
+                    </div>
+                </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="button" id="save-entity" (click)="save()" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+

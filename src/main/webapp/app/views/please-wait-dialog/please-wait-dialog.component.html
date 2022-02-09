@@ -1,0 +1,8 @@
+<p-dialog header="{{ 'please-wait.please-wait' | translate }}" [(visible)]="display"  [modal]="true" [style]="{width: '50vw'}"
+[draggable]="false" [resizable]="false">
+
+  <div class="alert alert-info" role="alert" jhiTranslate="add-product.please-wait">
+    {{ 'please-wait.please-wait' | translate }}
+  </div>
+  <p-progressBar mode="indeterminate"></p-progressBar>
+</p-dialog>

@@ -1,0 +1,186 @@
+.system-notification {
+  background-image: url('../../content/images/info.png');
+  width: 75px;
+  height: 75px;
+  position: absolute;
+  left: 75px;
+  top: 175px;
+  z-index: 6;
+}
+
+.totalMessage {
+  position: absolute;
+  left: 60px;
+  top: 160px;
+  background-color: red;
+  text-align: center;
+  width: 40px;
+  font-weight: bold;
+  color: white;
+  border-radius: 20px;
+  z-index: 6;
+  font-size: large;
+}
+
+.chat-notification-system {
+  background-color: black;
+  opacity: 0.9;
+  min-width: 250px;
+  min-height: 55px;
+  position: absolute;
+  left: 37.5px;
+  top: 250px;
+  z-index: 500;
+  border-radius: 10px;
+  border: white 1px solid;
+  color: white;
+  padding: 5px;
+  padding-top: 20px;
+  font-weight: bold;
+}
+
+.user {
+  width: 75%;
+  float: left;
+}
+
+.counterMessages {
+  background-color: red;
+  border-radius: 12.5px;
+  margin-bottom: 5px;
+  width: 25px;
+  margin: 0 auto;
+  float: left;
+  text-align: center;
+}
+
+.circle {
+  counter-reset: list-counter;
+  list-style: none;
+}
+.circle li {
+  margin: 1.5em 0;
+}
+.circle li:before {
+  content: counter(list-counter);
+  counter-increment: list-counter;
+  padding: 0.5em;
+  margin-right: 1em;
+  border-radius: 50%;
+  border: 0.25em solid #ccc;
+  background: firebrick;
+  color: #fff;
+  font-family: arial;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+}
+
+.diamond {
+  counter-reset: list-counter;
+  list-style: none;
+}
+.diamond li {
+  margin: 1.5em 0;
+}
+.diamond li:before {
+  content: counter(list-counter);
+  counter-increment: list-counter;
+  transform: rotate(45deg);
+  text-transform: rotate(90deg);
+  padding: 0.5em;
+  margin-right: 1em;
+  border: 0.25em solid #ccc;
+  background: #000;
+  color: #fff;
+  font-family: arial;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+}
+
+.large {
+  counter-reset: list-counter;
+  list-style: none;
+  float: left;
+}
+.large li {
+  margin: 1.5em 0;
+  line-height: 1em;
+}
+.large li:before {
+  content: counter(list-counter);
+  counter-increment: list-counter;
+  font-family: arial;
+  color: #666;
+  font: bold;
+  font-size: 2em;
+  margin-right: 0.5em;
+}
+
+.oval {
+  counter-reset: list-counter;
+  list-style: none;
+  float: left;
+}
+.oval li {
+  margin: 1.5em 0;
+}
+.oval li:before {
+  content: counter(list-counter);
+  counter-increment: list-counter;
+  width: 0.5em;
+  height: 1em;
+  padding: 0.5em;
+  margin-right: 1em;
+  border-radius: 50%;
+  border: 0.25em solid #ccc;
+  background: #000;
+  color: #fff;
+  font-family: arial;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+}
+
+ul.timeline li {
+  position: relative;
+  height: 3em;
+  color: #888;
+}
+
+ul.timeline li:before {
+  content: '';
+  display: inline-block;
+  height: 3em;
+  width: 1px;
+  background: #aaaa;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: -11px;
+  top: -0.4em;
+  z-index: -1;
+}
+
+ul.timeline:before {
+  content: '●';
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  left: -1em;
+  top: 0.1em;
+  color: #aaa;
+}
+
+ul.timeline:after {
+  content: '●';
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  left: -1em;
+  top: -1em;
+  color: #aaa;
+}

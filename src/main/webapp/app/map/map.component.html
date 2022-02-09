@@ -1,0 +1,62 @@
+<mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span jhiTranslate="map.map">Map</span>
+      </ng-template>
+      <div class="row">
+            <div class="col-md-1">
+                <img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png"/>
+            </div>
+            <div class="col-md-11">
+                <span jhiTranslate="map.events">Events</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png"/>
+            </div>
+            <div class="col-md-11">
+                <span jhiTranslate="map.shops">Shops</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <img src="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"/>
+            </div>
+            <div class="col-md-11">
+                <span jhiTranslate="map.services">Services</span>
+            </div>
+        </div>
+        <hr/>
+        <p-gmap [options]="options" [style]="{'width':'100%','height':'720px'}" [overlays]="overlays"></p-gmap>
+      </mat-tab>
+
+    <ng-container *jhiHasAnyAuthority="'ROLE_USER'">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span jhiTranslate="map.distance">Show event's or shop's with distance</span>
+        </ng-template>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <jhi-distance></jhi-distance>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="box">
+                    <jhi-distance-shop></jhi-distance-shop>
+                  </div>
+              </div>
+              <div class="col-md-12">
+                <div class="box">
+                  <jhi-distance-service></jhi-distance-service>
+                </div>
+            </div>
+            </div>
+        </div>
+
+      </mat-tab>
+    </ng-container>
+
+</mat-tab-group>

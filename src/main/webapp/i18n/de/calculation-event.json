@@ -1,0 +1,16 @@
+{
+  "calculation-event": {
+    "max-num-of-participants": "Maximum der Teilnehmerzahl",
+    "entrance-fee": "Eintrittspreis",
+    "total-entrance-fee": "Total der Eintrittspreise",
+    "entries-currently-booked": "Aktuell gebuchte Eintritte",
+    "earnings-from-booked-entries": "Aktueller Verdienst aus den gebuchten Eintritten",
+    "costs-products": "Kosten aller Produkte",
+    "costs-offers": "Kosten aller Offerten",
+    "total-costs": "Total aller Kosten",
+    "total-revenue": "Total Einnahmen",
+    "total-expenses": "Total Ausgaben",
+    "total": "Total",
+    "costs-services": "Total Dienstleistungen"
+  }
+}

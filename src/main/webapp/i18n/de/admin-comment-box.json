@@ -1,0 +1,10 @@
+{
+  "admin-comment-box": {
+    "comment": "Kommentare",
+    "date": "Datum",
+    "email": "Email",
+    "action": "Aktion",
+    "answer": "Antwort",
+    "no-answers": "Dieser Kommentar hat keine Antworten."
+  }
+}

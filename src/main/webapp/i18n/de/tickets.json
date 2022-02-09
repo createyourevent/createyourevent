@@ -1,0 +1,25 @@
+{
+    "tickets": {
+        "unpaid-tickets": "Unbezahlte Tickets",
+        "paid-tickets": "Bezahlte Tickets",
+        "info-buy-ticket": "Bitte bezahlen Sie die Tickets 7 Tage vor dem ",
+        "cc-owner": "Kreditkarteninhaber",
+        "pay": "Bezahle Ticket",
+        "view-ticket": "Ticket anzeigen",
+        "no-unpaid-tickets": "Keine unbezahlten Tickets",
+        "no-paid-tickets": "Keine bazahlten Tickets",
+        "date": "Datum",
+        "price": "Preis",
+        "location": "Location",
+        "name": "Name",
+        "cc-form.error": "Fehler bei Kreditkarte",
+        "cc-form.error.info": "Bitte überprüfen Sie die Kreditkartendaten nocheinmal.",
+        "payment-successfull": "Bezahlung erfolgreich",
+        "payment-successfull.info": "Die Bezahlung für dieses Ticket war erfolgreich. Besten Dank.",
+        "pay-ticket": "Bazahle Ticket",
+        "count": "Anzahl Tickets:",
+        "send-mail-title": "Sende Ticket als Mail",
+        "send-mail-info": "Unten können Sie dieses Ticket an einen Freunden oder Bekannten schicken. Das Ticket ist sovielmal gültig wie Sie Tickets dafür bestellt haben. Wenn Sie zum Beispiel 5 Tickets gekauft haben, können Sie dieses Ticket am Event 5 mal entwerten, bis es anschliessend nicht mehr gültig ist. \n Bitte beachten Sie, dass wenn Sie zum Beispiel 3 Tickets gekauft haben, Sie jeweils nur eines an die angegebene Mailadresse schicken. Das würde heissen, dass wenn Sie einem anderen dieses Mail schicken, erhält er einfach eine Ausgabe von den dreien. Wenn Sie Ihm nun alle zustellen möchten, müssen Sie diesen Schritt 3 Mal wiederholen.",
+        "send-ticket": "Sende Ticket an Mail"
+    }
+}

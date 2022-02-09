@@ -1,0 +1,16 @@
+{
+  "product-detail": {
+    "rating": "Rating",
+    "detail": "Detail's",
+    "gallery": "Gallerie",
+    "priceType": "Price type",
+    "quantity": "Quantity",
+    "rentType": "Rent type",
+    "price": "Price",
+    "company": "Company",
+    "delivery-methods": "Delivery methods",
+    "delivery-method": "Delivery method",
+    "min-order-quantity": "Minimum quantity order",
+    "price-per-kilometre": "Price per kilometre"
+  }
+}

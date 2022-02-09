@@ -1,0 +1,8 @@
+{
+  "add-ride-costs": {
+    "createLabel": "Add ride costs",
+    "createRideCost.info": "Here you can enter a price, which you calculate as the kilometer price for this service map if you use a car for these tasks. The costs which are then calculated are from the address that you have entered in your service location up to the event for which the customer then books you.",
+    "pricePerKilometre": "Costs per kilometre",
+    "new.title": "Ride costs"
+  }
+}

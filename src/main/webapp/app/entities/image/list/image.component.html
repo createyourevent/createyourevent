@@ -1,0 +1,143 @@
+<div>
+  <h2 id="page-heading" data-cy="ImageHeading">
+    <span jhiTranslate="createyoureventApp.image.home.title">Images</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="createyoureventApp.image.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-image"
+        [routerLink]="['/image/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="createyoureventApp.image.home.createLabel"> Create a new Image </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="images?.length === 0">
+    <span jhiTranslate="createyoureventApp.image.home.notFound">No images found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="images && images.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="name">
+            <span jhiTranslate="createyoureventApp.image.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="image">
+            <span jhiTranslate="createyoureventApp.image.image">Image</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="user.id">
+            <span jhiTranslate="createyoureventApp.image.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="product.id">
+            <span jhiTranslate="createyoureventApp.image.product">Product</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="shop.id">
+            <span jhiTranslate="createyoureventApp.image.shop">Shop</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="event.id">
+            <span jhiTranslate="createyoureventApp.image.event">Event</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="service.id">
+            <span jhiTranslate="createyoureventApp.image.service">Service</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="organization.id">
+            <span jhiTranslate="createyoureventApp.image.organization">Organization</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let image of images; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/image', image.id, 'view']">{{ image.id }}</a>
+          </td>
+          <td>{{ image.name }}</td>
+          <td>
+            <a *ngIf="image.image" (click)="openFile(image.image, image.imageContentType)">
+              <img [src]="'data:' + image.imageContentType + ';base64,' + image.image" style="max-height: 30px" alt="image image" />
+            </a>
+            <span *ngIf="image.image">{{ image.imageContentType }}, {{ byteSize(image.image) }}</span>
+          </td>
+          <td>
+            {{ image.user?.id }}
+          </td>
+          <td>
+            <div *ngIf="image.product">
+              <a [routerLink]="['/product', image.product?.id, 'view']">{{ image.product?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="image.shop">
+              <a [routerLink]="['/shop', image.shop?.id, 'view']">{{ image.shop?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="image.event">
+              <a [routerLink]="['/event', image.event?.id, 'view']">{{ image.event?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="image.service">
+              <a [routerLink]="['/create-your-event-service', image.service?.id, 'view']">{{ image.service?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="image.organization">
+              <a [routerLink]="['/organization', image.organization?.id, 'view']">{{ image.organization?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/image', image.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/image', image.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(image)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="images && images.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

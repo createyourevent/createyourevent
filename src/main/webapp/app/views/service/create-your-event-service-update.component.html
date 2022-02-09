@@ -1,0 +1,136 @@
+<p-toast></p-toast>
+<div class="row justify-content-center">
+    <div class="col-8">
+
+            <h2 id="jhi-create-your-event-service-heading" jhiTranslate="createyoureventApp.createYourEventService.home.createOrEditLabel">Create or edit a Create Your Event Service</h2>
+
+
+                <jhi-alert-error></jhi-alert-error>
+                <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="createyoureventApp.createYourEventService.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="createyoureventApp.createYourEventService.category" for="field_category">Category</label>
+                    <select class="form-control" name="category" formControlName="category" id="field_category">
+                        <option value="SECURITAS">{{ 'createyoureventApp.ServiceCategory.SECURITAS' | translate }}</option>
+                        <option value="SHUTTLESERVICE">{{ 'createyoureventApp.ServiceCategory.SHUTTLESERVICE' | translate }}</option>
+                        <option value="SANITARY">{{ 'createyoureventApp.ServiceCategory.SANITARY' | translate }}</option>
+                        <option value="CLEANINGSERVICE">{{ 'createyoureventApp.ServiceCategory.CLEANINGSERVICE' | translate }}</option>
+                        <option value="PLUMBER">{{ 'createyoureventApp.ServiceCategory.PLUMBER' | translate }}</option>
+                        <option value="DISCJOKEY">{{ 'createyoureventApp.ServiceCategory.DISCJOKEY' | translate }}</option>
+                        <option value="ELECTRONICSTECHNICIAN">{{ 'createyoureventApp.ServiceCategory.ELECTRONICSTECHNICIAN' | translate }}</option>
+                        <option value="COMPUTERSCIENTIST">{{ 'createyoureventApp.ServiceCategory.COMPUTERSCIENTIST' | translate }}</option>
+                        <option value="MISCELLANEOUS">{{ 'createyoureventApp.ServiceCategory.MISCELLANEOUS' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('category')!.invalid && (editForm.get('category')!.dirty || editForm.get('category')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('category')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="createyoureventApp.createYourEventService.logo" for="field_logo">Logo</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('logoContentType')!.value + ';base64,' + editForm.get('logo')!.value" style="max-height: 100px;" *ngIf="editForm.get('logo')!.value" alt="createYourEventService image"/>
+                        <div *ngIf="editForm.get('logo')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('logoContentType')!.value }}, {{ byteSize(editForm.get('logo')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('logo', 'logoContentType', 'file_logo')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_logo" (change)="setFileData($event, 'logo', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="logo" id="field_logo"
+                           formControlName="logo"/>
+                    <input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType"
+                           formControlName="logoContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="createyoureventApp.createYourEventService.description" for="field_description">Description</label>
+                    <quill-editor [styles]="{height: '350px'}" formControlName="description" [modules]="modules"  (onEditorCreated)="getEditorInstance($event)">
+                        <quill-view format="text" theme="snow">
+                            <quill-view-html theme="snow"></quill-view-html>
+                        </quill-view>
+                    </quill-editor>
+                    <input type="file" style="display: none" id="fileInputField"/>
+                    <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('description')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="createyoureventApp.createYourEventService.address" for="field_address">Address</label>
+                    <input ngx-google-places-autocomplete type="text" class="form-control" name="address" id="field_address"
+                           formControlName="address"/>
+                    <div *ngIf="editForm.get('address')!.invalid && (editForm.get('address')!.dirty || editForm.get('address')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('address')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="createyoureventApp.createYourEventService.motto" for="field_motto">Motto</label>
+                    <input type="text" class="form-control" name="motto" id="field_motto"
+                           formControlName="motto"/>
+                    <div *ngIf="editForm.get('motto')!.invalid && (editForm.get('motto')!.dirty || editForm.get('motto')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('motto')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="createyoureventApp.product.keywords" for="field_keywords">Keywords</label>
+                    <tag-input [(ngModel)]='items' [maxItems]='4' [ngModelOptions]="{standalone: true}"></tag-input>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="createyoureventApp.createYourEventService.phone" for="field_phone">Phone</label>
+                    <input type="text" class="form-control" name="phone" id="field_phone"
+                           formControlName="phone"/>
+                    <div *ngIf="editForm.get('phone')!.invalid && (editForm.get('phone')!.dirty || editForm.get('phone')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('phone')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="createyoureventApp.createYourEventService.webAddress" for="field_webAddress">Web Address</label>
+                    <input type="text" class="form-control" name="webAddress" id="field_webAddress"
+                           formControlName="webAddress"/>
+                </div>
+
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

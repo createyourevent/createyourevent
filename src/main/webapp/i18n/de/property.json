@@ -1,0 +1,25 @@
+{
+  "createyoureventApp": {
+    "property": {
+      "home": {
+        "title": "Properties",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Property erstellen",
+        "createOrEditLabel": "Property erstellen oder bearbeiten",
+        "notFound": "Keine Properties gefunden"
+      },
+      "created": "Property erstellt mit ID {{ param }}",
+      "updated": "Property aktualisiert mit ID {{ param }}",
+      "deleted": "Property gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Property {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Property"
+      },
+      "id": "ID",
+      "key": "Key",
+      "value": "Value"
+    }
+  }
+}

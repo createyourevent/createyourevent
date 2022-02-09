@@ -1,0 +1,9 @@
+{
+  "createyoureventApp": {
+    "WorksheetType": {
+      "null": "",
+      "OFFER": "OFFER",
+      "BILLING": "BILLING"
+    }
+  }
+}

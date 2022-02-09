@@ -1,0 +1,25 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="urs_baumann_1977 (generated)" id="1642849106018-1">
+        <createTable tableName="rel_organization__events">
+            <column name="organization_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="events_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642849106018-2">
+        <addForeignKeyConstraint baseColumnNames="events_id" baseTableName="rel_organization__events" constraintName="FK4cii75cvgdwgl79k6gxy7o8ur" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="event" validate="true"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642849106018-3">
+        <addForeignKeyConstraint baseColumnNames="organization_id" baseTableName="rel_organization__events" constraintName="FKe4f6youomrnhx3ooajw3k59bu" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="organization" validate="true"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642849106018-4">
+        <dropForeignKeyConstraint baseTableName="organization" constraintName="FK6mh7w5mkqd149ch62ex4oaqse"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1642849106018-5">
+        <dropColumn columnName="events_id" tableName="organization"/>
+    </changeSet>
+</databaseChangeLog>

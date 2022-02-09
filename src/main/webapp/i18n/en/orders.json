@@ -1,0 +1,17 @@
+{
+  "orders": {
+    "title": "Orders for all products for ",
+    "info": "Above you will see all orders from this shop per event. If one product is seled on two or more shops you will find this entry whith each quantity and user.",
+    "eventproductorder": "Event product order: ",
+    "productname": "Productname",
+    "quantity": "Quantity",
+    "event": "Event",
+    "customer": "Customer",
+    "dateFrom": "Date from",
+    "dateUntil": "Date until",
+    "provisionally": "Provisional orders",
+    "definitely": "Definitive orders",
+    "seen": "Seen",
+    "approved": "Approved"
+  }
+}

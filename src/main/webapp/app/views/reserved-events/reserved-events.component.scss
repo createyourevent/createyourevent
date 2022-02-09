@@ -1,0 +1,43 @@
+.favorit {
+  background-image: url('../../../content/images/favorit.png');
+  width: 75px;
+  height: 72px;
+  position: absolute;
+  left: 120px;
+  top: 285px;
+  z-index: 6;
+}
+
+.favorits-text{
+  background-color: yellow;
+  color: red;
+  height: 30px;
+  border-radius: 15px;
+  font-weight: bold;
+  padding: 5px;
+  margin-top: -20px;
+  width: 95px;
+}
+
+.favorits {
+  border-radius: 10px;
+  opacity: 0.9;
+  background-color: black;
+  border-radius: 1px solid white;
+  color: white;
+  padding: 10px;
+  width: 500px;
+  position: absolute;
+  left: 90px;
+  top: 360px;
+  z-index: 500;
+}
+
+.bold {
+  font-weight: bold;
+  text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
+}
+
+.margin-5 {
+  margin: 5px;
+}

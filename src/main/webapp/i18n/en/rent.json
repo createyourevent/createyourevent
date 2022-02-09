@@ -1,0 +1,13 @@
+{
+  "rent": {
+    "title": "Rent recived",
+    "event": "Event",
+    "date": "Date",
+    "date-from": "Date from",
+    "date-until": "Date until",
+    "rent": "Rent",
+    "seen": "Seen",
+    "approved": "Approved",
+    "total": "Total"
+  }
+}

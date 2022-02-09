@@ -1,0 +1,19 @@
+{
+  "customer-booking": {
+    "select-service-or-no-service-map": "No service selected or no service map available in the service.",
+    "title": "Bookings",
+    "select-service": "Select service",
+    "date-from": "Date from",
+    "date-until": "Date until",
+    "cost-hour": "Cost hour",
+    "total-hours": "Total hours",
+    "ride-costs": "Ride costs",
+    "kilometre": "Kilometre",
+    "total": "Total",
+    "event": "Event",
+    "organisator": "Organisator",
+    "select-servicemap": "Select servicemap",
+    "provisionally": "Provisional bookings",
+    "definitely": "Definitive bookings"
+  }
+}

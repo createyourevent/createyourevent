@@ -1,0 +1,375 @@
+<ng-container *ngIf="loading">
+  <p-progressSpinner></p-progressSpinner>
+  <div class="alert alert-info" role="alert" jhiTranslate="billing.wait-a-moment">
+    Please wait a moment. We calculate your total fees that have accrued to date.
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!loading">
+  <div *ngIf="billed === true">
+    <div class="alert alert-success" role="alert">
+        <h5 jhiTranslate="billing.payment-successfull">Payment successfull</h5>
+        <span jhiTranslate="billing.payment-successfull.info">The payment via credit card was successfull. Thanks for allthing.</span>
+      </div>
+</div>
+
+<div *ngIf="billed === false" class="box">
+        <h1 jhiTranslate="billing.page_title">Billing for your shops, services and events</h1>
+
+        <p-accordion>
+            <p-accordionTab header="{{ 'billing.events' | translate }}">
+                <div class="card" *ngFor="let event of events">
+                    <div class="card-header">
+                        <h3>{{ event.name }}</h3>
+                    </div>
+                    <div class="card-body">
+                    <h5 class="card-title"><span jhiTranslate="billing.eventid">Event ID</span>{{ event.id }}</h5>
+                    <div class="card-text">
+                        <table>
+                            <tr class="border">
+                                <td jhiTranslate="billing.price"></td><td>{{ event.price | currency  }}</td>
+                            </tr>
+                            <tr class="border">
+                                <td jhiTranslate="billing.placenumber"></td><td>{{ event.placenumber  }}</td>
+                            </tr>
+                            <tr class="border">
+                                <td jhiTranslate="billing.total"></td><td>{{ event!.price! * event!.placenumber! | currency  }}</td>
+                            </tr>
+                            <tr class="border">
+                                <td jhiTranslate="billing.fee"></td><td>{{ fees!.feesOrganisator! / 100 | percent }}</td>
+                            </tr>
+                            <tr class="border">
+                                <td jhiTranslate="billing.fees" class="bold"></td><td>{{ event!.price! * event!.placenumber! / 100 * fees!.feesOrganisator! | currency}}</td>
+                            </tr>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <table class="big padding">
+                    <tr class="border">
+                        <td jhiTranslate="billing.totalEarnings" class="border"></td><td class="border">{{ totalEvents | currency }}</td>
+                    </tr>
+                    <tr class="border">
+                        <td jhiTranslate="billing.totalFees" class="bold border"></td><td class="border">{{ totalFeesEvents | currency }}</td>
+                    </tr>
+                </table>
+            </p-accordionTab>
+
+            <p-accordionTab header="{{ 'billing.shops' | translate }}">
+                <div class="card" *ngFor="let shop of shops">
+                    <div class="card-header">
+                    <h3>{{ shop.name }}</h3>
+                    </div>
+                    <div class="card-body">
+                    <div class="card-text">
+                        <p-accordion>
+                            <p-accordionTab header="{{ eop.product!.title }}" *ngFor="let eop of shop.eventProductOrders">
+                                    <table>
+                                        <tr class="border">
+                                            <td jhiTranslate="billing.orderid">Order ID</td><td>{{ eop.id }}</td>
+                                        </tr>
+                                        <tr class="border">
+                                          <td jhiTranslate="billing.event"></td><td>{{ eop.event.name }}</td>
+                                      </tr>
+                                        <tr class="border">
+                                            <td jhiTranslate="billing.total"></td><td>{{ eop.total | currency }}</td>
+                                        </tr>
+                                        <tr class="border">
+                                            <td jhiTranslate="billing.fee"></td><td>{{ fees.feesSupplier! /100 | percent}}</td>
+                                        </tr>
+                                        <tr class="border">
+                                            <td jhiTranslate="billing.fees" class="bold"></td><td>{{ eop.total! / 100 * fees!.feesSupplier! | currency }}</td>
+                                        </tr>
+                                    </table>
+                                <div class="clear"></div>
+                            </p-accordionTab>
+                        </p-accordion>
+                    </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <table class="big padding">
+                    <tr class="border">
+                        <td jhiTranslate="billing.totalEarnings" class="border"></td><td class="border">{{ totalShops | currency }}</td>
+                    </tr>
+                    <tr class="border">
+                    <td jhiTranslate="billing.totalFees" class="bold border"></td><td class="border">{{ totalFeesShops | currency }}</td>
+                </tr>
+                </table>
+            </p-accordionTab>
+
+            <p-accordionTab header="{{ 'billing.services' | translate }}">
+                <div class="card" *ngFor="let service of services">
+                    <div class="card-header">
+                        <h3>{{ service.name }}</h3>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><span jhiTranslate="billing.serviceid">Service ID</span>{{ service.id }}</h5>
+                    <div class="card-text">
+                        <div *ngFor="let sm of service.serviceMaps">
+                            <p-accordion>
+                                <p-accordionTab header="{{ sm.title }}" *ngFor="let esmo of sm.eventServiceMapOrders">
+                                    <table>
+                                        <tr class="border">
+                                            <td jhiTranslate="billing.orderid"></td>Order ID<td>{{ esmo.id}}</td>
+                                        </tr>
+                                        <tr class="border">
+                                            <td jhiTranslate="billing.total"></td>Total<td>{{ esmo.total | currency }}</td>
+                                        </tr>
+                                        <tr class="border">
+                                            <td jhiTranslate="billing.fee">Fee</td><td>{{ fees!.feesService! / 100 | percent }}</td>
+                                        </tr>
+                                        <tr class="border">
+                                            <td jhiTranslate="billing.fees" class="bold"></td>Fees<td>{{ esmo!.total! / 100 * fees!.feesService!  | currency }}</td>
+                                        </tr>
+                                    </table>
+                                </p-accordionTab>
+                            </p-accordion>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <table  class="big padding">
+                    <tr class="border">
+                        <td jhiTranslate="billing.totalEarnings" class="border"></td><td class="border">{{ totalServices | currency }}</td>
+                    </tr>
+                    <tr class="border">
+                    <td jhiTranslate="billing.totalFees" class="bold border"></td><td class="border">{{ totalFeesServices | currency }}</td>
+                </tr>
+                </table>
+            </p-accordionTab>
+
+            <p-accordionTab header="{{ 'billing.organizations' | translate }}">
+              <div class="card" *ngFor="let reservation of organizationReservations">
+                <div class="card-header">
+                    <h3>{{ reservation.organization.name }}</h3>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"><span jhiTranslate="billing.organization-reservation-id">Reservation ID</span>{{ reservation.id }}</h5>
+                <div class="card-text">
+                  <table>
+                    <tr class="border">
+                      <td jhiTranslate="billing.event"></td><td>{{ reservation.event.name  }}</td>
+                  </tr>
+                    <tr class="border">
+                        <td jhiTranslate="billing.date-from"></td><td>{{ reservation.dateFrom | date:'medium'  }}</td>
+                    </tr>
+                    <tr class="border">
+                        <td jhiTranslate="billing.date-until"></td><td>{{ reservation.dateUntil | date:'medium'  }}</td>
+                    </tr>
+                    <tr class="border">
+                        <td jhiTranslate="billing.total"></td><td>{{ reservation.total | currency  }}</td>
+                    </tr>
+                    <tr class="border">
+                        <td jhiTranslate="billing.fee"></td><td>{{ fees!.feesOrganizations! / 100 | percent }}</td>
+                    </tr>
+                    <tr class="border">
+                        <td jhiTranslate="billing.fees" class="bold"></td><td>{{ reservation.total / 100 * fees!.feesOrganizations! | currency}}</td>
+                    </tr>
+                </table>
+                </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <table  class="big padding">
+                <tr class="border">
+                    <td jhiTranslate="billing.totalEarnings" class="border"></td><td class="border">{{ totalOrganizations | currency }}</td>
+                </tr>
+                <tr class="border">
+                <td jhiTranslate="billing.totalFees" class="bold border"></td><td class="border">{{ totalFeesOrganizations | currency }}</td>
+            </tr>
+            </table>
+          </p-accordionTab>
+
+        </p-accordion>
+        <hr/>
+
+        <div class="alert alert-primary" role="alert">
+            <span jhiTranslate="billing.totalFees" class="big bold">Total fees to pay</span> <span class="big bold">{{ totalFeesEvents + totalFeesShops + totalFeesServices + totalFeesOrganizations| currency }}</span>
+        </div>
+        <div class="alert alert-info" role="alert">
+          <span jhiTranslate="billing.totalVAT" class="big bold">Total VAT.</span> <span class="big bold">{{ (totalFeesEvents + totalFeesShops + totalFeesServices + totalFeesOrganizations)/100*7.7 | currency }}</span>
+      </div>
+      <div class="alert alert-success" role="alert">
+        <span jhiTranslate="billing.total" class="big bold">Total</span> <span class="big bold">{{ genround(((totalFeesEvents + totalFeesShops + totalFeesServices + totalFeesOrganizations) / 100 * 7.7) + (totalFeesEvents + totalFeesShops + totalFeesServices + totalFeesOrganizations), 0.05) | currency }}</span>
+      </div>
+        <hr/>
+        <jhi-payment [value]="genround(((totalFeesEvents + totalFeesShops + totalFeesServices + totalFeesOrganizations) / 100 * 7.7) + (totalFeesEvents + totalFeesShops + totalFeesServices + totalFeesOrganizations), 0.05)" [type]="type" [id]="id"></jhi-payment>
+</div>
+<hr/>
+
+  <div class="box_brown padding-10">
+    <h2 jhiTranslate="billing.paid">Paid:</h2>
+    <p-tabView>
+      <p-tabPanel header="{{ 'billing.events' | translate }}">
+        <div class="card" *ngFor="let event of eventsPaid">
+          <div class="card-header">
+              <h3>{{ event.name }}</h3>
+          </div>
+          <div class="card-body">
+          <h5 class="card-title"><span jhiTranslate="billing.eventid">Event ID</span>{{ event.id }}</h5>
+          <div class="card-text">
+                <table>
+                    <tr class="border">
+                        <td jhiTranslate="billing.price"></td><td>{{ event.price | currency  }}</td>
+                    </tr>
+                    <tr class="border">
+                        <td jhiTranslate="billing.placenumber"></td><td>{{ event.placenumber  }}</td>
+                    </tr>
+                    <tr class="border">
+                        <td jhiTranslate="billing.total"></td><td>{{ event!.price! * event!.placenumber! | currency  }}</td>
+                    </tr>
+                    <tr class="border">
+                        <td jhiTranslate="billing.fee"></td><td>{{ fees!.feesOrganisator! / 100 | percent }}</td>
+                    </tr>
+                    <tr class="border">
+                        <td jhiTranslate="billing.fees" class="bold"></td><td>{{ event!.price! * event!.placenumber! / 100 * fees!.feesOrganisator! | currency}}</td>
+                    </tr>
+                </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <table class="big padding">
+            <tr class="border">
+                <td jhiTranslate="billing.totalEarnings" class="border"></td><td class="border">{{ totalEventsPaid | currency }}</td>
+            </tr>
+            <tr class="border">
+                <td jhiTranslate="billing.totalFees" class="bold border"></td><td class="border">{{ totalFeesEventsPaid | currency }}</td>
+            </tr>
+        </table>
+      </p-tabPanel>
+
+      <p-tabPanel header="{{ 'billing.shops' | translate }}">
+        <div class="card" *ngFor="let shop of shopsPaid">
+          <div class="card-header">
+          <h3>{{ shop.name }}</h3>
+          </div>
+          <div class="card-body">
+          <div class="card-text">
+              <p-accordion>
+                  <p-accordionTab header="{{ eop.product!.title }}" *ngFor="let eop of shop.eventProductOrders">
+                            <table>
+                                <tr class="border">
+                                    <td jhiTranslate="billing.orderid">Order ID</td><td>{{ eop.id }}</td>
+                                </tr>
+                                <tr class="border">
+                                  <td jhiTranslate="billing.event"></td><td>{{ eop.event.name }}</td>
+                                </tr>
+                                <tr class="border">
+                                    <td jhiTranslate="billing.total"></td><td>{{ eop.total | currency }}</td>
+                                </tr>
+                                <tr class="border">
+                                    <td jhiTranslate="billing.fee"></td><td>{{ fees.feesSupplier! /100 | percent}}</td>
+                                </tr>
+                                <tr class="border">
+                                    <td jhiTranslate="billing.fees" class="bold"></td><td>{{ eop.total! / 100 * fees!.feesSupplier! | currency }}</td>
+                                </tr>
+                            </table>
+                        <div class="clear"></div>
+                    </p-accordionTab>
+                </p-accordion>
+            </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <table class="big padding">
+            <tr class="border">
+                <td jhiTranslate="billing.totalEarnings" class="border"></td><td class="border">{{ totalShopsPaid | currency }}</td>
+            </tr>
+            <tr class="border">
+            <td jhiTranslate="billing.totalFees" class="bold border"></td><td class="border">{{ totalFeesShopsPaid | currency }}</td>
+        </tr>
+        </table>
+      </p-tabPanel>
+
+      <p-tabPanel header="{{ 'billing.services' | translate }}">
+        <div class="card" *ngFor="let service of servicesPaid">
+            <div class="card-header">
+                <h3>{{ service.name }}</h3>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"><span jhiTranslate="billing.serviceid">Service ID</span>{{ service.id }}</h5>
+            <div class="card-text">
+                <div *ngFor="let sm of service.serviceMaps">
+                    <p-accordion>
+                        <p-accordionTab header="{{ sm.title }}" *ngFor="let esmo of sm.eventServiceMapOrders">
+                            <table>
+                                <tr class="border">
+                                    <td jhiTranslate="billing.orderid"></td>Order ID<td>{{ esmo.id}}</td>
+                                </tr>
+                                <tr class="border">
+                                    <td jhiTranslate="billing.total"></td>Total<td>{{ esmo.total | currency }}</td>
+                                </tr>
+                                <tr class="border">
+                                    <td jhiTranslate="billing.fee">Fee</td><td>{{ fees!.feesService! / 100 | percent }}</td>
+                                </tr>
+                                <tr class="border">
+                                    <td jhiTranslate="billing.fees" class="bold"></td>Fees<td>{{ esmo!.total! / 100 * fees!.feesService!  | currency }}</td>
+                                </tr>
+                            </table>
+                        </p-accordionTab>
+                    </p-accordion>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <table  class="big padding">
+            <tr class="border">
+                <td jhiTranslate="billing.totalEarnings" class="border"></td><td class="border">{{ totalServicesPaid | currency }}</td>
+            </tr>
+            <tr class="border">
+            <td jhiTranslate="billing.totalFees" class="bold border"></td><td class="border">{{ totalFeesServicesPaid | currency }}</td>
+        </tr>
+        </table>
+      </p-tabPanel>
+      <p-tabPanel header="{{ 'billing.organizations' | translate }}">
+        <div class="card" *ngFor="let reservation of organizationReservationsPaid">
+            <div class="card-header">
+                <h3>{{ reservation.organization.name }}</h3>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"><span jhiTranslate="billing.organization-reservation-id">Reservation ID</span>{{ reservation.id }}</h5>
+            <div class="card-text">
+              <table>
+                <tr class="border">
+                  <td jhiTranslate="billing.event"></td><td>{{ reservation.event.name  }}</td>
+              </tr>
+                <tr class="border">
+                    <td jhiTranslate="billing.date-from"></td><td>{{ reservation.dateFrom | date:'medium'  }}</td>
+                </tr>
+                <tr class="border">
+                    <td jhiTranslate="billing.date-until"></td><td>{{ reservation.dateUntil | date:'medium'  }}</td>
+                </tr>
+                <tr class="border">
+                    <td jhiTranslate="billing.total"></td><td>{{ reservation.total | currency  }}</td>
+                </tr>
+                <tr class="border">
+                    <td jhiTranslate="billing.fee"></td><td>{{ fees!.feesOrganizations! / 100 | percent }}</td>
+                </tr>
+                <tr class="border">
+                    <td jhiTranslate="billing.fees" class="bold"></td><td>{{ reservation.total / 100 * fees!.feesOrganizations! | currency}}</td>
+                </tr>
+            </table>
+            </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <table  class="big padding">
+          <tr class="border">
+              <td jhiTranslate="billing.totalEarnings" class="border"></td><td class="border">{{ totalOrganizations | currency }}</td>
+          </tr>
+          <tr class="border">
+          <td jhiTranslate="billing.totalFees" class="bold border"></td><td class="border">{{ totalFeesOrganizations | currency }}</td>
+      </tr>
+      </table>
+    </p-tabPanel>
+
+    </p-tabView>
+  </div>
+</ng-container>
+
+<jhi-please-wait-dialog [display]="loading"></jhi-please-wait-dialog>

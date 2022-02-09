@@ -1,0 +1,14 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="urs_baumann_1977 (generated)" id="1643407635511-1">
+        <addColumn tableName="fee_transaction">
+            <column name="organization_reservation_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1643407635511-2">
+        <addUniqueConstraint columnNames="organization_reservation_id" constraintName="UC_FEE_TRANSACTIONORGANIZATION_RESERVATION_ID_COL" tableName="fee_transaction"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1643407635511-3">
+        <addForeignKeyConstraint baseColumnNames="organization_reservation_id" baseTableName="fee_transaction" constraintName="FK3inh4mp0df15eoty9v2fs8q6k" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="organization_reservation" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

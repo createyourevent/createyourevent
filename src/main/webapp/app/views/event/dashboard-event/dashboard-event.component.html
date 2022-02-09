@@ -1,0 +1,15 @@
+<h2><span jhiTranslate="dashboard-event.dashboard-for-event">Dashboard for Event</span> {{ jhiEvent.name }}</h2>
+<nav mat-tab-nav-bar>
+    <a mat-tab-link
+       *ngFor="let link of navLinks"
+       [routerLink]="link.link"
+       routerLinkActive #rla="routerLinkActive"
+       [active]="rla.isActive">
+      {{link.label}}
+    </a>
+  </nav>
+
+  <router-outlet></router-outlet>
+
+
+

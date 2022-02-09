@@ -1,0 +1,30 @@
+{
+  "createyoureventApp": {
+    "organizationComment": {
+      "home": {
+        "title": "Organization Comments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Organization Comment",
+        "createOrEditLabel": "Create or edit a Organization Comment",
+        "notFound": "No Organization Comments found"
+      },
+      "created": "A new Organization Comment is created with identifier {{ param }}",
+      "updated": "A Organization Comment is updated with identifier {{ param }}",
+      "deleted": "A Organization Comment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Organization Comment {{ id }}?"
+      },
+      "detail": {
+        "title": "Organization Comment"
+      },
+      "id": "ID",
+      "comment": "Comment",
+      "date": "Date",
+      "organizationComments": "Organization Comments",
+      "organization": "Organization",
+      "user": "User",
+      "event": "Event",
+      "organizationComment": "Organization Comment"
+    }
+  }
+}

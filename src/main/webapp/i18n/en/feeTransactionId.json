@@ -1,0 +1,25 @@
+{
+  "createyoureventApp": {
+    "feeTransactionId": {
+      "home": {
+        "title": "Fee Transaction Ids",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Fee Transaction Id",
+        "createOrEditLabel": "Create or edit a Fee Transaction Id",
+        "notFound": "No Fee Transaction Ids found"
+      },
+      "created": "A new Fee Transaction Id is created with identifier {{ param }}",
+      "updated": "A Fee Transaction Id is updated with identifier {{ param }}",
+      "deleted": "A Fee Transaction Id is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Fee Transaction Id {{ id }}?"
+      },
+      "detail": {
+        "title": "Fee Transaction Id"
+      },
+      "id": "ID",
+      "transactionId": "Transaction Id",
+      "feeTransaction": "Fee Transaction"
+    }
+  }
+}

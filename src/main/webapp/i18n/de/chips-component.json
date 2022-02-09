@@ -1,0 +1,12 @@
+{
+    "chips-component": {
+        "info.confirmation": "Das Spiel wird offline gestellt. Alle gefundenenen Chips aller User werden gelöscht. Und eine neue Runde kann geladen werden.",
+        "confirmation": "Bestätigung",
+        "confirmed": "Bestätigt",
+        "put-game-offline": "Diese Spielrunde wurde beendet. Alle gefundenen Chips aller User wurden gelöscht.",
+        "rejected": "Abgelehnt",
+        "info.rejected": "Der Vorgang wurde abgelehnt.",
+        "cancelled": "Abgebrochen",
+        "info.cancelled": "Der Vorgang wurde abgebrochen."
+    }
+}

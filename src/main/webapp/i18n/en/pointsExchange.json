@@ -1,0 +1,26 @@
+{
+  "createyoureventApp": {
+    "pointsExchange": {
+      "home": {
+        "title": "Points Exchanges",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Points Exchange",
+        "createOrEditLabel": "Create or edit a Points Exchange",
+        "notFound": "No Points Exchanges found"
+      },
+      "created": "A new Points Exchange is created with identifier {{ param }}",
+      "updated": "A Points Exchange is updated with identifier {{ param }}",
+      "deleted": "A Points Exchange is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Points Exchange {{ id }}?"
+      },
+      "detail": {
+        "title": "Points Exchange"
+      },
+      "id": "ID",
+      "pointsTotal": "Points Total",
+      "bondPointsTotal": "Bond Points Total",
+      "bonds": "Bonds"
+    }
+  }
+}

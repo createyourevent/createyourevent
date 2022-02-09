@@ -1,0 +1,10 @@
+{
+  "calendar": {
+    "month": "Monat",
+    "week": "Woche",
+    "day": "Tag",
+    "previous": "Vorheriger",
+    "today": "Heute",
+    "next": "Nächster"
+  }
+}

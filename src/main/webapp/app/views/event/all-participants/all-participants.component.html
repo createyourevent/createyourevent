@@ -1,0 +1,10 @@
+<div class="box margin height-550">
+        <h5 class="card-title" jhiTranslate="all-participants.title">All participants for this Event</h5>
+        <p jhiTranslate="all-participants.info">
+            Below you can see all participants for this event. Click the name to start a chat conversation.
+        </p>
+        <hr/>
+        <ul class="list-group">
+            <li class="list-group-item" (click)="clickUserName(reservation.user!)" *ngFor="let reservation of reservations">{{ reservation.user!.firstName }} {{ reservation.user!.lastName }}</li>
+          </ul>
+  </div>

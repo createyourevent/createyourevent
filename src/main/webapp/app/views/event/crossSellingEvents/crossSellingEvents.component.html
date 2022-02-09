@@ -1,0 +1,54 @@
+<ng-container *ngIf="loaded">
+    <div class="box_brown">
+        <h3 jhiTranslate="crossSellingEvents.title">Customers who bought this also bought ...</h3>
+        <p-dataView [value]="events" [paginator]="true" [rows]="8" layout="grid">
+            <ng-template let-event pTemplate="gridItem">
+                <div class="p-col-12 p-md-3">
+                    <div class="card card-container">
+                        <a href="/events/{{ event.id }}/view">
+                            <h3 class="title">{{ event.name }}</h3>
+                            <div class="center">
+                                <a (click)="openFile(event?.flyerContentType!, event?.flyer)">
+                                    <img [src]="'data:' + event.flyerContentType + ';base64,' + event.flyer" style="max-width: 250px; max-height: 350px;" alt="event image"/>
+                                </a>
+                            </div>
+                            <div class="info">
+                                <hr/>
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <span jhiTranslate="event-detail.placenumber">Placenumber</span>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <span>{{ event.reservations.length }}/{{ event.placenumber }}</span>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <span jhiTranslate="event-detail.price">Price</span>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <span>{{ event.price | currency }}</span>
+                                  </div>
+                                </div>
+                                <hr/>
+                                <div>{{ event.dateStart | date:'medium' }}</div>
+                                <div>{{ event.dateEnd | date:'medium' }}</div>
+                            </div>
+                            <ng-template #t let-fill="fill">
+                              <span class="heart" [class.full]="fill === 100">
+                                <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                              </span>
+                            </ng-template>
+
+                            <ngb-rating [rate]="getAverage(event.id)" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                        </a>
+                    </div>
+                </div>
+            </ng-template>
+        </p-dataView>
+    </div>
+</ng-container>

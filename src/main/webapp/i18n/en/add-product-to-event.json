@@ -1,0 +1,7 @@
+{
+  "add-product-to-event": {
+    "add-event-title": "Add to event",
+    "info": "Below you can add products to a planned event if you still find something. You can add as many products as you like until the minimum number of tickets sold has been reached.",
+    "select-event": "Choose event"
+  }
+}

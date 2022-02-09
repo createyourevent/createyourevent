@@ -1,0 +1,29 @@
+{
+  "createyoureventApp": {
+    "productLikeDislike": {
+      "home": {
+        "title": "Product Like Dislikes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Product Like Dislike",
+        "createOrEditLabel": "Create or edit a Product Like Dislike",
+        "notFound": "No Product Like Dislikes found"
+      },
+      "created": "A new Product Like Dislike is created with identifier {{ param }}",
+      "updated": "A Product Like Dislike is updated with identifier {{ param }}",
+      "deleted": "A Product Like Dislike is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Product Like Dislike {{ id }}?"
+      },
+      "detail": {
+        "title": "Product Like Dislike"
+      },
+      "id": "ID",
+      "like": "Like",
+      "dislike": "Dislike",
+      "date": "Date",
+      "comment": "Comment",
+      "product": "Product",
+      "user": "User"
+    }
+  }
+}

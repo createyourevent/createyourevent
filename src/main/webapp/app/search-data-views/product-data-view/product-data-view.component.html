@@ -1,0 +1,124 @@
+<h1 id="main-title" class="main-title" jhiTranslate="product-data-view.title">Search products</h1>
+
+<p-dataView #dv [value]="productsWithDistance"   [paginator]="true" [rows]="8" filterBy="title" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid" [loading]="loading">
+  <ng-template pTemplate="header">
+    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+        <div class="row">
+          <div class="col-md-4">
+            <span class="p-input-icon-left p-mb-2 p-mb-md-0">
+              <i class="pi pi-search"></i>
+              <input type="search" pInputText placeholder="Search by name" (input)="dv.filter($event.target!.value)">
+           </span>
+          </div>
+          <div class="col-md-6">
+            <ng-container *ngIf="user">
+              <div class="row">
+                <div class="col-md-3">
+                  <h5><span jhiTranslate="distance.distance"></span>{{ distance }} Km</h5>
+                  <p-knob [(ngModel)]="distance" [step]="5" (onChange)="changeSliderRadius($event)" class="slider"></p-knob>
+                </div>
+                <div class="col-md-9">
+                  <div class="alert alert-info" role="alert">
+                    <span jhiTranslate="data-view.distance-info">
+                      Use the switch to select the maximum range in which you want to search for events.
+                      If the distance is set to 0, all search results are displayed.
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div  class="col-md-2">
+            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+          </div>
+        </div>
+    </div>
+</ng-template>
+
+    <ng-template let-product pTemplate="listItem">
+        <div class="row orange padding product-row">
+            <div class="col-md-3">
+                <div class="center">
+                    <img class="img" [src]="'data:' + product.photoContentType + ';base64,' + product.photo" style="max-height: 250px; max-width: 250px" alt="{{ product.title }}"/>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h3 class="product-title">{{ product.title }}</h3>
+            </div>
+            <div class="col-md-2">
+                <div class="star_big">
+                    <jhi-price-type [product]="product"></jhi-price-type>
+                    <dl class="row-md jh-entity-details price">
+                        <dt><span jhiTranslate="product-detail.price">Price</span></dt>
+                        <dd>
+                            <span>{{ product.price | currency }} / {{ product.amount }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</span>
+                        </dd>
+                    </dl>
+              </div>
+            </div>
+            <div class="col-md-2">
+                <dl class="row-md jh-entity-details">
+                    <ng-container *ngIf="product.stock < 0">
+                        <dt><span jhiTranslate="product_slider.stock">Stock</span></dt>
+                        <dd>
+                            <span jhiTranslation="select-products.infinite">Infinite</span>
+                        </dd>
+                    </ng-container>
+                    <ng-container *ngIf="product.stock >= 0">
+                        <dt><span jhiTranslate="product_slider.stock">Stock</span></dt>
+                        <dd>
+                            <span>{{ product.stock }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</span>
+                        </dd>
+                    </ng-container>
+                </dl>
+            </div>
+            <div class="col-md-2">
+                <a (click)="goToProduct(product.id)" class="myButton" jhiTranslate="product-data-view.go-to-product">Go to product</a>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template let-product pTemplate="gridItem">
+        <div class="p-col-12 p-md-3">
+            <div class="card card-container orange">
+                <a href="/products/{{ product.id }}/view">
+                    <h3 class="product-title">{{ product.title }}</h3>
+                    <div class="center">
+                        <img class="img" [src]="'data:' + product.photoContentType + ';base64,' + product.photo" style="max-height: 250px; max-width: 250px" alt="{{ product.title }}"/>
+                    </div>
+                    <hr/>
+                    <div class="star_big">
+                        <jhi-price-type [product]="product"></jhi-price-type>
+                        <dl class="row-md jh-entity-details price">
+                            <dt><span jhiTranslate="product-detail.price">Price</span></dt>
+                            <dd>
+                                <span>{{ product.price | currency }} / {{ product.amount }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</span>
+                            </dd>
+                        </dl>
+                  </div>
+                    <hr/>
+                    <dl class="row-md jh-entity-details">
+                        <ng-container *ngIf="product.stock < 0">
+                            <dt><span jhiTranslate="product_slider.stock">Stock</span></dt>
+                            <dd>
+                                <span jhiTranslation="select-products.infinite">Infinite</span>
+                            </dd>
+                        </ng-container>
+                        <ng-container *ngIf="product.stock >= 0">
+                            <dt><span jhiTranslate="product_slider.stock">Stock</span></dt>
+                            <dd>
+                                <span>{{ product.stock }} {{ "createyoureventApp.Unit." + product.unit  | translate }}</span>
+                            </dd>
+                        </ng-container>
+                    </dl>
+                </a>
+                <a (click)="goToProduct(product.id)" class="myButton" jhiTranslate="product-data-view.go-to-product">Go to product</a>
+            </div>
+        </div>
+    </ng-template>
+
+
+    <ng-template pTemplate="footer">
+        <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+    </ng-template>
+</p-dataView>
+

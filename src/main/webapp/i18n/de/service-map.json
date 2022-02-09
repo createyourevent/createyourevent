@@ -1,0 +1,18 @@
+{
+  "service-map": {
+    "title": "Dienstleistungsmappen",
+    "createServiceMap": "Erstelle Dienstleistungsmappe",
+    "choose-service-maps": "Wähle Dienstleistungsmappe",
+    "new-offer": "Neuen Serviceofferteneintrag",
+    "title-offer": "Titel",
+    "description": "Beschreibung",
+    "costHour": "Stundenansatz",
+    "total": "Total",
+
+    "ride-costs": "Fahrtkosten",
+    "pricePerKilometre": "Preis pro Kilometer",
+    "add-ride-costs": "Füge Fahrtkosten hinzu",
+    "riding-cost-not-set": "Die Fahrtkosten sind nicht gesetzt.",
+    "riding-cost-for-service-map": "Die Fahrtkosten für dieses Servicemap sind "
+  }
+}

@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="shopStarRating">
+      <h2 data-cy="shopStarRatingDetailsHeading">
+        <span jhiTranslate="createyoureventApp.shopStarRating.detail.title">Shop Star Rating</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ shopStarRating.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shopStarRating.stars">Stars</span></dt>
+        <dd>
+          <span>{{ shopStarRating.stars }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shopStarRating.date">Date</span></dt>
+        <dd>
+          <span>{{ shopStarRating.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shopStarRating.comment">Comment</span></dt>
+        <dd>
+          <span>{{ shopStarRating.comment }}</span>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shopStarRating.shop">Shop</span></dt>
+        <dd>
+          <div *ngIf="shopStarRating.shop">
+            <a [routerLink]="['/shop', shopStarRating.shop?.id, 'view']">{{ shopStarRating.shop?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="createyoureventApp.shopStarRating.user">User</span></dt>
+        <dd>
+          <span>{{ shopStarRating.user?.id }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/shop-star-rating', shopStarRating.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

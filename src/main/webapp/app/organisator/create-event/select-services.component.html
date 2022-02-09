@@ -1,0 +1,256 @@
+<div class="container-fluid">
+    <p-toast key="myKey1"></p-toast>
+    <div class="box">
+        <jhi-till [incomings]="revenue" [outgoings]="(investment + revenue)" [investment]="investment"></jhi-till>
+        <hr/>
+        <h3 jhiTranslate="select-services.order-cart">Order cart</h3>
+        <table>
+          <tr>
+            <td><span jhiTranslate="select-products.cost-location">Total location:</span></td><td>{{ totalLocationCosts| currency }}</td>
+          </tr>
+          <tr>
+              <td><span jhiTranslate="select-services.total-products">Total products:</span></td><td>{{ sharedEventService.totalProducts | currency }}</td>
+          </tr>
+          <tr>
+              <td><span jhiTranslate="select-services.total-services">Total services:</span></td><td>{{ sharedEventService.totalServices | currency }}</td>
+          </tr>
+          <tr>
+              <td><span jhiTranslate="select-services.total-ride-costs">Total ride-costs:</span></td><td>{{ sharedEventService.calcRideCosts() | currency }}</td>
+          </tr>
+          <tr style="border-top: 1px solid black">
+              <td><span jhiTranslate="select-services.total-delivery-costs">Total delivery costs:</span></td><td>{{ sharedEventService.totalDeliveryCosts + sharedEventService.totalDeliveryRideCosts | currency }}</td>
+          </tr>
+          <tr>
+              <td><span jhiTranslate="select-services.total-shipping">Total shipping:</span></td><td>{{ sharedEventService.totalShipping| currency }}</td>
+          </tr>
+          <tr style="border-top: 1px solid black">
+              <td style="font-weight: bold;" ><span jhiTranslate="select-services.total-cart">Total in cart:</span></td><td>{{ sharedEventService.totalCart | currency }}</td>
+          </tr>
+        </table>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-4">
+          <div class="alert alert-info" role="alert" jhiTranslate="select-services.category-info">
+            Please select the category from which you would like to choose your services.
+            You can then select the services you want or need from the service offers below.
+          </div>
+          <label class="form-control-label" jhiTranslate="select-services.category" for="field_category">Category</label>
+          <p-dropdown [ngModelOptions]="{standalone: true}" (onChange)="selectCategory($event)" [options]="categories" [(ngModel)]="cat" optionLabel="name" optionValue="value" placeholder="{{ 'createyourevent.select-services.select-category' | translate }}"></p-dropdown>
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-info" role="alert">
+                <h2 jhiTranslate="select-services.distance-slider">Radius-Filter for the service map's (Services's)</h2>
+                <p jhiTranslate="select-services.distance-info">
+                    Below you can sort the service maps by distance. Say how far the service is from the location of the event.
+                    All service maps within this radius are displayed. If you set the slider to 0, all service maps on our platform will be displayed.
+                </p>
+            </div>
+            <h5><span jhiTranslate="distance.distance"></span>{{ distanceSlider }} Km</h5>
+            <p-knob [(ngModel)]="distanceSlider" [step]="5" (onChange)="changeSliderRadius($event)" class="slider"></p-knob>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+
+
+    <div class="box">
+    <p-scrollPanel [style]="{width: '100%', height: '700px'}">
+      <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
+        <ng-container *ngFor="let serviceMap of serviceMaps">
+
+
+          <div class="scene">
+            <div class="flipcard  flipcard-{{ serviceMap.id }}">
+
+
+            <mat-card class="servicemap-card card__face card__face--front">
+                <mat-card-header>
+                <mat-card-title>{{ serviceMap.title }}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <table class="table_offers">
+                        <ng-container *ngFor="let offer of serviceMap.serviceOffers">
+                            <tr class="table_row_offers">
+                                <td class="table_offers">{{ offer.title }}</td>
+                                <td class="table_offers"><small>{{ offer.description }}</small></td>
+                                <td class="table_offers">{{ offer.costHour | currency }}</td>
+                            </tr>
+                        </ng-container>
+                        <tr class="bold table_row_offers">
+                            <td colspan="2" class="table_offers"><span jhiTranslate="servicemap_slider.total-per-hour">Total costs per hour</span></td>
+                            <td class="table_offers">{{ total(serviceMap.serviceOffers) | currency }}</td>
+                        </tr>
+                    </table>
+                    <hr/>
+                    <table>
+                        <tr>
+                            <td colspan="2"><span jhiTranslate="servicemap_slider.ride-costs">Costs per kilometre</span></td>
+                            <td>{{ serviceMap.rideCost.pricePerKilometre | currency }}</td>
+                        </tr>
+                    </table>
+                <hr/>
+                </mat-card-content>
+                <mat-card-actions>
+                    <table>
+                        <tr>
+                            <td><span jhiTranslation="select-products.dateFrom">Date from:</span></td><td><input id="field_dateStart-{{serviceMap.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslation="select-products.timeFrom">Time from:</span></td><td><input id="field_timeStart-{{serviceMap.id}}" type="time"  placeholder="HH:mm"/></td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslation="select-products.dateUntil">Date until:</span></td><td><input id="field_dateEnd-{{serviceMap.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
+                        </tr>
+                        <tr>
+                            <td><span jhiTranslation="select-products.timeUntil">Time until:</span></td><td> <input id="field_timeEnd-{{serviceMap.id}}" type="time"  placeholder="HH:mm"/></td>
+                        </tr>
+                    </table>
+                    <hr/>
+                    <button class="btn btn-primary" (click)="flipCard(serviceMap.id)" [disabled]="isAdding">
+                      <fa-icon icon="industry"></fa-icon>
+                      <span  jhiTranslate="select-services.service">
+                      Service
+                      </span>
+                    </button>
+                    <button id="add-service" class="btn btn-primary" (click)="addToCart(serviceMap)" [disabled]="isAdding">
+                        <fa-icon icon="plus"></fa-icon>
+                        <span  jhiTranslate="select-services.add-to-cart">
+                        Add to Cart
+                        </span>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+
+            <mat-card class="card__face card__face--back">
+              <mat-card-header>
+                <mat-card-title><a [routerLink]="">{{ serviceMap.createYourEventService.name }}</a></mat-card-title>
+                <mat-card-subtitle>{{ serviceMap.createYourEventService.motto }}</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image class="card-image" [src]="'data:' + serviceMap.createYourEventService.logoContentType + ';base64,' + serviceMap.createYourEventService.logo" alt="{{ serviceMap.createYourEventService.name }}">
+              <mat-card-content>
+                <p id="address_box-{{ serviceMap.id }}" class="address">
+                  {{ formatAddress(serviceMap.createYourEventService.address) }}
+                </p>
+                <p>{{ serviceMap.createYourEventService.phone }}</p>
+                <p><a href="{{ serviceMap.createYourEventService.webAddress }}">{{ serviceMap.createYourEventService.webAddress }}</a></p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button class="btn btn-info"  (click)="gotoService(serviceMap.createYourEventService.id)" [disabled]="isAdding">
+                  <fa-icon icon="box"></fa-icon>
+                  <span jhiTranslate="select-products.profile-of">Profile of</span> {{ serviceMap.createYourEventService.name }}
+              </button>
+                <button class="btn btn-primary" (click)="flipCard(serviceMap.id)" [disabled]="isAdding">
+                  <fa-icon icon="box"></fa-icon>
+                  <span  jhiTranslate="select-services.servicemap">
+                  Servicemap
+                  </span>
+              </button>
+              </mat-card-actions>
+            </mat-card>
+
+         </div>
+       </div>
+
+        </ng-container>
+      </div>
+    </p-scrollPanel>
+    </div>
+    <div class="clear"></div>
+
+    <hr/>
+
+    <mat-card class="cart box">
+        <mat-card-header class="cart-header">
+            <mat-card-title><span jhiTranslate="select-services.service-cart">Service-Cart</span></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+        <p-scrollPanel [style]="{width: '100%', height: '700px'}">
+        <ng-container *ngFor="let serviceMapOrder of sharedEventService.selectedEventServiceMapOrders">
+            <mat-card class="servicemap-card">
+                <mat-card-header>
+                <mat-card-title>{{ serviceMapOrder.serviceMap.title }}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <table>
+                        <tr class="table_row_offers">
+                            <td><span jhiTranslation="select-products.dateFrom">Date from:</span></td>
+                        </tr>
+                        <tr class="table_row_offers">
+                            <td>{{ serviceMapOrder.dateFrom | date:'medium' }}</td>
+                        </tr>
+                        <tr class="table_row_offers">
+                            <td><span jhiTranslation="select-products.dateUntil">Date until:</span></td>
+                        </tr>
+                        <tr class="table_row_offers">
+                            <td>{{ serviceMapOrder.dateUntil | date:'medium' }}</td>
+                        </tr>
+                    </table>
+                    <hr/>
+                    <table class="table_offers">
+                        <ng-container *ngFor="let offer of serviceMapOrder.serviceMap.serviceOffers">
+                            <tr class="table_row_offers">
+                                <td>{{ offer.title }}</td>
+                                <td><small>{{ offer.description }}</small></td>
+                                <td>{{ offer.costHour | currency }}</td>
+                            </tr>
+                        </ng-container>
+                        <tr class="bold table_row_offers">
+                            <td colspan="2"><span jhiTranslate="servicemap_slider.total-per-hour">Total costs per hour</span></td>
+                            <td>{{ total(serviceMapOrder.serviceMap.serviceOffers) | currency }}</td>
+                        </tr>
+                        <tr class="bold table_row_offers">
+                            <td colspan="2"><span jhiTranslate="select-services.total-hours">Total hours</span></td>
+                            <td>{{ serviceMapOrder.totalHours }}</td>
+                        </tr>
+                        <tr class="bold table_row_offers">
+                            <td colspan="2"><span jhiTranslate="select-services.total-work-costs">Total costs</span></td>
+                            <td>{{ serviceMapOrder.total | currency }}</td>
+                        </tr>
+                    </table>
+                    <hr/>
+                    <table>
+                        <tr class="bold table_row_offers">
+                            <td colspan="2"><span jhiTranslate="servicemap_slider.ride-costs">Costs per kilometre</span></td>
+                            <td>{{ serviceMapOrder.serviceMap.rideCost.pricePerKilometre | currency }}</td>
+                        </tr>
+                        <tr class="bold table_row_offers">
+                            <td colspan="2"><span jhiTranslate="select-services.kilometre">Kilometre</span></td>
+                            <td>{{ serviceMapOrder.kilometre }} Km</td>
+                        </tr>
+                        <tr class="bold table_row_offers">
+                            <td colspan="2"><span jhiTranslate="select-services.total-ride-costs">Total ride costs</span></td>
+                            <td>{{ serviceMapOrder.rideCosts | currency }}</td>
+                        </tr>
+                    </table>
+                    <hr/>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button id="add-service" class="btn btn-primary" (click)="removeFromCart(serviceMapOrder)" [disabled]="isAdding">
+                        <fa-icon icon="plus"></fa-icon>
+                        <span  jhiTranslate="select-services.remove-from-cart">
+                        Remove from Cart
+                        </span>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </ng-container>
+    </p-scrollPanel>
+    </mat-card-content>
+    </mat-card>
+    <div class="clear"></div>
+
+    <hr/>
+
+    <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" id="save-entity" class="btn btn-primary" (click)="save()" [disabled]="isSaving">
+            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="select-products.overview">Overview</span>
+        </button>
+    </div>
+
+</div>

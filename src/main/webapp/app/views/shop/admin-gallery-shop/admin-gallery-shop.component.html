@@ -1,0 +1,26 @@
+<ng-container *ngIf="shop && user && !(images?.length >= 10)">
+    <p-fileUpload name="files" [url]="url" (onUpload)="onUpload($event)"
+            [multiple]="true" accept="image/*" [maxFileSize]="1000000" [fileLimit]="fileLimit">
+        <ng-template pTemplate="content">
+            <ul *ngIf="uploadedFiles.length">
+                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+            </ul>
+        </ng-template>
+    </p-fileUpload>
+</ng-container>
+<p>
+    <ng-container *ngFor="let image of images">
+        <div class="image">
+            <img [src]="'data:' + image.imageContentType + ';base64,' + image.image" style="max-height: 150px;" alt="image.name"/>
+
+            <button (click)="deleteImage(image.id)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+            </button>
+        </div>
+    </ng-container>
+</p>
+<hr/>
+<p>
+    <jhi-gallery-shop [images]="images"></jhi-gallery-shop>
+</p>

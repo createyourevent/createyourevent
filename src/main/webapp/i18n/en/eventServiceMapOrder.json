@@ -1,0 +1,38 @@
+{
+  "createyoureventApp": {
+    "eventServiceMapOrder": {
+      "home": {
+        "title": "Event Service Map Orders",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Event Service Map Order",
+        "createOrEditLabel": "Create or edit a Event Service Map Order",
+        "notFound": "No Event Service Map Orders found"
+      },
+      "created": "A new Event Service Map Order is created with identifier {{ param }}",
+      "updated": "A Event Service Map Order is updated with identifier {{ param }}",
+      "deleted": "A Event Service Map Order is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Event Service Map Order {{ id }}?"
+      },
+      "detail": {
+        "title": "Event Service Map Order"
+      },
+      "id": "ID",
+      "date": "Date",
+      "dateFrom": "Date From",
+      "dateUntil": "Date Until",
+      "costHour": "Cost Hour",
+      "rideCosts": "Ride Costs",
+      "total": "Total",
+      "totalHours": "Total Hours",
+      "kilometre": "Kilometre",
+      "billed": "Billed",
+      "seen": "Seen",
+      "approved": "Approved",
+      "feeTransaction": "Fee Transaction",
+      "event": "Event",
+      "serviceMap": "Service Map",
+      "cart": "Cart"
+    }
+  }
+}

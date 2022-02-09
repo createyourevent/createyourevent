@@ -1,0 +1,24 @@
+.card-container {
+  box-shadow: 10px 10px 7px -3px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 10px 7px -3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 7px -3px rgba(0, 0, 0, 0.75);
+  padding: 10px;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#a9e4f7+0,0fb4e7+100;Ble+3D+%235 */
+  background: #a9e4f7; /* Old browsers */
+  background: -moz-linear-gradient(top, #a9e4f7 0%, #0fb4e7 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #a9e4f7 0%, #0fb4e7 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #a9e4f7 0%, #0fb4e7 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9e4f7', endColorstr='#0fb4e7',GradientType=0 ); /* IE6-9 */
+  margin: 10px;
+}
+
+.title {
+  font-family: 'Abril Fatface', cursive;
+}
+
+.img {
+  margin: 10px auto;
+  text-align: center;
+}
+
+

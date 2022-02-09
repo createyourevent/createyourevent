@@ -1,0 +1,28 @@
+{
+  "createyoureventApp": {
+    "userExtension": {
+      "home": {
+        "title": "User Extensions",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "User Extension erstellen",
+        "createOrEditLabel": "User Extension erstellen oder bearbeiten",
+        "notFound": "Keine User Extensions gefunden"
+      },
+      "created": "User Extension erstellt mit ID {{ param }}",
+      "updated": "User Extension aktualisiert mit ID {{ param }}",
+      "deleted": "User Extension gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll User Extension {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "User Extension"
+      },
+      "id": "ID",
+      "address": "Address",
+      "phone": "Phone",
+      "loggedIn": "Logged In",
+      "points": "Points",
+      "user": "User"
+    }
+  }
+}

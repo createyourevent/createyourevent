@@ -1,0 +1,94 @@
+<jhi-alert-error></jhi-alert-error>
+
+<mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span jhiTranslate="create-your-event-service-detail.detail">Detail's</span>
+      </ng-template>
+
+      <div class="container-fluid">
+        <div class="row box_green">
+            <div class="col-md-8">
+                <h1><span class="title">{{ createYourEventService.name }}</span></h1>
+                <h2>{{ createYourEventService.motto }}</h2>
+                <dt><span jhiTranslate="create-your-event-service-detail.category">Category</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'createyoureventApp.ServiceCategory.' + createYourEventService.category }}">{{ createYourEventService.category }}</span>
+                </dd>
+            </div>
+            <div class="col-md-4">
+                <div *ngIf="createYourEventService.logo!" class="margin-top">
+                        <img [src]="'data:' + createYourEventService.logoContentType + ';base64,' + createYourEventService.logo" style="max-width: 375px;" alt="createYourEventService image" class="img-thumbnail"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="box">
+                            <div class="ql-snow">
+                                <div class="ql-editor">
+                                    <div [innerHTML]="createYourEventService.description | safeHtml"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box">
+                            <div>{{ address }}</div>
+                            <div>{{ place }}</div>
+                            <div>{{ land }}</div>
+                        </div>
+                        <div class="box">
+                            <p-gmap #gmap [options]="options" [overlays]="overlays" [style]="{'width':'100%','height':'250px'}" (onMapReady)="setMap($event)"></p-gmap>
+                        </div>
+                        <div class="box">
+                            <div>{{ createYourEventService.phone }}</div>
+                            <div><a href="{{ createYourEventService.webAddress }}">{{ createYourEventService.webAddress }}</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box_violet">
+            <jhi-servicemap-slider [serviceMaps]="serviceMaps"></jhi-servicemap-slider>
+        </div>
+        </div>
+        </mat-tab>
+
+        <ng-container *ngIf="images.length > 0">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <span jhiTranslate="create-your-event-service-detail.gallery">Gallery</span>
+                </ng-template>
+                <jhi-gallery-service [images]="images"></jhi-gallery-service>
+            </mat-tab>
+        </ng-container>
+
+        <ng-container *ngIf="mp3s.length > 0">
+          <mat-tab>
+              <ng-template mat-tab-label>
+                  <span jhiTranslate="create-your-event-service-detail.mp3-player">MP3 player</span>
+              </ng-template>
+              <jhi-mp3-player [user]="user" [service]="createYourEventService" [mp3s]="mp3s"></jhi-mp3-player>
+          </mat-tab>
+      </ng-container>
+
+        </mat-tab-group>
+            <ng-container *jhiHasAnyAuthority="'ROLE_USER'">
+                <hr/>
+                    <jhi-like-dislike [like]="like" [dislike]="dislike" [disabled]="!rated" (liked)="onVoted($event)"></jhi-like-dislike>
+                    <jhi-star-rating [val]="stars" (rated)="onChangesStars($event)" [disabled]="ratedStars"></jhi-star-rating>
+                <hr/>
+
+            </ng-container>
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+            <ng-container *jhiHasAnyAuthority="'ROLE_USER'">
+                <hr/>
+                <jhi-comment-box [comments]="comments" (comment)="onCommented($event)" (answer)="onAnswered($event)"></jhi-comment-box>
+            </ng-container>

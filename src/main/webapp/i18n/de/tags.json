@@ -1,0 +1,29 @@
+{
+  "createyoureventApp": {
+    "tags": {
+      "home": {
+        "title": "Tags",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Tags erstellen",
+        "createOrEditLabel": "Tags erstellen oder bearbeiten",
+        "notFound": "Keine Tags gefunden"
+      },
+      "created": "Tags erstellt mit ID {{ param }}",
+      "updated": "Tags aktualisiert mit ID {{ param }}",
+      "deleted": "Tags gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Tags {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Tags"
+      },
+      "id": "ID",
+      "tag": "Tag",
+      "event": "Event",
+      "product": "Product",
+      "shop": "Shop",
+      "service": "Service",
+      "organization": "Organization"
+    }
+  }
+}

@@ -1,0 +1,85 @@
+<mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span jhiTranslate="admin-dashboard-supplier.calculation">Calculation</span>
+      </ng-template>
+
+      <div class="alert alert-info" role="alert">
+        <h2 jhiTranslate="admin-dashboard-supplier.calculation-title">Balance sheet and calculations for this product</h2>
+        <p jhiTranslate="admin-dashboard-supplier.calculation-info">
+           Below are the most important balance sheet and calculation data for this product, which could be of interest to you.
+        </p>
+    </div>
+      <hr/>
+      <jhi-admin-calculation-product [product]="product"></jhi-admin-calculation-product>
+
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span jhiTranslate="admin-dashboard-supplier.comments-feedback">Comments and feedback</span>
+      </ng-template>
+
+      <div class="alert alert-info" role="alert">
+            <h2 jhiTranslate="admin-dashboard-supplier.comments-title">All comment's of this product</h2>
+            <p jhiTranslate="admin-dashboard-supplier.comments-info">
+                Below you will find all comments that have been made for this product. If you would like to reply personally to a comment, you can do so directly below via the email address.
+            </p>
+        </div>
+        <hr/>
+        <jhi-admin-comment-box [comments]="comments" (deleted)="onDelete($event)"></jhi-admin-comment-box>
+
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+          <span jhiTranslate="admin-dashboard-supplier.ratings">Rating's</span>
+        </ng-template>
+
+        <div class="alert alert-info" role="alert">
+            <h2 jhiTranslate="admin-dashboard-supplier.ratings-title">All user rating's</h2>
+            <p jhiTranslate="admin-dashboard-supplier.ratings-info">
+                Below you can see all likes / dislikes that have been given for this product of each individual user. You will also find the email address of the user who has liked there. You can also contact them if you have any questions about the decision.
+            </p>
+        </div>
+        <hr/>
+        <jhi-admin-star-rating [stars]="stars"></jhi-admin-star-rating>
+        <hr/>
+        <jhi-admin-like-dislike [likes]="likes" [dislikes]="dislikes" (deletedLikes)="onDeleteLikes($event)" (deletedDislikes)="onDeleteDislikes($event)"></jhi-admin-like-dislike>
+
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span jhiTranslate="admin-dashboard-supplier.gallery">Gallery</span>
+        </ng-template>
+        <jhi-admin-gallery-product [product]="product" [user]="user"></jhi-admin-gallery-product>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span jhiTranslate="admin-dashboard-service.music">Music</span>
+        </ng-template>
+
+        <div class="alert alert-info" role="alert">
+            <h2 jhiTranslate="admin-dashboard-supplier.music-title">MP3 Upload form for this product</h2>
+            <p jhiTranslate="admin-dashboard-service.music-info">
+              You can upload a maximum of 5 pieces of MP3 music below. The maximum file size is 15 MB.
+            </p>
+        </div>
+          <hr/>
+          <jhi-mp3-player-admin [product]="product" [user]="user" url="/api/music/{{product.id}}/{{user.id}}/product"></jhi-mp3-player-admin>
+      </mat-tab>
+
+  </mat-tab-group>
+
+  <div class="row">
+    <div class="col-md-12">
+        <hr/>
+        <div class="btn-cancel">
+            <button type="button" id="cancel-save" class="btn btn-secondary btn-cancel" (click)="previousState()">
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+          </button>
+        </div>
+    </div>
+</div>
