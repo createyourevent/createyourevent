@@ -72,6 +72,9 @@
           <th scope="col" jhiSortBy="rentType">
             <span jhiTranslate="createyoureventApp.organization.rentType">Rent Type</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="rentable">
+            <span jhiTranslate="createyoureventApp.organization.rentable">Rentable</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="user.id">
             <span jhiTranslate="createyoureventApp.organization.user">User</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -107,6 +110,7 @@
           <td>{{ organization.placeNumber }}</td>
           <td>{{ organization.price }}</td>
           <td jhiTranslate="{{ 'createyoureventApp.RentType.' + organization.rentType }}">{{ organization.rentType }}</td>
+          <td>{{ organization.rentable }}</td>
           <td>
             {{ organization.user?.id }}
           </td>

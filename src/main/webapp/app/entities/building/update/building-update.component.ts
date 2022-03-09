@@ -9,6 +9,8 @@ import { IBuilding, Building } from '../building.model';
 import { BuildingService } from '../service/building.service';
 import { IOrganization } from 'app/entities/organization/organization.model';
 import { OrganizationService } from 'app/entities/organization/service/organization.service';
+import { IUser } from 'app/entities/user/user.model';
+import { UserService } from 'app/entities/user/user.service';
 
 @Component({
   selector: 'jhi-building-update',
@@ -18,16 +20,19 @@ export class BuildingUpdateComponent implements OnInit {
   isSaving = false;
 
   organizationsCollection: IOrganization[] = [];
+  usersSharedCollection: IUser[] = [];
 
   editForm = this.fb.group({
     id: [],
     surface: [],
     organization: [],
+    user: [],
   });
 
   constructor(
     protected buildingService: BuildingService,
     protected organizationService: OrganizationService,
+    protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -58,6 +63,10 @@ export class BuildingUpdateComponent implements OnInit {
     return item.id!;
   }
 
+  trackUserById(index: number, item: IUser): string {
+    return item.id!;
+  }
+
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IBuilding>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
       () => this.onSaveSuccess(),
@@ -82,12 +91,14 @@ export class BuildingUpdateComponent implements OnInit {
       id: building.id,
       surface: building.surface,
       organization: building.organization,
+      user: building.user,
     });
 
     this.organizationsCollection = this.organizationService.addOrganizationToCollectionIfMissing(
       this.organizationsCollection,
       building.organization
     );
+    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(this.usersSharedCollection, building.user);
   }
 
   protected loadRelationshipsOptions(): void {
@@ -100,6 +111,12 @@ export class BuildingUpdateComponent implements OnInit {
         )
       )
       .subscribe((organizations: IOrganization[]) => (this.organizationsCollection = organizations));
+
+    this.userService
+      .query()
+      .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
+      .pipe(map((users: IUser[]) => this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value)))
+      .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
   }
 
   protected createFromForm(): IBuilding {
@@ -108,6 +125,7 @@ export class BuildingUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       surface: this.editForm.get(['surface'])!.value,
       organization: this.editForm.get(['organization'])!.value,
+      user: this.editForm.get(['user'])!.value,
     };
   }
 }

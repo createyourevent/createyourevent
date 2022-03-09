@@ -1,0 +1,24 @@
+{
+  "createyoureventApp": {
+    "slotListOrange": {
+      "home": {
+        "title": "Slot List Oranges",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Slot List Orange erstellen",
+        "createOrEditLabel": "Slot List Orange erstellen oder bearbeiten",
+        "notFound": "Keine Slot List Oranges gefunden"
+      },
+      "created": "Slot List Orange erstellt mit ID {{ param }}",
+      "updated": "Slot List Orange aktualisiert mit ID {{ param }}",
+      "deleted": "Slot List Orange gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Slot List Orange {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Slot List Orange"
+      },
+      "id": "ID",
+      "coupons": "Coupons"
+    }
+  }
+}

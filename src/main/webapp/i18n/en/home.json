@@ -41,6 +41,17 @@
     "drive-service": "We collect your products for an event",
     "additional-services": "Ask us if you need additional services. Maybe we can help you.",
     "organization": "Organizations",
-    "info-organization": "If you have a restaurant, club, hotel or just any other building, you can register this via www.createyourevent.org and then you can rent it out for events that can be registered and planned with us. The organizer of an event now has the possibility that when he plans an event, he can also choose an organization that you offer as the organization owner. Furthermore, a profile is created for each organization on www.createyourevent.org, which is advertised free of charge on the Internet."
+    "info-organization": "If you have a restaurant, club, hotel or just any other building, you can register this via www.createyourevent.org and then you can rent it out for events that can be registered and planned with us. The organizer of an event now has the possibility that when he plans an event, he can also choose an organization that you offer as the organization owner. Furthermore, a profile is created for each organization on www.createyourevent.org, which is advertised free of charge on the Internet.",
+    "bell": "Bell",
+    "plum": "Plumb",
+    "orange": "Orange",
+    "cherry": "Cherry",
+    "slot-machine": "Slot machine",
+    "slot-machine.info": "Join our slot machine game. Every month we raffle vouchers for events that are planned and organized on our platform. Everyone can register with us and plan and advertise their own events. We at Create Your Event will issue and pay out vouchers worth CHF 300 every month. To participate in the game you need to register on our platform, which is free if you're just an event attendee, and earn points on Create Your Event. We explain how you can collect points on our platform at https://createyourevent.org/points-list. A game costs you 50 points. We wish good luck.",
+    "won": "You won!!!",
+    "won.info.clock": "Congratulation! You got 3 bells in a row...",
+    "won.info.orange": "Congratulation! You got 3 oranges in a row...",
+    "won.info.cherry": "Congratulation! You got 3 cherries in a row...",
+    "won.info.plum": "Congratulation! You got 3 plums in a row..."
   }
 }

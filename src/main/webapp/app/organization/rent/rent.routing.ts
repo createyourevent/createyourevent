@@ -9,27 +9,36 @@ const routes: Routes = [
     component: RentComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'routes.dashboard-organization.title'
+      pageTitle: 'routes.dashboard-organization.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'organization/:id/rent-hotel',
     component: RentComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'routes.dashboard-organization.title'
+      pageTitle: 'routes.dashboard-organization.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'organization/:id/rent-restaurant',
     component: RentComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'routes.dashboard-organization.title'
+      pageTitle: 'routes.dashboard-organization.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'organization/:id/rent-building',
+    component: RentComponent,
+    data: {
+      authorities: [Authority.USER],
+      pageTitle: 'routes.dashboard-organization.title',
+    },
+    canActivate: [UserRouteAccessService],
   },
 ];
 

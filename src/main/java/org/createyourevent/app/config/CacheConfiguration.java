@@ -162,6 +162,15 @@ public class CacheConfiguration {
             createCache(cm, org.createyourevent.app.domain.Event.class.getName() + ".organizations");
             createCache(cm, org.createyourevent.app.domain.OrganizationReservation.class.getName() + ".events");
             createCache(cm, org.createyourevent.app.domain.Event.class.getName() + ".organizationReservations");
+            createCache(cm, org.createyourevent.app.domain.Coupon.class.getName());
+            createCache(cm, org.createyourevent.app.domain.SlotListClock.class.getName());
+            createCache(cm, org.createyourevent.app.domain.SlotListClock.class.getName() + ".coupons");
+            createCache(cm, org.createyourevent.app.domain.SlotListCherry.class.getName());
+            createCache(cm, org.createyourevent.app.domain.SlotListCherry.class.getName() + ".coupons");
+            createCache(cm, org.createyourevent.app.domain.SlotListOrange.class.getName());
+            createCache(cm, org.createyourevent.app.domain.SlotListOrange.class.getName() + ".coupons");
+            createCache(cm, org.createyourevent.app.domain.SlotListPlum.class.getName());
+            createCache(cm, org.createyourevent.app.domain.SlotListPlum.class.getName() + ".coupons");
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,47 @@
+<div class="title-points-costs" jhiTranslate="slot-machine.one-game-costs">One game will use</div>
+<div class="points-count">{{ pointsStart }} {{ 'slot-machine.points' | translate }}</div>
+
+<ng-container *ngIf="!enoughtPoints">
+  <div class="text-align-center">
+    <img class="slot-machine" src="../../../../content/images/slot-machine/slotmachine.png" />
+  </div>
+</ng-container>
+<ng-container *ngIf="enoughtPoints">
+  <div id="slot-machine" class="slot-machine"></div>
+</ng-container>
+
+<ng-container [ngSwitch]="state">
+  <div *ngSwitchCase="'new'">
+    <div class="status">
+      <div jhiTranslate="slot-machine.lets-play">Let's play...</div>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="'lost'">
+    <div class="status">
+      <div jhiTranslate="slot-machine.lost">Lost</div>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="'win'">
+    <div class="status">
+      <div jhiTranslate="slot-machine.win">Win</div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!enoughtPoints">
+  <div class="container-not-enought-points">
+    <div class="box-not-enought-points" jhiTranslate="slot-machine.not-enought-points">
+      You don't have enough points to play. Visit www.createyourevent.org/points-list to find out how to get more points on Create Your
+      Event to play.
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="enoughtPoints">
+  <div class="button-slot-machine">
+    <button (click)="play()" pButton pRipple type="button" class="p-button-rounded p-button-info play-button">
+      <fa-icon icon="gamepad"></fa-icon>&nbsp;<span>{{ 'slot-machine.play-game' | translate | uppercase }}</span>
+    </button>
+  </div>
+</ng-container>

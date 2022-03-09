@@ -1,0 +1,24 @@
+{
+  "createyoureventApp": {
+    "slotListPlum": {
+      "home": {
+        "title": "Slot List Plums",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Slot List Plum",
+        "createOrEditLabel": "Create or edit a Slot List Plum",
+        "notFound": "No Slot List Plums found"
+      },
+      "created": "A new Slot List Plum is created with identifier {{ param }}",
+      "updated": "A Slot List Plum is updated with identifier {{ param }}",
+      "deleted": "A Slot List Plum is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Slot List Plum {{ id }}?"
+      },
+      "detail": {
+        "title": "Slot List Plum"
+      },
+      "id": "ID",
+      "coupons": "Coupons"
+    }
+  }
+}

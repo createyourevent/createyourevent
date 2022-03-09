@@ -56,6 +56,9 @@
     "transactions": "Transaktionen Datatrans",
     "search-organizations": "Suche Organisationen",
     "pay-it-forward-admin": "Pay it forward Admin",
-    "pay-it-forward": "Pay it Forward"
+    "pay-it-forward": "Pay it Forward",
+    "admin-coupons": "Administration Gutscheine",
+    "coupons": "Gutscheine",
+    "admin-slot-machine": "Administration Einarmiger Bandit"
   }
 }

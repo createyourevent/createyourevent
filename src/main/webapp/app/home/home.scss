@@ -101,3 +101,84 @@
 .title_font {
   font-family: 'Vast Shadow', cursive;
 }
+
+.title-slot-machine {
+  font-family: 'Chango', cursive;
+  color: yellow;
+  text-shadow: 5px 5px black;
+  text-align: center;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.white {
+  color: #fff;
+}
+
+.shadow {
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
+}
+
+.text-shadow {
+  text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
+}
+
+.center {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.p-card-header {
+  padding: 1rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+.p-card .p-card-content {
+  padding: 1rem 0;
+  color: #fff;
+}
+
+.p-card .p-card-footer {
+  padding: 1rem 0 0 0;
+  color: #fff;
+  font-weight: bold;
+}
+
+.p-card {
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#6db3f2+0,54a3ee+50,3690f0+51,1e69de+100;Blue+Gloss+%233 */
+  background: rgb(109, 179, 242); /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    rgb(109, 179, 242) 0%,
+    rgb(84, 163, 238) 50%,
+    rgb(54, 144, 240) 51%,
+    rgb(30, 105, 222) 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    rgb(109, 179, 242) 0%,
+    rgb(84, 163, 238) 50%,
+    rgb(54, 144, 240) 51%,
+    rgb(30, 105, 222) 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    rgb(109, 179, 242) 0%,
+    rgb(84, 163, 238) 50%,
+    rgb(54, 144, 240) 51%,
+    rgb(30, 105, 222) 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6db3f2', endColorstr='#1e69de',GradientType=0 ); /* IE6-9 */
+  color: #333333;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
+  border-radius: 3px;
+}

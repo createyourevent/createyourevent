@@ -52,11 +52,19 @@ import { RouterModule } from '@angular/router';
       },
       {
         path: 'tetris-admin',
-        loadChildren: () => import('../views/games/tetris/admin-tetris/admin-tetris.module').then(m => m.AdminTetrisModule ),
+        loadChildren: () => import('../views/games/tetris/admin-tetris/admin-tetris.module').then(m => m.AdminTetrisModule),
       },
       {
         path: 'adminbonds',
         loadChildren: () => import('./admin-bonds/admin-bonds.module').then(m => m.AdminBondsModule),
+      },
+      {
+        path: 'admincoupons',
+        loadChildren: () => import('./admin-coupons/admin-coupons.module').then(m => m.AdminCouponsModule),
+      },
+      {
+        path: 'adminslotmachine',
+        loadChildren: () => import('./admin-slot-machine/admin-slot-machine.module').then(m => m.AdminSlotMachineModule),
       },
       {
         path: 'transactions',
@@ -67,7 +75,6 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./pay-it-forward-admin/pay-it-forward-admin.module').then(m => m.PayItForwardAdminModule),
       },
       /* jhipster-needle-add-admin-route - JHipster will add admin routes here */
-
     ]),
   ],
 })

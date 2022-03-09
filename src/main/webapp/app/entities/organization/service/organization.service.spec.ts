@@ -37,6 +37,7 @@ describe('Organization Service', () => {
       placeNumber: 0,
       price: 0,
       rentType: RentType.HOURLY,
+      rentable: false,
     };
   });
 
@@ -85,6 +86,7 @@ describe('Organization Service', () => {
           placeNumber: 1,
           price: 1,
           rentType: 'BBBBBB',
+          rentable: true,
         },
         elemDefault
       );
@@ -141,6 +143,7 @@ describe('Organization Service', () => {
           placeNumber: 1,
           price: 1,
           rentType: 'BBBBBB',
+          rentable: true,
         },
         elemDefault
       );
@@ -192,7 +195,7 @@ describe('Organization Service', () => {
       });
 
       it('should add only unique Organization to an array', () => {
-        const organizationArray: IOrganization[] = [{ id: 123 }, { id: 456 }, { id: 30519 }];
+        const organizationArray: IOrganization[] = [{ id: 123 }, { id: 456 }, { id: 36144 }];
         const organizationCollection: IOrganization[] = [{ id: 123 }];
         expectedResult = service.addOrganizationToCollectionIfMissing(organizationCollection, ...organizationArray);
         expect(expectedResult).toHaveLength(3);

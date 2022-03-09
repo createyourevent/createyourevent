@@ -42,6 +42,7 @@ export class OrganizationUpdateComponent implements OnInit {
     placeNumber: [],
     price: [],
     rentType: [],
+    rentable: [],
     user: [],
   });
 
@@ -142,6 +143,7 @@ export class OrganizationUpdateComponent implements OnInit {
       placeNumber: organization.placeNumber,
       price: organization.price,
       rentType: organization.rentType,
+      rentable: organization.rentable,
       user: organization.user,
     });
 
@@ -174,6 +176,7 @@ export class OrganizationUpdateComponent implements OnInit {
       placeNumber: this.editForm.get(['placeNumber'])!.value,
       price: this.editForm.get(['price'])!.value,
       rentType: this.editForm.get(['rentType'])!.value,
+      rentable: this.editForm.get(['rentable'])!.value,
       user: this.editForm.get(['user'])!.value,
     };
   }

@@ -39,6 +39,9 @@
           <th scope="col" jhiSortBy="organization.id">
             <span jhiTranslate="createyoureventApp.building.organization">Organization</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="user.id">
+            <span jhiTranslate="createyoureventApp.building.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -52,6 +55,9 @@
             <div *ngIf="building.organization">
               <a [routerLink]="['/organization', building.organization?.id, 'view']">{{ building.organization?.id }}</a>
             </div>
+          </td>
+          <td>
+            {{ building.user?.id }}
           </td>
           <td class="text-right">
             <div class="btn-group">

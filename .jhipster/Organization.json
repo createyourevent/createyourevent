@@ -62,6 +62,10 @@
       "fieldName": "rentType",
       "fieldType": "RentType",
       "fieldValues": "HOURLY,HALFDAY,DAY"
+    },
+    {
+      "fieldName": "rentable",
+      "fieldType": "Boolean"
     }
   ],
   "relationships": [

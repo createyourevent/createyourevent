@@ -1,0 +1,63 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="urs_baumann_1977 (generated)" id="1644678035810-1">
+        <createTable tableName="slot_list_cherry">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="slot_list_cherryPK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1644678035810-2">
+        <createTable tableName="slot_list_clock">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="slot_list_clockPK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1644678035810-3">
+        <createTable tableName="slot_list_orange">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="slot_list_orangePK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1644678035810-4">
+        <createTable tableName="slot_list_plum">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="slot_list_plumPK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1644678035810-5">
+        <addColumn tableName="coupon">
+            <column name="slot_list_cherry_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1644678035810-6">
+        <addColumn tableName="coupon">
+            <column name="slot_list_clock_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1644678035810-7">
+        <addColumn tableName="coupon">
+            <column name="slot_list_orange_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1644678035810-8">
+        <addColumn tableName="coupon">
+            <column name="slot_list_plum_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1644678035810-9">
+        <addForeignKeyConstraint baseColumnNames="slot_list_cherry_id" baseTableName="coupon" constraintName="FKevp5g5cm6m6ibyxt63qk8xlt5" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="slot_list_cherry" validate="true"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1644678035810-10">
+        <addForeignKeyConstraint baseColumnNames="slot_list_clock_id" baseTableName="coupon" constraintName="FKnwvakxk1ln989oipmbhn72ko6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="slot_list_clock" validate="true"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1644678035810-11">
+        <addForeignKeyConstraint baseColumnNames="slot_list_orange_id" baseTableName="coupon" constraintName="FKok1ayqt92w1xbq5dvdhtfu0d4" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="slot_list_orange" validate="true"/>
+    </changeSet>
+    <changeSet author="urs_baumann_1977 (generated)" id="1644678035810-12">
+        <addForeignKeyConstraint baseColumnNames="slot_list_plum_id" baseTableName="coupon" constraintName="FKr3pmidsdfs0nkthr22x8eflqj" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="slot_list_plum" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

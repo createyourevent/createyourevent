@@ -1,0 +1,24 @@
+{
+  "createyoureventApp": {
+    "slotListClock": {
+      "home": {
+        "title": "Slot List Clocks",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Slot List Clock erstellen",
+        "createOrEditLabel": "Slot List Clock erstellen oder bearbeiten",
+        "notFound": "Keine Slot List Clocks gefunden"
+      },
+      "created": "Slot List Clock erstellt mit ID {{ param }}",
+      "updated": "Slot List Clock aktualisiert mit ID {{ param }}",
+      "deleted": "Slot List Clock gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Slot List Clock {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Slot List Clock"
+      },
+      "id": "ID",
+      "coupons": "Coupons"
+    }
+  }
+}

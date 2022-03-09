@@ -19,7 +19,8 @@
       },
       "id": "ID",
       "surface": "Surface",
-      "organization": "Organization"
+      "organization": "Organization",
+      "user": "User"
     }
   }
 }

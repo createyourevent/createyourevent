@@ -24,6 +24,10 @@
             <a [routerLink]="['/organization', building.organization?.id, 'view']">{{ building.organization?.id }}</a>
           </div>
         </dd>
+        <dt><span jhiTranslate="createyoureventApp.building.user">User</span></dt>
+        <dd>
+          <span>{{ building.user?.id }}</span>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

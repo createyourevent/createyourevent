@@ -1,0 +1,24 @@
+{
+  "createyoureventApp": {
+    "slotListCherry": {
+      "home": {
+        "title": "Slot List Cherries",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Slot List Cherry erstellen",
+        "createOrEditLabel": "Slot List Cherry erstellen oder bearbeiten",
+        "notFound": "Keine Slot List Cherries gefunden"
+      },
+      "created": "Slot List Cherry erstellt mit ID {{ param }}",
+      "updated": "Slot List Cherry aktualisiert mit ID {{ param }}",
+      "deleted": "Slot List Cherry gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Slot List Cherry {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Slot List Cherry"
+      },
+      "id": "ID",
+      "coupons": "Coupons"
+    }
+  }
+}

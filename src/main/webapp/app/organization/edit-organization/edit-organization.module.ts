@@ -6,15 +6,10 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { QuillModule } from 'ngx-quill';
 import { EditOrganizationComponent } from './edit-organization.component';
 import { EDIT_ORGANIZATION_ROUTE } from './edit-organization.route';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule.forChild(EDIT_ORGANIZATION_ROUTE),
-    GooglePlaceModule,
-    QuillModule
-  ],
-  declarations: [EditOrganizationComponent]
+  imports: [CommonModule, SharedModule, RouterModule.forChild(EDIT_ORGANIZATION_ROUTE), GooglePlaceModule, QuillModule, MatCheckboxModule],
+  declarations: [EditOrganizationComponent],
 })
-export class EditOrganizationModule { }
+export class EditOrganizationModule {}

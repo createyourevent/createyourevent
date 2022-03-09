@@ -12,6 +12,9 @@ import { IBuilding, Building } from '../building.model';
 import { IOrganization } from 'app/entities/organization/organization.model';
 import { OrganizationService } from 'app/entities/organization/service/organization.service';
 
+import { IUser } from 'app/entities/user/user.model';
+import { UserService } from 'app/entities/user/user.service';
+
 import { BuildingUpdateComponent } from './building-update.component';
 
 describe('Building Management Update Component', () => {
@@ -20,6 +23,7 @@ describe('Building Management Update Component', () => {
   let activatedRoute: ActivatedRoute;
   let buildingService: BuildingService;
   let organizationService: OrganizationService;
+  let userService: UserService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -34,6 +38,7 @@ describe('Building Management Update Component', () => {
     activatedRoute = TestBed.inject(ActivatedRoute);
     buildingService = TestBed.inject(BuildingService);
     organizationService = TestBed.inject(OrganizationService);
+    userService = TestBed.inject(UserService);
 
     comp = fixture.componentInstance;
   });
@@ -57,16 +62,38 @@ describe('Building Management Update Component', () => {
       expect(comp.organizationsCollection).toEqual(expectedCollection);
     });
 
+    it('Should call User query and add missing value', () => {
+      const building: IBuilding = { id: 456 };
+      const user: IUser = { id: '59ec4a1a-eb5f-4a68-8fb3-a6c84b0d7b07' };
+      building.user = user;
+
+      const userCollection: IUser[] = [{ id: '9cb29996-5313-410b-9b84-b12c303972e9' }];
+      jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
+      const additionalUsers = [user];
+      const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
+      jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ building });
+      comp.ngOnInit();
+
+      expect(userService.query).toHaveBeenCalled();
+      expect(userService.addUserToCollectionIfMissing).toHaveBeenCalledWith(userCollection, ...additionalUsers);
+      expect(comp.usersSharedCollection).toEqual(expectedCollection);
+    });
+
     it('Should update editForm', () => {
       const building: IBuilding = { id: 456 };
       const organization: IOrganization = { id: 64627 };
       building.organization = organization;
+      const user: IUser = { id: 'ceffa7aa-cff3-48a0-8bbe-bd88a9513330' };
+      building.user = user;
 
       activatedRoute.data = of({ building });
       comp.ngOnInit();
 
       expect(comp.editForm.value).toEqual(expect.objectContaining(building));
       expect(comp.organizationsCollection).toContain(organization);
+      expect(comp.usersSharedCollection).toContain(user);
     });
   });
 
@@ -139,6 +166,14 @@ describe('Building Management Update Component', () => {
       it('Should return tracked Organization primary key', () => {
         const entity = { id: 123 };
         const trackResult = comp.trackOrganizationById(0, entity);
+        expect(trackResult).toEqual(entity.id);
+      });
+    });
+
+    describe('trackUserById', () => {
+      it('Should return tracked User primary key', () => {
+        const entity = { id: 'ABC' };
+        const trackResult = comp.trackUserById(0, entity);
         expect(trackResult).toEqual(entity.id);
       });
     });

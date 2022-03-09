@@ -1,0 +1,102 @@
+<p-toast></p-toast>
+
+<div class="card">
+  <p-toolbar styleClass="mb-4">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+      <button
+        pButton
+        pRipple
+        [label]="Delete"
+        icon="pi pi-trash"
+        class="p-button-danger"
+        (click)="deleteSelected()"
+        [disabled]="!selectedProducts || !selectedProducts.length"
+      ></button>
+    </ng-template>
+
+    <ng-template pTemplate="right"> </ng-template>
+  </p-toolbar>
+
+  <p-table
+    #dt
+    [value]="coupons"
+    [rows]="10"
+    [paginator]="true"
+    [globalFilterFields]="['title', 'value', '', 'couponNr', 'used']"
+    responsiveLayout="scroll"
+    [(selection)]="selectedCoupons"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <h5 class="m-0">Manage Coupons</h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 3rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
+        <th pSortableColumn="value">Value <p-sortIcon field="value"></p-sortIcon></th>
+        <th pSortableColumn="couponNr">CouponNr <p-sortIcon field="couponNr"></p-sortIcon></th>
+        <th pSortableColumn="used">Used <p-sortIcon field="used"></p-sortIcon></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-coupon>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="coupon"></p-tableCheckbox>
+        </td>
+        <td>{{ coupon.title }}</td>
+        <td>{{ coupon.value | currency }}</td>
+        <td>{{ coupon.couponNr }}</td>
+        <td>{{ coupon.used }}</td>
+        <td>
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editCoupon(coupon)"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteCoupon(coupon)"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">In total there are {{ coupons ? coupons.length : 0 }} coupons.</div>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog [(visible)]="couponDialog" [style]="{ width: '450px' }" header="Coupon Details" [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <div class="field">
+      <label for="title">Title</label>
+      <input type="text" pInputText id="title" [(ngModel)]="coupon.title" required autofocus />
+      <small class="p-error" *ngIf="submitted && !coupon.title">Title is required.</small>
+    </div>
+    <div class="field">
+      <label for="description">Description</label>
+      <textarea id="description" pInputTextarea [(ngModel)]="coupon.description" required rows="3" cols="20"></textarea>
+    </div>
+
+    <div class="formgrid grid">
+      <div class="field col">
+        <label for="value">Value</label>
+        <p-inputNumber id="value" [(ngModel)]="coupon.value" mode="currency" currency="CHF" locale="de-CH"></p-inputNumber>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveCoupon()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

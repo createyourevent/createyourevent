@@ -1,0 +1,15 @@
+{
+  "slot-machine": {
+    "play-game": "Play",
+    "points": "Points",
+    "one-game-costs": "A game will cost you...",
+    "not-enought-points": "You don't have enough points to play. Visit www.createyourevent.org/points-list to find out how to get more points on Create Your Event to play.",
+    "bell.info": "For 3 bells you will receive a voucher for a product at an event (drink, food...) worth CHF 10.",
+    "plum.info": "For 3 plums you will receive a voucher for a product at an event (drink, food...) worth CHF 5.00.",
+    "orange.info": "For 3 oranges you will receive a voucher for a product at an event (drink, food...) worth CHF 2.50.",
+    "cherry.info": "For 3 cherries you will receive a voucher for a product at an event (drink, food...) worth CHF 7.50.",
+    "lost": "Lost",
+    "win": "Won",
+    "lets-play": "Let's play..."
+  }
+}

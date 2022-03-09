@@ -25,6 +25,7 @@ export interface IOrganization {
   placeNumber?: number | null;
   price?: number | null;
   rentType?: RentType | null;
+  rentable?: boolean | null;
   images?: IImage[] | null;
   organizationReservations?: IOrganizationReservation[] | null;
   user?: IUser | null;
@@ -52,6 +53,7 @@ export class Organization implements IOrganization {
     public placeNumber?: number | null,
     public price?: number | null,
     public rentType?: RentType | null,
+    public rentable?: boolean | null,
     public images?: IImage[] | null,
     public organizationReservations?: IOrganizationReservation[] | null,
     public user?: IUser | null,
@@ -63,6 +65,7 @@ export class Organization implements IOrganization {
   ) {
     this.active = this.active ?? false;
     this.activeOwner = this.activeOwner ?? false;
+    this.rentable = this.rentable ?? false;
   }
 }
 

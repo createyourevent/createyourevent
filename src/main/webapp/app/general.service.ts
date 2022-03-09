@@ -54,6 +54,8 @@ import { IOrganizationLikeDislike } from './entities/organization-like-dislike/o
 import { IOrganizationStarRating } from './entities/organization-star-rating/organization-star-rating.model';
 import { IOrganizationComment } from './entities/organization-comment/organization-comment.model';
 import { IOrganizationReservation } from './entities/organization-reservation/organization-reservation.model';
+import { ICoupon } from './entities/coupon/coupon.model';
+import { IBuilding } from './entities/building/building.model';
 
 type EntityResponseType = HttpResponse<IUser>;
 type EntityResponseType_Event = HttpResponse<IEvent>;
@@ -114,25 +116,26 @@ export class GeneralService {
   public resourceUrl_restaurants = SERVER_API_URL + 'api/restaurants';
   public resourceUrl_hotels = SERVER_API_URL + 'api/hotels';
   public resourceUrl_clubs = SERVER_API_URL + 'api/clubs';
+  public resourceUrl_buildings = SERVER_API_URL + 'api/buildings';
   public resourceUrl_organizations = SERVER_API_URL + 'api/organizations';
   public resourceUrl_organization_star_ratings = SERVER_API_URL + 'api/organization-star-ratings';
   public resourceUrl_organization_comments = SERVER_API_URL + 'api/organization-comments';
   public resourceUrl_organization_like_dislikes = SERVER_API_URL + 'api/organization-like-dislikes';
   public resourceUrl_organization_reservations = SERVER_API_URL + 'api/organization-reservations';
-
-
-
+  public resourceUrl_slot_list_plum = SERVER_API_URL + 'api/slot-list-plums';
+  public resourceUrl_slot_list_clock = SERVER_API_URL + 'api/slot-list-clocks';
+  public resourceUrl_slot_list_orange = SERVER_API_URL + 'api/slot-list-oranges';
+  public resourceUrl_slot_list_cherry = SERVER_API_URL + 'api/slot-list-cherries';
+  public resourceUrl_coupons = SERVER_API_URL + 'api/coupons';
 
   constructor(protected http: HttpClient) {}
 
   updatePointsKeycloak(points: number, userId: string): Observable<void> {
-    return this.http
-      .put<void>(`${this.resourceUrl_keycloak}/${userId}/${points}`, { observe: 'response' })
+    return this.http.put<void>(`${this.resourceUrl_keycloak}/${userId}/${points}`, { observe: 'response' });
   }
 
   getPointsFromUser(userId: string): Observable<HttpResponse<number>> {
-    return this.http
-      .get<number>(`${this.resourceUrl_keycloak}/${userId}`, { observe: 'response' })
+    return this.http.get<number>(`${this.resourceUrl_keycloak}/${userId}`, { observe: 'response' });
   }
 
   updateBond(bond: IBond): Observable<EntityResponseType_Bond> {
@@ -167,11 +170,9 @@ export class GeneralService {
   updateOrganizationReservation(organizationReservation: IOrganizationReservation): Observable<HttpResponse<IOrganizationReservation>> {
     const copy = this.convertOrganizationReservationDateFromClient(organizationReservation);
     return this.http
-      .put<IOrganizationReservation>(
-        `${this.resourceUrl_organization_reservations}/${organizationReservation.id}`,
-        copy,
-        { observe: 'response' }
-      )
+      .put<IOrganizationReservation>(`${this.resourceUrl_organization_reservations}/${organizationReservation.id}`, copy, {
+        observe: 'response',
+      })
       .pipe(map((res: HttpResponse<IOrganizationReservation>) => this.convertOrganizationReservationDateFromServer(res)));
   }
 
@@ -183,7 +184,9 @@ export class GeneralService {
     });
   }
 
-  protected convertOrganizationReservationDateFromServer(res: HttpResponse<IOrganizationReservation>): HttpResponse<IOrganizationReservation> {
+  protected convertOrganizationReservationDateFromServer(
+    res: HttpResponse<IOrganizationReservation>
+  ): HttpResponse<IOrganizationReservation> {
     if (res.body) {
       res.body.date = res.body.date ? dayjs(res.body.date) : undefined;
       res.body.dateFrom = res.body.dateFrom ? dayjs(res.body.dateFrom) : undefined;
@@ -193,14 +196,13 @@ export class GeneralService {
   }
 
   findEventWithId(id: number): Observable<HttpResponse<IEvent>> {
-    return this.http
-      .get<IEvent>(`${this.resourceUrl_event}/findById/${id}`, { observe: 'response' });
+    return this.http.get<IEvent>(`${this.resourceUrl_event}/findById/${id}`, { observe: 'response' });
   }
 
   protected convertDateFromClient(event: IEvent): IEvent {
     const copy: IEvent = Object.assign({}, event, {
       dateStart: event.dateStart && dayjs(event.dateStart).isValid() ? dayjs(event.dateStart).toJSON() : undefined,
-      dateEnd: event.dateEnd && dayjs(event.dateEnd).isValid() ? dayjs(event.dateEnd).toJSON() : undefined
+      dateEnd: event.dateEnd && dayjs(event.dateEnd).isValid() ? dayjs(event.dateEnd).toJSON() : undefined,
     });
     return copy;
   }
@@ -221,7 +223,6 @@ export class GeneralService {
       })
       .pipe(map((res: EntityResponseType_EPO) => this.convertDateFromServerEPO(res)));
   }
-
 
   protected convertDateFromClientEPO(eventProductOrder: IEventProductOrder): IEventProductOrder {
     return Object.assign({}, eventProductOrder, {
@@ -266,7 +267,6 @@ export class GeneralService {
     return res;
   }
 
-
   findWidthAuthorities(): Observable<HttpResponse<IUser>> {
     return this.http.get<IUser>(`${this.resourceUrl_cye}/loggedIn`, { observe: 'response' });
   }
@@ -297,7 +297,7 @@ export class GeneralService {
 
   findImagesByProductIdAndUserId(productId: number, userId: string): Observable<HttpResponse<IImage[]>> {
     return this.http.get<IImage[]>(`${this.resourceUrl_image}/${productId}/${userId}/imagesFromProductIdAndUserId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -307,7 +307,7 @@ export class GeneralService {
 
   findImagesByShopIdAndUserId(shopId: number, userId: string): Observable<HttpResponse<IImage[]>> {
     return this.http.get<IImage[]>(`${this.resourceUrl_image}/${shopId}/${userId}/imagesFromShopIdAndUserId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -317,7 +317,7 @@ export class GeneralService {
 
   findImagesByOrganizationIdAndUserId(organizationId: number, userId: string): Observable<HttpResponse<IImage[]>> {
     return this.http.get<IImage[]>(`${this.resourceUrl_image}/${organizationId}/${userId}/imagesFromOrganizationIdAndUserId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -327,7 +327,7 @@ export class GeneralService {
 
   findImagesByServiceIdAndUserId(serviceId: number, userId: string): Observable<HttpResponse<IImage[]>> {
     return this.http.get<IImage[]>(`${this.resourceUrl_image}/${serviceId}/${userId}/imagesFromServiceIdAndUserId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -337,19 +337,19 @@ export class GeneralService {
 
   findImagesByEventIdAndUserId(eventId: number, userId: string): Observable<HttpResponse<IImage[]>> {
     return this.http.get<IImage[]>(`${this.resourceUrl_image}/${eventId}/${userId}/imagesFromEventIdAndUserId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findShopLikeDislikeByShopId(shopId: number): Observable<HttpResponse<IShopLikeDislike[]>> {
     return this.http.get<IShopLikeDislike[]>(`${this.resourceUrl_shop_like_dislikes}/${shopId}/getShopLikeDislikeByShopId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findServiceLikeDislikeByServiceId(serviceId: number): Observable<HttpResponse<IServiceLikeDislike[]>> {
     return this.http.get<IServiceLikeDislike[]>(`${this.resourceUrl_service_like_dislikes}/${serviceId}/getServiceLikeDislikeByServiceId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -357,23 +357,28 @@ export class GeneralService {
     return this.http.get<IShopLikeDislike[]>(
       `${this.resourceUrl_shop_like_dislikes}/${shopId}/${userId}/getShopLikeDislikeByShopIdAndUserId`,
       {
-        observe: 'response'
+        observe: 'response',
       }
     );
   }
 
   findOrganizationLikeDislikeByOrganizationId(shopId: number): Observable<HttpResponse<IOrganizationLikeDislike[]>> {
-    return this.http.get<IOrganizationLikeDislike[]>(`${this.resourceUrl_organization_like_dislikes}/${shopId}/getOrganizationLikeDislikeByOrganizationId`, {
-      observe: 'response'
-    });
+    return this.http.get<IOrganizationLikeDislike[]>(
+      `${this.resourceUrl_organization_like_dislikes}/${shopId}/getOrganizationLikeDislikeByOrganizationId`,
+      {
+        observe: 'response',
+      }
+    );
   }
 
-
-  findOrganizationLikeDislikeByOrganizationIdAndUserId(shopId: number, userId: string): Observable<HttpResponse<IOrganizationLikeDislike[]>> {
+  findOrganizationLikeDislikeByOrganizationIdAndUserId(
+    shopId: number,
+    userId: string
+  ): Observable<HttpResponse<IOrganizationLikeDislike[]>> {
     return this.http.get<IOrganizationLikeDislike[]>(
       `${this.resourceUrl_organization_like_dislikes}/${shopId}/${userId}/getOrganizationLikeDislikeByOrganizationIdAndUserId`,
       {
-        observe: 'response'
+        observe: 'response',
       }
     );
   }
@@ -382,7 +387,7 @@ export class GeneralService {
     return this.http.get<IServiceLikeDislike[]>(
       `${this.resourceUrl_service_like_dislikes}/${serviceId}/${userId}/getServiceLikeDislikeByServiceIdAndUserId`,
       {
-        observe: 'response'
+        observe: 'response',
       }
     );
   }
@@ -393,25 +398,28 @@ export class GeneralService {
 
   findServiceCommentByServiceId(serviceId: number): Observable<HttpResponse<IServiceComment[]>> {
     return this.http.get<IServiceComment[]>(`${this.resourceUrl_service_comments}/${serviceId}/getServiceCommentByServiceId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
-findOrganizationCommentByOrganizationId(organizationId: number): Observable<HttpResponse<IOrganizationComment[]>> {
-    return this.http.get<IOrganizationComment[]>(`${this.resourceUrl_organization_comments}/${organizationId}/getOrganizationCommentByOrganizationId`, {
-      observe: 'response'
-    });
+  findOrganizationCommentByOrganizationId(organizationId: number): Observable<HttpResponse<IOrganizationComment[]>> {
+    return this.http.get<IOrganizationComment[]>(
+      `${this.resourceUrl_organization_comments}/${organizationId}/getOrganizationCommentByOrganizationId`,
+      {
+        observe: 'response',
+      }
+    );
   }
 
   findShopCommentByShopIdAndUserId(shopId: number, userId: string): Observable<HttpResponse<IShopComment[]>> {
     return this.http.get<IShopComment[]>(`${this.resourceUrl_shop_comments}/${shopId}/${userId}/getShopCommentByShopIdAndUserId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findProductCommentByProductId(productId: number): Observable<HttpResponse<IProductComment[]>> {
     return this.http.get<IProductComment[]>(`${this.resourceUrl_product_comments}/${productId}/getProductCommentByProductId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -419,14 +427,14 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     return this.http.get<IProductComment[]>(
       `${this.resourceUrl_product_comments}/${productId}/${userId}/getProductCommentByProductIdAndUserId`,
       {
-        observe: 'response'
+        observe: 'response',
       }
     );
   }
 
   findProductLikeDislikeByProductId(productId: number): Observable<HttpResponse<IProductLikeDislike[]>> {
     return this.http.get<IProductLikeDislike[]>(`${this.resourceUrl_product_like_dislikes}/${productId}/getProductLikeDislikeByProductId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -434,26 +442,26 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     return this.http.get<IProductLikeDislike[]>(
       `${this.resourceUrl_product_like_dislikes}/${productId}/${userId}/getProductLikeDislikeByProductIdAndUserId`,
       {
-        observe: 'response'
+        observe: 'response',
       }
     );
   }
 
   findEventCommentByEventId(eventId: number): Observable<HttpResponse<IEventComment[]>> {
     return this.http.get<IEventComment[]>(`${this.resourceUrl_event_comments}/${eventId}/getEventCommentByEventId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findEventCommentByEventIdAndUserId(eventId: number, userId: string): Observable<HttpResponse<IEventComment[]>> {
     return this.http.get<IEventComment[]>(`${this.resourceUrl_event_comments}/${eventId}/${userId}/getEventCommentByEventIdAndUserId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findEventLikeDislikeByEventId(eventId: number): Observable<HttpResponse<IEventLikeDislike[]>> {
     return this.http.get<IEventLikeDislike[]>(`${this.resourceUrl_event_like_dislikes}/${eventId}/getEventLikeDislikeByEventId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -461,7 +469,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     return this.http.get<IEventLikeDislike[]>(
       `${this.resourceUrl_event_like_dislikes}/${eventId}/${userId}/getEventLikeDislikeByEventIdAndUserId`,
       {
-        observe: 'response'
+        observe: 'response',
       }
     );
   }
@@ -509,7 +517,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     const options = createRequestOption(req);
     return this.http.get<IEventProductOrder[]>(`${this.resourceUrl_eventProductOrder}/${productId}/getEventProductOrderByProduct`, {
       params: options,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -517,7 +525,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     const options = createRequestOption(req);
     return this.http.get<IEventProductOrder[]>(`${this.resourceUrl_eventProductOrder}/${eventId}/getProductsByEvent`, {
       params: options,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -553,7 +561,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
 
     return this.http.get<IEventProductOrder[]>(`${this.resourceUrl_eventProductOrder}/${productId}/findAllByProductIdAndDateStartBetween`, {
       params: params,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -570,13 +578,13 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
 
     return this.http.get<IEventProductOrder[]>(`${this.resourceUrl_eventProductOrder}/${productId}/findAllByProductIdAndDateUntilBetween`, {
       params: params,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findAllEventProductOrdersByShopId(shopId: number): Observable<HttpResponse<IEventProductOrder[]>> {
     return this.http.get<IEventProductOrder[]>(`${this.resourceUrl_eventProductOrder}/${shopId}/getEventProductOrdersByShopId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -615,7 +623,10 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     return this.http.get<IEvent[]>(`${this.resourceUrl_event}/user/active/${userId}`, { params: options, observe: 'response' });
   }
 
-  findEventsByPrivateOrPublicAndActiveTrueAndDateStartBetween(dateStart: dayjs.Dayjs, dateEnd: dayjs.Dayjs): Observable<HttpResponse<IEvent[]>> {
+  findEventsByPrivateOrPublicAndActiveTrueAndDateStartBetween(
+    dateStart: dayjs.Dayjs,
+    dateEnd: dayjs.Dayjs
+  ): Observable<HttpResponse<IEvent[]>> {
     const s = dateStart.format();
     const e = dateEnd.format();
     let params = new HttpParams();
@@ -629,16 +640,15 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     const options = createRequestOption(req);
     return this.http.get<ICreateYourEventService[]>(`${this.resourceUrl_service}/user/active/${userId}`, {
       params: options,
-      observe: 'response'
+      observe: 'response',
     });
   }
-
 
   getServiceFromServiceMapId(serviceMapId: number, req?: any): Observable<HttpResponse<ICreateYourEventService[]>> {
     const options = createRequestOption(req);
     return this.http.get<ICreateYourEventService[]>(`${this.resourceUrl_service}/active/serviceMap/${serviceMapId}`, {
       params: options,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -646,7 +656,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     const options = createRequestOption(req);
     return this.http.get<IServiceMap[]>(`${this.resourceUrl_servicemaps}/byServiceId/${serviceId}`, {
       params: options,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -657,14 +667,17 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
 
   getServicesWhereActiveAndActiveOwnerTrue(req?: any): Observable<HttpResponse<ICreateYourEventService[]>> {
     const options = createRequestOption(req);
-    return this.http.get<ICreateYourEventService[]>(`${this.resourceUrl_service}/active/activeOwner`, { params: options, observe: 'response' });
+    return this.http.get<ICreateYourEventService[]>(`${this.resourceUrl_service}/active/activeOwner`, {
+      params: options,
+      observe: 'response',
+    });
   }
 
   getAllServiceOffersByServiceMapId(serviceMapId: number, req?: any): Observable<HttpResponse<IServiceOffer[]>> {
     const options = createRequestOption(req);
     return this.http.get<IServiceOffer[]>(`${this.resourceUrl_serviceoffers}/byServiceMapId/${serviceMapId}`, {
       params: options,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -695,7 +708,10 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     );
   }
 
-  findAllEventServiceMapOrdersWithDateRange(dateStart: dayjs.Dayjs, dateEnd: dayjs.Dayjs): Observable<HttpResponse<IEventServiceMapOrder[]>> {
+  findAllEventServiceMapOrdersWithDateRange(
+    dateStart: dayjs.Dayjs,
+    dateEnd: dayjs.Dayjs
+  ): Observable<HttpResponse<IEventServiceMapOrder[]>> {
     const s = dateStart.format();
     const e = dateEnd.format();
     let params = new HttpParams();
@@ -707,7 +723,11 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     );
   }
 
-  findAllEventServiceMapOrdersWithDateRangeAndServiceMapId(serviceMapId: number, dateStart: dayjs.Dayjs, dateEnd: dayjs.Dayjs): Observable<HttpResponse<IEventServiceMapOrder[]>> {
+  findAllEventServiceMapOrdersWithDateRangeAndServiceMapId(
+    serviceMapId: number,
+    dateStart: dayjs.Dayjs,
+    dateEnd: dayjs.Dayjs
+  ): Observable<HttpResponse<IEventServiceMapOrder[]>> {
     const s = dateStart.format();
     const e = dateEnd.format();
     let params = new HttpParams();
@@ -719,7 +739,11 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     );
   }
 
-  findAllEventServiceMapOrdersWithDateRangeAndEventId(dateStart: dayjs.Dayjs, dateEnd: dayjs.Dayjs, eventId: number): Observable<HttpResponse<IEventServiceMapOrder[]>> {
+  findAllEventServiceMapOrdersWithDateRangeAndEventId(
+    dateStart: dayjs.Dayjs,
+    dateEnd: dayjs.Dayjs,
+    eventId: number
+  ): Observable<HttpResponse<IEventServiceMapOrder[]>> {
     const s = dateStart.format();
     const e = dateEnd.format();
     let params = new HttpParams();
@@ -731,7 +755,10 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     );
   }
 
-  findAllOrganizationReservationsWithDateRange(dateStart: dayjs.Dayjs, dateEnd: dayjs.Dayjs): Observable<HttpResponse<IOrganizationReservation[]>> {
+  findAllOrganizationReservationsWithDateRange(
+    dateStart: dayjs.Dayjs,
+    dateEnd: dayjs.Dayjs
+  ): Observable<HttpResponse<IOrganizationReservation[]>> {
     const s = dateStart.format();
     const e = dateEnd.format();
     let params = new HttpParams();
@@ -751,13 +778,16 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     params = params.append('betweenEnd', encodeURIComponent(e));
     return this.http.get<IEventServiceMapOrder[]>(`${this.resourceUrl_eventProductOrder}/findAllEventProductOrdersWithDateFromRange`, {
       params: params,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   /* --------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-  findAllEventProductOrdersWithDateFromRange(dateStart: dayjs.Dayjs, dateEnd: dayjs.Dayjs): Observable<HttpResponse<IEventServiceMapOrder[]>> {
+  findAllEventProductOrdersWithDateFromRange(
+    dateStart: dayjs.Dayjs,
+    dateEnd: dayjs.Dayjs
+  ): Observable<HttpResponse<IEventServiceMapOrder[]>> {
     const s = dateStart.format();
     const e = dateEnd.format();
     let params = new HttpParams();
@@ -765,7 +795,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     params = params.append('dateEnd', encodeURIComponent(e));
     return this.http.get<IEventServiceMapOrder[]>(`${this.resourceUrl_eventProductOrder}/findAllEventProductOrdersWithDateFromRange`, {
       params: params,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -832,7 +862,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     params = params.append('now', encodeURIComponent(s));
     return this.http.get<IEventProductOrder[]>(`${this.resourceUrl_eventProductOrder}/findAllEventProductOrderByDateGreaterThen`, {
       params: params,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -863,7 +893,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     const options = createRequestOption(req);
     return this.http.get<IEventStarRating[]>(`${this.resourceUrl_event_star_ratings}/${eventId}/getEventStarRatingByEvent`, {
       params: options,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -871,7 +901,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     const options = createRequestOption(req);
     return this.http.get<IEventStarRating[]>(`${this.resourceUrl_event_star_ratings}/${userId}/getEventStarRatingByUser`, {
       params: options,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -879,7 +909,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     const options = createRequestOption(req);
     return this.http.get<IEventStarRating[]>(`${this.resourceUrl_event_star_ratings}/${stars}/findAllWhereStarsBiggerAs`, {
       params: options,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -933,12 +963,11 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     return res;
   }
 
-
   getReservationsByUser(userId: string, req?: any): Observable<HttpResponse<IReservation[]>> {
     const options = createRequestOption(req);
     return this.http.get<IReservation[]>(`${this.resourceUrl_reservation}/${userId}/getReservationsByUserId`, {
       params: options,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -946,7 +975,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     const options = createRequestOption(req);
     return this.http.get<IReservation[]>(`${this.resourceUrl_reservation}/${userId}/getReservationsByUserIdAndBilled`, {
       params: options,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -954,7 +983,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     const options = createRequestOption(req);
     return this.http.get<IReservation[]>(`${this.resourceUrl_reservation}/${userId}/getReservationsByUserIdAndNotBilled`, {
       params: options,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -965,7 +994,6 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
 
     return this.http.get<IEvent[]>(`${this.resourceUrl_event}/dateBefor/active/notBilled`, { params: params, observe: 'response' });
   }
-
 
   findEventById(eventId: number): Observable<HttpResponse<IEvent>> {
     return this.http.get<IEvent>(`${this.resourceUrl_event}/findById/${eventId}`, { observe: 'response' });
@@ -978,7 +1006,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
 
     return this.http.get<IEvent[]>(`${this.resourceUrl_event}/dateBefor/active/notBilled/${userId}`, {
       params: params,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -989,7 +1017,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
 
     return this.http.get<IEvent[]>(`${this.resourceUrl_event}/dateBefor/active/billed/${userId}`, {
       params: params,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -1000,7 +1028,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
 
     return this.http.get<IEvent[]>(`${this.resourceUrl_event}/dateBefor/active/${userId}`, {
       params: params,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -1011,7 +1039,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
 
     return this.http.get<IEvent[]>(`${this.resourceUrl_event}/dateAfter/active/${userId}`, {
       params: params,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -1062,9 +1090,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     let params = new HttpParams();
     params = params.append('now', encodeURIComponent(s));
     return this.http.get<IEventServiceMapOrder[]>(
-      `${
-        this.resourceUrl_event_service_map_orders
-      }/${serviceMapId}/findEventServiceMapOrdersByServiceMapIdAndBilledFalseAndDateEndSmallerThen`,
+      `${this.resourceUrl_event_service_map_orders}/${serviceMapId}/findEventServiceMapOrdersByServiceMapIdAndBilledFalseAndDateEndSmallerThen`,
       { params: params, observe: 'response' }
     );
   }
@@ -1077,9 +1103,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     let params = new HttpParams();
     params = params.append('now', encodeURIComponent(s));
     return this.http.get<IEventServiceMapOrder[]>(
-      `${
-        this.resourceUrl_event_service_map_orders
-      }/${serviceMapId}/findEventServiceMapOrdersByServiceMapIdAndDateEndSmallerThen`,
+      `${this.resourceUrl_event_service_map_orders}/${serviceMapId}/findEventServiceMapOrdersByServiceMapIdAndDateEndSmallerThen`,
       { params: params, observe: 'response' }
     );
   }
@@ -1092,9 +1116,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     let params = new HttpParams();
     params = params.append('now', encodeURIComponent(s));
     return this.http.get<IEventServiceMapOrder[]>(
-      `${
-        this.resourceUrl_event_service_map_orders
-      }/${serviceMapId}/findEventServiceMapOrdersByServiceMapIdAndBilledTrueAndDateEndSmallerThen`,
+      `${this.resourceUrl_event_service_map_orders}/${serviceMapId}/findEventServiceMapOrdersByServiceMapIdAndBilledTrueAndDateEndSmallerThen`,
       { params: params, observe: 'response' }
     );
   }
@@ -1169,7 +1191,9 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
   }
 
   updateAddressAndPhoneFromUser(userId: string, address: string, phone: string): Observable<void> {
-    return this.http.put<void>(`${this.resourceUrl}/${userId}/update/${encodeURIComponent(address)}/${encodeURIComponent(phone)}`, { observe: 'response' });
+    return this.http.put<void>(`${this.resourceUrl}/${userId}/update/${encodeURIComponent(address)}/${encodeURIComponent(phone)}`, {
+      observe: 'response',
+    });
   }
 
   updateAGBTrue(userId: string): Observable<void> {
@@ -1177,17 +1201,32 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
   }
 
   updateAddressAndPhoneAndIBanFromUser(userId: string, address: string, phone: string, iban: string): Observable<void> {
-    return this.http.put<void>(`${this.resourceUrl}/${userId}/update/${encodeURIComponent(address)}/${encodeURIComponent(phone)}/${encodeURIComponent(iban)}`, { observe: 'response' });
+    return this.http.put<void>(
+      `${this.resourceUrl}/${userId}/update/${encodeURIComponent(address)}/${encodeURIComponent(phone)}/${encodeURIComponent(iban)}`,
+      { observe: 'response' }
+    );
   }
 
-  updateAddressAndPhoneAndIBanAndBanknameAndBankaddressFromUser(userId: string, address: string, phone: string, iban: string, bankname: string, bankaddress: string): Observable<void> {
+  updateAddressAndPhoneAndIBanAndBanknameAndBankaddressFromUser(
+    userId: string,
+    address: string,
+    phone: string,
+    iban: string,
+    bankname: string,
+    bankaddress: string
+  ): Observable<void> {
     //let params = new HttpParams().set('address',address).set('phone', phone);
-    return this.http.put<void>(`${this.resourceUrl}/${userId}/update/${encodeURIComponent(address)}/${encodeURIComponent(phone)}/${encodeURIComponent(iban)}/${encodeURIComponent(bankname)}/${encodeURIComponent(bankaddress)}`, { observe: 'response' });
+    return this.http.put<void>(
+      `${this.resourceUrl}/${userId}/update/${encodeURIComponent(address)}/${encodeURIComponent(phone)}/${encodeURIComponent(
+        iban
+      )}/${encodeURIComponent(bankname)}/${encodeURIComponent(bankaddress)}`,
+      { observe: 'response' }
+    );
   }
 
   getAllPointsFromUser(userId: string): Observable<HttpResponse<IUserPointAssociation[]>> {
     return this.http.get<IUserPointAssociation[]>(`${this.resourceUrl_pointsUsers}/${userId}/getAllPointsFromUser`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -1203,7 +1242,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     params = params.append('betweenEnd', encodeURIComponent(e));
     return this.http.get<IUserPointAssociation[]>(`${this.resourceUrl_pointsUsers}/${userId}/findByUsersIdAndDateBetween`, {
       params: params,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -1226,37 +1265,46 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
 
   findUserPointAssociationByUsersIdAndPointkey(userId: string, key: string): Observable<HttpResponse<IUserPointAssociation[]>> {
     return this.http.get<IUserPointAssociation[]>(`${this.resourceUrl_pointsUsers}/${userId}/${key}/findByUsersIdAndPointkey`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findShopStarRatingsByShopId(shopId: number): Observable<HttpResponse<IShopStarRating[]>> {
     return this.http.get<IShopStarRating[]>(`${this.resourceUrl_shop_star_rating}/${shopId}/findShopStarRatingsByShopId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findShopStarRatingsByShopIdAndUserId(shopId: number, userId: string): Observable<HttpResponse<IShopStarRating>> {
     return this.http.get<IShopStarRating>(`${this.resourceUrl_shop_star_rating}/${shopId}/${userId}/findShopStarRatingsByShopIdAndUserId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findOrganizationStarRatingsByOrganizationId(organizationId: number): Observable<HttpResponse<IOrganizationStarRating[]>> {
-    return this.http.get<IOrganizationStarRating[]>(`${this.resourceUrl_organization_star_ratings}/${organizationId}/findOrganizationStarRatingsByOrganizationId`, {
-      observe: 'response'
-    });
+    return this.http.get<IOrganizationStarRating[]>(
+      `${this.resourceUrl_organization_star_ratings}/${organizationId}/findOrganizationStarRatingsByOrganizationId`,
+      {
+        observe: 'response',
+      }
+    );
   }
 
-  findOrganizationStarRatingsByOrganizationIdAndUserId(organizationId: number, userId: string): Observable<HttpResponse<IOrganizationStarRating>> {
-    return this.http.get<IOrganizationStarRating>(`${this.resourceUrl_organization_star_ratings}/${organizationId}/${userId}/findOrganizationStarRatingsByOrganizationIdAndUserId`, {
-      observe: 'response'
-    });
+  findOrganizationStarRatingsByOrganizationIdAndUserId(
+    organizationId: number,
+    userId: string
+  ): Observable<HttpResponse<IOrganizationStarRating>> {
+    return this.http.get<IOrganizationStarRating>(
+      `${this.resourceUrl_organization_star_ratings}/${organizationId}/${userId}/findOrganizationStarRatingsByOrganizationIdAndUserId`,
+      {
+        observe: 'response',
+      }
+    );
   }
 
   findServiceStarRatingsByServiceId(serviceId: number): Observable<HttpResponse<IServiceStarRating[]>> {
     return this.http.get<IServiceStarRating[]>(`${this.resourceUrl_service_star_rating}/${serviceId}/findServiceStarRatingsByServiceId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -1281,7 +1329,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
 
   findProductStarRatingsByProductId(productId: number): Observable<HttpResponse<IProductStarRating[]>> {
     return this.http.get<IProductStarRating[]>(`${this.resourceUrl_product_star_rating}/${productId}/findProductStarRatingsByProductId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -1294,7 +1342,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
 
   findChipsCollectionByUserId(userId: string): Observable<HttpResponse<IChipsCollection>> {
     return this.http.get<IChipsCollection>(`${this.resourceUrl_chips_collections}/${userId}/findChipsCollectionByUserId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -1328,7 +1376,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     const options = createRequestOption(req);
     return this.http.get<IGiftShoppingCart[]>(`${this.resourceUrl_gift_shopping_carts}/${userId}/findByUserId`, {
       params: options,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -1341,7 +1389,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     const options = createRequestOption(req);
     return this.http.get<IDeliveryType[]>(`${this.resourceUrl_delivery_types}/${id}/findDeliveryTypeByProductId`, {
       params: options,
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -1349,60 +1397,57 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     return this.http.delete(`${this.resourceUrl_delivery_types}/${id}/deleteByProductId`, { observe: 'response' });
   }
 
-
-
   findMp3ByServiceIdAndUserId(serviceId: number, userId: string): Observable<HttpResponse<IMp3[]>> {
     return this.http.get<IMp3[]>(`${this.resourceUrl_mp3}/${userId}/${serviceId}/service`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findMp3ByServiceId(serviceId: number): Observable<HttpResponse<IMp3[]>> {
     return this.http.get<IMp3[]>(`${this.resourceUrl_mp3}/${serviceId}/service`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findMp3ByProductIdAndUserId(productId: number, userId: string): Observable<HttpResponse<IMp3[]>> {
     return this.http.get<IMp3[]>(`${this.resourceUrl_mp3}/${userId}/${productId}/product`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
-
   findMp3ByProductId(productId: number): Observable<HttpResponse<IMp3[]>> {
     return this.http.get<IMp3[]>(`${this.resourceUrl_mp3}/${productId}/product`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findMp3ByEventIdAndUserId(eventId: number, userId: string): Observable<HttpResponse<IMp3[]>> {
     return this.http.get<IMp3[]>(`${this.resourceUrl_mp3}/${userId}/${eventId}/event`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findMp3ByEventId(eventId: number): Observable<HttpResponse<IMp3[]>> {
     return this.http.get<IMp3[]>(`${this.resourceUrl_mp3}/${eventId}/event`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findMp3ByShopIdAndUserId(shopId: number, userId: string): Observable<HttpResponse<IMp3[]>> {
     return this.http.get<IMp3[]>(`${this.resourceUrl_mp3}/${userId}/${shopId}/shop`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findMp3ByShopId(shopId: number): Observable<HttpResponse<IMp3[]>> {
     return this.http.get<IMp3[]>(`${this.resourceUrl_mp3}/${shopId}/shop`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   deleteMP3(mp3Id: number): Observable<HttpResponse<void>> {
     return this.http.delete<void>(`${this.resourceUrl_music_del}/${mp3Id}/delete`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -1420,7 +1465,7 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
 
   findTicketsByEventId(eventId: number): Observable<HttpResponse<ITicket[]>> {
     return this.http.get<ITicket[]>(`${this.resourceUrl_tickets}/${eventId}/getAllTicketsByEventId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
@@ -1430,74 +1475,92 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
 
     return this.http.post<void>(`${this.resourceUrl_send_ticket}/${reservationId}/${lang}/uploadPdf`, data, {
       params: params,
-      observe: 'response'
+      observe: 'response',
     });
- }
+  }
 
- findRestaurantsByUserAndActive(): Observable<HttpResponse<IRestaurant[]>> {
-  return this.http.get<IRestaurant[]>(`${this.resourceUrl_restaurants}/byUser/active`, {
-    observe: 'response'
-  });
-}
+  findRestaurantsByUserAndActive(): Observable<HttpResponse<IRestaurant[]>> {
+    return this.http.get<IRestaurant[]>(`${this.resourceUrl_restaurants}/byUser/active`, {
+      observe: 'response',
+    });
+  }
 
   findHotelsByUserAndActive(): Observable<HttpResponse<IHotel[]>> {
     return this.http.get<IHotel[]>(`${this.resourceUrl_hotels}/byUser/active`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findClubsByUserAndActive(): Observable<HttpResponse<IClub[]>> {
     return this.http.get<IClub[]>(`${this.resourceUrl_clubs}/byUser/active`, {
-      observe: 'response'
+      observe: 'response',
+    });
+  }
+
+  findBuildingsByUserAndActive(): Observable<HttpResponse<IBuilding[]>> {
+    return this.http.get<IBuilding[]>(`${this.resourceUrl_buildings}/byUser/active`, {
+      observe: 'response',
     });
   }
 
   findOrganizationsByActiveAndActiveOwner(): Observable<HttpResponse<IOrganization[]>> {
     return this.http.get<IOrganization[]>(`${this.resourceUrl_organizations}/active/activeOwner`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findOrganizationReservationsByEventId(eventId: number): Observable<HttpResponse<IOrganizationReservation[]>> {
-    return this.http.get<IOrganizationReservation[]>(`${this.resourceUrl_organization_reservations}/${eventId}/findOrganizationReservationsByEventId`, {
-      observe: 'response'
-    });
+    return this.http.get<IOrganizationReservation[]>(
+      `${this.resourceUrl_organization_reservations}/${eventId}/findOrganizationReservationsByEventId`,
+      {
+        observe: 'response',
+      }
+    );
   }
 
   findOrganizationReservationsByOrganizationId(eventId: number): Observable<HttpResponse<IOrganizationReservation[]>> {
-    return this.http.get<IOrganizationReservation[]>(`${this.resourceUrl_organization_reservations}/${eventId}/findOrganizationReservationsByOrganizationId`, {
-      observe: 'response'
-    });
+    return this.http.get<IOrganizationReservation[]>(
+      `${this.resourceUrl_organization_reservations}/${eventId}/findOrganizationReservationsByOrganizationId`,
+      {
+        observe: 'response',
+      }
+    );
   }
 
   findClubByOrganizationId(id: number): Observable<HttpResponse<IClub>> {
     return this.http.get<IClub>(`${this.resourceUrl_clubs}/${id}/clubByOrganizationId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findHotelByOrganizationId(id: number): Observable<HttpResponse<IHotel>> {
     return this.http.get<IHotel>(`${this.resourceUrl_hotels}/${id}/hotelByOrganizationId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   findRestaurantByOrganizationId(id: number): Observable<HttpResponse<IRestaurant>> {
     return this.http.get<IRestaurant>(`${this.resourceUrl_restaurants}/${id}/restaurantByOrganizationId`, {
-      observe: 'response'
+      observe: 'response',
     });
   }
 
   byActiveTrueAndUserIdAndDateUntilSmallerThanNow(userId: string): Observable<HttpResponse<IOrganizationReservation[]>> {
-    return this.http.get<IOrganizationReservation[]>(`${this.resourceUrl_organization_reservations}/${userId}/byActiveTrueAndUserIdAndDateUntilSmallerThanNow`, {
-      observe: 'response'
-    });
+    return this.http.get<IOrganizationReservation[]>(
+      `${this.resourceUrl_organization_reservations}/${userId}/byActiveTrueAndUserIdAndDateUntilSmallerThanNow`,
+      {
+        observe: 'response',
+      }
+    );
   }
 
   findOrganizationReservationsByOrganizationWithUserId(userId: string): Observable<HttpResponse<IOrganizationReservation[]>> {
-    return this.http.get<IOrganizationReservation[]>(`${this.resourceUrl_organization_reservations}/${userId}/findOrganizationReservationsByOrganizationWithUserId`, {
-      observe: 'response'
-    });
+    return this.http.get<IOrganizationReservation[]>(
+      `${this.resourceUrl_organization_reservations}/${userId}/findOrganizationReservationsByOrganizationWithUserId`,
+      {
+        observe: 'response',
+      }
+    );
   }
 
   findEventServiceMapOrdersByEventDateEndSmallerThenNow(req?: any): Observable<HttpResponse<IEventServiceMapOrder[]>> {
@@ -1508,4 +1571,39 @@ findOrganizationCommentByOrganizationId(organizationId: number): Observable<Http
     );
   }
 
+  deleteAllSlotListPlum(): Observable<HttpResponse<void>> {
+    return this.http.delete<void>(`${this.resourceUrl_slot_list_plum}/deleteAll`, {
+      observe: 'response',
+    });
+  }
+
+  deleteAllSlotListOrange(): Observable<HttpResponse<void>> {
+    return this.http.delete<void>(`${this.resourceUrl_slot_list_orange}/deleteAll`, {
+      observe: 'response',
+    });
+  }
+
+  deleteAllSlotListCherry(): Observable<HttpResponse<void>> {
+    return this.http.delete<void>(`${this.resourceUrl_slot_list_cherry}/deleteAll`, {
+      observe: 'response',
+    });
+  }
+
+  deleteAllSlotListClock(): Observable<HttpResponse<void>> {
+    return this.http.delete<void>(`${this.resourceUrl_slot_list_clock}/deleteAll`, {
+      observe: 'response',
+    });
+  }
+
+  findCouponsByActiveUser(): Observable<HttpResponse<ICoupon[]>> {
+    return this.http.get<ICoupon[]>(`${this.resourceUrl_coupons}/byUser`, {
+      observe: 'response',
+    });
+  }
+
+  findCouponsByUser(userId: string): Observable<HttpResponse<ICoupon[]>> {
+    return this.http.get<ICoupon[]>(`${this.resourceUrl_coupons}/${userId}/byUser`, {
+      observe: 'response',
+    });
+  }
 }

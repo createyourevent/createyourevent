@@ -1,104 +1,130 @@
 <h1 id="main-title" class="main-title" jhiTranslate="organization-data-view.title">Search organizations</h1>
 
-<p-dataView #dv [value]="organizationsWithDistance"   [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid" [loading]="loading">
-    <ng-template pTemplate="header">
-        <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+<p-dataView
+  #dv
+  [value]="organizationsWithDistance"
+  [paginator]="true"
+  [rows]="9"
+  filterBy="name"
+  [sortField]="sortField"
+  [sortOrder]="sortOrder"
+  layout="grid"
+  [loading]="loading"
+>
+  <ng-template pTemplate="header">
+    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+      <div class="row">
+        <div class="col-md-4">
+          <span class="p-input-icon-left p-mb-2 p-mb-md-0">
+            <i class="pi pi-search"></i>
+            <input type="search" pInputText placeholder="Search by name" (input)="dv.filter($event.target!.value)" />
+          </span>
+          <ngx-select-dropdown
+            (change)="changeTypeFilter($event)"
+            [config]="config"
+            [options]="organizationTypeValues"
+            [(ngModel)]="selectedOrganizationType"
+            [multiple]="false"
+          ></ngx-select-dropdown>
+        </div>
+        <div class="col-md-6">
+          <ng-container *ngIf="user">
             <div class="row">
-              <div class="col-md-4">
-                <span class="p-input-icon-left p-mb-2 p-mb-md-0">
-                  <i class="pi pi-search"></i>
-                  <input type="search" pInputText placeholder="Search by name" (input)="dv.filter($event.target!.value)">
-               </span>
-               <ngx-select-dropdown (change)="changeTypeFilter($event)" [config]="config" [options]="organizationTypeValues"
-               [(ngModel)]="selectedOrganizationType" [multiple]="false"></ngx-select-dropdown>
+              <div class="col-md-3">
+                <h5><span jhiTranslate="distance.distance"></span>{{ distance }} Km</h5>
+                <p-knob [(ngModel)]="distance" (onChange)="changeSliderRadius($event)" class="slider"></p-knob>
               </div>
-              <div class="col-md-6">
-                <ng-container *ngIf="user">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <h5><span jhiTranslate="distance.distance"></span>{{ distance }} Km</h5>
-                      <p-knob [(ngModel)]="distance" (onChange)="changeSliderRadius($event)" class="slider"></p-knob>
-                    </div>
-                    <div class="col-md-9">
-                      <div class="alert alert-info" role="alert">
-                        <span jhiTranslate="data-view.distance-info">
-                          Use the switch to select the maximum range in which you want to search for organizations.
-                          If the distance is set to 0, all search results are displayed.
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </ng-container>
-              </div>
-              <div  class="col-md-2">
-                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+              <div class="col-md-9">
+                <div class="alert alert-info" role="alert">
+                  <span jhiTranslate="data-view.distance-info">
+                    Use the switch to select the maximum range in which you want to search for organizations. If the distance is set to 0,
+                    all search results are displayed.
+                  </span>
+                </div>
               </div>
             </div>
+          </ng-container>
         </div>
-    </ng-template>
-
-
-    <ng-template let-organization pTemplate="listItem">
-        <div class="row organization-list-row">
-            <div class="col-md-3">
-                <img class="img img-center" [src]="'data:' + organization.logoContentType + ';base64,' + organization.logo" style="max-width: 200px; max-height: 200px;" alt="{{ organization.name }}"/>
-            </div>
-            <div class="col-md-3 title">
-                <h3>{{ organization.name }}</h3>
-                <h5>{{ organization.motto }}</h5>
-            </div>
-            <div class="col-md-3">
-              <div class="address">
-                <p>
-                  {{ formatAddress(organization) }}
-                </p>
-            </div>
-            <p>
-              <span class="bold" jhiTranslate="partners.phone">Phone:</span> {{ organization.phone }}
-            </p>
-            <p>
-                <span class="bold" jhiTranslate="partners.webaddress">Webaddress:</span> {{ organization.webAddress }}
-            </p>
-            </div>
-            <div class="col-md-3">
-                  <a class="shiny-button" (click)="goToOrganization(organization)" jhiTranslate="organization-data-view.goto-organization">Go to organization</a>
-            </div>
+        <div class="col-md-2">
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
         </div>
-    </ng-template>
+      </div>
+    </div>
+  </ng-template>
 
-    <ng-template let-organization pTemplate="gridItem">
-        <div class="p-col-12 p-md-3">
-            <div class="card card-container">
-                    <h3 class="title">{{ organization.name }}</h3>
-                    <h5 class="center">{{ organization.organizationType }}</h5>
-                    <div class="center">
-                        <img class="img img-center" [src]="'data:' + organization.logoContentType + ';base64,' + organization.logo" style="max-width: 250px; max-height: 350px;" alt="{{ organization.name }}"/>
-                    </div>
-                    <h5 class="motto center">{{ organization.motto }}</h5>
-                        <hr/>
-                        <p>
-                          <span class="bold" jhiTranslate="organization-data-view.placenumber">Place:</span> {{ organization.placeNumber }}
-                      </p>
-                      <p>
-                        <span class="bold" jhiTranslate="organization-data-view.price">Price:</span> {{ organization.price | currency }}
-                      </p>
-                    <div class="address">
-                      <p>
-                        {{ formatAddress(organization) }}
-                      </p>
-                  </div>
-                  <p>
-                      <span class="bold" jhiTranslate="partners.phone">Phone:</span> {{ organization.phone }}
-                  </p>
-                  <p>
-                      <span class="bold" jhiTranslate="partners.webaddress">Webaddress:</span> {{ organization.webAddress }}
-                  </p>
-                    <a class="shiny-button" (click)="goToOrganization(organization)" jhiTranslate="organization-data-view.goto-organization">Go to organization</a>
-            </div>
+  <ng-template let-organization pTemplate="listItem">
+    <div class="row organization-list-row">
+      <div class="col-md-3">
+        <img
+          class="img img-center"
+          [src]="'data:' + organization.logoContentType + ';base64,' + organization.logo"
+          style="max-width: 200px; max-height: 200px"
+          alt="{{ organization.name }}"
+        />
+      </div>
+      <div class="col-md-3">
+        <h3>{{ organization.name }}</h3>
+        <h5>{{ organization.motto }}</h5>
+      </div>
+      <div class="col-md-3">
+        <div class="address">
+          <p>
+            {{ formatAddress(organization) }}
+          </p>
         </div>
-    </ng-template>
+        <p><span class="bold" jhiTranslate="partners.phone">Phone:</span> {{ organization.phone }}</p>
+        <p><span class="bold" jhiTranslate="partners.webaddress">Webaddress:</span> {{ organization.webAddress }}</p>
+      </div>
+      <div class="col-md-3">
+        <a class="shiny-button" (click)="goToOrganization(organization)" jhiTranslate="organization-data-view.goto-organization"
+          >Go to organization</a
+        >
+      </div>
+    </div>
+  </ng-template>
 
-    <ng-template pTemplate="footer">
-        <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-    </ng-template>
+  <ng-template let-organization pTemplate="gridItem">
+    <div class="p-col-12 p-md-3">
+      <div class="card card-container">
+        <h3 class="title-org">{{ organization.name }}</h3>
+        <h5 class="center">{{ organization.organizationType }}</h5>
+        <div class="center">
+          <img
+            class="img img-center"
+            [src]="'data:' + organization.logoContentType + ';base64,' + organization.logo"
+            style="max-width: 250px; max-height: 350px"
+            alt="{{ organization.name }}"
+          />
+        </div>
+        <h5 class="motto center">{{ organization.motto }}</h5>
+        <hr />
+        <p><span class="bold" jhiTranslate="organization-data-view.placenumber">Place:</span> {{ organization.placeNumber }}</p>
+        <p>
+          <span class="bold" jhiTranslate="organization-data-view.rentable">Rentable:</span>
+          <i
+            class="pi"
+            [ngClass]="{ 'true-icon pi-check-circle': organization.rentable, 'false-icon pi-times-circle': !organization.rentable }"
+          ></i>
+        </p>
+        <p *ngIf="organization.rentable">
+          <span class="bold" jhiTranslate="organization-data-view.price">Price:</span> {{ organization.price | currency }} /
+          {{ organization.rentType }}
+        </p>
+        <div class="address">
+          <p>
+            {{ formatAddress(organization) }}
+          </p>
+        </div>
+        <p><span class="bold" jhiTranslate="partners.phone">Phone:</span> {{ organization.phone }}</p>
+        <p><span class="bold" jhiTranslate="partners.webaddress">Webaddress:</span> {{ organization.webAddress }}</p>
+        <a class="shiny-button" (click)="goToOrganization(organization)" jhiTranslate="organization-data-view.goto-organization"
+          >Go to organization</a
+        >
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+  </ng-template>
 </p-dataView>

@@ -56,6 +56,9 @@
     "transactions": "Transactions Datatrans",
     "search-organizations": "Search organizations",
     "pay-it-forward-admin": "Pay it forward Admin",
-    "pay-it-forward": "Pay it Forward"
+    "pay-it-forward": "Pay it Forward",
+    "admin-coupons": "Administration Coupons",
+    "coupons": "Coupons",
+    "admin-slot-machine": "Adminstration Slot Machine"
   }
 }

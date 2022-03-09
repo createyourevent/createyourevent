@@ -106,8 +106,13 @@
       "Ticket",
       "OrganizationReservation",
       "Building",
-      "OrganizationStarRating"
+      "OrganizationStarRating",
+      "Coupon",
+      "SlotListClock",
+      "SlotListCherry",
+      "SlotListOrange",
+      "SlotListPlum"
     ],
-    "lastLiquibaseTimestamp": 1642646124000
+    "lastLiquibaseTimestamp": 1644677006000
   }
 }

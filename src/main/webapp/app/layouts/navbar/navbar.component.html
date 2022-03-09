@@ -195,6 +195,15 @@
                 </span>
               </a>
             </li>
+
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+              <a class="dropdown-item" routerLink="/agb" (click)="collapseNavbar()">
+                <span>
+                  <fa-icon icon="file-signature"></fa-icon>
+                  <span jhiTranslate="routes.agb.title">AGB's</span>
+                </span>
+              </a>
+            </li>
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
               <a class="dropdown-item" routerLink="impressum" (click)="collapseNavbar()">
                 <span>
@@ -1233,6 +1242,66 @@
                   <span jhiTranslate="global.menu.entities.organizationStarRating">Organization Star Rating</span>
                 </a>
               </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="coupon"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.coupon">Coupon</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="slot-list-clock"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.slotListClock">Slot List Clock</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="slot-list-cherry"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.slotListCherry">Slot List Cherry</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="slot-list-orange"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.slotListOrange">Slot List Orange</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="slot-list-plum"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.slotListPlum">Slot List Plum</span>
+                </a>
+              </li>
               <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
             </ul>
           </li>
@@ -1415,6 +1484,18 @@
               </a>
             </li>
             <li>
+              <a class="dropdown-item" routerLink="admin/admincoupons" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="cogs" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="navbar.admin-coupons">Administration Coupons</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="admin/adminslotmachine" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="gamepad" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="navbar.admin-slot-machine">Administration Slot Machine</span>
+              </a>
+            </li>
+            <li>
               <a class="dropdown-item" routerLink="admin/transactions" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="certificate" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="navbar.transactions">Transactions</span>
@@ -1544,6 +1625,12 @@
               <a class="dropdown-item" routerLink="billing" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="wallet" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="navbar.billing">Billing</span>
+              </a>
+            </li>
+            <li *ngSwitchCase="true">
+              <a class="dropdown-item" routerLink="coupons" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="wallet" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="navbar.coupons">Coupons</span>
               </a>
             </li>
             <li *ngSwitchCase="true">

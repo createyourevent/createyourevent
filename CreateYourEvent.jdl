@@ -105,6 +105,7 @@ entity Organization {
     placeNumber Integer
     price Float
     rentType RentType
+    rentable Boolean
 }
 
 entity OrganizationReservation {
@@ -529,6 +530,31 @@ entity Ticket {
     ticketsUsed Integer
 }
 
+entity Coupon {
+    title String
+    value Float
+    description TextBlob
+    couponNr String
+    used Boolean
+}
+
+entity SlotListClock {
+    coupons String
+}
+
+entity SlotListCherry {
+    coupons String
+}
+
+entity SlotListOrange {
+    coupons String
+}
+
+entity SlotListPlum {
+    coupons String
+}
+
+
 relationship OneToOne {
     Event to Location
     Location to Address
@@ -601,21 +627,22 @@ relationship OneToMany {
     EventComment{eventComments} to EventComment{eventComment}
     ServiceComment{serviceComments} to ServiceComment{serviceComment}
     OrganizationComment{organizationComments} to OrganizationComment{organizationComment}
-
     Organization{organizationReservations} to OrganizationReservation{organization}
-
 }
 
 relationship ManyToOne {
+  Coupon{user} to User
   Shop{user} to User
   Organization{user} to User
   Event{user} to User
+  Coupon{event} to Event
 
   FeeTransaction{user} to User
 
   Hotel{user} to User
   Club{user} to User
   Restaurant{user} to User
+  Building{user} to User
 
   OrganizationStarRating{organization} to Organization
   OrganizationStarRating{user} to User
@@ -686,6 +713,8 @@ relationship ManyToOne {
 
   OrganizationReservation{user} to User
   OrganizationReservation{event} to Event{organizationReservations}
+
+  Coupon{event} to Event
 }
 
 /**

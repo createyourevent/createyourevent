@@ -77,6 +77,9 @@ public class Organization implements Serializable {
     @Column(name = "rent_type")
     private RentType rentType;
 
+    @Column(name = "rentable")
+    private Boolean rentable;
+
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "user", "product", "shop", "event", "service", "organization" }, allowSetters = true)
@@ -90,19 +93,19 @@ public class Organization implements Serializable {
     @ManyToOne
     private User user;
 
-    @JsonIgnoreProperties(value = {  "user" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
     @OneToOne(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Restaurant restaurant;
 
-    @JsonIgnoreProperties(value = {  "user" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
     @OneToOne(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Hotel hotel;
 
-    @JsonIgnoreProperties(value = {  "user" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
     @OneToOne(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Club club;
 
-    @JsonIgnoreProperties(value = {  }, allowSetters = true)
+    @JsonIgnoreProperties(value = {}, allowSetters = true)
     @OneToOne(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Building building;
 
@@ -306,6 +309,19 @@ public class Organization implements Serializable {
 
     public void setRentType(RentType rentType) {
         this.rentType = rentType;
+    }
+
+    public Boolean getRentable() {
+        return this.rentable;
+    }
+
+    public Organization rentable(Boolean rentable) {
+        this.setRentable(rentable);
+        return this;
+    }
+
+    public void setRentable(Boolean rentable) {
+        this.rentable = rentable;
     }
 
     public Set<Image> getImages() {
@@ -528,6 +544,7 @@ public class Organization implements Serializable {
             ", placeNumber=" + getPlaceNumber() +
             ", price=" + getPrice() +
             ", rentType='" + getRentType() + "'" +
+            ", rentable='" + getRentable() + "'" +
             "}";
     }
 }

@@ -210,6 +210,11 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" jhiTranslate="createyoureventApp.organization.rentable" for="field_rentable">Rentable</label>
+          <input type="checkbox" class="form-check" name="rentable" id="field_rentable" data-cy="rentable" formControlName="rentable" />
+        </div>
+
+        <div class="form-group">
           <label class="form-control-label" jhiTranslate="createyoureventApp.organization.user" for="field_user">User</label>
           <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
             <option [ngValue]="null"></option>

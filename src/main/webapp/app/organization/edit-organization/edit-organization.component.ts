@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
-
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { EventManager, EventWithContent } from 'app/core/util/event-manager.service';
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
@@ -34,15 +33,13 @@ import { BuildingService } from 'app/entities/building/service/building.service'
   selector: 'jhi-edit-organization',
   templateUrl: './edit-organization.component.html',
   styleUrls: ['./edit-organization.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class EditOrganizationComponent implements OnInit {
-
   isSaving = false;
   organizationTypeValues = Object.keys(OrganizationType);
   rentTypeValues = Object.keys(RentType);
 
-  usersSharedCollection: IUser[] = [];
   type: OrganizationType;
 
   user: IUser;
@@ -53,6 +50,8 @@ export class EditOrganizationComponent implements OnInit {
 
   quillEditorRef: any;
   maxUploadFileSize = 500000;
+
+  showRent = false;
 
   editRestaurantForm = this.fb.group({
     id: [],
@@ -65,13 +64,14 @@ export class EditOrganizationComponent implements OnInit {
     active: [],
     activeOwner: [],
     description: [null, [Validators.required]],
-    address: [null, [Validators.required,Validators.pattern(ADDRESS_REGEX)]],
+    address: [null, [Validators.required, Validators.pattern(ADDRESS_REGEX)]],
     motto: [null, [Validators.required]],
     phone: [null, [Validators.required]],
     webAddress: [null, [Validators.required, this.validatorHttp.checkHttp()]],
     placeNumber: [null, [Validators.required]],
     price: [],
     rentType: [],
+    rentable: [],
     user: [],
   });
 
@@ -85,13 +85,14 @@ export class EditOrganizationComponent implements OnInit {
     active: [],
     activeOwner: [],
     description: [null, [Validators.required]],
-    address: [null, [Validators.required,Validators.pattern(ADDRESS_REGEX)]],
+    address: [null, [Validators.required, Validators.pattern(ADDRESS_REGEX)]],
     motto: [null, [Validators.required]],
     phone: [null, [Validators.required]],
     webAddress: [null, [Validators.required, this.validatorHttp.checkHttp()]],
     placeNumber: [null, [Validators.required]],
     price: [],
     rentType: [],
+    rentable: [],
     user: [],
   });
 
@@ -112,8 +113,9 @@ export class EditOrganizationComponent implements OnInit {
     phone: [null, [Validators.required]],
     webAddress: [null, [Validators.required, this.validatorHttp.checkHttp()]],
     placeNumber: [null, [Validators.required]],
-    price: [null, [Validators.required]],
-    rentType: [null, [Validators.required]],
+    price: [],
+    rentType: [],
+    rentable: [],
     user: [],
   });
 
@@ -135,10 +137,11 @@ export class EditOrganizationComponent implements OnInit {
     placeNumber: [null, [Validators.required]],
     price: [],
     rentType: [],
+    rentable: [],
     user: [],
   });
 
-  editForm: FormGroup = this.editRestaurantForm;
+  editForm: FormGroup;
 
   constructor(
     protected dataUtils: DataUtils,
@@ -179,8 +182,8 @@ export class EditOrganizationComponent implements OnInit {
 
         ['clean'], // remove formatting button
 
-        ['link', 'image', 'video'] // link and image, video
-      ]
+        ['link', 'image', 'video'], // link and image, video
+      ],
     };
   }
 
@@ -190,17 +193,33 @@ export class EditOrganizationComponent implements OnInit {
     toolbar.addHandler('image', this.imageHandler);
   }
 
+  onChange(e) {
+    if (e.checked === true) {
+      this.showRent = true;
+      this.editForm.get(['price']).addValidators([Validators.required]);
+      this.editForm.get(['rentType']).addValidators([Validators.required]);
+    } else {
+      this.showRent = false;
+      this.editForm.get(['price']).removeValidators([Validators.required]);
+      this.editForm.get(['rentType']).removeValidators([Validators.required]);
+    }
+  }
+
   imageHandler = (image: any, callback: any) => {
-    const input = <HTMLInputElement> document.getElementById('fileInputField');
+    const input = <HTMLInputElement>document.getElementById('fileInputField');
     document.getElementById('fileInputField')!.onchange = () => {
-     const file: File = input.files![0];
+      const file: File = input.files![0];
       // file type is only image.
       if (/^image\//.test(file.type)) {
         if (file.size > this.maxUploadFileSize) {
-         this.messageService.add({severity:'error', summary: this.translate.instant('register-shop.filesize.error'), detail: this.translate.instant('register-shop.filesize.error.info')});
+          this.messageService.add({
+            severity: 'error',
+            summary: this.translate.instant('register-shop.filesize.error'),
+            detail: this.translate.instant('register-shop.filesize.error.info'),
+          });
         } else {
-          const reader  = new FileReader();
-          reader.onload = () =>  {
+          const reader = new FileReader();
+          reader.onload = () => {
             const range = this.quillEditorRef.getSelection();
             const img = '<img src="' + reader.result + '" />';
             this.quillEditorRef.clipboard.dangerouslyPasteHTML(range.index, img);
@@ -208,11 +227,15 @@ export class EditOrganizationComponent implements OnInit {
           reader.readAsDataURL(file);
         }
       } else {
-         this.messageService.add({severity:'error', summary: this.translate.instant('register-shop.filetype.error'), detail: this.translate.instant('register-shop.filetype.error.info')});
+        this.messageService.add({
+          severity: 'error',
+          summary: this.translate.instant('register-shop.filetype.error'),
+          detail: this.translate.instant('register-shop.filetype.error.info'),
+        });
       }
     };
     input.click();
-  }
+  };
 
   public addressChange(address: any): void {
     this.formattedaddress = address.formatted_address;
@@ -223,31 +246,36 @@ export class EditOrganizationComponent implements OnInit {
     this.generalService.findWidthAuthorities().subscribe(u => {
       this.user = u.body;
       this.activatedRoute.data.subscribe(({ organization }) => {
-        if(organization.organizationType === OrganizationType.RESTAURANT) {
+        if (organization.organizationType === OrganizationType.RESTAURANT) {
           this.type = OrganizationType.RESTAURANT;
           this.editForm = this.editRestaurantForm;
           this.updateRestaurantForm(organization);
-
         }
-        if(organization.organizationType === OrganizationType.HOTEL) {
+        if (organization.organizationType === OrganizationType.HOTEL) {
           this.type = OrganizationType.HOTEL;
           this.editForm = this.editHotelForm;
           this.updateHotelForm(organization);
-
         }
-        if(organization.organizationType === OrganizationType.CLUB) {
+        if (organization.organizationType === OrganizationType.CLUB) {
           this.type = OrganizationType.CLUB;
           this.editForm = this.editClubForm;
           this.updateClubForm(organization);
-
         }
-        if(organization.organizationType === OrganizationType.BUILDING) {
+        if (organization.organizationType === OrganizationType.BUILDING) {
           this.type = OrganizationType.BUILDING;
           this.editForm = this.editBuildingForm;
           this.updateBuildingForm(organization);
-
         }
 
+        if (organization.rentable === true) {
+          this.showRent = true;
+          this.editForm.get(['price']).addValidators([Validators.required]);
+          this.editForm.get(['rentType']).addValidators([Validators.required]);
+        } else {
+          this.showRent = false;
+          this.editForm.get(['price']).removeValidators([Validators.required]);
+          this.editForm.get(['rentType']).removeValidators([Validators.required]);
+        }
         this.loadRelationshipsOptions();
       });
     });
@@ -263,14 +291,14 @@ export class EditOrganizationComponent implements OnInit {
 
   setFileData(event: Event, field: string, isImage: boolean): void {
     let fg: FormGroup;
-    if(this.type === OrganizationType.RESTAURANT) {
+    if (this.type === OrganizationType.RESTAURANT) {
       fg = this.editRestaurantForm;
-    }
-    else if(this.type === OrganizationType.HOTEL) {
+    } else if (this.type === OrganizationType.HOTEL) {
       fg = this.editHotelForm;
-    }
-    else if(this.type === OrganizationType.CLUB) {
+    } else if (this.type === OrganizationType.CLUB) {
       fg = this.editClubForm;
+    } else if (this.type === OrganizationType.BUILDING) {
+      fg = this.editBuildingForm;
     }
 
     this.dataUtils.loadFileToForm(event, fg, field, isImage).subscribe({
@@ -281,19 +309,15 @@ export class EditOrganizationComponent implements OnInit {
 
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     let fg: FormGroup;
-    if(this.type === OrganizationType.RESTAURANT) {
+    if (this.type === OrganizationType.RESTAURANT) {
       fg = this.editRestaurantForm;
-    }
-    else if(this.type === OrganizationType.HOTEL) {
+    } else if (this.type === OrganizationType.HOTEL) {
       fg = this.editHotelForm;
-    }
-    else if(this.type === OrganizationType.CLUB) {
+    } else if (this.type === OrganizationType.CLUB) {
       fg = this.editClubForm;
-    }
-    else if(this.type === OrganizationType.BUILDING) {
+    } else if (this.type === OrganizationType.BUILDING) {
       fg = this.editBuildingForm;
     }
-
 
     fg.patchValue({
       [field]: null,
@@ -311,22 +335,19 @@ export class EditOrganizationComponent implements OnInit {
   save(): void {
     this.isSaving = true;
 
-    if(this.type === OrganizationType.RESTAURANT) {
+    if (this.type === OrganizationType.RESTAURANT) {
       let organization: IRestaurant;
       organization = this.createFromRestaurantForm();
       this.subscribeToSaveResponseRestaurant(this.restaurantService.update(organization));
-    }
-    else if(this.type === OrganizationType.HOTEL) {
+    } else if (this.type === OrganizationType.HOTEL) {
       let organization: IHotel;
       organization = this.createFromHotelForm();
       this.subscribeToSaveResponseHotel(this.hotelService.update(organization));
-    }
-    else if(this.type === OrganizationType.CLUB) {
+    } else if (this.type === OrganizationType.CLUB) {
       let organization: IClub;
       organization = this.createFromClubForm();
       this.subscribeToSaveResponseClub(this.clubService.update(organization));
-    }
-    else if(this.type === OrganizationType.BUILDING) {
+    } else if (this.type === OrganizationType.BUILDING) {
       let organization: IBuilding;
       organization = this.createFromBuildingForm();
       this.subscribeToSaveResponseBuilding(this.buildingService.update(organization));
@@ -377,21 +398,18 @@ export class EditOrganizationComponent implements OnInit {
     this.isSaving = false;
   }
 
-  changeType(e: any): void{
+  changeType(e: any): void {
     this.type = e.target.value;
-    if(this.type === OrganizationType.RESTAURANT) {
+    if (this.type === OrganizationType.RESTAURANT) {
       this.editRestaurantForm.get('organizationType').setValue(OrganizationType.RESTAURANT);
       this.editForm = this.editRestaurantForm;
-    }
-    else if(this.type === OrganizationType.HOTEL) {
+    } else if (this.type === OrganizationType.HOTEL) {
       this.editHotelForm.get('organizationType').setValue(OrganizationType.HOTEL);
       this.editForm = this.editHotelForm;
-    }
-    else if(this.type === OrganizationType.CLUB) {
+    } else if (this.type === OrganizationType.CLUB) {
       this.editClubForm.get('organizationType').setValue(OrganizationType.CLUB);
       this.editForm = this.editClubForm;
-    }
-    else if(this.type === OrganizationType.BUILDING) {
+    } else if (this.type === OrganizationType.BUILDING) {
       this.editClubForm.get('organizationType').setValue(OrganizationType.BUILDING);
       this.editForm = this.editBuildingForm;
     }
@@ -416,10 +434,9 @@ export class EditOrganizationComponent implements OnInit {
       placeNumber: restaurant.placeNumber,
       price: restaurant.price,
       rentType: restaurant.rentType,
+      rentable: restaurant.rentable,
       user: this.user,
     });
-
-    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(this.usersSharedCollection, restaurant.user);
   }
 
   protected updateBuildingForm(building: IOrganization): void {
@@ -440,12 +457,13 @@ export class EditOrganizationComponent implements OnInit {
       placeNumber: building.placeNumber,
       price: building.price,
       rentType: building.rentType,
+      rentable: building.rentable,
       user: this.user,
     });
   }
 
   protected updateHotelForm(hotel: IOrganization): void {
-    this.editRestaurantForm.patchValue({
+    this.editHotelForm.patchValue({
       id: hotel.id,
       cId: hotel.hotel.id,
       name: hotel.name,
@@ -464,10 +482,9 @@ export class EditOrganizationComponent implements OnInit {
       placeNumber: hotel.placeNumber,
       price: hotel.price,
       rentType: hotel.rentType,
+      rentable: hotel.rentable,
       user: this.user,
     });
-
-    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(this.usersSharedCollection, hotel.user);
   }
 
   protected updateClubForm(club: IOrganization): void {
@@ -489,36 +506,27 @@ export class EditOrganizationComponent implements OnInit {
       placeNumber: club.placeNumber,
       price: club.price,
       rentType: club.rentType,
+      rentable: club.rentable,
       user: this.user,
     });
-
-    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(this.usersSharedCollection, club.user);
   }
-
 
   protected loadRelationshipsOptions(): void {
-
     let fg: FormGroup;
-    if(this.type === OrganizationType.RESTAURANT) {
+    if (this.type === OrganizationType.RESTAURANT) {
       fg = this.editRestaurantForm;
-    }
-    else if(this.type === OrganizationType.HOTEL) {
+    } else if (this.type === OrganizationType.HOTEL) {
       fg = this.editHotelForm;
-    }
-    else if(this.type === OrganizationType.CLUB) {
+    } else if (this.type === OrganizationType.CLUB) {
       fg = this.editClubForm;
+    } else if (this.type === OrganizationType.BUILDING) {
+      fg = this.editBuildingForm;
     }
-
-    this.userService
-      .query()
-      .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
-      .pipe(map((users: IUser[]) => this.userService.addUserToCollectionIfMissing(users, fg.get('user')!.value)))
-      .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
   }
 
-  protected createFromRestaurantForm(): any{
+  protected createFromRestaurantForm(): any {
     const o = new Organization();
-    o.id =  this.editForm.get(['id'])!.value;
+    o.id = this.editForm.get(['id'])!.value;
     o.name = this.editForm.get(['name'])!.value;
     o.organizationType = this.editForm.get(['organizationType'])!.value;
     o.logoContentType = this.editForm.get(['logoContentType'])!.value;
@@ -527,25 +535,26 @@ export class EditOrganizationComponent implements OnInit {
     o.activeOwner = this.editForm.get(['activeOwner'])!.value;
     o.description = this.editForm.get(['description'])!.value;
     o.address = this.editForm.get(['address'])!.value;
-    o.motto = this.editForm.get(['motto'])!.value,
-    o.phone = this.editForm.get(['phone'])!.value,
-    o.webAddress = this.editForm.get(['webAddress'])!.value,
-    o.placeNumber = this.editForm.get(['placeNumber'])!.value,
-    o.price = this.editForm.get(['price'])!.value,
-    o.rentType = this.editForm.get(['rentType'])!.value,
-    o.user = this.user;
+    (o.motto = this.editForm.get(['motto'])!.value),
+      (o.phone = this.editForm.get(['phone'])!.value),
+      (o.webAddress = this.editForm.get(['webAddress'])!.value),
+      (o.placeNumber = this.editForm.get(['placeNumber'])!.value),
+      (o.price = this.editForm.get(['price'])!.value),
+      (o.rentType = this.editForm.get(['rentType'])!.value),
+      (o.rentable = this.editForm.get(['rentable'])!.value),
+      (o.user = this.user);
 
-      const r = new Restaurant();
-      r.id = this.editForm.get(['cId'])!.value;
-      r.menu = this.editForm.get(['menu'])!.value;
-      r.organization = o;
-      r.user = this.user;
+    const r = new Restaurant();
+    r.id = this.editForm.get(['cId'])!.value;
+    r.menu = this.editForm.get(['menu'])!.value;
+    r.organization = o;
+    r.user = this.user;
     return r;
   }
 
-  protected createFromBuildingForm(): any{
+  protected createFromBuildingForm(): any {
     const o = new Organization();
-    o.id =  this.editForm.get(['id'])!.value;
+    o.id = this.editForm.get(['id'])!.value;
     o.name = this.editForm.get(['name'])!.value;
     o.organizationType = this.editForm.get(['organizationType'])!.value;
     o.logoContentType = this.editForm.get(['logoContentType'])!.value;
@@ -554,24 +563,25 @@ export class EditOrganizationComponent implements OnInit {
     o.activeOwner = this.editForm.get(['activeOwner'])!.value;
     o.description = this.editForm.get(['description'])!.value;
     o.address = this.editForm.get(['address'])!.value;
-    o.motto = this.editForm.get(['motto'])!.value,
-    o.phone = this.editForm.get(['phone'])!.value,
-    o.webAddress = this.editForm.get(['webAddress'])!.value,
-    o.placeNumber = this.editForm.get(['placeNumber'])!.value,
-    o.price = this.editForm.get(['price'])!.value,
-    o.rentType = this.editForm.get(['rentType'])!.value,
-    o.user = this.user;
+    (o.motto = this.editForm.get(['motto'])!.value),
+      (o.phone = this.editForm.get(['phone'])!.value),
+      (o.webAddress = this.editForm.get(['webAddress'])!.value),
+      (o.placeNumber = this.editForm.get(['placeNumber'])!.value),
+      (o.price = this.editForm.get(['price'])!.value),
+      (o.rentType = this.editForm.get(['rentType'])!.value),
+      (o.rentable = this.editForm.get(['rentable'])!.value),
+      (o.user = this.user);
 
-      const r = new Building();
-      r.id = this.editForm.get(['cId'])!.value;
-      r.organization = o;
-      return r;
-
+    const r = new Building();
+    r.id = this.editForm.get(['cId'])!.value;
+    r.organization = o;
+    r.user = this.user;
+    return r;
   }
 
   protected createFromHotelForm(): any {
     const o = new Organization();
-    o.id =  this.editForm.get(['id'])!.value;
+    o.id = this.editForm.get(['id'])!.value;
     o.name = this.editForm.get(['name'])!.value;
     o.organizationType = this.editForm.get(['organizationType'])!.value;
     o.logoContentType = this.editForm.get(['logoContentType'])!.value;
@@ -580,13 +590,14 @@ export class EditOrganizationComponent implements OnInit {
     o.activeOwner = this.editForm.get(['activeOwner'])!.value;
     o.description = this.editForm.get(['description'])!.value;
     o.address = this.editForm.get(['address'])!.value;
-    o.motto = this.editForm.get(['motto'])!.value,
-    o.phone = this.editForm.get(['phone'])!.value,
-    o.webAddress = this.editForm.get(['webAddress'])!.value,
-    o.placeNumber = this.editForm.get(['placeNumber'])!.value,
-    o.price = this.editForm.get(['price'])!.value,
-    o.rentType = this.editForm.get(['rentType'])!.value,
-    o.user = this.user;
+    (o.motto = this.editForm.get(['motto'])!.value),
+      (o.phone = this.editForm.get(['phone'])!.value),
+      (o.webAddress = this.editForm.get(['webAddress'])!.value),
+      (o.placeNumber = this.editForm.get(['placeNumber'])!.value),
+      (o.price = this.editForm.get(['price'])!.value),
+      (o.rentType = this.editForm.get(['rentType'])!.value),
+      (o.rentable = this.editForm.get(['rentable'])!.value),
+      (o.user = this.user);
 
     const r = new Hotel();
     r.id = this.editForm.get(['cId'])!.value;
@@ -595,12 +606,11 @@ export class EditOrganizationComponent implements OnInit {
     r.organization = o;
     r.user = this.user;
     return r;
-
   }
 
-  protected createFromClubForm(): any{
+  protected createFromClubForm(): any {
     const o = new Organization();
-    o.id =  this.editForm.get(['id'])!.value;
+    o.id = this.editForm.get(['id'])!.value;
     o.name = this.editForm.get(['name'])!.value;
     o.organizationType = this.editForm.get(['organizationType'])!.value;
     o.logoContentType = this.editForm.get(['logoContentType'])!.value;
@@ -609,21 +619,20 @@ export class EditOrganizationComponent implements OnInit {
     o.activeOwner = this.editForm.get(['activeOwner'])!.value;
     o.description = this.editForm.get(['description'])!.value;
     o.address = this.editForm.get(['address'])!.value;
-    o.motto = this.editForm.get(['motto'])!.value,
-    o.phone = this.editForm.get(['phone'])!.value,
-    o.webAddress = this.editForm.get(['webAddress'])!.value,
-    o.placeNumber = this.editForm.get(['placeNumber'])!.value,
-    o.price = this.editForm.get(['price'])!.value,
-    o.rentType = this.editForm.get(['rentType'])!.value,
-    o.user = this.user;
+    (o.motto = this.editForm.get(['motto'])!.value),
+      (o.phone = this.editForm.get(['phone'])!.value),
+      (o.webAddress = this.editForm.get(['webAddress'])!.value),
+      (o.placeNumber = this.editForm.get(['placeNumber'])!.value),
+      (o.price = this.editForm.get(['price'])!.value),
+      (o.rentType = this.editForm.get(['rentType'])!.value),
+      (o.rentable = this.editForm.get(['rentable'])!.value),
+      (o.user = this.user);
 
     const r = new Club();
     r.id = this.editForm.get(['cId'])!.value;
-    r.priceCard= this.editForm.get(['priceCard'])!.value;
+    r.priceCard = this.editForm.get(['priceCard'])!.value;
     r.organization = o;
     r.user = this.user;
     return r;
-
   }
-
 }

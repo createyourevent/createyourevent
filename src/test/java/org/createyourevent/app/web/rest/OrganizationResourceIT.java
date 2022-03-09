@@ -74,6 +74,9 @@ class OrganizationResourceIT {
     private static final RentType DEFAULT_RENT_TYPE = RentType.HOURLY;
     private static final RentType UPDATED_RENT_TYPE = RentType.HALFDAY;
 
+    private static final Boolean DEFAULT_RENTABLE = false;
+    private static final Boolean UPDATED_RENTABLE = true;
+
     private static final String ENTITY_API_URL = "/api/organizations";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -112,7 +115,8 @@ class OrganizationResourceIT {
             .webAddress(DEFAULT_WEB_ADDRESS)
             .placeNumber(DEFAULT_PLACE_NUMBER)
             .price(DEFAULT_PRICE)
-            .rentType(DEFAULT_RENT_TYPE);
+            .rentType(DEFAULT_RENT_TYPE)
+            .rentable(DEFAULT_RENTABLE);
         return organization;
     }
 
@@ -137,7 +141,8 @@ class OrganizationResourceIT {
             .webAddress(UPDATED_WEB_ADDRESS)
             .placeNumber(UPDATED_PLACE_NUMBER)
             .price(UPDATED_PRICE)
-            .rentType(UPDATED_RENT_TYPE);
+            .rentType(UPDATED_RENT_TYPE)
+            .rentable(UPDATED_RENTABLE);
         return organization;
     }
 
@@ -178,6 +183,7 @@ class OrganizationResourceIT {
         assertThat(testOrganization.getPlaceNumber()).isEqualTo(DEFAULT_PLACE_NUMBER);
         assertThat(testOrganization.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testOrganization.getRentType()).isEqualTo(DEFAULT_RENT_TYPE);
+        assertThat(testOrganization.getRentable()).isEqualTo(DEFAULT_RENTABLE);
     }
 
     @Test
@@ -338,7 +344,8 @@ class OrganizationResourceIT {
             .andExpect(jsonPath("$.[*].webAddress").value(hasItem(DEFAULT_WEB_ADDRESS)))
             .andExpect(jsonPath("$.[*].placeNumber").value(hasItem(DEFAULT_PLACE_NUMBER)))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
-            .andExpect(jsonPath("$.[*].rentType").value(hasItem(DEFAULT_RENT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].rentType").value(hasItem(DEFAULT_RENT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].rentable").value(hasItem(DEFAULT_RENTABLE.booleanValue())));
     }
 
     @Test
@@ -366,7 +373,8 @@ class OrganizationResourceIT {
             .andExpect(jsonPath("$.webAddress").value(DEFAULT_WEB_ADDRESS))
             .andExpect(jsonPath("$.placeNumber").value(DEFAULT_PLACE_NUMBER))
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()))
-            .andExpect(jsonPath("$.rentType").value(DEFAULT_RENT_TYPE.toString()));
+            .andExpect(jsonPath("$.rentType").value(DEFAULT_RENT_TYPE.toString()))
+            .andExpect(jsonPath("$.rentable").value(DEFAULT_RENTABLE.booleanValue()));
     }
 
     @Test
@@ -402,7 +410,8 @@ class OrganizationResourceIT {
             .webAddress(UPDATED_WEB_ADDRESS)
             .placeNumber(UPDATED_PLACE_NUMBER)
             .price(UPDATED_PRICE)
-            .rentType(UPDATED_RENT_TYPE);
+            .rentType(UPDATED_RENT_TYPE)
+            .rentable(UPDATED_RENTABLE);
 
         restOrganizationMockMvc
             .perform(
@@ -431,6 +440,7 @@ class OrganizationResourceIT {
         assertThat(testOrganization.getPlaceNumber()).isEqualTo(UPDATED_PLACE_NUMBER);
         assertThat(testOrganization.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testOrganization.getRentType()).isEqualTo(UPDATED_RENT_TYPE);
+        assertThat(testOrganization.getRentable()).isEqualTo(UPDATED_RENTABLE);
     }
 
     @Test
@@ -544,6 +554,7 @@ class OrganizationResourceIT {
         assertThat(testOrganization.getPlaceNumber()).isEqualTo(UPDATED_PLACE_NUMBER);
         assertThat(testOrganization.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testOrganization.getRentType()).isEqualTo(UPDATED_RENT_TYPE);
+        assertThat(testOrganization.getRentable()).isEqualTo(DEFAULT_RENTABLE);
     }
 
     @Test
@@ -572,7 +583,8 @@ class OrganizationResourceIT {
             .webAddress(UPDATED_WEB_ADDRESS)
             .placeNumber(UPDATED_PLACE_NUMBER)
             .price(UPDATED_PRICE)
-            .rentType(UPDATED_RENT_TYPE);
+            .rentType(UPDATED_RENT_TYPE)
+            .rentable(UPDATED_RENTABLE);
 
         restOrganizationMockMvc
             .perform(
@@ -601,6 +613,7 @@ class OrganizationResourceIT {
         assertThat(testOrganization.getPlaceNumber()).isEqualTo(UPDATED_PLACE_NUMBER);
         assertThat(testOrganization.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testOrganization.getRentType()).isEqualTo(UPDATED_RENT_TYPE);
+        assertThat(testOrganization.getRentable()).isEqualTo(UPDATED_RENTABLE);
     }
 
     @Test

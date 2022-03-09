@@ -31,10 +31,9 @@ export interface StepType {
   selector: 'jhi-create-event',
   templateUrl: './create-event.component.html',
   styleUrls: ['./create-event.component.scss'],
-  providers: [MessageService, DialogService]
+  providers: [MessageService, DialogService],
 })
 export class CreateEventComponent implements OnInit, OnDestroy {
-
   loading = false;
   organizationsWithDistance: IOrganization[] = [];
   user: IUser;
@@ -82,7 +81,6 @@ export class CreateEventComponent implements OnInit, OnDestroy {
     if (this.sharedEventService.sharedEvent != null) {
       this.model = this.sharedEventService.sharedEvent;
     }
-
   }
   ngOnInit(): void {
     this.steps = [
@@ -96,8 +94,8 @@ export class CreateEventComponent implements OnInit, OnDestroy {
               label: this.translate.instant('create-event.eventname'),
               required: true,
               placeholder: this.translate.instant('create-event.eventname'),
-              description: this.translate.instant('create-event.name.description')
-            }
+              description: this.translate.instant('create-event.name.description'),
+            },
           },
           {
             key: 'motto',
@@ -106,8 +104,8 @@ export class CreateEventComponent implements OnInit, OnDestroy {
               label: this.translate.instant('create-event.motto'),
               required: true,
               placeholder: this.translate.instant('create-event.motto'),
-              description: this.translate.instant('create-event.motto.description')
-            }
+              description: this.translate.instant('create-event.motto.description'),
+            },
           },
           {
             key: 'keywords',
@@ -116,8 +114,8 @@ export class CreateEventComponent implements OnInit, OnDestroy {
               label: this.translate.instant('create-event.keywords'),
               required: true,
               placeholder: this.translate.instant('create-event.keywords'),
-              description: this.translate.instant('create-event.keywords.description')
-            }
+              description: this.translate.instant('create-event.keywords.description'),
+            },
           },
           {
             key: 'select_event_category',
@@ -135,9 +133,9 @@ export class CreateEventComponent implements OnInit, OnDestroy {
                 { value: 'NATIONAL_HOLYDAY', label: this.translate.instant('create-event.category.national-holiday') },
                 { value: 'WEDDING', label: this.translate.instant('create-event.category.wedding') },
                 { value: 'GRADUATION', label: this.translate.instant('create-event.category.graduation') },
-                { value: 'HALLOWEEN', label: this.translate.instant('create-event.category.halloween') }
-              ]
-            }
+                { value: 'HALLOWEEN', label: this.translate.instant('create-event.category.halloween') },
+              ],
+            },
           },
           {
             key: 'date_start',
@@ -147,7 +145,7 @@ export class CreateEventComponent implements OnInit, OnDestroy {
               label: this.translate.instant('create-event.event-start-date'),
               required: true,
               placeholder: this.translate.instant('create-event.event-start-date'),
-              description: this.translate.instant('create-event.event-start-date.description')
+              description: this.translate.instant('create-event.event-start-date.description'),
             },
             validators: {
               validation: [this.validator4Weeks.check4weeks()],
@@ -161,7 +159,7 @@ export class CreateEventComponent implements OnInit, OnDestroy {
               label: this.translate.instant('create-event.event-end-date'),
               required: true,
               placeholder: this.translate.instant('create-event.event-end-date'),
-              description: this.translate.instant('create-event.event-end-date.description')
+              description: this.translate.instant('create-event.event-end-date.description'),
             },
             validators: {
               validation: [this.validator4Weeks.check4weeks()],
@@ -175,8 +173,8 @@ export class CreateEventComponent implements OnInit, OnDestroy {
               label: this.translate.instant('create-event.event-start-time'),
               required: true,
               placeholder: this.translate.instant('create-event.event-start-time'),
-              description: this.translate.instant('create-event.event-start-time.description')
-            }
+              description: this.translate.instant('create-event.event-start-time.description'),
+            },
           },
           {
             key: 'time_end',
@@ -186,8 +184,8 @@ export class CreateEventComponent implements OnInit, OnDestroy {
               label: this.translate.instant('create-event.event-end-time'),
               required: true,
               placeholder: this.translate.instant('create-event.event-end-time'),
-              description: this.translate.instant('create-event.event-end-time.description')
-            }
+              description: this.translate.instant('create-event.event-end-time.description'),
+            },
           },
           {
             key: 'description',
@@ -197,14 +195,14 @@ export class CreateEventComponent implements OnInit, OnDestroy {
               required: true,
               placeholder: this.translate.instant('create-event.description'),
               description: this.translate.instant('create-event.description.description'),
-              rows: 5
-            }
-          }
+              rows: 5,
+            },
+          },
         ],
       },
 
       {
-        label: this.translate.instant('create-event.administrativ-information') ,
+        label: this.translate.instant('create-event.administrativ-information'),
         fields: [
           {
             key: 'private_public',
@@ -214,10 +212,10 @@ export class CreateEventComponent implements OnInit, OnDestroy {
               description: this.translate.instant('create-event.private-public.description'),
               required: true,
               options: [
-                { value: this.translate.instant('create-event.private'), key: 'private'},
-                { value: this.translate.instant('create-event.public') , key: 'public'}
-              ]
-            }
+                { value: this.translate.instant('create-event.private'), key: 'private' },
+                { value: this.translate.instant('create-event.public'), key: 'public' },
+              ],
+            },
           },
           {
             key: 'placenumber',
@@ -227,13 +225,16 @@ export class CreateEventComponent implements OnInit, OnDestroy {
               required: true,
               change: this.calcTotal.bind(this),
               placeholder: this.translate.instant('create-event.participants'),
-              description: this.translate.instant('create-event.participants.description')
+              description: this.translate.instant('create-event.participants.description'),
             },
             validators: {
-              validation: Validators.compose([this.validatorSmallerThen.checkMaximumPlaces(), this.validatorGreaterThenZero.checkGreaterThenZero()])
-            }
+              validation: Validators.compose([
+                this.validatorSmallerThen.checkMaximumPlaces(),
+                this.validatorGreaterThenZero.checkGreaterThenZero(),
+              ]),
             },
-            {
+          },
+          {
             key: 'minPlacenumber',
             type: 'input',
             templateOptions: {
@@ -241,11 +242,14 @@ export class CreateEventComponent implements OnInit, OnDestroy {
               required: true,
               change: this.calcTotal.bind(this),
               placeholder: this.translate.instant('create-event.min-participants'),
-              description: this.translate.instant('create-event.min-participants.description')
+              description: this.translate.instant('create-event.min-participants.description'),
             },
             validators: {
-              validation: Validators.compose([this.validatorSmallerThen.checkMaximumPlaces(), this.validatorGreaterThenZero.checkGreaterThenZero()])
-            }
+              validation: Validators.compose([
+                this.validatorSmallerThen.checkMaximumPlaces(),
+                this.validatorGreaterThenZero.checkGreaterThenZero(),
+              ]),
+            },
           },
           {
             key: 'price',
@@ -255,11 +259,11 @@ export class CreateEventComponent implements OnInit, OnDestroy {
               required: true,
               placeholder: this.translate.instant('create-event.price'),
               change: this.calcTotal.bind(this),
-              description: this.translate.instant('create-event.price.description')
+              description: this.translate.instant('create-event.price.description'),
             },
             validators: {
-              validation: Validators.compose([this.validatorGreaterThenZero.checkGreaterThenZero()])
-            }
+              validation: Validators.compose([this.validatorGreaterThenZero.checkGreaterThenZero()]),
+            },
           },
           {
             key: 'total',
@@ -268,8 +272,8 @@ export class CreateEventComponent implements OnInit, OnDestroy {
             templateOptions: {
               label: this.translate.instant('create-event.total'),
               disabled: true,
-              description: this.translate.instant('create-event.total.description')
-            }
+              description: this.translate.instant('create-event.total.description'),
+            },
           },
           {
             key: 'investment',
@@ -278,9 +282,9 @@ export class CreateEventComponent implements OnInit, OnDestroy {
               label: this.translate.instant('create-event.investment'),
               required: true,
               placeholder: this.translate.instant('create-event.investment'),
-              description: this.translate.instant('create-event.investment.description')
-            }
-          }
+              description: this.translate.instant('create-event.investment.description'),
+            },
+          },
         ],
       },
       {
@@ -293,8 +297,8 @@ export class CreateEventComponent implements OnInit, OnDestroy {
               label: this.translate.instant('create-event.locationname'),
               required: true,
               placeholder: this.translate.instant('create-event.locationname'),
-              description: this.translate.instant('create-event.locationname.description')
-            }
+              description: this.translate.instant('create-event.locationname.description'),
+            },
           },
           {
             key: 'address',
@@ -302,9 +306,10 @@ export class CreateEventComponent implements OnInit, OnDestroy {
             templateOptions: {
               label: this.translate.instant('create-event.address'),
               required: true,
-              pattern: /(?:([A-z\\.-ßäöü]+[\sA-z\\.-ßäöü]*[\sA-z\\.-ßäöü]*[\sA-z\\.-ßäöü]*[\s]*[0-9]*)([\s]*[,]?[\s]*)([\d][\d][\d][\d][\d]?[\s]+[A-z\\.-ßäöü]+[\sA-z\\.-ßäöü]*[\sA-z\\.-ßäöü]*[\sA-z\\.-ßäöü]*)([\s]*[,]?[\s]*)([A-z\\.-ßäöü]+[\s]*[A-zß]*[\s]*[A-zß]*)$)/,
-              description: this.translate.instant('fieldnames.address.info')
-            }
+              pattern:
+                /(?:([A-z\\.-ßäöü]+[\sA-z\\.-ßäöü]*[\sA-z\\.-ßäöü]*[\sA-z\\.-ßäöü]*[\s]*[0-9]*)([\s]*[,]?[\s]*)([\d][\d][\d][\d][\d]?[\s]+[A-z\\.-ßäöü]+[\sA-z\\.-ßäöü]*[\sA-z\\.-ßäöü]*[\sA-z\\.-ßäöü]*)([\s]*[,]?[\s]*)([A-z\\.-ßäöü]+[\s]*[A-zß]*[\s]*[A-zß]*)$)/,
+              description: this.translate.instant('fieldnames.address.info'),
+            },
           },
           {
             key: 'description_location',
@@ -314,15 +319,15 @@ export class CreateEventComponent implements OnInit, OnDestroy {
               required: true,
               placeholder: this.translate.instant('create-event.description-location'),
               description: this.translate.instant('create-event.description-location.description'),
-              rows: 5
-            }
-          }
+              rows: 5,
+            },
+          },
         ],
       },
     ];
 
     this.form = new FormArray(this.steps.map(() => new FormGroup({})));
-    this.options = this.steps.map(() => <FormlyFormOptions> {});
+    this.options = this.steps.map(() => <FormlyFormOptions>{});
 
     this.generalService.findWidthAuthorities().subscribe(u => {
       this.user = u.body;
@@ -331,12 +336,11 @@ export class CreateEventComponent implements OnInit, OnDestroy {
 
   showCalendar(organization: IOrganization) {
     this.ref = this.dialogService.open(OrganizationReservationCalendarComponent, {
-        header: 'All reservations for this organization',
-        width: '90%',
-        data: { organization: organization }
+      header: 'All reservations for this organization',
+      width: '90%',
+      data: { organization: organization },
     });
-}
-
+  }
 
   formatAddress(org: IOrganization): string {
     const googleAddressArray = org.address!.split(',');
@@ -348,7 +352,7 @@ export class CreateEventComponent implements OnInit, OnDestroy {
   }
 
   changeOrg(e: any) {
-    if(!e) {
+    if (!e) {
       //this.form.controls[1].get('placenumber').setValue(0);
       //this.form.controls[1].get('placenumber').clearValidators();
       this.isOrganization = e;
@@ -361,7 +365,7 @@ export class CreateEventComponent implements OnInit, OnDestroy {
         const organizations = org.body;
         const pn = this.form.controls[1].get('placenumber').value;
         organizations.forEach(ele => {
-          if(ele.placeNumber >=  pn) {
+          if (ele.placeNumber >= pn) {
             this.organizations.push(ele);
           }
         });
@@ -371,7 +375,7 @@ export class CreateEventComponent implements OnInit, OnDestroy {
   }
 
   getPlaceNumber(): number {
-    if(this.form) {
+    if (this.form) {
       return this.form.controls[1].get('placenumber').value;
     }
   }
@@ -381,8 +385,7 @@ export class CreateEventComponent implements OnInit, OnDestroy {
 
     if (this.ref) {
       this.ref.close();
-  }
-
+    }
   }
 
   changeLanguage(): void {
@@ -395,7 +398,7 @@ export class CreateEventComponent implements OnInit, OnDestroy {
     const total = Number(this.model.price) * Number(this.model.minPlacenumber);
     this.model = {
       ...this.model,
-      total: total
+      total: total,
     };
   }
 
@@ -417,17 +420,23 @@ export class CreateEventComponent implements OnInit, OnDestroy {
     const dateFrom = dayjs(dateFromField.value + ' ' + timeFromField.value);
     const dateUntil = dayjs(dateUntilField.value + ' ' + timeUntilField.value);
 
-    if (dateFromField.value === '' || timeFromField.value === '' || dateUntilField.value === '' || timeUntilField.value === '' ||  !dateFrom.isValid() || !dateUntil.isValid()) {
+    if (
+      dateFromField.value === '' ||
+      timeFromField.value === '' ||
+      dateUntilField.value === '' ||
+      timeUntilField.value === '' ||
+      !dateFrom.isValid() ||
+      !dateUntil.isValid()
+    ) {
       this.isAdding = false;
       this.messageService.add({
         key: 'myKey1',
         severity: 'error',
         summary: this.translate.instant('select-products.error'),
-        detail: this.translate.instant('select-products.error-date')
+        detail: this.translate.instant('select-products.error-date'),
       });
       return;
     }
-
 
     this.generalService.findAllOrganizationReservationsWithDateRange(dateFrom, dateUntil).subscribe(smo => {
       const orders = smo.body;
@@ -485,34 +494,38 @@ export class CreateEventComponent implements OnInit, OnDestroy {
           factor = 7;
         }
       }
-      sum = org.price * factor;
-      const totalEntry = Number(this.model.price) * Number(this.model.minPlacenumber);
-      const totalInvestment = Number(this.model.investment);
-
-      if (sum > totalEntry + totalInvestment) {
-        this.isAdding = false;
-        this.messageService.add({
-          key: 'myKey1',
-          severity: 'error',
-          summary: this.translate.instant('create-event.error'),
-          detail: this.translate.instant('create-event.organization-too-expensive'),
-        });
-        return;
-      }
 
       this.organizationReservation = new OrganizationReservation();
+      if (org.rentable) {
+        sum = org.price * factor;
+        const totalEntry = Number(this.model.price) * Number(this.model.minPlacenumber);
+        const totalInvestment = Number(this.model.investment);
+
+        if (sum > totalEntry + totalInvestment) {
+          this.isAdding = false;
+          this.messageService.add({
+            key: 'myKey1',
+            severity: 'error',
+            summary: this.translate.instant('create-event.error'),
+            detail: this.translate.instant('create-event.organization-too-expensive'),
+          });
+          return;
+        }
+
+        this.organizationReservation.total = sum;
+      }
+
       this.organizationReservation.date = dayjs();
       this.organizationReservation.dateFrom = dateFrom;
       this.organizationReservation.dateUntil = dateUntil;
-      this.organizationReservation.total = sum;
       this.organizationReservation.organization = org;
       this.sharedEventService.organizationReservation = this.organizationReservation;
 
-      if(this.sharedEventService.organization) {
+      if (this.sharedEventService.organization) {
         this.organizationsWithDistance.push(this.sharedEventService.organization);
       }
-      const found  = this.organizationsWithDistance.findIndex(e => e.id === org.id);
-      if(found >= 0) {
+      const found = this.organizationsWithDistance.findIndex(e => e.id === org.id);
+      if (found >= 0) {
         this.organizationsWithDistance.splice(found, 1);
       }
 
@@ -521,7 +534,6 @@ export class CreateEventComponent implements OnInit, OnDestroy {
       this.model.organization = org;
       this.model.organizationReservation = this.organizationReservation;
       this.isAdding = false;
-
     });
   }
 
@@ -554,7 +566,7 @@ export class CreateEventComponent implements OnInit, OnDestroy {
           const posOrganization = new google.maps.LatLng(lat, lng);
           const distance = google.maps.geometry.spherical.computeDistanceBetween(posUser, posOrganization);
           const maxDistance = Number(e) * 1000;
-          if(e === 0) {
+          if (e === 0) {
             this.organizationsWithDistance = this.organizations;
           }
           if (maxDistance > distance) {
@@ -564,5 +576,5 @@ export class CreateEventComponent implements OnInit, OnDestroy {
       });
       this.organizationsWithDistance = [...new Set(this.organizationsWithDistance)];
     });
-  };
+  }
 }

@@ -28,9 +28,12 @@ public class Building implements Serializable {
         value = { "images", "organizationReservations", "user", "restaurant", "hotel", "club", "building", "tags" },
         allowSetters = true
     )
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(unique = true)
     private Organization organization;
+
+    @ManyToOne
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -70,6 +73,19 @@ public class Building implements Serializable {
 
     public Building organization(Organization organization) {
         this.setOrganization(organization);
+        return this;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Building user(User user) {
+        this.setUser(user);
         return this;
     }
 

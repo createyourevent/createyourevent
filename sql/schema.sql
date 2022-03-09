@@ -28,7 +28,7 @@ CREATE TABLE `address` (
   `lat` float DEFAULT NULL,
   `lng` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,10 +84,13 @@ CREATE TABLE `building` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `surface` float DEFAULT NULL,
   `organization_id` bigint(20) DEFAULT NULL,
+  `user_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ux_building__organization_id` (`organization_id`),
+  KEY `FK6jn8ubepqc5bn3ifvp3wwom70` (`user_id`),
+  CONSTRAINT `FK6jn8ubepqc5bn3ifvp3wwom70` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`),
   CONSTRAINT `fk_building__organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organization` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,6 +212,30 @@ CREATE TABLE `contact` (
   `date` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `coupon`
+--
+
+DROP TABLE IF EXISTS `coupon`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `coupon` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `value` float DEFAULT NULL,
+  `event_id` bigint(20) DEFAULT NULL,
+  `user_id` varchar(255) DEFAULT NULL,
+  `coupon_nr` varchar(255) DEFAULT NULL,
+  `description` longtext,
+  `title` varchar(255) DEFAULT NULL,
+  `used` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKoh8ut30aphlkx6odcme33u4lw` (`event_id`),
+  KEY `FKq098abtxuct1q9l27qhonc0fe` (`user_id`),
+  CONSTRAINT `FKoh8ut30aphlkx6odcme33u4lw` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
+  CONSTRAINT `FKq098abtxuct1q9l27qhonc0fe` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -339,7 +366,7 @@ CREATE TABLE `event` (
   CONSTRAINT `fk_event__event_detail_id` FOREIGN KEY (`event_detail_id`) REFERENCES `event_details` (`id`),
   CONSTRAINT `fk_event__location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
   CONSTRAINT `fk_event__user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -377,7 +404,7 @@ CREATE TABLE `event_details` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `total_entrance_fee` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -442,7 +469,7 @@ CREATE TABLE `event_product_order` (
   CONSTRAINT `fk_event_product_order__product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `fk_event_product_order__shop_id` FOREIGN KEY (`shop_id`) REFERENCES `shop` (`id`),
   CONSTRAINT `fk_event_product_order__user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -525,7 +552,7 @@ CREATE TABLE `event_service_map_order` (
   CONSTRAINT `fk_event_service_map_order__cart_id` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`),
   CONSTRAINT `fk_event_service_map_order__event_id` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
   CONSTRAINT `fk_event_service_map_order__service_map_id` FOREIGN KEY (`service_map_id`) REFERENCES `service_map` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -547,7 +574,7 @@ CREATE TABLE `event_star_rating` (
   KEY `fk_event_star_rating__user_id` (`user_id`),
   CONSTRAINT `fk_event_star_rating__event_id` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
   CONSTRAINT `fk_event_star_rating__user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -598,7 +625,7 @@ CREATE TABLE `fee_transaction` (
   CONSTRAINT `fk_fee_transaction__event_service_map_order_id` FOREIGN KEY (`event_service_map_order_id`) REFERENCES `event_service_map_order` (`id`),
   CONSTRAINT `fk_fee_transaction__transaction_id_id` FOREIGN KEY (`transaction_id_id`) REFERENCES `fee_transaction_id` (`id`),
   CONSTRAINT `fk_fee_transaction__user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -616,7 +643,7 @@ CREATE TABLE `fee_transaction_entry` (
   PRIMARY KEY (`id`),
   KEY `fk_fee_transaction_entry__fee_transaction_id` (`fee_transaction_id`),
   CONSTRAINT `fk_fee_transaction_entry__fee_transaction_id` FOREIGN KEY (`fee_transaction_id`) REFERENCES `fee_transaction` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -630,7 +657,7 @@ CREATE TABLE `fee_transaction_id` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `transaction_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -726,7 +753,7 @@ CREATE TABLE `image` (
   CONSTRAINT `fk_image__service_id` FOREIGN KEY (`service_id`) REFERENCES `create_your_event_service` (`id`),
   CONSTRAINT `fk_image__shop_id` FOREIGN KEY (`shop_id`) REFERENCES `shop` (`id`),
   CONSTRAINT `fk_image__user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -844,7 +871,7 @@ CREATE TABLE `location` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `ux_location__address_id` (`address_id`),
   CONSTRAINT `fk_location__address_id` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -903,10 +930,11 @@ CREATE TABLE `organization` (
   `place_number` int(11) DEFAULT NULL,
   `price` float DEFAULT NULL,
   `rent_type` varchar(255) DEFAULT NULL,
+  `rentable` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_organization__user_id` (`user_id`),
   CONSTRAINT `fk_organization__user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -988,7 +1016,7 @@ CREATE TABLE `organization_reservation` (
   CONSTRAINT `FK6hw6liv6tcjhcuyquy0x88apg` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`),
   CONSTRAINT `FKlw5gv2m9qn4syti2ieye51hvq` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
   CONSTRAINT `fk_organization_reservation__organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organization` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1192,7 +1220,7 @@ CREATE TABLE `property` (
   `jhi_key` varchar(255) DEFAULT NULL,
   `value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1240,7 +1268,7 @@ CREATE TABLE `reservation` (
   CONSTRAINT `fk_reservation__event_id` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`),
   CONSTRAINT `fk_reservation__transaction_id_id` FOREIGN KEY (`transaction_id_id`) REFERENCES `reservation_transaction_id` (`id`),
   CONSTRAINT `fk_reservation__user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1255,7 +1283,7 @@ CREATE TABLE `reservation_transaction_id` (
   `transaction_deposit_id` varchar(255) DEFAULT NULL,
   `transaction_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1497,6 +1525,62 @@ CREATE TABLE `shop_star_rating` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `slot_list_cherry`
+--
+
+DROP TABLE IF EXISTS `slot_list_cherry`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `slot_list_cherry` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `coupons` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `slot_list_clock`
+--
+
+DROP TABLE IF EXISTS `slot_list_clock`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `slot_list_clock` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `coupons` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `slot_list_orange`
+--
+
+DROP TABLE IF EXISTS `slot_list_orange`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `slot_list_orange` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `coupons` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `slot_list_plum`
+--
+
+DROP TABLE IF EXISTS `slot_list_plum`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `slot_list_plum` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `coupons` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `tags`
 --
 
@@ -1522,7 +1606,7 @@ CREATE TABLE `tags` (
   CONSTRAINT `fk_tags__product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
   CONSTRAINT `fk_tags__service_id` FOREIGN KEY (`service_id`) REFERENCES `create_your_event_service` (`id`),
   CONSTRAINT `fk_tags__shop_id` FOREIGN KEY (`shop_id`) REFERENCES `shop` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1547,7 +1631,7 @@ CREATE TABLE `ticket` (
   KEY `FKfytuhjopeamxbt1cpudy92x5n` (`event_id`),
   CONSTRAINT `FK14p6i3tb23aol75bx9dtcej0d` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`),
   CONSTRAINT `FKfytuhjopeamxbt1cpudy92x5n` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1587,7 +1671,7 @@ CREATE TABLE `user_point_association` (
   KEY `fk_user_point_association__users_id` (`users_id`),
   CONSTRAINT `fk_user_point_association__points_id` FOREIGN KEY (`points_id`) REFERENCES `point` (`id`),
   CONSTRAINT `fk_user_point_association__users_id` FOREIGN KEY (`users_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1628,4 +1712,4 @@ CREATE TABLE `worksheet` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-04  3:36:41
+-- Dump completed on 2022-02-27 21:45:15

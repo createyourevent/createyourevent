@@ -87,7 +87,7 @@ import localeDECH from '@angular/common/locales/de-CH';
 import { AdsenseModule } from 'ng2-adsense';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'angular2-moment';
-import { ModalModule } from "ngx-bootstrap/modal";
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaymentModule } from './views/payment/payment.module';
 import { ReservedEventsComponent } from './views/reserved-events/reserved-events.component';
 import { MatCardModule } from '@angular/material/card';
@@ -96,11 +96,8 @@ import { BuyTicketModule } from './views/buy-ticket/buy-ticket.module';
 import { OurRangeModule } from './views/our-range/our-range.module';
 import { VideoplayerModule } from './views/videoplayer/videoplayer.module';
 import { OrganizationModule } from './organization/organization.module';
-import { OrganizationReservationCalendarModule } from './organisator/create-event/organization-reservation-calendar/organization-reservation-calendar.module';
-import { OrganizationReservationCalendarComponent } from './organisator/create-event/organization-reservation-calendar/organization-reservation-calendar.component';
 import { OrganizationHasEventsModule } from './views/organization-has-events/organization-has-events.module';
-
-
+import { AdminCouponsModule } from './admin/admin-coupons/admin-coupons.module';
 
 registerLocaleData(localeDECH);
 
@@ -145,9 +142,7 @@ registerLocaleData(localeDECH);
     ScullyLibModule,
     ReactiveFormsModule,
     FormlyModule.forRoot({
-      validationMessages: [
-        { name: 'required', message: 'This field is required' },
-      ],
+      validationMessages: [{ name: 'required', message: 'This field is required' }],
       types: [
         {
           name: 'quill',
@@ -181,7 +176,7 @@ registerLocaleData(localeDECH);
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
-      useFactory: adapterFactory
+      useFactory: adapterFactory,
     }),
     GoogleMapsModule,
     FormlyFieldTimeAppModule,
@@ -216,22 +211,24 @@ registerLocaleData(localeDECH);
     { provide: LOCALE_ID, useValue: 'de-CH' },
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
-    { provide: DEFAULT_CURRENCY_CODE, useValue: 'CHF' }
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'CHF' },
   ],
-  declarations: [MainComponent,
-                 NavbarComponent,
-                 ErrorComponent,
-                 PageRibbonComponent,
-                 ActiveMenuDirective,
-                 FooterComponent,
-                 ChatNotificationComponent,
-                 SystemNotificationComponent,
-                 ReservedEventsComponent,
-                 PointsDisplayComponent,
-                 ChipHolderComponent,
-                 ChipHolderDirective,
-                 ChipComponent,
-                 FieldQuillType],
+  declarations: [
+    MainComponent,
+    NavbarComponent,
+    ErrorComponent,
+    PageRibbonComponent,
+    ActiveMenuDirective,
+    FooterComponent,
+    ChatNotificationComponent,
+    SystemNotificationComponent,
+    ReservedEventsComponent,
+    PointsDisplayComponent,
+    ChipHolderComponent,
+    ChipHolderDirective,
+    ChipComponent,
+    FieldQuillType,
+  ],
   bootstrap: [MainComponent],
 })
 export class AppModule {

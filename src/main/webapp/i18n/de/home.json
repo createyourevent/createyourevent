@@ -41,6 +41,17 @@
     "drive-service": "Wir sammeln Ihre Produkte für einen Event zusammen",
     "additional-services": "Fragen Sie uns an, wenn Sie noch weitere Dienstleistungen benötigen. Vielleicht können wir Ihnen weiterhelfen.",
     "organization": "Organisationen",
-    "info-organization": "Wenn Sie ein Restaurant, einen Club, ein Hotel oder einfach sonst ein Gebäude haben, können Sie dies über www.createyourevent.org erfassen und anschliessend können Sie es vermieten für Anlässe, welche bei uns registriert und geplant werden können. Der Organisator eines Events hat die nun die Möglichkeit, dass wenn er einen Event plant, kann er auch gleich eine solche Organisation auswählen, welche Sie eben anbieten als Organisationsinhaber. Weiter wird für jede Organisation ein Profil auf www.createyourevent.org erstellt, welches kostenlos ausgeschrieben ist im Internet. "
+    "info-organization": "Wenn Sie ein Restaurant, einen Club, ein Hotel oder einfach sonst ein Gebäude haben, können Sie dies über www.createyourevent.org erfassen und anschliessend können Sie es vermieten für Anlässe, welche bei uns registriert und geplant werden können. Der Organisator eines Events hat die nun die Möglichkeit, dass wenn er einen Event plant, kann er auch gleich eine solche Organisation auswählen, welche Sie eben anbieten als Organisationsinhaber. Weiter wird für jede Organisation ein Profil auf www.createyourevent.org erstellt, welches kostenlos ausgeschrieben ist im Internet. ",
+    "bell": "Glocke",
+    "plum": "Pflaume",
+    "orange": "Orange",
+    "cherry": "Kirsche",
+    "slot-machine": "Einarmiger Bandit",
+    "slot-machine.info": "Spiele an unserem einarmigen Banditen mit. Wir verlosen monatlich Gutscheine für Events, welche auf unserer Plattform geplant und organisiert werden. Es können alle sich bei uns registrieren und eigene Events planen und ausschreiben. Wir von Create Your Event werden jeden Monat Gutscheine im Wert von 300 CHF ausstellen und ausbezahlen. Um am Spiel teilzunehmen müssen Sie sich auf unserer Plattform registrieren, was kostenlos ist, wenn man nur Eventteilnehmer ist, und auf Create Your Event Punkte sammeln. Wie sie auf unserer Plattform Punkte sammeln können, erklären wir auf https://createyourevent.org/points-list. Ein Spiele kostet Sie 50 Punkte. Wir wünschen viel Glück.",
+    "won": "Du gewinnst!!!",
+    "won.info.clock": "Glückwunsch! Du hast 3 Glocken in einer Reihe...",
+    "won.info.orange": "Glückwunsch! Du hast 3 Orangen in einer Reihe...",
+    "won.info.cherry": "Glückwunsch! Du hast 3 Kirschen in einer Reihe...",
+    "won.info.plum": "Glückwunsch! Du hast 3 Pflaumen in einer Reihe..."
   }
 }

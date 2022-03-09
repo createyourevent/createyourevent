@@ -56,6 +56,9 @@
             <column name="rent_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="rentable" type="boolean">
+                <constraints nullable="true" />
+            </column>
             <column name="user_id" type="varchar(100)">
                 <constraints nullable="true" />
             </column>
@@ -94,6 +97,7 @@
             <column name="place_number" type="numeric"/>
             <column name="price" type="numeric"/>
             <column name="rent_type" type="string"/>
+            <column name="rentable" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

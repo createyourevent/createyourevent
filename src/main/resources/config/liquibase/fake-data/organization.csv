@@ -1,11 +1,11 @@
-id;name;organization_type;logo;logo_content_type;active;active_owner;description;address;motto;phone;web_address;place_number;price;rent_type
-1;Intelligent open-source Kentucky;CLUB;../fake-data/blob/hipster.png;image/png;false;true;../fake-data/blob/hipster.txt;Bosnia CSS;bandwidth Bacon;1-785-634-8548;Rupee;86053;22529;HALFDAY
-2;violet withdrawal global;CLUB;../fake-data/blob/hipster.png;image/png;true;true;../fake-data/blob/hipster.txt;web-readiness Steel bypassing;revolutionize cross-platform generate;1-795-558-2542;1080p;22880;46929;HALFDAY
-3;green Licensed;CLUB;../fake-data/blob/hipster.png;image/png;true;true;../fake-data/blob/hipster.txt;architect Fantastic cross-platform;Chicken Rustic;705-984-2030 x18046;parse payment indigo;66252;65757;HOURLY
-4;Nebraska;RESTAURANT;../fake-data/blob/hipster.png;image/png;false;false;../fake-data/blob/hipster.txt;Soft North;Multi-channelled Lanka Incredible;598-994-7071;Villages;5250;59992;HOURLY
-5;Swedish;RESTAURANT;../fake-data/blob/hipster.png;image/png;true;true;../fake-data/blob/hipster.txt;Salad Granite Florida;transparent Gloves Assistant;479.377.4163;Kids Customizable generate;65405;27608;HALFDAY
-6;impactful;HOTEL;../fake-data/blob/hipster.png;image/png;false;true;../fake-data/blob/hipster.txt;Account;holistic;(671) 633-6595;Integration quantifying Configuration;86604;22187;HALFDAY
-7;Soft;HOTEL;../fake-data/blob/hipster.png;image/png;false;true;../fake-data/blob/hipster.txt;withdrawal online Steel;Buckinghamshire up encompassing;1-416-292-1478 x8909;Future compressing;60526;41133;DAY
-8;deposit Dollar Technician;CLUB;../fake-data/blob/hipster.png;image/png;true;false;../fake-data/blob/hipster.txt;Baby AI;bus;736-881-7488 x5474;Oklahoma;73546;66648;HALFDAY
-9;Checking Graphic Uganda;CLUB;../fake-data/blob/hipster.png;image/png;true;false;../fake-data/blob/hipster.txt;JSON;hacking Account;902-407-9906 x33412;holistic;11258;24872;HALFDAY
-10;partnerships;BUILDING;../fake-data/blob/hipster.png;image/png;false;true;../fake-data/blob/hipster.txt;Synergized Electronics e-commerce;Applications Austria Virginia;750-896-1823;Mauritania leading monitor;53584;50871;HALFDAY
+id;name;organization_type;logo;logo_content_type;active;active_owner;description;address;motto;phone;web_address;place_number;price;rent_type;rentable
+1;Intelligent open-source Kentucky;CLUB;../fake-data/blob/hipster.png;image/png;false;true;../fake-data/blob/hipster.txt;Bosnia CSS;bandwidth Bacon;1-785-634-8548;Rupee;86053;22529;HALFDAY;true
+2;Glens;HOTEL;../fake-data/blob/hipster.png;image/png;false;false;../fake-data/blob/hipster.txt;Towels web-readiness;Computer;582-468-7563 x69545;intermediate white hack;46929;57260;HALFDAY;false
+3;Compatible;BUILDING;../fake-data/blob/hipster.png;image/png;true;true;../fake-data/blob/hipster.txt;Iceland optimize New;Caribbean Chicken;(348) 705-9842;robust;87375;759;HALFDAY;true
+4;parse payment indigo;CLUB;../fake-data/blob/hipster.png;image/png;true;false;../fake-data/blob/hipster.txt;Nebraska;markets;1-765-729-2465;bypass Manager Facilitator;94368;48069;DAY;false
+5;Car Factors Checking;CLUB;../fake-data/blob/hipster.png;image/png;true;false;../fake-data/blob/hipster.txt;Account;Legacy;(951) 593-8900 x529;cross-platform enterprise ivory;40662;19486;DAY;false
+6;Kids Customizable generate;CLUB;../fake-data/blob/hipster.png;image/png;false;false;../fake-data/blob/hipster.txt;impactful;Prairie;893.499.2571 x533;Yemen matrix;19996;83611;HALFDAY;false
+7;RAM pink Soft;HOTEL;../fake-data/blob/hipster.png;image/png;false;true;../fake-data/blob/hipster.txt;withdrawal online Steel;Buckinghamshire up encompassing;1-416-292-1478 x8909;Future compressing;60526;41133;DAY;true
+8;pink Metal;CLUB;../fake-data/blob/hipster.png;image/png;true;true;../fake-data/blob/hipster.txt;Awesome Silver eyeballs;connecting withdrawal transmitting;1-588-647-4257 x4765;Checking Graphic Uganda;57969;57012;HOURLY;false
+9;Legacy hacking Account;BUILDING;../fake-data/blob/hipster.png;image/png;true;false;../fake-data/blob/hipster.txt;archive;Program frictionless Ball;(511) 330-4189;programming;87619;71674;HOURLY;false
+10;e-commerce;BUILDING;../fake-data/blob/hipster.png;image/png;true;false;../fake-data/blob/hipster.txt;Austria;Global payment;961-823-6556 x25277;Lithuania Bolivia ADP;3935;88325;HOURLY;false

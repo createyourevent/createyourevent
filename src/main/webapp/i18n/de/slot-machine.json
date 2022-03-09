@@ -1,0 +1,15 @@
+{
+  "slot-machine": {
+    "play-game": "Spielen",
+    "points": "Punkte",
+    "one-game-costs": "Ein Spiel kostet Sie...",
+    "not-enought-points": "Sie haben nicht genügend Punkte um mitzuspielen. Wie sie zu mehr Punkten auf Create Your Event kommen um mitzuspielen erfahren Sie auf www.createyourevent.org/points-list.",
+    "bell.info": "Für 3 Glocken erhalten Sie einen Gutschein für ein Produkt an einem Event (Getränk, Food...)  im Wert von 10 CHF.",
+    "plum.info": "Für 3 Pflaumen erhalten Sie einen Gutschein für ein Produkt an einem Event (Getränk, Food...)  im Wert von 5 CHF.",
+    "orange.info": "Für 3 Orangen erhalten Sie einen Gutschein für ein Produkt an einem Event (Getränk, Food...)  im Wert von 2.50 CHF.",
+    "cherry.info": "Für 3 Kirschen erhalten Sie einen Gutschein für ein Produkt an einem Event (Getränk, Food...)  im Wert von 7.50 CHF.",
+    "lost": "Verloren",
+    "win": "Gewonnen",
+    "lets-play": "Neues Spiel, neues Glück..."
+  }
+}

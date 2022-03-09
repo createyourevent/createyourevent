@@ -5,7 +5,7 @@ services:
     image: createyourevent
     volumes:
       - ./music:/app/resources/static/content/music
-    user: "0:33"
+    user: '0:33'
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,api-docs
@@ -53,11 +53,11 @@ services:
       - SPRING_PROFILES_ACTIVE=dev,api-docs,oauth2
       - SPRING_SECURITY_USER_PASSWORD=ihMMuka8243
       - JHIPSTER_REGISTRY_PASSWORD=ihMMuka8243Schaffhausen!
-      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_TYPE=native
-      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_SEARCH_LOCATIONS=file:./central-server-config/localhost-config/
-      # - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_TYPE=git
-      # - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_URI=https://github.com/jhipster/jhipster-registry/
-      # - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_SEARCH_PATHS=central-config
+      # - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_TYPE=native
+      # - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_SEARCH_LOCATIONS=file:./central-server-config/localhost-config/
+      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_TYPE=git
+      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_URI=https://github.com/jhipster/jhipster-registry/
+      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_SEARCH_PATHS=central-config
       # For keycloak to work, you need to add '127.0.0.1 keycloak' to your hosts file
       - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=https://keycloak.createyourevent.org/auth/realms/jhipster
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=jhipster-registry
@@ -68,7 +68,7 @@ services:
       - 127.0.0.1:8761:8761
   keycloak:
     image: jboss/keycloak:14.0.0
-    user: "${UID}:${GID}"
+    user: '${UID}:${GID}'
     command:
       [
         '-b',
@@ -117,4 +117,3 @@ volumes:
     external: true
   keycloak-themes-folder:
     external: true
-

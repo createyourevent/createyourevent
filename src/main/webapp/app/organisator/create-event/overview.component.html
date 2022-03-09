@@ -1,677 +1,802 @@
 <ng-container *ngIf="isSaved === true">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <h1 jhiTranslate="register.title">Registration event</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 jhiTranslate="register.title">Registration event</h1>
 
-            <div class="alert alert-success" *ngIf="!savedProducts || !savedServicemaps || !savedPoints" jhiTranslate="overview.messages.success">
-                Registration event saved! After successfully checking your details, we will activate the event. You will find it then on your dashboard.
-            </div>
-        </div>
+      <div class="alert alert-success" *ngIf="!savedProducts || !savedServicemaps || !savedPoints" jhiTranslate="overview.messages.success">
+        Registration event saved! After successfully checking your details, we will activate the event. You will find it then on your
+        dashboard.
+      </div>
     </div>
+  </div>
 </ng-container>
 
-<ng-container *ngIf="isSaved === false;">
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-12">
-                    <h1 class="title">{{ model.name }}</h1>
-                    <h2 class="margin-auto">{{ model.motto }}</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-                    <div class="ql-snow">
-                        <div class="ql-editor">
-                            <div class="box" [innerHTML]="model.description | safeHtml">
-                            </div>
-                        </div>
-                    </div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6">
-          <div class="box w90">
-			<div class="row">
-				<div class="col-md-4">
-                    {{ 'overview.date-start' | translate }}
-                </div>
-				<div class="col-md-8">
-                    {{model.date_start | date: 'medium'}}
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-                    {{ 'overview.start-time' | translate }}
-				</div>
-				<div class="col-md-8">
-                    {{model.time_start }}
-				</div>
+<ng-container *ngIf="isSaved === false">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="bungee-inline">{{ model.name }}</h1>
+            <h2 class="margin-auto">{{ model.motto }}</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="ql-snow">
+              <div class="ql-editor">
+                <div class="box" [innerHTML]="model.description | safeHtml"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box w90">
+          <div class="row">
+            <div class="col-md-4">
+              {{ 'overview.date-start' | translate }}
+            </div>
+            <div class="col-md-8">
+              {{ model.date_start | date: 'medium' }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              {{ 'overview.start-time' | translate }}
+            </div>
+            <div class="col-md-8">
+              {{ model.time_start }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              {{ 'overview.date-end' | translate }}
+            </div>
+            <div class="col-md-8">
+              {{ model.date_end | date: 'medium' }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              {{ 'overview.end-time' | translate }}
+            </div>
+            <div class="col-md-8">
+              {{ model.time_end }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="box w90">
+          <ng-container *ngIf="!sharedEventService.organization">
+            <div class="row">
+              <div class="col-md-4">
+                {{ 'overview.location' | translate }}
+              </div>
+              <div class="col-md-8">
+                {{ model.name_location }}
+              </div>
             </div>
             <div class="row">
-				<div class="col-md-4">
-                    {{ 'overview.date-end' | translate }}
-                </div>
-				<div class="col-md-8">
-                    {{model.date_end | date: 'medium'}}
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-                    {{ 'overview.end-time' | translate }}
-				</div>
-				<div class="col-md-8">
-                    {{model.time_end }}
-				</div>
-            </div>
-          </div>
-		</div>
-		<div class="col-md-6">
-      <div class="box w90">
-      <ng-container *ngIf="!sharedEventService.organization">
-        <div class="row">
-          <div class="col-md-4">
-                      {{ 'overview.location' | translate }}
-          </div>
-          <div class="col-md-8">
-                      {{model.name_location}}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-                      {{ 'overview.address' | translate }}
-          </div>
-          <div class="col-md-8">
-                      {{model.address}}
-          </div>
+              <div class="col-md-4">
+                {{ 'overview.address' | translate }}
               </div>
-              <div class="row">
-          <div class="col-md-4">
-                      {{ 'overview.description_location' | translate }}
-          </div>
-          <div class="col-md-8">
-                      <div class="ql-snow">
-                          <div class="ql-editor">
-                              <div [innerHTML]="model.description_location | safeHtml"></div>
-                          </div>
-                      </div>
-          </div>
-        </div>
-
-      </ng-container>
-      <ng-container *ngIf="sharedEventService.organization">
-        <div class="sel-card card-container">
-          <h3 class="title">{{ sharedEventService.organization.name }}</h3>
-          <h5 class="center">{{ sharedEventService.organization.organizationType }}</h5>
-          <div class="center">
-              <img class="img img-center" [src]="'data:' + sharedEventService.organization.logoContentType + ';base64,' + sharedEventService.organization.logo" style="max-width: 250px; max-height: 350px;" alt="{{ sharedEventService.organization.name }}"/>
-          </div>
-          <h5 class="motto center">{{ sharedEventService.organization.motto }}</h5>
-              <hr/>
+              <div class="col-md-8">
+                {{ model.address }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                {{ 'overview.description_location' | translate }}
+              </div>
+              <div class="col-md-8">
+                <div class="ql-snow">
+                  <div class="ql-editor">
+                    <div [innerHTML]="model.description_location | safeHtml"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="sharedEventService.organization">
+            <div class="sel-card card-container">
+              <h3 class="bungee-inline">{{ sharedEventService.organization.name }}</h3>
+              <h5 class="center">{{ sharedEventService.organization.organizationType }}</h5>
+              <div class="center">
+                <img
+                  class="img img-center"
+                  [src]="'data:' + sharedEventService.organization.logoContentType + ';base64,' + sharedEventService.organization.logo"
+                  style="max-width: 250px; max-height: 350px"
+                  alt="{{ sharedEventService.organization.name }}"
+                />
+              </div>
+              <h5 class="motto center">{{ sharedEventService.organization.motto }}</h5>
+              <hr />
               <p>
-                <span class="bold" jhiTranslate="organization-data-view.placenumber">Place:</span> {{ sharedEventService.organization.placeNumber }}
-            </p>
-            <p>
-              <span class="bold" jhiTranslate="organization-data-view.price">Price:</span> {{ sharedEventService.organization.price | currency }}
-            </p>
-            <p>
-              <span class="bold" jhiTranslate="create-event.rent-type">Rent type:</span> {{ sharedEventService.organization.rentType }}
-            </p>
-            <p>
-              <span class="bold" jhiTranslate="create-event.total-rent">Total:</span> {{ sharedEventService.organizationReservation.total | currency }}
-            </p>
-          <div class="address">
-            <p>
-              {{ formatAddress(sharedEventService.organization) }}
-            </p>
+                <span class="bold" jhiTranslate="organization-data-view.placenumber">Place:</span>
+                {{ sharedEventService.organization.placeNumber }}
+              </p>
+              <p>
+                <span class="bold" jhiTranslate="organization-data-view.price">Price:</span>
+                {{ sharedEventService.organization.price | currency }}
+              </p>
+              <p>
+                <span class="bold" jhiTranslate="create-event.rent-type">Rent type:</span> {{ sharedEventService.organization.rentType }}
+              </p>
+              <p>
+                <span class="bold" jhiTranslate="create-event.total-rent">Total:</span>
+                {{ sharedEventService.organizationReservation.total | currency }}
+              </p>
+              <div class="address">
+                <p>
+                  {{ formatAddress(sharedEventService.organization) }}
+                </p>
+              </div>
+              <p><span class="bold" jhiTranslate="partners.phone">Phone:</span> {{ sharedEventService.organization.phone }}</p>
+              <p>
+                <span class="bold" jhiTranslate="partners.webaddress">Webaddress:</span> {{ sharedEventService.organization.webAddress }}
+              </p>
+            </div>
+          </ng-container>
         </div>
-        <p>
-            <span class="bold" jhiTranslate="partners.phone">Phone:</span> {{ sharedEventService.organization.phone }}
-        </p>
-        <p>
-            <span class="bold" jhiTranslate="partners.webaddress">Webaddress:</span> {{ sharedEventService.organization.webAddress }}
-        </p>
-  </div>
-      </ng-container>
-    </div>
-
       </div>
-	</div>
-</div>
+    </div>
+  </div>
 
-<div class="container-fluid">
-
+  <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
-    <hr/>
-    <div *ngIf="flyer !== null && flyer !== ''">
-        <div class="box">
+      <div class="col-md-12">
+        <hr />
+        <div *ngIf="flyer !== null && flyer !== ''">
+          <div class="box">
             <dt><span jhiTranslate="createyoureventApp.event.flyer">Flyer</span></dt>
             <dd>
-                    <a (click)="openFile(flyerContentType, flyer)">
-                        <img [src]="'data:' + flyerContentType + ';base64,' + flyer" style="max-height: 400px;" alt="event image"/>
-                    </a>
+              <a (click)="openFile(flyerContentType, flyer)">
+                <img [src]="'data:' + flyerContentType + ';base64,' + flyer" style="max-height: 400px" alt="event image" />
+              </a>
             </dd>
+          </div>
         </div>
-    </div>
-    <hr/>
-    <p>
-    <ng-container *ngIf="youtube !== null && youtube !== ''">
-        <div class="box margin-auto">
-             <youtube-player videoId="{{ youtube }}"></youtube-player>
-        </div>
-    </ng-container>
-  </p>
-  <hr/>
-
-</div>
-</div>
-
-
-<ng-container *ngIf="realEstateProducts.length > 0 || foodProducts.length > 0 || drinkProducts.length > 0 || musicProducts.length > 0 || lightshowProducts.length > 0 || decorationProducts.length > 0 || miscellaneousProducts.length > 0">
-    <div class="row">
-        <div class="col-md-12 box">
-            <h3 jhiTranslate="overview.products">Products</h3>
-
-            <div id="accordion">
-            <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-
-                <ng-container *ngIf="realEstateProducts.length > 0">
-                    <ngb-panel>
-                        <ng-template ngbPanelTitle>
-                            <span>&#9733; <b><span jhiTranslate="select-products.real-estate-shop">Real Estate</span></b> &#9733;</span>
-                        </ng-template>
-                        <ng-template ngbPanelContent>
-                        <p-scrollPanel [style]="{width: '100%', height: '500px'}">
-                        <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
-                        <ng-container *ngFor="let epo of realEstateProducts">
-                        <mat-card fxFlex="0 1 calc(20% - 32px)">
-                            <mat-card-header>
-                                <mat-card-title>{{epo.product.title}}</mat-card-title>
-                                <mat-card-subtitle>{{ epo.product.motto }}</mat-card-subtitle>
-                                </mat-card-header>
-                                <div class="img_div">
-                                  <img class="card-image" mat-card-image [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"  alt="{{ epo.product.title }}" >
-                                </div>
-                                <mat-card-content>
-                                        <jhi-price-type [product]="epo.product"></jhi-price-type>
-                                        <p>{{ epo.product.price | currency }} / {{ epo.product.amount }} {{ "createyoureventApp.Unit." + epo.product.unit  | translate }}</p>
-                                <hr/>
-                                <span jhiTranslation="select-products.quantity">Quantity</span><input type="number"  id="quantity-selectedProduct---{{epo.product.id}}" value="{{ epo.amount }}" disabled="disabled">
-                                <ng-container *ngIf="epo.product.priceType === 'RENT'">
-                                        <hr/>
-                                        <div jhiTranslation="select-products.dateFrom">Date from:</div>
-                                        <div>{{ epo.dateFrom | date: 'medium' }}</div>
-                                    <hr/>
-                                        <div jhiTranslation="select-products.dateUntil">Date until:</div>
-                                        <div>{{ epo.dateUntil | date: 'medium' }}</div>
-                                        <hr/>
-                                </ng-container>
-                                    <hr/>
-                                    <span jhiTranslate="select-products.total">Total: </span>  {{ epo.total | currency }}
-
-                                <ng-container *ngIf="epo.product.stock >= 0">
-                                    <p>
-                                        <span jhiTranslation="select-products.available">Available: </span> {{ epo.product.stock }} {{ "createyoureventApp.Unit." + epo.product.unit  | translate }}
-                                    </p>
-                                </ng-container>
-                                <ng-container *ngIf="0 > epo.product.stock">
-                                    <p>
-                                        <span jhiTranslation="select-products.infinite">Infinite</span>
-                                    </p>
-                                </ng-container>
-                                <hr/>
-                                </mat-card-content>
-                                <mat-card-actions>
-                                </mat-card-actions>
-                        </mat-card>
-                        </ng-container>
-                        </div>
-                        </p-scrollPanel>
-                    </ng-template>
-                    </ngb-panel>
-                </ng-container>
-
-                <ng-container *ngIf="foodProducts.length > 0">
-                    <ngb-panel>
-                        <ng-template ngbPanelTitle>
-                            <span>&#9733; <b><span jhiTranslate="select-products.food-shop">Food</span></b> &#9733;</span>
-                        </ng-template>
-                        <ng-template ngbPanelContent>
-                            <p-scrollPanel [style]="{width: '100%', height: '500px'}">
-                                <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
-                                <ng-container *ngFor="let epo of foodProducts">
-                                    <mat-card fxFlex="0 1 calc(20% - 32px)">
-                                        <mat-card-header>
-                                            <mat-card-title>{{epo.product.title}}</mat-card-title>
-                                            <mat-card-subtitle>{{ epo.product.motto }}</mat-card-subtitle>
-                                            </mat-card-header>
-                                                <div class="img_div">
-                                                  <img class="card-image" mat-card-image [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"  alt="{{ epo.product.title }}" >
-                                                </div>
-                                            <mat-card-content>
-                                                    <jhi-price-type [product]="epo.product"></jhi-price-type>
-                                                    <p>{{ epo.product.price | currency }} / {{ epo.product.amount }} {{ "createyoureventApp.Unit." + epo.product.unit  | translate }}</p>
-                                            <hr/>
-                                            <span jhiTranslation="select-products.quantity">Quantity</span><input type="number"  id="quantity-selectedProduct---{{epo.product.id}}" value="{{ epo.amount }}" disabled="disabled">
-                                            <ng-container *ngIf="epo.product.priceType === 'RENT'">
-                                                    <hr/>
-                                                    <div jhiTranslation="select-products.dateFrom">Date from:</div>
-                                                    <div>{{ epo.dateFrom | date: 'medium' }}</div>
-                                                <hr/>
-                                                    <div jhiTranslation="select-products.dateUntil">Date until:</div>
-                                                    <div>{{ epo.dateUntil | date: 'medium' }}</div>
-                                                    <hr/>
-                                            </ng-container>
-                                                <hr/>
-                                                <span jhiTranslate="select-products.total">Total: </span>  {{ epo.total | currency }}
-
-                                            <ng-container *ngIf="epo.product.stock >= 0">
-                                                <p>
-                                                    <span jhiTranslation="select-products.available">Available: </span> {{ epo.product.stock }} {{ "createyoureventApp.Unit." + epo.product.unit  | translate }}
-                                                </p>
-                                            </ng-container>
-                                            <ng-container *ngIf="0 > epo.product.stock">
-                                                <p>
-                                                    <span jhiTranslation="select-products.infinite">Infinite</span>
-                                                </p>
-                                            </ng-container>
-                                            <hr/>
-                                            </mat-card-content>
-                                        <mat-card-actions>
-                                        </mat-card-actions>
-                                </mat-card>
-                                </ng-container>
-                                </div>
-                                </p-scrollPanel>
-                        </ng-template>
-                    </ngb-panel>
-                </ng-container>
-
-                <ng-container *ngIf="drinkProducts.length > 0">
-                    <ngb-panel>
-                        <ng-template ngbPanelTitle>
-                            <span>&#9733; <b><span jhiTranslate="select-products.drink-shop">Drink</span></b> &#9733;</span>
-                        </ng-template>
-                        <ng-template ngbPanelContent>
-                            <p-scrollPanel [style]="{width: '100%', height: '500px'}">
-                                <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
-                                <ng-container *ngFor="let epo of drinkProducts">
-                                    <mat-card fxFlex="0 1 calc(20% - 32px)">
-                                        <mat-card-header>
-                                            <mat-card-title>{{epo.product.title}}</mat-card-title>
-                                            <mat-card-subtitle>{{ epo.product.motto }}</mat-card-subtitle>
-                                            </mat-card-header>
-                                                <div class="img_div">
-                                                  <img class="card-image" mat-card-image [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"  alt="{{ epo.product.title }}" >
-                                                </div>
-                                            <mat-card-content>
-                                                    <jhi-price-type [product]="epo.product"></jhi-price-type>
-                                                    <p>{{ epo.product.price | currency }} / {{ epo.product.amount }} {{ "createyoureventApp.Unit." + epo.product.unit  | translate }}</p>
-                                            <hr/>
-                                            <span jhiTranslation="select-products.quantity">Quantity</span><input type="number"  id="quantity-selectedProduct---{{epo.product.id}}" value="{{ epo.amount }}" disabled="disabled">
-                                            <ng-container *ngIf="epo.product.priceType === 'RENT'">
-                                                    <hr/>
-                                                    <div jhiTranslation="select-products.dateFrom">Date from:</div>
-                                                    <div>{{ epo.dateFrom | date: 'medium' }}</div>
-                                                <hr/>
-                                                    <div jhiTranslation="select-products.dateUntil">Date until:</div>
-                                                    <div>{{ epo.dateUntil | date: 'medium' }}</div>
-                                                    <hr/>
-                                            </ng-container>
-                                                <hr/>
-                                                <span jhiTranslate="select-products.total">Total: </span>  {{ epo.total | currency }}
-
-                                            <ng-container *ngIf="epo.product.stock >= 0">
-                                                <p>
-                                                    <span jhiTranslation="select-products.available">Available: </span> {{ epo.product.stock }} {{ "createyoureventApp.Unit." + epo.product.unit  | translate }}
-                                                </p>
-                                            </ng-container>
-                                            <ng-container *ngIf="0 > epo.product.stock">
-                                                <p>
-                                                    <span jhiTranslation="select-products.infinite">Infinite</span>
-                                                </p>
-                                            </ng-container>
-                                            <hr/>
-                                            </mat-card-content>
-                                        <mat-card-actions>
-                                        </mat-card-actions>
-                                </mat-card>
-                                </ng-container>
-                                </div>
-                                </p-scrollPanel>
-                        </ng-template>
-                    </ngb-panel>
-                </ng-container>
-
-                <ng-container *ngIf="musicProducts.length > 0">
-                    <ngb-panel>
-                        <ng-template ngbPanelTitle>
-                            <span>&#9733; <b><span jhiTranslate="select-products.music-shop">Music</span></b> &#9733;</span>
-                            </ng-template>
-                            <ng-template ngbPanelContent>
-                                <p-scrollPanel [style]="{width: '100%', height: '500px'}">
-                                    <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
-                                    <ng-container *ngFor="let epo of musicProducts">
-                                        <mat-card fxFlex="0 1 calc(20% - 32px)">
-                                            <mat-card-header>
-                                                <mat-card-title>{{epo.product.title}}</mat-card-title>
-                                                <mat-card-subtitle>{{ epo.product.motto }}</mat-card-subtitle>
-                                                </mat-card-header>
-                                                <div class="img_div">
-                                                  <img class="card-image" mat-card-image [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"  alt="{{ epo.product.title }}" >
-                                                </div>
-                                                <mat-card-content>
-                                                        <jhi-price-type [product]="epo.product"></jhi-price-type>
-                                                        <p>{{ epo.product.price | currency }} / {{ epo.product.amount }} {{ "createyoureventApp.Unit." + epo.product.unit  | translate }}</p>
-                                                <hr/>
-                                                <span jhiTranslation="select-products.quantity">Quantity</span><input type="number"  id="quantity-selectedProduct---{{epo.product.id}}" value="{{ epo.amount }}" disabled="disabled">
-                                                <ng-container *ngIf="epo.product.priceType === 'RENT'">
-                                                        <hr/>
-                                                        <div jhiTranslation="select-products.dateFrom">Date from:</div>
-                                                        <div>{{ epo.dateFrom | date: 'medium' }}</div>
-                                                    <hr/>
-                                                        <div jhiTranslation="select-products.dateUntil">Date until:</div>
-                                                        <div>{{ epo.dateUntil | date: 'medium' }}</div>
-                                                        <hr/>
-                                                </ng-container>
-                                                    <hr/>
-                                                    <span jhiTranslate="select-products.total">Total: </span>  {{ epo.total | currency }}
-
-                                                <ng-container *ngIf="epo.product.stock >= 0">
-                                                    <p>
-                                                        <span jhiTranslation="select-products.available">Available: </span> {{ epo.product.stock }} {{ "createyoureventApp.Unit." + epo.product.unit  | translate }}
-                                                    </p>
-                                                </ng-container>
-                                                <ng-container *ngIf="0 > epo.product.stock">
-                                                    <p>
-                                                        <span jhiTranslation="select-products.infinite">Infinite</span>
-                                                    </p>
-                                                </ng-container>
-                                                <hr/>
-                                                </mat-card-content>
-                                            <mat-card-actions>
-                                            </mat-card-actions>
-                                    </mat-card>
-                                    </ng-container>
-                                    </div>
-                                    </p-scrollPanel>
-                            </ng-template>
-                        </ngb-panel>
-                </ng-container>
-
-                <ng-container *ngIf="lightshowProducts.length > 0">
-                    <ngb-panel>
-                        <ng-template ngbPanelTitle>
-                            <span>&#9733; <b><span jhiTranslate="select-products.lightshow-shop">Lightshow</span></b> &#9733;</span>
-                            </ng-template>
-                            <ng-template ngbPanelContent>
-                                <p-scrollPanel [style]="{width: '100%', height: '500px'}">
-                                    <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
-                                    <ng-container *ngFor="let epo of lightshowProducts">
-                                        <mat-card fxFlex="0 1 calc(20% - 32px)">
-                                            <mat-card-header>
-                                                <mat-card-title>{{epo.product.title}}</mat-card-title>
-                                                <mat-card-subtitle>{{ epo.product.motto }}</mat-card-subtitle>
-                                                </mat-card-header>
-                                                <div class="img_div">
-                                                  <img class="card-image" mat-card-image [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"  alt="{{ epo.product.title }}" >
-                                                </div>
-                                                <mat-card-content>
-                                                        <jhi-price-type [product]="epo.product"></jhi-price-type>
-                                                        <p>{{ epo.product.price | currency }} / {{ epo.product.amount }} {{ "createyoureventApp.Unit." + epo.product.unit  | translate }}</p>
-                                                <hr/>
-                                                <span jhiTranslation="select-products.quantity">Quantity</span><input type="number"  id="quantity-selectedProduct---{{epo.product.id}}" value="{{ epo.amount }}" disabled="disabled">
-                                                <ng-container *ngIf="epo.product.priceType === 'RENT'">
-                                                        <hr/>
-                                                        <div jhiTranslation="select-products.dateFrom">Date from:</div>
-                                                        <div>{{ epo.dateFrom | date: 'medium' }}</div>
-                                                    <hr/>
-                                                        <div jhiTranslation="select-products.dateUntil">Date until:</div>
-                                                        <div>{{ epo.dateUntil | date: 'medium' }}</div>
-                                                        <hr/>
-                                                </ng-container>
-                                                    <hr/>
-                                                    <span jhiTranslate="select-products.total">Total: </span>  {{ epo.total | currency }}
-                                                <ng-container *ngIf="epo.product.stock >= 0">
-                                                    <p>
-                                                        <span jhiTranslation="select-products.available">Available: </span> {{ epo.product.stock }} {{ "createyoureventApp.Unit." + epo.product.unit  | translate }}
-                                                    </p>
-                                                </ng-container>
-                                                <ng-container *ngIf="0 > epo.product.stock">
-                                                    <p>
-                                                        <span jhiTranslation="select-products.infinite">Infinite</span>
-                                                    </p>
-                                                </ng-container>
-                                                <hr/>
-                                                <ng-container *ngIf="epo.sellingPrice !== null && epo.sellingPrice !== undefined">
-                                                  <hr/>
-                                                  <span jhiTranslate="select-products.selling-price">Selling price:</span>
-                                                  <p>
-                                                    <span>{{ epo.sellingPrice | currency }}</span>
-                                                  </p>
-                                                </ng-container>
-                                                <hr/>
-                                                  <span jhiTranslate="select-products.deliveryType">Delivery type</span>
-                                                  <p>
-                                                    <span jhiTranslate="{{ 'createyoureventApp.DeliveryTypes.' + epo.deliveryType.deliveryType }}">{{ epo.deliveryType.deliveryType }}</span>
-                                                  </p>
-                                                <hr/>
-                                                </mat-card-content>
-                                            <mat-card-actions>
-                                            </mat-card-actions>
-                                    </mat-card>
-                                    </ng-container>
-                                    </div>
-                                    </p-scrollPanel>
-                            </ng-template>
-                        </ngb-panel>
-                </ng-container>
-
-                <ng-container *ngIf="decorationProducts.length > 0">
-                    <ngb-panel>
-                        <ng-template ngbPanelTitle>
-                            <span>&#9733; <b><span jhiTranslate="select-products.decoration-shop">Decoration</span></b> &#9733;</span>
-                            </ng-template>
-                            <ng-template ngbPanelContent>
-                                <p-scrollPanel [style]="{width: '100%', height: '500px'}">
-                                    <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
-                                    <ng-container *ngFor="let epo of decorationProducts">
-                                        <mat-card fxFlex="0 1 calc(20% - 32px)">
-                                            <mat-card-header>
-                                                <mat-card-title>{{epo.product.title}}</mat-card-title>
-                                                <mat-card-subtitle>{{ epo.product.motto }}</mat-card-subtitle>
-                                                </mat-card-header>
-                                                <div class="img_div">
-                                                  <img class="card-image" mat-card-image [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"  alt="{{ epo.product.title }}" >
-                                                </div>
-                                                <mat-card-content>
-                                                        <jhi-price-type [product]="epo.product"></jhi-price-type>
-                                                        <p>{{ epo.product.price | currency }} / {{ epo.product.amount }} {{ "createyoureventApp.Unit." + epo.product.unit  | translate }}</p>
-                                                <hr/>
-                                                <span jhiTranslation="select-products.quantity">Quantity</span><input type="number"  id="quantity-selectedProduct---{{epo.product.id}}" value="{{ epo.amount }}" disabled="disabled">
-                                                <ng-container *ngIf="epo.product.priceType === 'RENT'">
-                                                        <hr/>
-                                                        <div jhiTranslation="select-products.dateFrom">Date from:</div>
-                                                        <div>{{ epo.dateFrom | date: 'medium' }}</div>
-                                                    <hr/>
-                                                        <div jhiTranslation="select-products.dateUntil">Date until:</div>
-                                                        <div>{{ epo.dateUntil | date: 'medium' }}</div>
-                                                        <hr/>
-                                                </ng-container>
-                                                    <hr/>
-                                                    <span jhiTranslate="select-products.total">Total: </span>  {{ epo.total | currency }}
-
-                                                <ng-container *ngIf="epo.product.stock >= 0">
-                                                    <p>
-                                                        <span jhiTranslation="select-products.available">Available: </span> {{ epo.product.stock }} {{ "createyoureventApp.Unit." + epo.product.unit  | translate }}
-                                                    </p>
-                                                </ng-container>
-                                                <ng-container *ngIf="0 > epo.product.stock">
-                                                    <p>
-                                                        <span jhiTranslation="select-products.infinite">Infinite</span>
-                                                    </p>
-                                                </ng-container>
-                                                <ng-container *ngIf="epo.sellingPrice !== null && epo.sellingPrice !== undefined">
-                                                  <hr/>
-                                                  <span jhiTranslate="select-products.selling-price">Selling price:</span>
-                                                  <p>
-                                                    <span>{{ epo.sellingPrice | currency }}</span>
-                                                  </p>
-                                                </ng-container>
-                                                <hr/>
-                                                  <span jhiTranslate="select-products.deliveryType">Delivery type</span>
-                                                  <p>
-                                                    <span jhiTranslate="{{ 'createyoureventApp.DeliveryTypes.' + epo.deliveryType.deliveryType }}">{{ epo.deliveryType.deliveryType }}</span>
-                                                  </p>
-                                                <hr/>
-                                                </mat-card-content>
-                                            <mat-card-actions>
-                                            </mat-card-actions>
-                                    </mat-card>
-                                    </ng-container>
-                                    </div>
-                                    </p-scrollPanel>
-                            </ng-template>
-                        </ngb-panel>
-                </ng-container>
-
-                <ng-container *ngIf="miscellaneousProducts.length > 0">
-                    <ngb-panel>
-                        <ng-template ngbPanelTitle>
-                            <span>&#9733; <b><span jhiTranslate="select-products.miscellaneous-shop">Miscellaneous</span></b> &#9733;</span>
-                            </ng-template>
-                            <ng-template ngbPanelContent>
-                                <p-scrollPanel [style]="{width: '100%', height: '500px'}">
-                                    <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
-                                <ng-container *ngFor="let epo of miscellaneousProducts">
-                                    <mat-card fxFlex="0 1 calc(20% - 32px)">
-                                        <mat-card-header>
-                                            <mat-card-title>{{epo.product.title}}</mat-card-title>
-                                            <mat-card-subtitle>{{ epo.product.motto }}</mat-card-subtitle>
-                                            </mat-card-header>
-                                                <div class="img_div">
-                                                  <img class="card-image" mat-card-image [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"  alt="{{ epo.product.title }}" >
-                                                </div>
-                                            <mat-card-content>
-                                                    <jhi-price-type [product]="epo.product"></jhi-price-type>
-                                                    <p>{{ epo.product.price | currency }} / {{ epo.product.amount }} {{ "createyoureventApp.Unit." + epo.product.unit  | translate }}</p>
-                                            <hr/>
-                                            <span jhiTranslation="select-products.quantity">Quantity</span><input type="number"  id="quantity-selectedProduct---{{epo.product.id}}" value="{{ epo.amount }}" disabled="disabled">
-                                            <ng-container *ngIf="epo.product.priceType === 'RENT'">
-                                                    <hr/>
-                                                    <div jhiTranslation="select-products.dateFrom">Date from:</div>
-                                                    <div>{{ epo.dateFrom | date: 'medium' }}</div>
-                                                <hr/>
-                                                    <div jhiTranslation="select-products.dateUntil">Date until:</div>
-                                                    <div>{{ epo.dateUntil | date: 'medium' }}</div>
-                                                    <hr/>
-                                            </ng-container>
-                                                <hr/>
-                                                <span jhiTranslate="select-products.total">Total: </span>  {{ epo.total | currency }}
-
-                                            <ng-container *ngIf="epo.product.stock >= 0">
-                                                <p>
-                                                    <span jhiTranslation="select-products.available">Available: </span> {{ epo.product.stock }} {{ "createyoureventApp.Unit." + epo.product.unit  | translate }}
-                                                </p>
-                                            </ng-container>
-                                            <ng-container *ngIf="0 > epo.product.stock">
-                                                <p>
-                                                    <span jhiTranslation="select-products.infinite">Infinite</span>
-                                                </p>
-                                            </ng-container>
-                                            <ng-container *ngIf="epo.sellingPrice !== null && epo.sellingPrice !== undefined">
-                                              <hr/>
-                                              <span jhiTranslate="select-products.selling-price">Selling price:</span>
-                                              <p>
-                                                <span>{{ epo.sellingPrice | currency }}</span>
-                                              </p>
-                                            </ng-container>
-                                            <hr/>
-                                              <span jhiTranslate="select-products.deliveryType">Delivery type</span>
-                                              <p>
-                                                <span jhiTranslate="{{ 'createyoureventApp.DeliveryTypes.' + epo.deliveryType.deliveryType }}">{{ epo.deliveryType.deliveryType }}</span>
-                                              </p>
-                                            <hr/>
-                                            </mat-card-content>
-                                        <mat-card-actions>
-                                        </mat-card-actions>
-                                    </mat-card>
-                                </ng-container>
-                                    </div>
-                                </p-scrollPanel>
-                            </ng-template>
-                        </ngb-panel>
-                </ng-container>
-
-                </ngb-accordion>
-                </div>
+        <hr />
+        <p>
+          <ng-container *ngIf="youtube !== null && youtube !== ''">
+            <div class="box margin-auto">
+              <youtube-player videoId="{{ youtube }}"></youtube-player>
             </div>
-        </div>
-    </ng-container>
+          </ng-container>
+        </p>
+        <hr />
+      </div>
+    </div>
 
+    <ng-container
+      *ngIf="
+        realEstateProducts.length > 0 ||
+        foodProducts.length > 0 ||
+        drinkProducts.length > 0 ||
+        musicProducts.length > 0 ||
+        lightshowProducts.length > 0 ||
+        decorationProducts.length > 0 ||
+        miscellaneousProducts.length > 0
+      "
+    >
+      <div class="row">
+        <div class="col-md-12 box">
+          <h3 jhiTranslate="overview.products">Products</h3>
+
+          <div id="accordion">
+            <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+              <ng-container *ngIf="realEstateProducts.length > 0">
+                <ngb-panel>
+                  <ng-template ngbPanelTitle>
+                    <span
+                      >&#9733; <b><span jhiTranslate="select-products.real-estate-shop">Real Estate</span></b> &#9733;</span
+                    >
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                    <p-scrollPanel [style]="{ width: '100%', height: '500px' }">
+                      <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
+                        <ng-container *ngFor="let epo of realEstateProducts">
+                          <mat-card fxFlex="0 1 calc(20% - 32px)">
+                            <mat-card-header>
+                              <mat-card-title>{{ epo.product.title }}</mat-card-title>
+                              <mat-card-subtitle>{{ epo.product.motto }}</mat-card-subtitle>
+                            </mat-card-header>
+                            <div class="img_div">
+                              <img
+                                class="card-image"
+                                mat-card-image
+                                [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"
+                                alt="{{ epo.product.title }}"
+                              />
+                            </div>
+                            <mat-card-content>
+                              <jhi-price-type [product]="epo.product"></jhi-price-type>
+                              <p>
+                                {{ epo.product.price | currency }} / {{ epo.product.amount }}
+                                {{ 'createyoureventApp.Unit.' + epo.product.unit | translate }}
+                              </p>
+                              <hr />
+                              <span jhiTranslation="select-products.quantity">Quantity</span
+                              ><input
+                                type="number"
+                                id="quantity-selectedProduct---{{ epo.product.id }}"
+                                value="{{ epo.amount }}"
+                                disabled="disabled"
+                              />
+                              <ng-container *ngIf="epo.product.priceType === 'RENT'">
+                                <hr />
+                                <div jhiTranslation="select-products.dateFrom">Date from:</div>
+                                <div>{{ epo.dateFrom | date: 'medium' }}</div>
+                                <hr />
+                                <div jhiTranslation="select-products.dateUntil">Date until:</div>
+                                <div>{{ epo.dateUntil | date: 'medium' }}</div>
+                                <hr />
+                              </ng-container>
+                              <hr />
+                              <span jhiTranslate="select-products.total">Total: </span> {{ epo.total | currency }}
+
+                              <ng-container *ngIf="epo.product.stock >= 0">
+                                <p>
+                                  <span jhiTranslation="select-products.available">Available: </span> {{ epo.product.stock }}
+                                  {{ 'createyoureventApp.Unit.' + epo.product.unit | translate }}
+                                </p>
+                              </ng-container>
+                              <ng-container *ngIf="0 > epo.product.stock">
+                                <p>
+                                  <span jhiTranslation="select-products.infinite">Infinite</span>
+                                </p>
+                              </ng-container>
+                              <hr />
+                            </mat-card-content>
+                            <mat-card-actions> </mat-card-actions>
+                          </mat-card>
+                        </ng-container>
+                      </div>
+                    </p-scrollPanel>
+                  </ng-template>
+                </ngb-panel>
+              </ng-container>
+
+              <ng-container *ngIf="foodProducts.length > 0">
+                <ngb-panel>
+                  <ng-template ngbPanelTitle>
+                    <span
+                      >&#9733; <b><span jhiTranslate="select-products.food-shop">Food</span></b> &#9733;</span
+                    >
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                    <p-scrollPanel [style]="{ width: '100%', height: '500px' }">
+                      <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
+                        <ng-container *ngFor="let epo of foodProducts">
+                          <mat-card fxFlex="0 1 calc(20% - 32px)">
+                            <mat-card-header>
+                              <mat-card-title>{{ epo.product.title }}</mat-card-title>
+                              <mat-card-subtitle>{{ epo.product.motto }}</mat-card-subtitle>
+                            </mat-card-header>
+                            <div class="img_div">
+                              <img
+                                class="card-image"
+                                mat-card-image
+                                [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"
+                                alt="{{ epo.product.title }}"
+                              />
+                            </div>
+                            <mat-card-content>
+                              <jhi-price-type [product]="epo.product"></jhi-price-type>
+                              <p>
+                                {{ epo.product.price | currency }} / {{ epo.product.amount }}
+                                {{ 'createyoureventApp.Unit.' + epo.product.unit | translate }}
+                              </p>
+                              <hr />
+                              <span jhiTranslation="select-products.quantity">Quantity</span
+                              ><input
+                                type="number"
+                                id="quantity-selectedProduct---{{ epo.product.id }}"
+                                value="{{ epo.amount }}"
+                                disabled="disabled"
+                              />
+                              <ng-container *ngIf="epo.product.priceType === 'RENT'">
+                                <hr />
+                                <div jhiTranslation="select-products.dateFrom">Date from:</div>
+                                <div>{{ epo.dateFrom | date: 'medium' }}</div>
+                                <hr />
+                                <div jhiTranslation="select-products.dateUntil">Date until:</div>
+                                <div>{{ epo.dateUntil | date: 'medium' }}</div>
+                                <hr />
+                              </ng-container>
+                              <hr />
+                              <span jhiTranslate="select-products.total">Total: </span> {{ epo.total | currency }}
+
+                              <ng-container *ngIf="epo.product.stock >= 0">
+                                <p>
+                                  <span jhiTranslation="select-products.available">Available: </span> {{ epo.product.stock }}
+                                  {{ 'createyoureventApp.Unit.' + epo.product.unit | translate }}
+                                </p>
+                              </ng-container>
+                              <ng-container *ngIf="0 > epo.product.stock">
+                                <p>
+                                  <span jhiTranslation="select-products.infinite">Infinite</span>
+                                </p>
+                              </ng-container>
+                              <hr />
+                            </mat-card-content>
+                            <mat-card-actions> </mat-card-actions>
+                          </mat-card>
+                        </ng-container>
+                      </div>
+                    </p-scrollPanel>
+                  </ng-template>
+                </ngb-panel>
+              </ng-container>
+
+              <ng-container *ngIf="drinkProducts.length > 0">
+                <ngb-panel>
+                  <ng-template ngbPanelTitle>
+                    <span
+                      >&#9733; <b><span jhiTranslate="select-products.drink-shop">Drink</span></b> &#9733;</span
+                    >
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                    <p-scrollPanel [style]="{ width: '100%', height: '500px' }">
+                      <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
+                        <ng-container *ngFor="let epo of drinkProducts">
+                          <mat-card fxFlex="0 1 calc(20% - 32px)">
+                            <mat-card-header>
+                              <mat-card-title>{{ epo.product.title }}</mat-card-title>
+                              <mat-card-subtitle>{{ epo.product.motto }}</mat-card-subtitle>
+                            </mat-card-header>
+                            <div class="img_div">
+                              <img
+                                class="card-image"
+                                mat-card-image
+                                [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"
+                                alt="{{ epo.product.title }}"
+                              />
+                            </div>
+                            <mat-card-content>
+                              <jhi-price-type [product]="epo.product"></jhi-price-type>
+                              <p>
+                                {{ epo.product.price | currency }} / {{ epo.product.amount }}
+                                {{ 'createyoureventApp.Unit.' + epo.product.unit | translate }}
+                              </p>
+                              <hr />
+                              <span jhiTranslation="select-products.quantity">Quantity</span
+                              ><input
+                                type="number"
+                                id="quantity-selectedProduct---{{ epo.product.id }}"
+                                value="{{ epo.amount }}"
+                                disabled="disabled"
+                              />
+                              <ng-container *ngIf="epo.product.priceType === 'RENT'">
+                                <hr />
+                                <div jhiTranslation="select-products.dateFrom">Date from:</div>
+                                <div>{{ epo.dateFrom | date: 'medium' }}</div>
+                                <hr />
+                                <div jhiTranslation="select-products.dateUntil">Date until:</div>
+                                <div>{{ epo.dateUntil | date: 'medium' }}</div>
+                                <hr />
+                              </ng-container>
+                              <hr />
+                              <span jhiTranslate="select-products.total">Total: </span> {{ epo.total | currency }}
+
+                              <ng-container *ngIf="epo.product.stock >= 0">
+                                <p>
+                                  <span jhiTranslation="select-products.available">Available: </span> {{ epo.product.stock }}
+                                  {{ 'createyoureventApp.Unit.' + epo.product.unit | translate }}
+                                </p>
+                              </ng-container>
+                              <ng-container *ngIf="0 > epo.product.stock">
+                                <p>
+                                  <span jhiTranslation="select-products.infinite">Infinite</span>
+                                </p>
+                              </ng-container>
+                              <hr />
+                            </mat-card-content>
+                            <mat-card-actions> </mat-card-actions>
+                          </mat-card>
+                        </ng-container>
+                      </div>
+                    </p-scrollPanel>
+                  </ng-template>
+                </ngb-panel>
+              </ng-container>
+
+              <ng-container *ngIf="musicProducts.length > 0">
+                <ngb-panel>
+                  <ng-template ngbPanelTitle>
+                    <span
+                      >&#9733; <b><span jhiTranslate="select-products.music-shop">Music</span></b> &#9733;</span
+                    >
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                    <p-scrollPanel [style]="{ width: '100%', height: '500px' }">
+                      <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
+                        <ng-container *ngFor="let epo of musicProducts">
+                          <mat-card fxFlex="0 1 calc(20% - 32px)">
+                            <mat-card-header>
+                              <mat-card-title>{{ epo.product.title }}</mat-card-title>
+                              <mat-card-subtitle>{{ epo.product.motto }}</mat-card-subtitle>
+                            </mat-card-header>
+                            <div class="img_div">
+                              <img
+                                class="card-image"
+                                mat-card-image
+                                [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"
+                                alt="{{ epo.product.title }}"
+                              />
+                            </div>
+                            <mat-card-content>
+                              <jhi-price-type [product]="epo.product"></jhi-price-type>
+                              <p>
+                                {{ epo.product.price | currency }} / {{ epo.product.amount }}
+                                {{ 'createyoureventApp.Unit.' + epo.product.unit | translate }}
+                              </p>
+                              <hr />
+                              <span jhiTranslation="select-products.quantity">Quantity</span
+                              ><input
+                                type="number"
+                                id="quantity-selectedProduct---{{ epo.product.id }}"
+                                value="{{ epo.amount }}"
+                                disabled="disabled"
+                              />
+                              <ng-container *ngIf="epo.product.priceType === 'RENT'">
+                                <hr />
+                                <div jhiTranslation="select-products.dateFrom">Date from:</div>
+                                <div>{{ epo.dateFrom | date: 'medium' }}</div>
+                                <hr />
+                                <div jhiTranslation="select-products.dateUntil">Date until:</div>
+                                <div>{{ epo.dateUntil | date: 'medium' }}</div>
+                                <hr />
+                              </ng-container>
+                              <hr />
+                              <span jhiTranslate="select-products.total">Total: </span> {{ epo.total | currency }}
+
+                              <ng-container *ngIf="epo.product.stock >= 0">
+                                <p>
+                                  <span jhiTranslation="select-products.available">Available: </span> {{ epo.product.stock }}
+                                  {{ 'createyoureventApp.Unit.' + epo.product.unit | translate }}
+                                </p>
+                              </ng-container>
+                              <ng-container *ngIf="0 > epo.product.stock">
+                                <p>
+                                  <span jhiTranslation="select-products.infinite">Infinite</span>
+                                </p>
+                              </ng-container>
+                              <hr />
+                            </mat-card-content>
+                            <mat-card-actions> </mat-card-actions>
+                          </mat-card>
+                        </ng-container>
+                      </div>
+                    </p-scrollPanel>
+                  </ng-template>
+                </ngb-panel>
+              </ng-container>
+
+              <ng-container *ngIf="lightshowProducts.length > 0">
+                <ngb-panel>
+                  <ng-template ngbPanelTitle>
+                    <span
+                      >&#9733; <b><span jhiTranslate="select-products.lightshow-shop">Lightshow</span></b> &#9733;</span
+                    >
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                    <p-scrollPanel [style]="{ width: '100%', height: '500px' }">
+                      <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
+                        <ng-container *ngFor="let epo of lightshowProducts">
+                          <mat-card fxFlex="0 1 calc(20% - 32px)">
+                            <mat-card-header>
+                              <mat-card-title>{{ epo.product.title }}</mat-card-title>
+                              <mat-card-subtitle>{{ epo.product.motto }}</mat-card-subtitle>
+                            </mat-card-header>
+                            <div class="img_div">
+                              <img
+                                class="card-image"
+                                mat-card-image
+                                [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"
+                                alt="{{ epo.product.title }}"
+                              />
+                            </div>
+                            <mat-card-content>
+                              <jhi-price-type [product]="epo.product"></jhi-price-type>
+                              <p>
+                                {{ epo.product.price | currency }} / {{ epo.product.amount }}
+                                {{ 'createyoureventApp.Unit.' + epo.product.unit | translate }}
+                              </p>
+                              <hr />
+                              <span jhiTranslation="select-products.quantity">Quantity</span
+                              ><input
+                                type="number"
+                                id="quantity-selectedProduct---{{ epo.product.id }}"
+                                value="{{ epo.amount }}"
+                                disabled="disabled"
+                              />
+                              <ng-container *ngIf="epo.product.priceType === 'RENT'">
+                                <hr />
+                                <div jhiTranslation="select-products.dateFrom">Date from:</div>
+                                <div>{{ epo.dateFrom | date: 'medium' }}</div>
+                                <hr />
+                                <div jhiTranslation="select-products.dateUntil">Date until:</div>
+                                <div>{{ epo.dateUntil | date: 'medium' }}</div>
+                                <hr />
+                              </ng-container>
+                              <hr />
+                              <span jhiTranslate="select-products.total">Total: </span> {{ epo.total | currency }}
+                              <ng-container *ngIf="epo.product.stock >= 0">
+                                <p>
+                                  <span jhiTranslation="select-products.available">Available: </span> {{ epo.product.stock }}
+                                  {{ 'createyoureventApp.Unit.' + epo.product.unit | translate }}
+                                </p>
+                              </ng-container>
+                              <ng-container *ngIf="0 > epo.product.stock">
+                                <p>
+                                  <span jhiTranslation="select-products.infinite">Infinite</span>
+                                </p>
+                              </ng-container>
+                              <hr />
+                              <ng-container *ngIf="epo.sellingPrice !== null && epo.sellingPrice !== undefined">
+                                <hr />
+                                <span jhiTranslate="select-products.selling-price">Selling price:</span>
+                                <p>
+                                  <span>{{ epo.sellingPrice | currency }}</span>
+                                </p>
+                              </ng-container>
+                              <hr />
+                              <span jhiTranslate="select-products.deliveryType">Delivery type</span>
+                              <p>
+                                <span jhiTranslate="{{ 'createyoureventApp.DeliveryTypes.' + epo.deliveryType.deliveryType }}">{{
+                                  epo.deliveryType.deliveryType
+                                }}</span>
+                              </p>
+                              <hr />
+                            </mat-card-content>
+                            <mat-card-actions> </mat-card-actions>
+                          </mat-card>
+                        </ng-container>
+                      </div>
+                    </p-scrollPanel>
+                  </ng-template>
+                </ngb-panel>
+              </ng-container>
+
+              <ng-container *ngIf="decorationProducts.length > 0">
+                <ngb-panel>
+                  <ng-template ngbPanelTitle>
+                    <span
+                      >&#9733; <b><span jhiTranslate="select-products.decoration-shop">Decoration</span></b> &#9733;</span
+                    >
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                    <p-scrollPanel [style]="{ width: '100%', height: '500px' }">
+                      <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
+                        <ng-container *ngFor="let epo of decorationProducts">
+                          <mat-card fxFlex="0 1 calc(20% - 32px)">
+                            <mat-card-header>
+                              <mat-card-title>{{ epo.product.title }}</mat-card-title>
+                              <mat-card-subtitle>{{ epo.product.motto }}</mat-card-subtitle>
+                            </mat-card-header>
+                            <div class="img_div">
+                              <img
+                                class="card-image"
+                                mat-card-image
+                                [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"
+                                alt="{{ epo.product.title }}"
+                              />
+                            </div>
+                            <mat-card-content>
+                              <jhi-price-type [product]="epo.product"></jhi-price-type>
+                              <p>
+                                {{ epo.product.price | currency }} / {{ epo.product.amount }}
+                                {{ 'createyoureventApp.Unit.' + epo.product.unit | translate }}
+                              </p>
+                              <hr />
+                              <span jhiTranslation="select-products.quantity">Quantity</span
+                              ><input
+                                type="number"
+                                id="quantity-selectedProduct---{{ epo.product.id }}"
+                                value="{{ epo.amount }}"
+                                disabled="disabled"
+                              />
+                              <ng-container *ngIf="epo.product.priceType === 'RENT'">
+                                <hr />
+                                <div jhiTranslation="select-products.dateFrom">Date from:</div>
+                                <div>{{ epo.dateFrom | date: 'medium' }}</div>
+                                <hr />
+                                <div jhiTranslation="select-products.dateUntil">Date until:</div>
+                                <div>{{ epo.dateUntil | date: 'medium' }}</div>
+                                <hr />
+                              </ng-container>
+                              <hr />
+                              <span jhiTranslate="select-products.total">Total: </span> {{ epo.total | currency }}
+
+                              <ng-container *ngIf="epo.product.stock >= 0">
+                                <p>
+                                  <span jhiTranslation="select-products.available">Available: </span> {{ epo.product.stock }}
+                                  {{ 'createyoureventApp.Unit.' + epo.product.unit | translate }}
+                                </p>
+                              </ng-container>
+                              <ng-container *ngIf="0 > epo.product.stock">
+                                <p>
+                                  <span jhiTranslation="select-products.infinite">Infinite</span>
+                                </p>
+                              </ng-container>
+                              <ng-container *ngIf="epo.sellingPrice !== null && epo.sellingPrice !== undefined">
+                                <hr />
+                                <span jhiTranslate="select-products.selling-price">Selling price:</span>
+                                <p>
+                                  <span>{{ epo.sellingPrice | currency }}</span>
+                                </p>
+                              </ng-container>
+                              <hr />
+                              <span jhiTranslate="select-products.deliveryType">Delivery type</span>
+                              <p>
+                                <span jhiTranslate="{{ 'createyoureventApp.DeliveryTypes.' + epo.deliveryType.deliveryType }}">{{
+                                  epo.deliveryType.deliveryType
+                                }}</span>
+                              </p>
+                              <hr />
+                            </mat-card-content>
+                            <mat-card-actions> </mat-card-actions>
+                          </mat-card>
+                        </ng-container>
+                      </div>
+                    </p-scrollPanel>
+                  </ng-template>
+                </ngb-panel>
+              </ng-container>
+
+              <ng-container *ngIf="miscellaneousProducts.length > 0">
+                <ngb-panel>
+                  <ng-template ngbPanelTitle>
+                    <span
+                      >&#9733; <b><span jhiTranslate="select-products.miscellaneous-shop">Miscellaneous</span></b> &#9733;</span
+                    >
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                    <p-scrollPanel [style]="{ width: '100%', height: '500px' }">
+                      <div class="content" fxLayout="row wrap" fxLayoutGap="16px">
+                        <ng-container *ngFor="let epo of miscellaneousProducts">
+                          <mat-card fxFlex="0 1 calc(20% - 32px)">
+                            <mat-card-header>
+                              <mat-card-title>{{ epo.product.title }}</mat-card-title>
+                              <mat-card-subtitle>{{ epo.product.motto }}</mat-card-subtitle>
+                            </mat-card-header>
+                            <div class="img_div">
+                              <img
+                                class="card-image"
+                                mat-card-image
+                                [src]="'data:' + epo.product.photoContentType + ';base64,' + epo.product.photo"
+                                alt="{{ epo.product.title }}"
+                              />
+                            </div>
+                            <mat-card-content>
+                              <jhi-price-type [product]="epo.product"></jhi-price-type>
+                              <p>
+                                {{ epo.product.price | currency }} / {{ epo.product.amount }}
+                                {{ 'createyoureventApp.Unit.' + epo.product.unit | translate }}
+                              </p>
+                              <hr />
+                              <span jhiTranslation="select-products.quantity">Quantity</span
+                              ><input
+                                type="number"
+                                id="quantity-selectedProduct---{{ epo.product.id }}"
+                                value="{{ epo.amount }}"
+                                disabled="disabled"
+                              />
+                              <ng-container *ngIf="epo.product.priceType === 'RENT'">
+                                <hr />
+                                <div jhiTranslation="select-products.dateFrom">Date from:</div>
+                                <div>{{ epo.dateFrom | date: 'medium' }}</div>
+                                <hr />
+                                <div jhiTranslation="select-products.dateUntil">Date until:</div>
+                                <div>{{ epo.dateUntil | date: 'medium' }}</div>
+                                <hr />
+                              </ng-container>
+                              <hr />
+                              <span jhiTranslate="select-products.total">Total: </span> {{ epo.total | currency }}
+
+                              <ng-container *ngIf="epo.product.stock >= 0">
+                                <p>
+                                  <span jhiTranslation="select-products.available">Available: </span> {{ epo.product.stock }}
+                                  {{ 'createyoureventApp.Unit.' + epo.product.unit | translate }}
+                                </p>
+                              </ng-container>
+                              <ng-container *ngIf="0 > epo.product.stock">
+                                <p>
+                                  <span jhiTranslation="select-products.infinite">Infinite</span>
+                                </p>
+                              </ng-container>
+                              <ng-container *ngIf="epo.sellingPrice !== null && epo.sellingPrice !== undefined">
+                                <hr />
+                                <span jhiTranslate="select-products.selling-price">Selling price:</span>
+                                <p>
+                                  <span>{{ epo.sellingPrice | currency }}</span>
+                                </p>
+                              </ng-container>
+                              <hr />
+                              <span jhiTranslate="select-products.deliveryType">Delivery type</span>
+                              <p>
+                                <span jhiTranslate="{{ 'createyoureventApp.DeliveryTypes.' + epo.deliveryType.deliveryType }}">{{
+                                  epo.deliveryType.deliveryType
+                                }}</span>
+                              </p>
+                              <hr />
+                            </mat-card-content>
+                            <mat-card-actions> </mat-card-actions>
+                          </mat-card>
+                        </ng-container>
+                      </div>
+                    </p-scrollPanel>
+                  </ng-template>
+                </ngb-panel>
+              </ng-container>
+            </ngb-accordion>
+          </div>
+        </div>
+      </div>
+    </ng-container>
 
     <ng-container *ngIf="sharedEventService.selectedEventServiceMapOrders.length > 0">
-    <div class="row">
+      <div class="row">
         <div class="col-md-12 box">
-            <h3 jhiTranslate="overview.services">Services</h3>
-            <p-scrollPanel [style]="{width: '100%', height: '700px'}">
-                <ng-container *ngFor="let serviceMapOrder of sharedEventService.selectedEventServiceMapOrders">
-                    <mat-card class="servicemap-card">
-                        <mat-card-header>
-                        <mat-card-title>{{ serviceMapOrder.serviceMap.title }}</mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <table>
-                                <tr class="table_row_offers">
-                                    <td><span jhiTranslation="select-products.dateFrom">Date from:</span></td>
-                                </tr>
-                                <tr class="table_row_offers">
-                                    <td>{{ serviceMapOrder.dateFrom | date:'medium' }}</td>
-                                </tr>
-                                <tr class="table_row_offers">
-                                    <td><span jhiTranslation="select-products.dateUntil">Date until:</span></td>
-                                </tr>
-                                <tr class="table_row_offers">
-                                    <td>{{ serviceMapOrder.dateUntil | date:'medium' }}</td>
-                                </tr>
-                            </table>
-                            <hr/>
-                            <table>
-                                <tr class="bold table_row_offers">
-                                    <td colspan="2"><span jhiTranslate="overview.workCosts">Total work costs</span></td>
-                                    <td>{{ serviceMapOrder.total | currency }}</td>
-                                </tr>
-                                <tr class="bold table_row_offers">
-                                    <td colspan="2"><span jhiTranslate="overview.rideCosts">Total ride costs</span></td>
-                                    <td>{{ serviceMapOrder.rideCosts | currency }}</td>
-                                </tr>
-                                <tr class="bold table_row_offers">
-                                    <td colspan="2"><span jhiTranslate="overview.totalService">Total</span></td>
-                                    <td>{{ (serviceMapOrder.rideCosts + serviceMapOrder.total) | currency }}</td>
-                                </tr>
-                            </table>
-                            <hr/>
-                        </mat-card-content>
-                        <mat-card-actions>
-                        </mat-card-actions>
-                    </mat-card>
-                </ng-container>
-            </p-scrollPanel>
+          <h3 jhiTranslate="overview.services">Services</h3>
+          <p-scrollPanel [style]="{ width: '100%', height: '700px' }">
+            <ng-container *ngFor="let serviceMapOrder of sharedEventService.selectedEventServiceMapOrders">
+              <mat-card class="servicemap-card">
+                <mat-card-header>
+                  <mat-card-title>{{ serviceMapOrder.serviceMap.title }}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <table>
+                    <tr class="table_row_offers">
+                      <td><span jhiTranslation="select-products.dateFrom">Date from:</span></td>
+                    </tr>
+                    <tr class="table_row_offers">
+                      <td>{{ serviceMapOrder.dateFrom | date: 'medium' }}</td>
+                    </tr>
+                    <tr class="table_row_offers">
+                      <td><span jhiTranslation="select-products.dateUntil">Date until:</span></td>
+                    </tr>
+                    <tr class="table_row_offers">
+                      <td>{{ serviceMapOrder.dateUntil | date: 'medium' }}</td>
+                    </tr>
+                  </table>
+                  <hr />
+                  <table>
+                    <tr class="bold table_row_offers">
+                      <td colspan="2"><span jhiTranslate="overview.workCosts">Total work costs</span></td>
+                      <td>{{ serviceMapOrder.total | currency }}</td>
+                    </tr>
+                    <tr class="bold table_row_offers">
+                      <td colspan="2"><span jhiTranslate="overview.rideCosts">Total ride costs</span></td>
+                      <td>{{ serviceMapOrder.rideCosts | currency }}</td>
+                    </tr>
+                    <tr class="bold table_row_offers">
+                      <td colspan="2"><span jhiTranslate="overview.totalService">Total</span></td>
+                      <td>{{ serviceMapOrder.rideCosts + serviceMapOrder.total | currency }}</td>
+                    </tr>
+                  </table>
+                  <hr />
+                </mat-card-content>
+                <mat-card-actions> </mat-card-actions>
+              </mat-card>
+            </ng-container>
+          </p-scrollPanel>
         </div>
-    </div>
-</ng-container>
-
+      </div>
+    </ng-container>
 
     <div class="row">
-        <div class="col-md-12">
-            <div>
-                <button mat-button class="btn btn-secondary" (click)="previousState()" [disabled]="isSaving">Back</button>
-                <button mat-button class="btn btn-primary" (click)="submit()" [disabled]="isSaving">Submit</button>
-            </div>
+      <div class="col-md-12">
+        <div>
+          <button mat-button class="btn btn-secondary" (click)="previousState()" [disabled]="isSaving">Back</button>
+          <button mat-button class="btn btn-primary" (click)="submit()" [disabled]="isSaving">Submit</button>
         </div>
+      </div>
     </div>
-
+  </div></ng-container
+>

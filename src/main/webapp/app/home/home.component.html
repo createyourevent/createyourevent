@@ -1,263 +1,388 @@
-  <div class="row">
-    <ng-container *ngIf="allEvents && loaded">
-      <div class="col-md-2 star-events">
+<div class="row">
+  <ng-container *ngIf="allEvents && loaded">
+    <div class="col-md-2 star-events">
+      <span class="dancegroup"></span>
+      <h2 jhiTranslate="home.star-events" class="bungee">All events with heart...</h2>
 
-        <span class="dancegroup"></span>
-          <h2 jhiTranslate="home.star-events" class="bungee">All events with heart...</h2>
+      <p-carousel
+        [value]="allEvents"
+        orientation="vertical"
+        [autoplayInterval]="5000"
+        verticalViewPortHeight="4650px"
+        [numVisible]="4"
+        [numScroll]="4"
+        [circular]="true"
+      >
+        <ng-template pTemplate="header"> </ng-template>
+        <ng-template let-event pTemplate="item">
+          <div class="container_box">
+            <div class="box_{{ 4 | randomNumber }}">
+              <span class="black"></span>
+              <div class="card content">
+                <ng-container *ngIf="event.flyer">
+                  <img
+                    class="card-img-top card-img-event"
+                    [src]="'data:' + event.flyerContentType + ';base64,' + event.flyer"
+                    alt="{{ event.name }}"
+                  />
+                </ng-container>
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <span class="font-title-event">{{ event.name }}</span>
+                  </h5>
+                  <h6 class="card-subtitle">{{ event.motto }}</h6>
+                  <div class="card-text">
+                    <hr />
+                    <div>{{ event.dateStart | date: 'medium' }}</div>
+                    <div>{{ event.dateEnd | date: 'medium' }}</div>
+                    <hr />
+                    <p>
+                      <dt><span jhiTranslate="event-detail.placenumber">Placenumber</span></dt>
+                      <dd>
+                        <span>{{ event.id | totalTickets | async }}/{{ event.placenumber }}</span>
+                      </dd>
+                      <dt><span jhiTranslate="event-detail.price">Price</span></dt>
+                      <dd>
+                        <span>{{ event.price | currency }}</span>
+                      </dd>
+                    </p>
 
-          <p-carousel [value]="allEvents" orientation="vertical" [autoplayInterval]="5000" verticalViewPortHeight="4650px" [numVisible]="4" [numScroll]="4" [circular]="true">
-              <ng-template pTemplate="header">
-              </ng-template>
-              <ng-template let-event pTemplate="item">
-              <div class="container_box">
-                <div class="box_{{ 4 | randomNumber }}">
-                    <span class="black"></span>
-                    <div class="card content">
-                      <ng-container *ngIf="event.flyer">
-                        <img class="card-img-top card-img-event" [src]="'data:' + event.flyerContentType + ';base64,' + event.flyer" alt="{{ event.name }}">
-                      </ng-container>
-                      <div class="card-body">
-                        <h5 class="card-title"><span class="font-title-event">{{ event.name }}</span></h5>
-                        <h6 class="card-subtitle">{{event.motto}}</h6>
-                        <div class="card-text">
-                          <hr/>
-                          <div>{{ event.dateStart | date:'medium' }}</div>
-                          <div>{{ event.dateEnd | date:'medium' }}</div>
-                          <hr/>
-                          <p>
-                            <dt><span jhiTranslate="event-detail.placenumber">Placenumber</span></dt>
-                            <dd>
-                                <span>{{ event.id | totalTickets | async }}/{{ event.placenumber }}</span>
-                            </dd>
-                            <dt><span jhiTranslate="event-detail.price">Price</span></dt>
-                            <dd>
-                                <span>{{ event.price | currency }}</span>
-                            </dd>
-                          </p>
-
-                          <ng-template #t let-fill="fill">
-                            <span class="heart" [class.full]="fill === 100">
-                              <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
-                            </span>
-                          </ng-template>
-                            <ngb-rating [rate]="getAverage(event.id)" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
-                            <br/>
-                            <span jhiTranslate="event-detail.total-ratings">Total ratings:</span> {{ getRatingsTotal(event.id) }}
-                        </div>
-                        <br/>
-                        <button type="button" class="btn btn-secondary" (click)="goToEvent(event.id)">
-                          <fa-icon icon="arrow-right"></fa-icon>&nbsp;<span jhiTranslate="entity.action.view">View</span>
-                        </button>
-                      </div>
-                    </div>
+                    <ng-template #t let-fill="fill">
+                      <span class="heart" [class.full]="fill === 100">
+                        <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                      </span>
+                    </ng-template>
+                    <ngb-rating [rate]="getAverage(event.id)" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                    <br />
+                    <span jhiTranslate="event-detail.total-ratings">Total ratings:</span> {{ getRatingsTotal(event.id) }}
                   </div>
-              </div>
-              </ng-template>
-          </p-carousel>
-      </div>
-    </ng-container>
-      <div class="col-md-10 main-content">
-          <h1 class="title" jhiTranslate="home.title">Welcome on Create your Event!</h1>
-          <div [ngSwitch]="isAuthenticated()">
-              <div class="alert alert-success" *ngSwitchCase="true">
-                  <span id="home-logged-message" *ngIf="getAccountFromUserIdentity()" jhiTranslate="home.logged.message"
-                      [translateValues]="{ username: getAccountFromUserIdentity().login }">You are logged in as user "{{ getAccountFromUserIdentity().login }}".</span>
-              </div>
-              <div class="alert alert-warning" *ngSwitchCase="false">
-                  <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>&nbsp;
-                  <a class="alert-link" (click)="registerAccount()" jhiTranslate="global.messages.info.register.link">Register a new account</a>
-              </div>
-          </div>
-          <hr/>
-            <div class="row">
-              <div class="col-md-8">
-                <img class="" src="../../content/images/vorteile.png" />
-              </div>
-              <div class="col-md-4">
-                <img class="img_logo_create_your_event" src="../../content/images/logo_rund_createyourevent.png" />
+                  <br />
+                  <button type="button" class="btn btn-secondary" (click)="goToEvent(event.id)">
+                    <fa-icon icon="arrow-right"></fa-icon>&nbsp;<span jhiTranslate="entity.action.view">View</span>
+                  </button>
+                </div>
               </div>
             </div>
-          <hr/>
-          <h3><span jhiTranslate="home.info-detail">Detail Infotext</span></h3>
-          <div class="font-white">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <span class="abril">{{ 'home.guest' | translate }}</span>
-                </mat-expansion-panel-header>
-                <ng-template matExpansionPanelContent>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </ng-container>
+  <div class="col-md-10 main-content">
+    <h1 class="title" jhiTranslate="home.title">Welcome on Create your Event!</h1>
+    <div [ngSwitch]="isAuthenticated()">
+      <div class="alert alert-success" *ngSwitchCase="true">
+        <span
+          id="home-logged-message"
+          *ngIf="getAccountFromUserIdentity()"
+          jhiTranslate="home.logged.message"
+          [translateValues]="{ username: getAccountFromUserIdentity().login }"
+          >You are logged in as user "{{ getAccountFromUserIdentity().login }}".</span
+        >
+      </div>
+      <div class="alert alert-warning" *ngSwitchCase="false">
+        <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>&nbsp;
+        <a class="alert-link" (click)="registerAccount()" jhiTranslate="global.messages.info.register.link">Register a new account</a>
+      </div>
+    </div>
+    <hr />
 
-                    <div class="floated-container">
-                        <div class="floated"><fa-icon icon="user"  class="icon-large"></fa-icon></div>
-                        <span jhiTranslate="home.info-guest">Guest Infotext</span>
-                    </div>
-                    <!--
+    <hr />
+    <h3><span jhiTranslate="home.info-detail">Detail Infotext</span></h3>
+    <div class="font-white">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <span class="abril">{{ 'home.guest' | translate }}</span>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <div class="floated-container">
+            <div class="floated"><fa-icon icon="user" class="icon-large"></fa-icon></div>
+            <span jhiTranslate="home.info-guest">Guest Infotext</span>
+          </div>
+          <!--
                     <button type="button" class="button abril" (click)="register('ROLE_USER')">
                         <fa-icon icon="user"></fa-icon>&nbsp;<span jhiTranslate="home.register-as">Register as</span>&nbsp;<span>{{ 'home.guest' | translate }}</span>
                     </button>
                     -->
-                </ng-template>
-              </mat-expansion-panel>
+        </ng-template>
+      </mat-expansion-panel>
 
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <span class="abril">{{ 'home.organizer' | translate }}</span>
-                </mat-expansion-panel-header>
-                <ng-template matExpansionPanelContent>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <span class="abril">{{ 'home.organizer' | translate }}</span>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <div class="floated-container">
+            <div class="floated"><fa-icon icon="user" class="icon-large"></fa-icon></div>
+            <span jhiTranslate="home.info-organisator">Organizer Infotext</span>
+          </div>
 
-                    <div class="floated-container">
-                        <div class="floated"><fa-icon icon="user"  class="icon-large"></fa-icon></div>
-                        <span jhiTranslate="home.info-organisator">Organizer Infotext</span>
-                    </div>
-
-                    <!--
+          <!--
                     <button type="button" class="button abril" (click)="register('ROLE_ORGANISATOR')">
                         <fa-icon icon="calendar-alt"></fa-icon>&nbsp;<span jhiTranslate="home.register-as">Register as</span>&nbsp;<span>{{ 'home.organizer' | translate }}</span>
                     </button>
                     -->
-                    <hr/>
+          <hr />
 
-                    <jhi-event-slider  orientation="horizontal" [numVisible]="3" [numScroll]="1" [circular]="true" [autoplayInterval]="5000"  [events]="allEvents" ></jhi-event-slider>
+          <jhi-event-slider
+            orientation="horizontal"
+            [numVisible]="3"
+            [numScroll]="1"
+            [circular]="true"
+            [autoplayInterval]="5000"
+            [events]="allEvents"
+          ></jhi-event-slider>
+        </ng-template>
+      </mat-expansion-panel>
 
-                </ng-template>
-              </mat-expansion-panel>
-
-              <mat-expansion-panel>
-
-                <mat-expansion-panel-header>
-                    <span class="abril">{{ 'home.service' | translate }}</span>
-                </mat-expansion-panel-header>
-                <ng-template matExpansionPanelContent>
-
-                    <div class="floated-container">
-                        <div class="floated"><fa-icon icon="fax"  class="icon-large"></fa-icon></div>
-                        <span jhiTranslate="home.info-service">Service Infotext</span>
-                    </div>
-                    <!--
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <span class="abril">{{ 'home.service' | translate }}</span>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <div class="floated-container">
+            <div class="floated"><fa-icon icon="fax" class="icon-large"></fa-icon></div>
+            <span jhiTranslate="home.info-service">Service Infotext</span>
+          </div>
+          <!--
                     <button type="button" class="button abril" (click)="register('ROLE_SERVICE')">
                         <fa-icon icon="fax"></fa-icon>&nbsp;<span jhiTranslate="home.register-as">Register as</span>&nbsp;<span>{{ 'home.service' | translate }}</span>
                     </button>
                     -->
-                    <hr/>
+          <hr />
 
-                    <jhi-service-slider [style]="{'max-width': '1180px', 'margin-top': '5px'}" orientation="horizontal" [numVisible]="3" [numScroll]="1" [circular]="true" [autoplayInterval]="5000" [services]="allServices"></jhi-service-slider>
+          <jhi-service-slider
+            [style]="{ 'max-width': '1180px', 'margin-top': '5px' }"
+            orientation="horizontal"
+            [numVisible]="3"
+            [numScroll]="1"
+            [circular]="true"
+            [autoplayInterval]="5000"
+            [services]="allServices"
+          ></jhi-service-slider>
+        </ng-template>
+      </mat-expansion-panel>
 
-                </ng-template>
-              </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <span class="abril">{{ 'home.supplier' | translate }}</span>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <div class="floated-container">
+            <div class="floated"><fa-icon icon="truck" class="icon-large"></fa-icon></div>
+            <span jhiTranslate="home.info-supplier">Supplier Infotext</span>
+          </div>
 
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <span class="abril">{{ 'home.supplier' | translate }}</span>
-                </mat-expansion-panel-header>
-                <ng-template matExpansionPanelContent>
-
-                    <div class="floated-container">
-                        <div class="floated"><fa-icon icon="truck"  class="icon-large"></fa-icon></div>
-                        <span jhiTranslate="home.info-supplier">Supplier Infotext</span>
-                    </div>
-
-                    <!--
+          <!--
                     <button type="button" class="button abril" (click)="register('ROLE_SUPPLIER')">
                         <fa-icon icon="truck"></fa-icon>&nbsp;<span jhiTranslate="home.register-as">Register as</span>&nbsp;<span>{{ 'home.supplier' | translate }}</span>
                     </button>
                     -->
-                    <hr/>
+          <hr />
 
-                    <jhi-shop-slider  orientation="horizontal" [numVisible]="3" [numScroll]="1" [circular]="true" [autoplayInterval]="5000" [shops]="allShops"></jhi-shop-slider>
+          <jhi-shop-slider
+            orientation="horizontal"
+            [numVisible]="3"
+            [numScroll]="1"
+            [circular]="true"
+            [autoplayInterval]="5000"
+            [shops]="allShops"
+          ></jhi-shop-slider>
+        </ng-template>
+      </mat-expansion-panel>
 
-                </ng-template>
-              </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <span class="abril">{{ 'home.organization' | translate }}</span>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <div class="floated-container">
+            <div class="floated"><fa-icon icon="user" class="icon-large"></fa-icon></div>
+            <span jhiTranslate="home.info-organization">Organization Infotext</span>
+          </div>
 
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <span class="abril">{{ 'home.organization' | translate }}</span>
-                </mat-expansion-panel-header>
-                <ng-template matExpansionPanelContent>
-
-                    <div class="floated-container">
-                        <div class="floated"><fa-icon icon="user"  class="icon-large"></fa-icon></div>
-                        <span jhiTranslate="home.info-organization">Organization Infotext</span>
-                    </div>
-
-                    <!--
+          <!--
                     <button type="button" class="button abril" (click)="register('ROLE_ORGANISATOR')">
                         <fa-icon icon="calendar-alt"></fa-icon>&nbsp;<span jhiTranslate="home.register-as">Register as</span>&nbsp;<span>{{ 'home.organizer' | translate }}</span>
                     </button>
                     -->
-                    <hr/>
+          <hr />
 
-                    <jhi-organization-slider  orientation="horizontal" [numVisible]="2" [numScroll]="1" [circular]="true" [autoplayInterval]="5000"  [organizations]="allOrganizations" ></jhi-organization-slider>
-
-                </ng-template>
-              </mat-expansion-panel>
-
+          <jhi-organization-slider
+            orientation="horizontal"
+            [numVisible]="2"
+            [numScroll]="1"
+            [circular]="true"
+            [autoplayInterval]="5000"
+            [organizations]="allOrganizations"
+          ></jhi-organization-slider>
+        </ng-template>
+      </mat-expansion-panel>
+    </div>
+    <hr />
+    <div class="box_brown padding">
+      <h3 class="title-slot-machine" jhiTranslate="home.slot-machine">Slot machine</h3>
+      <p class="white big bold" jhiTranslate="home.slot-machine.info">
+        Join our slot machine game. Every month we raffle vouchers for events that are planned and organized on our platform. Everyone can
+        register with us and plan and advertise their own events. We at Create Your Event will issue and pay out vouchers worth CHF 300
+        every month. To participate in the game you need to register on our platform, which is free if you're just an event attendee, and
+        earn points on Create Your Event. We explain how you can collect points on our platform at https://createyourevent.org/points-list.
+        A game costs you 50 points. We wish good luck.
+      </p>
+      <div class="row">
+        <div class="col-md-8">
+          <p-toast key="myKey1"></p-toast>
+          <jhi-slot-machine
+            (clockWin)="clockWin($event)"
+            (cherryWin)="cherryWin($event)"
+            (orangeWin)="orangeWin($event)"
+            (plumWin)="plumWin($event)"
+          ></jhi-slot-machine>
+        </div>
+        <div class="col-md-4">
+          <div class="row box_violet">
+            <div class="col-md-6">
+              <img src="../../content/images/slot-machine/bell.png" class="center" />
             </div>
-        <hr/>
-
-          <ng-container *ngIf="lang === 'de'">
-              <div style="width: 960px; height: 720px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:960px; height:720px" src="https://lucid.app/documents/embeddedchart/4d0be488-3026-4346-b20c-2d3ea25af123" id="utCm3SS4lWwo"></iframe></div>
-          </ng-container>
-          <ng-container *ngIf="lang === 'en'">
-              <div style="width: 960px; height: 720px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:960px; height:720px" src="https://lucid.app/documents/embeddedchart/7207dab2-5f41-4280-8f01-36d592a47b2b" id="7rCmLnxGK7Zs"></iframe></div>
-          </ng-container>
-          <!--
+            <div class="col-md-6">
+              <h5 class="bold white text-shadow" jhiTranslate="home.bell">Bell</h5>
+              <p-card>
+                <ng-template pTemplate="header">
+                  {{ clockCoupon.title }}
+                </ng-template>
+                {{ clockCoupon.description }}
+                <ng-template pTemplate="footer">
+                  {{ clockCoupon.value | currency }}
+                </ng-template>
+              </p-card>
+            </div>
+          </div>
+          <div class="row box_violet">
+            <div class="col-md-6">
+              <img src="../../content/images/slot-machine/cherry.png" class="center" />
+            </div>
+            <div class="col-md-6">
+              <h5 class="bold white text-shadow" jhiTranslate="home.cherry">Cherry</h5>
+              <p-card>
+                <ng-template pTemplate="header">
+                  {{ cherryCoupon.title }}
+                </ng-template>
+                {{ cherryCoupon.description }}
+                <ng-template pTemplate="footer">
+                  {{ cherryCoupon.value | currency }}
+                </ng-template>
+              </p-card>
+            </div>
+          </div>
+          <div class="row box_violet">
+            <div class="col-md-6">
+              <img src="../../content/images/slot-machine/orange.png" class="center" />
+            </div>
+            <div class="col-md-6">
+              <h5 class="bold white text-shadow" jhiTranslate="home.orange">>Orange</h5>
+              <p-card>
+                <ng-template pTemplate="header">
+                  {{ orangeCoupon.title }}
+                </ng-template>
+                {{ orangeCoupon.description }}
+                <ng-template pTemplate="footer">
+                  {{ orangeCoupon.value | currency }}
+                </ng-template>
+              </p-card>
+            </div>
+          </div>
+          <div class="row box_violet">
+            <div class="col-md-6">
+              <img src="../../content/images/slot-machine/plum.png" class="center" />
+            </div>
+            <div class="col-md-6">
+              <h5 class="bold white text-shadow" jhiTranslate="home.plum">Plum</h5>
+              <p-card>
+                <ng-template pTemplate="header">
+                  {{ plumCoupon.title }}
+                </ng-template>
+                {{ plumCoupon.description }}
+                <ng-template pTemplate="footer">
+                  {{ plumCoupon.value | currency }}
+                </ng-template>
+              </p-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="lang === 'de'">
+      <div style="width: 960px; height: 720px; margin: 10px; position: relative">
+        <iframe
+          allowfullscreen
+          frameborder="0"
+          style="width: 960px; height: 720px"
+          src="https://lucid.app/documents/embeddedchart/4d0be488-3026-4346-b20c-2d3ea25af123"
+          id="utCm3SS4lWwo"
+        ></iframe>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="lang === 'en'">
+      <div style="width: 960px; height: 720px; margin: 10px; position: relative">
+        <iframe
+          allowfullscreen
+          frameborder="0"
+          style="width: 960px; height: 720px"
+          src="https://lucid.app/documents/embeddedchart/7207dab2-5f41-4280-8f01-36d592a47b2b"
+          id="7rCmLnxGK7Zs"
+        ></iframe>
+      </div>
+    </ng-container>
+    <!--
               <jhi-product-slider-vertical-home></jhi-product-slider-vertical-home>
           -->
-          <p>
-              <hr/>
-              <div class="row">
-              <div class="col-md-6">
-                <div class="box_gradient" gradient>
-                  <p class="download-link">
-                    <a class="apk_link" href="../../../content/app/createyourevent.apk" download="createyourevent.apk">
-                     <span jhiTranslate="mobile-app.download">Download App for Android</span>
-                     <hr />
-                     <img src="../../content/images/download.png" />
-                   </a>
-                  </p>
-                </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="box_gradient" gradient>
-                    <h3 class="title_font" jhiTranslate="home.we-connect-sh">We connect Schaffhausen</h3>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <img src="../../content/images/schaffhausen/Wappen_Schaffhausen.png" />
-                      </div>
-                      <div class="col-md-8">
-                        <p jhiTranslate="home.services-do">
-                          Services we do for you
-                        </p>
-                        <ul>
-                          <li jhiTranslate="home.record-products">We record products and services for suppliers and service providers</li>
-                          <li jhiTranslate="home.photograph-products">We photograph and film your products and services</li>
-                          <li jhiTranslate="home.drive-service">Wir sammeln Ihre Produkte für einen Event zusammen</li>
-                          <li jhiTranslate="home.additional-services">Ask us if you need additional services. Maybe we can help you.</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-              </div>
-                <hr/>
-                  <img src="https://docs.google.com/drawings/d/e/2PACX-1vRIW4YQmsLY6_pvpAmETQ3f9mgbHLlFDZuUTSqg-FBhrUOBmBhFzN17a8Q9QAOrhxN6vv-yeZByZBpa/pub?w=960&amp;h=720">
-              <hr/>
-              <!--
+    <p></p>
+    <hr />
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box_gradient" gradient>
+          <p class="download-link">
+            <a class="apk_link" href="../../../content/app/createyourevent.apk" download="createyourevent.apk">
+              <span jhiTranslate="mobile-app.download">Download App for Android</span>
+              <hr />
+              <img src="../../content/images/download.png" />
+            </a>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="box_gradient" gradient>
+          <h3 class="title_font" jhiTranslate="home.we-connect-sh">We connect Schaffhausen</h3>
+          <div class="row">
+            <div class="col-md-4">
+              <img src="../../content/images/schaffhausen/Wappen_Schaffhausen.png" />
+            </div>
+            <div class="col-md-8">
+              <p jhiTranslate="home.services-do">Services we do for you</p>
+              <ul>
+                <li jhiTranslate="home.record-products">We record products and services for suppliers and service providers</li>
+                <li jhiTranslate="home.photograph-products">We photograph and film your products and services</li>
+                <li jhiTranslate="home.drive-service">Wir sammeln Ihre Produkte für einen Event zusammen</li>
+                <li jhiTranslate="home.additional-services">Ask us if you need additional services. Maybe we can help you.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <!--
               <div jhiTranslate="home.conclusion">
                   Conclusion-Text from us.
               </div>
               <hr/>
               -->
-              <div>
-                  <h2 jhiTranslate="home.cirecle-of-eventplanning">Circle of eventplanning on our plattform</h2>
-                  <img src="../../content/images/circleofeventplanning_gradient_750px.png" class="img-thumbnail">
-              </div>
-              <hr/>
-              <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSTR_GeFJkJPiAGen7Y7jw8e7okpxALNM5sen6hCvvsa3mJeHg6Orm-f5giJP-feIIpdIhvoiiR3xoT/embed?start=true&loop=true&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-          <p jhiTranslate="home.question">
-              If you have any question on "Create your Event": Contact
-          </p>
-          <p jhiTranslate="home.like">
-              If you like Create Your Event, don't forget to share our page. Thank you very much.
-          </p>
-      </div>
+    <div>
+      <h2 jhiTranslate="home.cirecle-of-eventplanning">Circle of eventplanning on our plattform</h2>
+      <img src="../../content/images/circleofeventplanning_gradient_750px.png" class="img-thumbnail" />
+    </div>
+    <hr />
+    <p jhiTranslate="home.question">If you have any question on "Create your Event": Contact</p>
+    <p jhiTranslate="home.like">If you like Create Your Event, don't forget to share our page. Thank you very much.</p>
   </div>
+</div>

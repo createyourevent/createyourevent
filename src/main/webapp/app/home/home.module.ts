@@ -18,9 +18,19 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { LuckySpinModule } from 'app/views/games/luckySpin/luckySpin.module';
 import { AdsenseModule } from 'ng2-adsense';
 import { Organization_sliderModule } from 'app/views/boxes/organization_slider/organization_slider.module';
+import { SlotMachineModule } from 'app/views/games/slot-machine/slot-machine.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { CardModule } from 'primeng/card';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   imports: [
+    CardModule,
+    ToastModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    SlotMachineModule,
     SharedModule,
     NgbModule,
     MatCardModule,
@@ -41,6 +51,6 @@ import { Organization_sliderModule } from 'app/views/boxes/organization_slider/o
       adSlot: 3790348225,
     }),
   ],
-  declarations: [HomeComponent]
+  declarations: [HomeComponent],
 })
 export class CreateyoureventHomeModule {}

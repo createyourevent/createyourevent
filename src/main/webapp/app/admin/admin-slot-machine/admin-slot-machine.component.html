@@ -1,0 +1,53 @@
+<h1>Slot Machine</h1>
+
+<div class="formgrid grid">
+  <div class="field col">
+    <label for="points">Points to play</label>
+    <p-inputNumber id="points" [(ngModel)]="slotmachinePoints"></p-inputNumber>
+  </div>
+</div>
+<button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="savePointsToPlay()">
+  Save
+</button>
+
+<hr />
+
+<h2>Winnings</h2>
+
+<h3>Clock List</h3>
+<p-pickList [source]="coupons" [target]="clockList" (onMoveToTarget)="moveItem($event)" (onMoveToSource)="moveItem($event)">
+  <ng-template let-coupon pTemplate="item">
+    <div>
+      {{ coupon.title }}
+    </div>
+  </ng-template>
+</p-pickList>
+
+<h3>Cherry List</h3>
+<p-pickList [source]="coupons" [target]="cherryList" (onMoveToTarget)="moveItem($event)" (onMoveToSource)="moveItem($event)">
+  <ng-template let-coupon pTemplate="item">
+    <div>
+      {{ coupon.title }}
+    </div>
+  </ng-template>
+</p-pickList>
+
+<h3>Orange List</h3>
+<p-pickList [source]="coupons" [target]="orangeList" (onMoveToTarget)="moveItem($event)" (onMoveToSource)="moveItem($event)">
+  <ng-template let-coupon pTemplate="item">
+    <div>
+      {{ coupon.title }}
+    </div>
+  </ng-template>
+</p-pickList>
+
+<h3>Plum List</h3>
+<p-pickList [source]="coupons" [target]="plumList" (onMoveToTarget)="moveItem($event)" (onMoveToSource)="moveItem($event)">
+  <ng-template let-coupon pTemplate="item">
+    <div>
+      {{ coupon.title }}
+    </div>
+  </ng-template>
+</p-pickList>
+
+<button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="saveLists()">Save</button>

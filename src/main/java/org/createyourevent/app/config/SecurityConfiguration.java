@@ -75,7 +75,12 @@ public class SecurityConfiguration extends KeycloakWebSecurityConfigurerAdapter 
 
     private final SecurityProblemSupport problemSupport;
 
-    public SecurityConfiguration(CorsFilter corsFilter, JHipsterProperties jHipsterProperties, SecurityProblemSupport problemSupport, KeycloakClientRequestFactory keycloakClientRequestFactory) {
+    public SecurityConfiguration(
+        CorsFilter corsFilter,
+        JHipsterProperties jHipsterProperties,
+        SecurityProblemSupport problemSupport,
+        KeycloakClientRequestFactory keycloakClientRequestFactory
+    ) {
         this.corsFilter = corsFilter;
         this.problemSupport = problemSupport;
         this.jHipsterProperties = jHipsterProperties;
@@ -98,8 +103,7 @@ public class SecurityConfiguration extends KeycloakWebSecurityConfigurerAdapter 
             .antMatchers("/config/**")
             .antMatchers("/test/**");
 
-            web.debug(true);
-
+        web.debug(true);
     }
 
     @Override
@@ -118,7 +122,7 @@ public class SecurityConfiguration extends KeycloakWebSecurityConfigurerAdapter 
                 .accessDeniedHandler(problemSupport)
         .and()
             .headers()
-            .contentSecurityPolicy("default-src 'self'; script-src 'self' 'unsafe-inline' https://pay.datatrans.com https://pay.sandbox.datatrans.com https://fundingchoicesmessages.google.com https://matomo.createyourevent.org https://www.paypal.com https://createyourevent.matomo.cloud https://createyourevent.matomo.cloudpiwik.js https://cdn.matomo.cloud https://adservice.google.com https://tpc.googlesyndication.com https://adservice.google.ch https://www.googletagservices.com https://partner.googleadservices.com https://pagead2.googlesyndication.com https://js.stripe.com https://cdnjs.cloudflare.com https://rawcdn.githack.com https://ajax.googleapis.com https://media.payrexx.com https://www.youtube.com https://tamaro.raisenow.com https://tamaro.raisenow.com/reall-ed89/latest/widget.js https://tamaro.raisenow.com/reall-ed89/latest/preloader.b27a1b60.js https://connect.facebook.net https://maps.googleapis.com https://s.ytimg.com https://www.youtube.com/iframe_api https://www.google-analytics.com https://www.googletagmanager.com 'unsafe-eval' data: gap: content:; style-src 'self' 'unsafe-inline' https://tamaro.raisenow.com https://fonts.googleapis.com https://maxcdn.bootstrapcdn.com https://unpkg.com; font-src 'self' 'unsafe-inline' https://fonts.gstatic.com 'unsafe-eval'; object-src 'none'; base-uri 'self'; connect-src 'self' https://dev.createyourevent.org:9000 https://fundingchoicesmessages.google.com https://adservice.google.com https://chat.createyourevent.org:3000 *.createyourevent.org/socket.io  https://*.createyourevent.org https://createyourevent.matomo.cloud https://stats.g.doubleclick.net https://csi.gstatic.com https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com https://www.createyourevent.org:3100 ws://chat.createyourevent.org wss://chat.createyourevent.org https://www.sandbox.paypal.com https://www.google-analytics.com https://www.createyourevent.org:3000 ws://www.createyourevent.org:3000 wss://www.createyourevent.org:3000 https://maps.googleapis.com; frame-ancestors 'self' https://pay.datatrans.com https://pay.sandbox.datatrans.com;  frame-src 'self' https://pay.datatrans.com https://pay.sandbox.datatrans.com https://www.google.com https://www.sandbox.paypal.com https://lucid.app https://tpc.googlesyndication.com https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com https://docs.google.com https://js.stripe.com https://player.vimeo.com https://createyourevent.payrexx.com https://www.mindmeister.com https://web.facebook.com https://www.facebook.com https://s.ytimg.com https://www.youtube.com data: ; img-src 'self' 'unsafe-inline'  http://pagead2.googlesyndication.com https://www.google.com https://www.google.ch https://pagead2.googlesyndication.com https://raw.githubusercontent.com https://docs.google.com https://maps.google.com https://www.paypal.com https://www.paypalobjects.com https://www.google-analytics.com https://maps.gstatic.com https://maps.googleapis.com data: blob:; manifest-src 'self'; media-src 'self' https://raw.githubusercontent.com; worker-src blob:; child-src  data: blob: gap: https://www.youtube.com/ https://s.ytimg.com;")
+            .contentSecurityPolicy("default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net/npm/pdfjs-dist@2.11.338/legacy/build/pdf.worker.js https://pay.datatrans.com https://pay.sandbox.datatrans.com https://fundingchoicesmessages.google.com https://matomo.createyourevent.org https://www.paypal.com https://createyourevent.matomo.cloud https://createyourevent.matomo.cloudpiwik.js https://cdn.matomo.cloud https://adservice.google.com https://tpc.googlesyndication.com https://adservice.google.ch https://www.googletagservices.com https://partner.googleadservices.com https://pagead2.googlesyndication.com https://js.stripe.com https://cdnjs.cloudflare.com https://rawcdn.githack.com https://ajax.googleapis.com https://media.payrexx.com https://www.youtube.com https://tamaro.raisenow.com https://tamaro.raisenow.com/reall-ed89/latest/widget.js https://tamaro.raisenow.com/reall-ed89/latest/preloader.b27a1b60.js https://connect.facebook.net https://maps.googleapis.com https://s.ytimg.com https://www.youtube.com/iframe_api https://www.google-analytics.com https://www.googletagmanager.com 'unsafe-eval' data: gap: content:; style-src 'self' 'unsafe-inline' https://tamaro.raisenow.com https://fonts.googleapis.com https://maxcdn.bootstrapcdn.com https://unpkg.com; font-src 'self' 'unsafe-inline' https://fonts.gstatic.com 'unsafe-eval'; object-src 'none'; base-uri 'self'; connect-src 'self' https://dev.createyourevent.org:9000 https://fundingchoicesmessages.google.com https://adservice.google.com https://chat.createyourevent.org:3000 *.createyourevent.org/socket.io  https://*.createyourevent.org https://createyourevent.matomo.cloud https://stats.g.doubleclick.net https://csi.gstatic.com https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com https://www.createyourevent.org:3100 ws://chat.createyourevent.org wss://chat.createyourevent.org https://www.sandbox.paypal.com https://www.google-analytics.com https://www.createyourevent.org:3000 ws://www.createyourevent.org:3000 wss://www.createyourevent.org:3000 https://maps.googleapis.com; frame-ancestors 'self' https://pay.datatrans.com https://pay.sandbox.datatrans.com;  frame-src 'self' https://pay.datatrans.com https://pay.sandbox.datatrans.com https://www.google.com https://www.sandbox.paypal.com https://lucid.app https://tpc.googlesyndication.com https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com https://docs.google.com https://js.stripe.com https://player.vimeo.com https://createyourevent.payrexx.com https://www.mindmeister.com https://web.facebook.com https://www.facebook.com https://s.ytimg.com https://www.youtube.com data: ; img-src 'self' 'unsafe-inline'  http://pagead2.googlesyndication.com https://www.google.com https://www.google.ch https://pagead2.googlesyndication.com https://raw.githubusercontent.com https://docs.google.com https://maps.google.com https://www.paypal.com https://www.paypalobjects.com https://www.google-analytics.com https://maps.gstatic.com https://maps.googleapis.com data: blob:; manifest-src 'self'; media-src 'self' https://raw.githubusercontent.com; worker-src blob:; child-src  data: blob: gap: https://www.youtube.com/ https://s.ytimg.com;")
             // .contentSecurityPolicy(jHipsterProperties.getSecurity().getContentSecurityPolicy())
         .and()
             .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
@@ -136,6 +140,11 @@ public class SecurityConfiguration extends KeycloakWebSecurityConfigurerAdapter 
             .antMatchers("/config/**").permitAll()
             .antMatchers("/eureka/**").permitAll()
             .antMatchers("/api/music/**").permitAll()
+            .antMatchers("/api/coupons/**").permitAll()
+            .antMatchers("/api/slot-list-clocks/**").permitAll()
+            .antMatchers("/api/slot-list-oranges/**").permitAll()
+            .antMatchers("/api/slot-list-cherries/**").permitAll()
+            .antMatchers("/api/slot-list-plums/**").permitAll()
             .antMatchers("/api/reservations/**").permitAll()
             .antMatchers("/api/datatrans/**").permitAll()
             .antMatchers("/api/public/**").permitAll()
@@ -228,16 +237,14 @@ public class SecurityConfiguration extends KeycloakWebSecurityConfigurerAdapter 
         return authorities -> {
             Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
 
-            authorities.forEach(
-                authority -> {
-                    // Check for OidcUserAuthority because Spring Security 5.2 returns
-                    // each scope as a GrantedAuthority, which we don't care about.
-                    if (authority instanceof OidcUserAuthority) {
-                        OidcUserAuthority oidcUserAuthority = (OidcUserAuthority) authority;
-                        mappedAuthorities.addAll(SecurityUtils.extractAuthorityFromClaims(oidcUserAuthority.getUserInfo().getClaims()));
-                    }
+            authorities.forEach(authority -> {
+                // Check for OidcUserAuthority because Spring Security 5.2 returns
+                // each scope as a GrantedAuthority, which we don't care about.
+                if (authority instanceof OidcUserAuthority) {
+                    OidcUserAuthority oidcUserAuthority = (OidcUserAuthority) authority;
+                    mappedAuthorities.addAll(SecurityUtils.extractAuthorityFromClaims(oidcUserAuthority.getUserInfo().getClaims()));
                 }
-            );
+            });
             return mappedAuthorities;
         };
     }
@@ -264,19 +271,14 @@ public class SecurityConfiguration extends KeycloakWebSecurityConfigurerAdapter 
         return new KeycloakRestTemplate(keycloakClientRequestFactory);
     }
 
-
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(keycloakAuthenticationProvider());
     }
 
-
-
     @Bean
     @Override
     protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
         return new RegisterSessionAuthenticationStrategy(new SessionRegistryImpl());
-
     }
 }

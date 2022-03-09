@@ -42,7 +42,6 @@
           </div>
         </div>
 
-
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="create-organization.name" for="field_name">Name</label>
           <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
@@ -56,16 +55,16 @@
         <ng-container *ngIf="type === 'RESTAURANT'">
           <div class="form-group">
             <label class="form-control-label" jhiTranslate="create-organization.menu" for="field_menu">Menu</label>
-            <quill-editor [styles]="{height: '350px'}" formControlName="menu" [modules]="modules" (onEditorCreated)="getEditorInstance($event)">
-              <quill-view format="text" theme="snow">
-              </quill-view>
-           </quill-editor>
+            <quill-editor
+              [styles]="{ height: '350px' }"
+              formControlName="menu"
+              [modules]="modules"
+              (onEditorCreated)="getEditorInstance($event)"
+            >
+              <quill-view format="text" theme="snow"> </quill-view>
+            </quill-editor>
             <div *ngIf="editForm.get('menu')!.invalid && (editForm.get('menu')!.dirty || editForm.get('menu')!.touched)">
-              <small
-                class="form-text text-danger"
-                *ngIf="editForm.get('menu')?.errors?.required"
-                jhiTranslate="entity.validation.required"
-              >
+              <small class="form-text text-danger" *ngIf="editForm.get('menu')?.errors?.required" jhiTranslate="entity.validation.required">
                 This field is required.
               </small>
             </div>
@@ -74,16 +73,16 @@
         <ng-container *ngIf="type === 'HOTEL'">
           <div class="form-group">
             <label class="form-control-label" jhiTranslate="create-organization.menu" for="field_menu">Menu</label>
-            <quill-editor [styles]="{height: '350px'}" formControlName="menu" [modules]="modules" (onEditorCreated)="getEditorInstance($event)">
-              <quill-view format="text" theme="snow">
-              </quill-view>
-           </quill-editor>
+            <quill-editor
+              [styles]="{ height: '350px' }"
+              formControlName="menu"
+              [modules]="modules"
+              (onEditorCreated)="getEditorInstance($event)"
+            >
+              <quill-view format="text" theme="snow"> </quill-view>
+            </quill-editor>
             <div *ngIf="editForm.get('menu')!.invalid && (editForm.get('menu')!.dirty || editForm.get('menu')!.touched)">
-              <small
-                class="form-text text-danger"
-                *ngIf="editForm.get('menu')?.errors?.required"
-                jhiTranslate="entity.validation.required"
-              >
+              <small class="form-text text-danger" *ngIf="editForm.get('menu')?.errors?.required" jhiTranslate="entity.validation.required">
                 This field is required.
               </small>
             </div>
@@ -101,7 +100,11 @@
               data-cy="placesToSleep"
               formControlName="placesToSleep"
             />
-            <div *ngIf="editForm.get('placesToSleep')!.invalid && (editForm.get('placesToSleep')!.dirty || editForm.get('placesToSleep')!.touched)">
+            <div
+              *ngIf="
+                editForm.get('placesToSleep')!.invalid && (editForm.get('placesToSleep')!.dirty || editForm.get('placesToSleep')!.touched)
+              "
+            >
               <small
                 class="form-text text-danger"
                 *ngIf="editForm.get('placesToSleep')?.errors?.required"
@@ -115,10 +118,14 @@
         <ng-container *ngIf="type === 'CLUB'">
           <div class="form-group">
             <label class="form-control-label" jhiTranslate="create-organization.priceCard" for="field_priceCard">Price Card</label>
-            <quill-editor [styles]="{height: '350px'}" formControlName="priceCard" [modules]="modules" (onEditorCreated)="getEditorInstance($event)">
-              <quill-view format="text" theme="snow">
-              </quill-view>
-           </quill-editor>
+            <quill-editor
+              [styles]="{ height: '350px' }"
+              formControlName="priceCard"
+              [modules]="modules"
+              (onEditorCreated)="getEditorInstance($event)"
+            >
+              <quill-view format="text" theme="snow"> </quill-view>
+            </quill-editor>
             <div *ngIf="editForm.get('priceCard')!.invalid && (editForm.get('priceCard')!.dirty || editForm.get('priceCard')!.touched)">
               <small
                 class="form-text text-danger"
@@ -164,13 +171,15 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="create-organization.description" for="field_description"
-            >Description</label
+          <label class="form-control-label" jhiTranslate="create-organization.description" for="field_description">Description</label>
+          <quill-editor
+            [styles]="{ height: '350px' }"
+            formControlName="description"
+            [modules]="modules"
+            (onEditorCreated)="getEditorInstance($event)"
           >
-          <quill-editor [styles]="{height: '350px'}" formControlName="description" [modules]="modules" (onEditorCreated)="getEditorInstance($event)">
-            <quill-view format="text" theme="snow">
-            </quill-view>
-         </quill-editor>
+            <quill-view format="text" theme="snow"> </quill-view>
+          </quill-editor>
 
           <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
             <small
@@ -185,8 +194,15 @@
 
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="create-organization.address" for="field_address">Address</label>
-          <input ngx-google-places-autocomplete  type="text" class="form-control" name="address" id="field_address"
-          formControlName="address" (onAddressChange)="addressChange($event)"/>
+          <input
+            ngx-google-places-autocomplete
+            type="text"
+            class="form-control"
+            name="address"
+            id="field_address"
+            formControlName="address"
+            (onAddressChange)="addressChange($event)"
+          />
           <div *ngIf="editForm.get('address')!.invalid && (editForm.get('address')!.dirty || editForm.get('address')!.touched)">
             <small
               class="form-text text-danger"
@@ -219,9 +235,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="create-organization.webAddress" for="field_webAddress"
-            >Web Address</label
-          >
+          <label class="form-control-label" jhiTranslate="create-organization.webAddress" for="field_webAddress">Web Address</label>
           <input
             type="text"
             class="form-control"
@@ -231,17 +245,18 @@
             formControlName="webAddress"
           />
           <div *ngIf="editForm.get('webAddress')!.invalid && (editForm.get('webAddress')!.dirty || editForm.get('webAddress')!.touched)">
-            <small class="form-text text-danger"
-                    *ngIf="editForm.get('webAddress')?.errors?.startsWithHttp" jhiTranslate="messages.startsWithHttp">
-            The webaddress must starts with either "http://" or "https://"
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('webAddress')?.errors?.startsWithHttp"
+              jhiTranslate="messages.startsWithHttp"
+            >
+              The webaddress must starts with either "http://" or "https://"
             </small>
-        </div>
+          </div>
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="create-organization.placeNumber" for="field_placeNumber"
-            >Place Number</label
-          >
+          <label class="form-control-label" jhiTranslate="create-organization.placeNumber" for="field_placeNumber">Place Number</label>
           <input
             type="number"
             class="form-control"
@@ -254,29 +269,47 @@
       </div>
 
       <div class="form-group">
-        <label class="form-control-label" jhiTranslate="create-organization.price" for="field_price">Price</label>
-        <input type="number" class="form-control" name="price" id="field_price" data-cy="price" formControlName="price" />
-        <div *ngIf="editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)">
-          <small class="form-text text-danger" *ngIf="editForm.get('price')?.errors?.required" jhiTranslate="entity.validation.required">
-            This field is required.
-          </small>
-        </div>
+        <label class="form-control-label" jhiTranslate="createyoureventApp.organization.rentable" for="field_rentable">Rentable</label>
+        <mat-checkbox
+          (change)="onChange($event)"
+          class="form-check"
+          name="rentable"
+          id="field_rentable"
+          data-cy="rentable"
+          formControlName="rentable"
+        ></mat-checkbox>
       </div>
 
-      <div class="form-group">
-        <label class="form-control-label" jhiTranslate="create-organization.rentType" for="field_rentType">Rent Type</label>
-        <select class="form-control" name="rentType" formControlName="rentType" id="field_rentType" data-cy="rentType">
-          <option [ngValue]="null">{{ 'createyoureventApp.RentType.null' | translate }}</option>
-          <option *ngFor="let rentType of rentTypeValues" [value]="rentType">
-            {{ 'createyoureventApp.RentType.' + rentType | translate }}
-          </option>
-        </select>
-        <div *ngIf="editForm.get('rentType')!.invalid && (editForm.get('rentType')!.dirty || editForm.get('rentType')!.touched)">
-          <small class="form-text text-danger" *ngIf="editForm.get('rentType')?.errors?.required" jhiTranslate="entity.validation.required">
-            This field is required.
-          </small>
+      <ng-container *ngIf="showRent">
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="create-organization.price" for="field_price">Price</label>
+          <input type="number" class="form-control" name="price" id="field_price" data-cy="price" formControlName="price" />
+          <div *ngIf="editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('price')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
         </div>
-      </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="create-organization.rentType" for="field_rentType">Rent Type</label>
+          <select class="form-control" name="rentType" formControlName="rentType" id="field_rentType" data-cy="rentType">
+            <option [ngValue]="null">{{ 'createyoureventApp.RentType.null' | translate }}</option>
+            <option *ngFor="let rentType of rentTypeValues" [value]="rentType">
+              {{ 'createyoureventApp.RentType.' + rentType | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('rentType')!.invalid && (editForm.get('rentType')!.dirty || editForm.get('rentType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('rentType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+      </ng-container>
 
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">

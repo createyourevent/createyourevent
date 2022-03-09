@@ -3,6 +3,7 @@
     "title": "Search organizations",
     "goto-organization": "Go to organization",
     "placenumber": "Maximal guests",
-    "price": "Rentprice"
+    "price": "Rentprice",
+    "rentable": "Rentable"
   }
 }

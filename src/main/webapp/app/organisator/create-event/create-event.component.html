@@ -1,231 +1,198 @@
 <p-toast key="myKey1"></p-toast>
 <form [formGroup]="form" (ngSubmit)="submit()">
   <mat-horizontal-stepper linear>
-    <mat-step *ngFor="let step of steps; let index = index; let last = last;">
+    <mat-step *ngFor="let step of steps; let index = index; let last = last">
       <ng-template matStepLabel>{{ step.label }}</ng-template>
       <ng-container *ngIf="index === 0">
-        <formly-form
-        [form]="form.at(index)"
-        [model]="model"
-        [fields]="step.fields"
-        [options]="options[index]">
-        </formly-form>
+        <formly-form [form]="form.at(index)" [model]="model" [fields]="step.fields" [options]="options[index]"> </formly-form>
       </ng-container>
 
       <ng-container *ngIf="index === 2">
         <div class="p-field-radiobutton">
-          <input type="radio" (change)="changeOrg(false)" name="org" inputId="man" [checked]="true"/>
+          <input type="radio" (change)="changeOrg(false)" name="org" inputId="man" [checked]="true" />
           <label for="man">Add address manually</label>
-      </div>
-      <div class="p-field-radiobutton">
+        </div>
+        <div class="p-field-radiobutton">
           <input type="radio" (change)="changeOrg(true)" name="org" inputId="org" />
           <label for="org">Select organization</label>
-      </div>
-      <hr/>
+        </div>
+        <hr />
       </ng-container>
 
       <ng-container *ngIf="!isOrganization && index === 2">
-        <formly-form
-        [form]="form.at(index)"
-        [model]="model"
-        [fields]="step.fields"
-        [options]="options[index]">
-        </formly-form>
+        <formly-form [form]="form.at(index)" [model]="model" [fields]="step.fields" [options]="options[index]"> </formly-form>
       </ng-container>
 
       <ng-container *ngIf="isOrganization && index === 2">
-
         <div class="row row-selected box">
           <div class="col-md-4">
             <ng-container *ngIf="organization">
-                <div class="sel-card card-container">
-                        <h3 class="title">{{ organization.name }}</h3>
-                        <h5 class="center">{{ organization.organizationType }}</h5>
-                        <div class="center">
-                            <img class="img img-center" [src]="'data:' + organization.logoContentType + ';base64,' + organization.logo" style="max-width: 250px; max-height: 350px;" alt="{{ organization.name }}"/>
-                        </div>
-                        <h5 class="motto center">{{ organization.motto }}</h5>
-                            <hr/>
-                            <p>
-                              <span class="bold" jhiTranslate="organization-data-view.placenumber">Place:</span> {{ organization.placeNumber }}
-                          </p>
-                          <p>
-                            <span class="bold" jhiTranslate="organization-data-view.price">Price:</span> {{ organization.price | currency }}
-                          </p>
-                          <p>
-                            <span class="bold" jhiTranslate="create-event.rent-type">Rent type:</span> {{ organization.rentType }}
-                          </p>
-                          <p>
-                            <span class="bold" jhiTranslate="create-event.total-rent">Total:</span> {{ organizationReservation.total | currency }}
-                          </p>
-                        <div class="address">
-                          <p>
-                            {{ formatAddress(organization) }}
-                          </p>
-                      </div>
-                      <p>
-                          <span class="bold" jhiTranslate="partners.phone">Phone:</span> {{ organization.phone }}
-                      </p>
-                      <p>
-                          <span class="bold" jhiTranslate="partners.webaddress">Webaddress:</span> {{ organization.webAddress }}
-                      </p>
+              <div class="sel-card card-container">
+                <h3 class="bungee-inline">{{ organization.name }}</h3>
+                <h5 class="center">{{ organization.organizationType }}</h5>
+                <div class="center">
+                  <img
+                    class="img img-center"
+                    [src]="'data:' + organization.logoContentType + ';base64,' + organization.logo"
+                    style="max-width: 250px; max-height: 350px"
+                    alt="{{ organization.name }}"
+                  />
                 </div>
+                <h5 class="motto center">{{ organization.motto }}</h5>
+                <hr />
+                <p><span class="bold" jhiTranslate="organization-data-view.placenumber">Place:</span> {{ organization.placeNumber }}</p>
+                <ng-container *ngIf="organization.rentable">
+                  <p><span class="bold" jhiTranslate="organization-data-view.price">Price:</span> {{ organization.price | currency }}</p>
+                  <p><span class="bold" jhiTranslate="create-event.rent-type">Rent type:</span> {{ organization.rentType }}</p>
+                  <p>
+                    <span class="bold" jhiTranslate="create-event.total-rent">Total:</span> {{ organizationReservation.total | currency }}
+                  </p>
+                </ng-container>
+                <div class="address">
+                  <p>
+                    {{ formatAddress(organization) }}
+                  </p>
+                </div>
+                <p><span class="bold" jhiTranslate="partners.phone">Phone:</span> {{ organization.phone }}</p>
+                <p><span class="bold" jhiTranslate="partners.webaddress">Webaddress:</span> {{ organization.webAddress }}</p>
+              </div>
             </ng-container>
           </div>
           <div class="col-md-8">
             <div class="alert alert-info" role="alert" jhiTranslate="create-event.select-organization-info">
-              Select the organization below that you would like to use as a venue for your event.
-              Only locations that are still available for rent on the date on which you want to hold the event are displayed.
+              Select the organization below that you would like to use as a venue for your event. Only locations that are still available
+              for rent on the date on which you want to hold the event are displayed.
             </div>
           </div>
         </div>
 
-
-
-        <p-dataView #dv [value]="organizationsWithDistance"   [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid" [loading]="loading">
+        <p-dataView
+          #dv
+          [value]="organizationsWithDistance"
+          [paginator]="true"
+          [rows]="9"
+          filterBy="name"
+          [sortField]="sortField"
+          [sortOrder]="sortOrder"
+          layout="grid"
+          [loading]="loading"
+        >
           <ng-template pTemplate="header">
-              <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <span class="p-input-icon-left p-mb-2 p-mb-md-0">
-                        <i class="pi pi-search"></i>
-                        <input type="search" pInputText placeholder="Search by name" (input)="dv.filter($event.target!.value)">
-                     </span>
-                    </div>
-                    <div class="col-md-6">
-                      <ng-container *ngIf="user">
-                        <div class="row">
-                          <div class="col-md-3">
-                            <h5><span jhiTranslate="distance.distance"></span>{{ distance }} Km</h5>
-                            <p-knob [(ngModel)]="distance" [step]="5" (onChange)="changeSliderRadius($event)" class="slider"></p-knob>
-                          </div>
-                          <div class="col-md-9">
-                            <div class="alert alert-info" role="alert">
-                              <span jhiTranslate="data-view.distance-info">
-                                Use the switch to select the maximum range in which you want to search for organizations.
-                                If the distance is set to 0, all search results are displayed.
-                              </span>
-                            </div>
-                          </div>
+            <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+              <div class="row">
+                <div class="col-md-4">
+                  <span class="p-input-icon-left p-mb-2 p-mb-md-0">
+                    <i class="pi pi-search"></i>
+                    <input type="search" pInputText placeholder="Search by name" (input)="dv.filter($event.target!.value)" />
+                  </span>
+                </div>
+                <div class="col-md-6">
+                  <ng-container *ngIf="user">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <h5><span jhiTranslate="distance.distance"></span>{{ distance }} Km</h5>
+                        <p-knob [(ngModel)]="distance" [step]="5" (onChange)="changeSliderRadius($event)" class="slider"></p-knob>
+                      </div>
+                      <div class="col-md-9">
+                        <div class="alert alert-info" role="alert">
+                          <span jhiTranslate="data-view.distance-info">
+                            Use the switch to select the maximum range in which you want to search for organizations. If the distance is set
+                            to 0, all search results are displayed.
+                          </span>
                         </div>
-                      </ng-container>
+                      </div>
                     </div>
-                    <div  class="col-md-2">
-                      <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-                    </div>
-                  </div>
+                  </ng-container>
+                </div>
+                <div class="col-md-2"></div>
               </div>
-          </ng-template>
-
-
-          <ng-template let-organization pTemplate="listItem">
-              <div class="row organization-list-row">
-                  <div class="col-md-3">
-                      <img class="img img-center" [src]="'data:' + organization.logoContentType + ';base64,' + organization.logo" style="max-width: 200px; max-height: 200px;" alt="{{ organization.name }}"/>
-                  </div>
-                  <div class="col-md-3 title">
-                      <h3>{{ organization.name }}</h3>
-                      <h5>{{ organization.motto }}</h5>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="address">
-                      <p>
-                        {{ formatAddress(organization) }}
-                      </p>
-                  </div>
-                  <p>
-                    <span class="bold" jhiTranslate="partners.phone">Phone:</span> {{ organization.phone }}
-                  </p>
-                  <p>
-                      <span class="bold" jhiTranslate="partners.webaddress">Webaddress:</span> {{ organization.webAddress }}
-                  </p>
-                  </div>
-                  <div class="col-md-3">
-                        <a class="shiny-button" (click)="selectOrganization(organization)" jhiTranslate="create-event.select-organization">Select organization</a>
-                  </div>
-              </div>
+            </div>
           </ng-template>
 
           <ng-template let-organization pTemplate="gridItem">
-              <div class="p-col-12 p-md-3">
-                  <div class="card card-container">
-                          <h3 class="title">{{ organization.name }}</h3>
-                          <h5 class="center">{{ organization.organizationType }}</h5>
-                          <div class="center">
-                              <img class="img img-center" [src]="'data:' + organization.logoContentType + ';base64,' + organization.logo" style="max-width: 250px; max-height: 350px;" alt="{{ organization.name }}"/>
-                          </div>
-                          <h5 class="motto center">{{ organization.motto }}</h5>
-                              <hr/>
-                              <p>
-                                <span class="bold" jhiTranslate="organization-data-view.placenumber">Place:</span> {{ organization.placeNumber }}
-                            </p>
-                            <p>
-                              <span class="bold" jhiTranslate="organization-data-view.price">Price:</span> {{ organization.price | currency }}
-                            </p>
-                            <p>
-                              <span class="bold" jhiTranslate="create-event.rent-type">Rent type:</span> {{ organization.rentType }}
-                            </p>
-                          <div class="address">
-                            <p>
-                              {{ formatAddress(organization) }}
-                            </p>
-                        </div>
-                        <p>
-                            <span class="bold" jhiTranslate="partners.phone">Phone:</span> {{ organization.phone }}
-                        </p>
-                        <p>
-                            <span class="bold" jhiTranslate="partners.webaddress">Webaddress:</span> {{ organization.webAddress }}
-                        </p>
-                        <hr/>
-                        <span class="bold" jhiTranslate="create-event.rent-date">Rent date</span>
-                        <table>
-                          <tr>
-                              <td><span jhiTranslate="select-products.dateFrom">Date from:</span></td><td><input id="field_dateStart-{{organization.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
-                          </tr>
-                          <tr>
-                              <td><span jhiTranslate="select-products.timeFrom">Time from:</span></td><td><input id="field_timeStart-{{organization.id}}" type="time"  placeholder="HH:mm"/></td>
-                          </tr>
-                          <tr>
-                              <td><span jhiTranslate="select-products.dateUntil">Date until:</span></td><td><input id="field_dateEnd-{{organization.id}}" type="date"  placeholder="YYYY-MM-DD"/></td>
-                          </tr>
-                          <tr>
-                              <td><span jhiTranslate="select-products.timeUntil">Time until:</span></td><td> <input id="field_timeEnd-{{organization.id}}" type="time"  placeholder="HH:mm"/></td>
-                          </tr>
-                        </table>
-                        <hr/>
-                          <button type="button" (click)="selectOrganization(organization)" jhiTranslate="create-event.select-organization">Select organization</button>
-                          <button type="button" (click)="showCalendar(organization)" jhiTranslate="create-event.show-calendar"></button>
-                  </div>
+            <div class="p-col-12 p-md-3">
+              <div class="card card-container">
+                <h3 class="bungee-inline">{{ organization.name }}</h3>
+                <h5 class="center">{{ organization.organizationType }}</h5>
+                <div class="center">
+                  <img
+                    class="img img-center"
+                    [src]="'data:' + organization.logoContentType + ';base64,' + organization.logo"
+                    style="max-width: 250px; max-height: 350px"
+                    alt="{{ organization.name }}"
+                  />
+                </div>
+                <h5 class="motto center">{{ organization.motto }}</h5>
+                <hr />
+                <p><span class="bold" jhiTranslate="organization-data-view.placenumber">Place:</span> {{ organization.placeNumber }}</p>
+                <ng-container *ngIf="organization.rentable">
+                  <p><span class="bold" jhiTranslate="organization-data-view.price">Price:</span> {{ organization.price | currency }}</p>
+                  <p><span class="bold" jhiTranslate="create-event.rent-type">Rent type:</span> {{ organization.rentType }}</p>
+                </ng-container>
+                <div class="address">
+                  <p>
+                    {{ formatAddress(organization) }}
+                  </p>
+                </div>
+                <p><span class="bold" jhiTranslate="partners.phone">Phone:</span> {{ organization.phone }}</p>
+                <p><span class="bold" jhiTranslate="partners.webaddress">Webaddress:</span> {{ organization.webAddress }}</p>
+                <hr />
+                <span class="bold" jhiTranslate="create-event.rent-date">Rent date</span>
+                <table>
+                  <tr>
+                    <td><span jhiTranslate="select-products.dateFrom">Date from:</span></td>
+                    <td><input id="field_dateStart-{{ organization.id }}" type="date" placeholder="YYYY-MM-DD" /></td>
+                  </tr>
+                  <tr>
+                    <td><span jhiTranslate="select-products.timeFrom">Time from:</span></td>
+                    <td><input id="field_timeStart-{{ organization.id }}" type="time" placeholder="HH:mm" /></td>
+                  </tr>
+                  <tr>
+                    <td><span jhiTranslate="select-products.dateUntil">Date until:</span></td>
+                    <td><input id="field_dateEnd-{{ organization.id }}" type="date" placeholder="YYYY-MM-DD" /></td>
+                  </tr>
+                  <tr>
+                    <td><span jhiTranslate="select-products.timeUntil">Time until:</span></td>
+                    <td><input id="field_timeEnd-{{ organization.id }}" type="time" placeholder="HH:mm" /></td>
+                  </tr>
+                </table>
+                <hr />
+                <button type="button" (click)="selectOrganization(organization)" jhiTranslate="create-event.select-organization">
+                  Select organization
+                </button>
+                <button type="button" (click)="showCalendar(organization)" jhiTranslate="create-event.show-calendar"></button>
               </div>
+            </div>
           </ng-template>
 
           <ng-template pTemplate="footer">
-              <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
           </ng-template>
-      </p-dataView>
+        </p-dataView>
       </ng-container>
 
       <ng-container *ngIf="index === 1">
-        <formly-form
-        [form]="form.at(index)"
-        [model]="model"
-        [fields]="step.fields"
-        [options]="options[index]">
-        </formly-form>
+        <formly-form [form]="form.at(index)" [model]="model" [fields]="step.fields" [options]="options[index]"> </formly-form>
       </ng-container>
-
 
       <div>
         <button *ngIf="index !== 0" matStepperPrevious class="btn btn-primary" type="button" (click)="prevStep(index)">Back</button>
-        <button *ngIf="!last" matStepperNext class="btn btn-primary" type="button" [disabled]="!form.at(index).valid" (click)="nextStep(index)">Next</button>
+        <button
+          *ngIf="!last"
+          matStepperNext
+          class="btn btn-primary"
+          type="button"
+          [disabled]="!form.at(index).valid"
+          (click)="nextStep(index)"
+        >
+          Next
+        </button>
         <ng-container *ngIf="!isOrganization && index === 2">
           <button *ngIf="last" class="btn btn-primary" [disabled]="!form.valid" type="submit">Submit</button>
         </ng-container>
         <ng-container *ngIf="isOrganization && index === 2">
           <button *ngIf="last" class="btn btn-primary" [disabled]="!organization" type="submit">Submit</button>
         </ng-container>
-
-
       </div>
     </mat-step>
   </mat-horizontal-stepper>

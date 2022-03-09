@@ -84,6 +84,9 @@ public class OrganizationServiceImpl implements OrganizationService {
                 if (organization.getRentType() != null) {
                     existingOrganization.setRentType(organization.getRentType());
                 }
+                if (organization.getRentable() != null) {
+                    existingOrganization.setRentable(organization.getRentable());
+                }
 
                 return existingOrganization;
             })

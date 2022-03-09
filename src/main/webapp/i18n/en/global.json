@@ -83,6 +83,11 @@
         "organizationReservation": "Organization Reservation",
         "building": "Building",
         "organizationStarRating": "Organization Star Rating",
+        "coupon": "Coupon",
+        "slotListClock": "Slot List Clock",
+        "slotListCherry": "Slot List Cherry",
+        "slotListOrange": "Slot List Orange",
+        "slotListPlum": "Slot List Plum",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

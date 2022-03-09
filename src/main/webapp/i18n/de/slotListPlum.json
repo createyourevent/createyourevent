@@ -1,0 +1,24 @@
+{
+  "createyoureventApp": {
+    "slotListPlum": {
+      "home": {
+        "title": "Slot List Plums",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Slot List Plum erstellen",
+        "createOrEditLabel": "Slot List Plum erstellen oder bearbeiten",
+        "notFound": "Keine Slot List Plums gefunden"
+      },
+      "created": "Slot List Plum erstellt mit ID {{ param }}",
+      "updated": "Slot List Plum aktualisiert mit ID {{ param }}",
+      "deleted": "Slot List Plum gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Slot List Plum {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Slot List Plum"
+      },
+      "id": "ID",
+      "coupons": "Coupons"
+    }
+  }
+}

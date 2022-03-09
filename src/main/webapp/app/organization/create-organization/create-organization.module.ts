@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { CREATE_ORGANIZATION_ROUTE } from './create-organization.route';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { QuillModule } from 'ngx-quill';
+import { RentType } from 'app/entities/enumerations/rent-type.model';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   imports: [
@@ -13,8 +15,9 @@ import { QuillModule } from 'ngx-quill';
     SharedModule,
     RouterModule.forChild(CREATE_ORGANIZATION_ROUTE),
     GooglePlaceModule,
-    QuillModule
+    QuillModule,
+    MatCheckboxModule,
   ],
-  declarations: [CreateOrganizationComponent]
+  declarations: [CreateOrganizationComponent],
 })
-export class CreateOrganizationModule { }
+export class CreateOrganizationModule {}

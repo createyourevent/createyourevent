@@ -328,6 +328,31 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'createyoureventApp.organizationStarRating.home.title' },
         loadChildren: () => import('./organization-star-rating/organization-star-rating.module').then(m => m.OrganizationStarRatingModule),
       },
+      {
+        path: 'coupon',
+        data: { pageTitle: 'createyoureventApp.coupon.home.title' },
+        loadChildren: () => import('./coupon/coupon.module').then(m => m.CouponModule),
+      },
+      {
+        path: 'slot-list-clock',
+        data: { pageTitle: 'createyoureventApp.slotListClock.home.title' },
+        loadChildren: () => import('./slot-list-clock/slot-list-clock.module').then(m => m.SlotListClockModule),
+      },
+      {
+        path: 'slot-list-cherry',
+        data: { pageTitle: 'createyoureventApp.slotListCherry.home.title' },
+        loadChildren: () => import('./slot-list-cherry/slot-list-cherry.module').then(m => m.SlotListCherryModule),
+      },
+      {
+        path: 'slot-list-orange',
+        data: { pageTitle: 'createyoureventApp.slotListOrange.home.title' },
+        loadChildren: () => import('./slot-list-orange/slot-list-orange.module').then(m => m.SlotListOrangeModule),
+      },
+      {
+        path: 'slot-list-plum',
+        data: { pageTitle: 'createyoureventApp.slotListPlum.home.title' },
+        loadChildren: () => import('./slot-list-plum/slot-list-plum.module').then(m => m.SlotListPlumModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],
