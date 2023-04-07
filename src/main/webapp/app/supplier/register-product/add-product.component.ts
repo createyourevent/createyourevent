@@ -1,33 +1,32 @@
-import { HttpResponse } from "@angular/common/http";
-import { Component, OnInit, ElementRef } from "@angular/core";
-import { Validators, FormBuilder } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
-import { DATE_TIME_FORMAT } from "app/config/input.constants";
-import { DeliveryType } from "app/entities/delivery-type/delivery-type.model";
-import { DeliveryTypeService } from "app/entities/delivery-type/service/delivery-type.service";
-import { DeliveryTypes } from "app/entities/enumerations/delivery-types.model";
-import { PriceType } from "app/entities/enumerations/price-type.model";
-import { IEvent } from "app/entities/event/event.model";
-import { IProduct, Product } from "app/entities/product/product.model";
-import { ProductService } from "app/entities/product/service/product.service";
-import { ShopService } from "app/entities/shop/service/shop.service";
-import { IShop } from "app/entities/shop/shop.model";
-import { TagsService } from "app/entities/tags/service/tags.service";
-import { Tags } from "app/entities/tags/tags.model";
-import { UserPointAssociationService } from "app/entities/user-point-association/service/user-point-association.service";
-import { UserPointAssociation } from "app/entities/user-point-association/user-point-association.model";
-import { GeneralService } from "app/general.service";
-import { PointsDataService } from "app/points/points-display/points-display.service";
-import { AlertError } from "app/shared/alert/alert-error.model";
-import { ValidateFileSizeService } from "app/validators/ValidateFileSize.service";
-import { ValidateImageWidthHeightService } from "app/validators/ValidateImageWidthHeight.service";
-import { EventService } from "app/views/event/event.service";
-import * as dayjs from "dayjs";
-import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from "ng-jhipster";
-import { MessageService } from "primeng/api";
-import { Observable } from "rxjs";
-
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { DATE_TIME_FORMAT } from 'app/config/input.constants';
+import { DeliveryType } from 'app/entities/delivery-type/delivery-type.model';
+import { DeliveryTypeService } from 'app/entities/delivery-type/service/delivery-type.service';
+import { DeliveryTypes } from 'app/entities/enumerations/delivery-types.model';
+import { PriceType } from 'app/entities/enumerations/price-type.model';
+import { IEvent } from 'app/entities/event/event.model';
+import { IProduct, Product } from 'app/entities/product/product.model';
+import { ProductService } from 'app/entities/product/service/product.service';
+import { ShopService } from 'app/entities/shop/service/shop.service';
+import { IShop } from 'app/entities/shop/shop.model';
+import { TagsService } from 'app/entities/tags/service/tags.service';
+import { Tags } from 'app/entities/tags/tags.model';
+import { UserPointAssociationService } from 'app/entities/user-point-association/service/user-point-association.service';
+import { UserPointAssociation } from 'app/entities/user-point-association/user-point-association.model';
+import { GeneralService } from 'app/general.service';
+import { PointsDataService } from 'app/points/points-display/points-display.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
+import { ValidateFileSizeService } from 'app/validators/ValidateFileSize.service';
+import { ValidateImageWidthHeightService } from 'app/validators/ValidateImageWidthHeight.service';
+import { EventService } from 'app/views/event/event.service';
+import * as dayjs from 'dayjs';
+import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from 'ng-jhipster';
+import { MessageService } from 'primeng/api';
+import { Observable } from 'rxjs';
 
 type SelectableEntity = IEvent | IShop;
 
@@ -35,7 +34,7 @@ type SelectableEntity = IEvent | IShop;
   selector: 'jhi-add-product',
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class AddProductComponent implements OnInit {
   isSaving = false;
@@ -94,12 +93,12 @@ export class AddProductComponent implements OnInit {
       unit: [null, [Validators.required]],
       amount: [null, [Validators.required]],
       shop: [],
-      motto: [null, [Validators.required]]
+      motto: [null, [Validators.required]],
     },
     { validator: this.validateImageWidthHeightService.validateProductImageWidthHeight(600, 750) }
   );
 
-    modules = {};
+  modules = {};
 
   constructor(
     protected dataUtils: JhiDataUtils,
@@ -109,7 +108,7 @@ export class AddProductComponent implements OnInit {
     protected shopService: ShopService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private route: ActivatedRoute,
     private tagsService: TagsService,
     private pointsDataService: PointsDataService,
@@ -141,8 +140,8 @@ export class AddProductComponent implements OnInit {
 
         ['clean'], // remove formatting button
 
-        ['link', 'image', 'video'] // link and image, video
-      ]
+        ['link', 'image', 'video'], // link and image, video
+      ],
     };
   }
 
@@ -172,7 +171,7 @@ export class AddProductComponent implements OnInit {
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     this.editForm.patchValue({
       [field]: null,
-      [fieldContentType]: null
+      [fieldContentType]: null,
     });
     if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
       this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
@@ -199,7 +198,7 @@ export class AddProductComponent implements OnInit {
           this.messageService.add({
             severity: 'error',
             summary: this.translate.instant('register-shop.filesize.error'),
-            detail: this.translate.instant('register-shop.filesize.error.info')
+            detail: this.translate.instant('register-shop.filesize.error.info'),
           });
         } else {
           const reader = new FileReader();
@@ -214,7 +213,7 @@ export class AddProductComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: this.translate.instant('register-shop.filetype.error'),
-          detail: this.translate.instant('register-shop.filetype.error.info')
+          detail: this.translate.instant('register-shop.filetype.error.info'),
         });
       }
     };
@@ -264,12 +263,15 @@ export class AddProductComponent implements OnInit {
       unit: this.editForm.get(['unit'])!.value,
       amount: this.editForm.get(['amount'])!.value,
       motto: this.editForm.get(['motto'])!.value,
-      shop: this.shop
+      shop: this.shop,
     };
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IProduct>>): void {
-    result.subscribe(p => this.onSaveSuccess(p.body!), () => this.onSaveError());
+    result.subscribe(
+      p => this.onSaveSuccess(p.body!),
+      () => this.onSaveError()
+    );
   }
 
   protected onSaveSuccess(p: IProduct): void {

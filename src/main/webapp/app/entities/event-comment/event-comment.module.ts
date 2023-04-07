@@ -9,6 +9,5 @@ import { EventCommentRoutingModule } from './route/event-comment-routing.module'
 @NgModule({
   imports: [SharedModule, EventCommentRoutingModule],
   declarations: [EventCommentComponent, EventCommentDetailComponent, EventCommentUpdateComponent, EventCommentDeleteDialogComponent],
-  entryComponents: [EventCommentDeleteDialogComponent],
 })
 export class EventCommentModule {}

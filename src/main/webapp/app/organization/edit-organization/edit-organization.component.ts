@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
@@ -141,7 +141,7 @@ export class EditOrganizationComponent implements OnInit {
     user: [],
   });
 
-  editForm: FormGroup;
+  editForm: UntypedFormGroup;
 
   constructor(
     protected dataUtils: DataUtils,
@@ -150,7 +150,7 @@ export class EditOrganizationComponent implements OnInit {
     protected userService: UserService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder,
+    protected fb: UntypedFormBuilder,
     private generalService: GeneralService,
     private restaurantService: RestaurantService,
     private clubService: ClubService,
@@ -290,7 +290,7 @@ export class EditOrganizationComponent implements OnInit {
   }
 
   setFileData(event: Event, field: string, isImage: boolean): void {
-    let fg: FormGroup;
+    let fg: UntypedFormGroup;
     if (this.type === OrganizationType.RESTAURANT) {
       fg = this.editRestaurantForm;
     } else if (this.type === OrganizationType.HOTEL) {
@@ -308,7 +308,7 @@ export class EditOrganizationComponent implements OnInit {
   }
 
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
-    let fg: FormGroup;
+    let fg: UntypedFormGroup;
     if (this.type === OrganizationType.RESTAURANT) {
       fg = this.editRestaurantForm;
     } else if (this.type === OrganizationType.HOTEL) {
@@ -512,7 +512,7 @@ export class EditOrganizationComponent implements OnInit {
   }
 
   protected loadRelationshipsOptions(): void {
-    let fg: FormGroup;
+    let fg: UntypedFormGroup;
     if (this.type === OrganizationType.RESTAURANT) {
       fg = this.editRestaurantForm;
     } else if (this.type === OrganizationType.HOTEL) {

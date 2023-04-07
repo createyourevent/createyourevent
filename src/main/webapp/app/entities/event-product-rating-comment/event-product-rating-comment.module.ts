@@ -14,6 +14,5 @@ import { EventProductRatingCommentRoutingModule } from './route/event-product-ra
     EventProductRatingCommentUpdateComponent,
     EventProductRatingCommentDeleteDialogComponent,
   ],
-  entryComponents: [EventProductRatingCommentDeleteDialogComponent],
 })
 export class EventProductRatingCommentModule {}

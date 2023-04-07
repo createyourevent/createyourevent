@@ -9,6 +9,5 @@ import { SlotListClockRoutingModule } from './route/slot-list-clock-routing.modu
 @NgModule({
   imports: [SharedModule, SlotListClockRoutingModule],
   declarations: [SlotListClockComponent, SlotListClockDetailComponent, SlotListClockUpdateComponent, SlotListClockDeleteDialogComponent],
-  entryComponents: [SlotListClockDeleteDialogComponent],
 })
 export class SlotListClockModule {}

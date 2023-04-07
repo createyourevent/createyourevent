@@ -9,6 +9,5 @@ import { UserExtensionRoutingModule } from './route/user-extension-routing.modul
 @NgModule({
   imports: [SharedModule, UserExtensionRoutingModule],
   declarations: [UserExtensionComponent, UserExtensionDetailComponent, UserExtensionUpdateComponent, UserExtensionDeleteDialogComponent],
-  entryComponents: [UserExtensionDeleteDialogComponent],
 })
 export class UserExtensionModule {}

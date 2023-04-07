@@ -14,6 +14,5 @@ import { FeeTransactionEntryRoutingModule } from './route/fee-transaction-entry-
     FeeTransactionEntryUpdateComponent,
     FeeTransactionEntryDeleteDialogComponent,
   ],
-  entryComponents: [FeeTransactionEntryDeleteDialogComponent],
 })
 export class FeeTransactionEntryModule {}

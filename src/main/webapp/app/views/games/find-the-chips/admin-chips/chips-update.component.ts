@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
@@ -12,7 +12,7 @@ import { ChipsService } from 'app/entities/chips/service/chips.service';
 
 @Component({
   selector: 'jhi-chips-update',
-  templateUrl: './chips-update.component.html'
+  templateUrl: './chips-update.component.html',
 })
 export class ChipsUpdateComponent implements OnInit {
   isSaving = false;
@@ -25,7 +25,7 @@ export class ChipsUpdateComponent implements OnInit {
     y: [],
     image: [],
     imageContentType: [],
-    color: []
+    color: [],
   });
 
   constructor(
@@ -34,7 +34,7 @@ export class ChipsUpdateComponent implements OnInit {
     protected chipsService: ChipsService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +52,7 @@ export class ChipsUpdateComponent implements OnInit {
       y: chips.y,
       image: chips.image,
       imageContentType: chips.imageContentType,
-      color: chips.color
+      color: chips.color,
     });
   }
 
@@ -75,7 +75,7 @@ export class ChipsUpdateComponent implements OnInit {
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     this.editForm.patchValue({
       [field]: null,
-      [fieldContentType]: null
+      [fieldContentType]: null,
     });
     if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
       this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
@@ -106,7 +106,7 @@ export class ChipsUpdateComponent implements OnInit {
       y: this.editForm.get(['y'])!.value,
       imageContentType: this.editForm.get(['imageContentType'])!.value,
       image: this.editForm.get(['image'])!.value,
-      color: this.editForm.get(['color'])!.value
+      color: this.editForm.get(['color'])!.value,
     };
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -26,7 +26,7 @@ export class AdminFeesPriceUpdateComponent implements OnInit {
   constructor(
     protected adminFeesPriceService: AdminFeesPriceService,
     protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
+    protected fb: UntypedFormBuilder
   ) {}
 
   ngOnInit(): void {

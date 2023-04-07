@@ -1,23 +1,22 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Validators, FormBuilder } from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { IRideCosts } from "app/entities/ride-costs/ride-costs.model";
-import { RideCostsService } from "app/entities/ride-costs/service/ride-costs.service";
-import { ServiceMapDeleteDialogComponent } from "app/entities/service-map/delete/service-map-delete-dialog.component";
-import { ServiceMap, IServiceMap } from "app/entities/service-map/service-map.model";
-import { ServiceMapService } from "app/entities/service-map/service/service-map.service";
-import { ServiceOfferService } from "app/entities/service-offer/service/service-offer.service";
-import { IUser } from "app/entities/user/user.model";
-import { GeneralService } from "app/general.service";
-import { JhiEventManager } from "ng-jhipster";
-import { Subscription } from "rxjs";
-
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { IRideCosts } from 'app/entities/ride-costs/ride-costs.model';
+import { RideCostsService } from 'app/entities/ride-costs/service/ride-costs.service';
+import { ServiceMapDeleteDialogComponent } from 'app/entities/service-map/delete/service-map-delete-dialog.component';
+import { ServiceMap, IServiceMap } from 'app/entities/service-map/service-map.model';
+import { ServiceMapService } from 'app/entities/service-map/service/service-map.service';
+import { ServiceOfferService } from 'app/entities/service-offer/service/service-offer.service';
+import { IUser } from 'app/entities/user/user.model';
+import { GeneralService } from 'app/general.service';
+import { JhiEventManager } from 'ng-jhipster';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'jhi-service-maps',
   templateUrl: './service-maps.component.html',
-  styleUrls: ['service-maps.component.scss']
+  styleUrls: ['service-maps.component.scss'],
 })
 export class ServiceMapsComponent implements OnInit, OnDestroy {
   serviceMaps!: ServiceMap[];
@@ -36,14 +35,14 @@ export class ServiceMapsComponent implements OnInit, OnDestroy {
     title: [null, [Validators.required]],
     description: [null, [Validators.required]],
     costHour: [null, [Validators.required]],
-    serviceMaps: []
+    serviceMaps: [],
   });
 
   constructor(
     protected router: Router,
     private route: ActivatedRoute,
     private generalService: GeneralService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private serviceOfferService: ServiceOfferService,
     private serviceMapService: ServiceMapService,
     private rideCostsService: RideCostsService,
@@ -99,11 +98,12 @@ export class ServiceMapsComponent implements OnInit, OnDestroy {
   delete(serviceMap: IServiceMap): void {
     const modalRef = this.modalService.open(ServiceMapDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.serviceMap = serviceMap;
-    modalRef.result.then((data) => {
-      this.loadPage();
-    }, (reason) => {
-
-    });
+    modalRef.result.then(
+      data => {
+        this.loadPage();
+      },
+      reason => {}
+    );
   }
 
   gotoDashboard(): void {

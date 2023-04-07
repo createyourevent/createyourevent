@@ -14,6 +14,5 @@ import { EventProductOrderRoutingModule } from './route/event-product-order-rout
     EventProductOrderUpdateComponent,
     EventProductOrderDeleteDialogComponent,
   ],
-  entryComponents: [EventProductOrderDeleteDialogComponent],
 })
 export class EventProductOrderModule {}

@@ -9,6 +9,5 @@ import { ShopRoutingModule } from './route/shop-routing.module';
 @NgModule({
   imports: [SharedModule, ShopRoutingModule],
   declarations: [ShopComponent, ShopDetailComponent, ShopUpdateComponent, ShopDeleteDialogComponent],
-  entryComponents: [ShopDeleteDialogComponent],
 })
 export class ShopModule {}

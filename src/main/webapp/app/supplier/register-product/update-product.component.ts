@@ -1,32 +1,32 @@
 import { IEventProductOrder } from 'app/entities/event-product-order/event-product-order.model';
-import { HttpResponse } from "@angular/common/http";
-import { Component, OnInit, ElementRef } from "@angular/core";
-import { Validators, FormBuilder } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
-import { DATE_TIME_FORMAT } from "app/config/input.constants";
-import { DeliveryType } from "app/entities/delivery-type/delivery-type.model";
-import { DeliveryTypeService } from "app/entities/delivery-type/service/delivery-type.service";
-import { DeliveryTypes } from "app/entities/enumerations/delivery-types.model";
-import { PriceType } from "app/entities/enumerations/price-type.model";
-import { IProduct, Product } from "app/entities/product/product.model";
-import { ProductService } from "app/entities/product/service/product.service";
-import { ShopService } from "app/entities/shop/service/shop.service";
-import { IShop } from "app/entities/shop/shop.model";
-import { TagsService } from "app/entities/tags/service/tags.service";
-import { Tags } from "app/entities/tags/tags.model";
-import { GeneralService } from "app/general.service";
-import { AlertError } from "app/shared/alert/alert-error.model";
-import * as dayjs from "dayjs";
-import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from "ng-jhipster";
-import { MessageService } from "primeng/api";
-import { Observable } from "rxjs";
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { DATE_TIME_FORMAT } from 'app/config/input.constants';
+import { DeliveryType } from 'app/entities/delivery-type/delivery-type.model';
+import { DeliveryTypeService } from 'app/entities/delivery-type/service/delivery-type.service';
+import { DeliveryTypes } from 'app/entities/enumerations/delivery-types.model';
+import { PriceType } from 'app/entities/enumerations/price-type.model';
+import { IProduct, Product } from 'app/entities/product/product.model';
+import { ProductService } from 'app/entities/product/service/product.service';
+import { ShopService } from 'app/entities/shop/service/shop.service';
+import { IShop } from 'app/entities/shop/shop.model';
+import { TagsService } from 'app/entities/tags/service/tags.service';
+import { Tags } from 'app/entities/tags/tags.model';
+import { GeneralService } from 'app/general.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
+import * as dayjs from 'dayjs';
+import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from 'ng-jhipster';
+import { MessageService } from 'primeng/api';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'jhi-add-product-update',
   templateUrl: './update-product.component.html',
   styleUrls: ['update-product.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class UpdateProductComponent implements OnInit {
   isSaving = false;
@@ -76,7 +76,7 @@ export class UpdateProductComponent implements OnInit {
     unit: [null, [Validators.required]],
     amount: [null, [Validators.required]],
     shop: [],
-    motto: [null, [Validators.required]]
+    motto: [null, [Validators.required]],
   });
 
   modules = {};
@@ -88,7 +88,7 @@ export class UpdateProductComponent implements OnInit {
     protected shopService: ShopService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private generalService: GeneralService,
     private tagsService: TagsService,
     private messageService: MessageService,
@@ -115,8 +115,8 @@ export class UpdateProductComponent implements OnInit {
 
         ['clean'], // remove formatting button
 
-        ['link', 'image', 'video'] // link and image, video
-      ]
+        ['link', 'image', 'video'], // link and image, video
+      ],
     };
   }
 
@@ -183,7 +183,7 @@ export class UpdateProductComponent implements OnInit {
           this.messageService.add({
             severity: 'error',
             summary: this.translate.instant('register-shop.filesize.error'),
-            detail: this.translate.instant('register-shop.filesize.error.info')
+            detail: this.translate.instant('register-shop.filesize.error.info'),
           });
         } else {
           const reader = new FileReader();
@@ -198,7 +198,7 @@ export class UpdateProductComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: this.translate.instant('register-shop.filetype.error'),
-          detail: this.translate.instant('register-shop.filetype.error.info')
+          detail: this.translate.instant('register-shop.filetype.error.info'),
         });
       }
     };
@@ -241,7 +241,7 @@ export class UpdateProductComponent implements OnInit {
       unit: product.unit,
       amount: product.amount,
       shop: product.shop,
-      motto: product.motto
+      motto: product.motto,
     });
   }
 
@@ -264,7 +264,7 @@ export class UpdateProductComponent implements OnInit {
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     this.editForm.patchValue({
       [field]: null,
-      [fieldContentType]: null
+      [fieldContentType]: null,
     });
     if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
       this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
@@ -323,19 +323,22 @@ export class UpdateProductComponent implements OnInit {
       unit: this.editForm.get(['unit'])!.value,
       amount: this.editForm.get(['amount'])!.value,
       motto: this.editForm.get(['motto'])!.value,
-      shop: this.editForm.get(['shop'])!.value
+      shop: this.editForm.get(['shop'])!.value,
     };
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IProduct>>): void {
-    result.subscribe(p => this.onSaveSuccess(p.body!), () => this.onSaveError());
+    result.subscribe(
+      p => this.onSaveSuccess(p.body!),
+      () => this.onSaveError()
+    );
   }
 
   checkDeliveryCouldChange(p: IProduct): any {
     this.generalService.findEventProductOrdersByProductId(p.id).subscribe(res => {
       const epos: IEventProductOrder[] = res.body;
       epos.forEach((ele: IEventProductOrder) => {
-        if(!ele.billed) {
+        if (!ele.billed) {
           return false;
         }
       });

@@ -1,20 +1,19 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Validators, FormBuilder } from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
-import { IRideCosts, RideCosts } from "app/entities/ride-costs/ride-costs.model";
-import { RideCostsService } from "app/entities/ride-costs/service/ride-costs.service";
-import { ServiceMap } from "app/entities/service-map/service-map.model";
-import { ServiceMapService } from "app/entities/service-map/service/service-map.service";
-import { ServiceOffer, IServiceOffer } from "app/entities/service-offer/service-offer.model";
-import { ServiceOfferService } from "app/entities/service-offer/service/service-offer.service";
-import { IUser } from "app/entities/user/user.model";
-import { GeneralService } from "app/general.service";
-
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { IRideCosts, RideCosts } from 'app/entities/ride-costs/ride-costs.model';
+import { RideCostsService } from 'app/entities/ride-costs/service/ride-costs.service';
+import { ServiceMap } from 'app/entities/service-map/service-map.model';
+import { ServiceMapService } from 'app/entities/service-map/service/service-map.service';
+import { ServiceOffer, IServiceOffer } from 'app/entities/service-offer/service-offer.model';
+import { ServiceOfferService } from 'app/entities/service-offer/service/service-offer.service';
+import { IUser } from 'app/entities/user/user.model';
+import { GeneralService } from 'app/general.service';
 
 @Component({
   selector: 'jhi-service-offers',
   templateUrl: './service-offers.component.html',
-  styleUrls: ['service-offers.component.scss']
+  styleUrls: ['service-offers.component.scss'],
 })
 export class ServiceOffersComponent implements OnInit, OnDestroy {
   serviceMapId = 0;
@@ -31,14 +30,14 @@ export class ServiceOffersComponent implements OnInit, OnDestroy {
     title: [null, [Validators.required]],
     description: [null, [Validators.required]],
     costHour: [null, [Validators.required]],
-    serviceMaps: []
+    serviceMaps: [],
   });
 
   constructor(
     protected router: Router,
     private route: ActivatedRoute,
     private generalService: GeneralService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private serviceOfferService: ServiceOfferService,
     private serviceMapService: ServiceMapService,
     private rideCostsService: RideCostsService
@@ -52,7 +51,7 @@ export class ServiceOffersComponent implements OnInit, OnDestroy {
 
       this.serviceMapService.find(this.serviceMapId).subscribe(smi => {
         this.serviceMap = smi.body!;
-        if(this.serviceMap.rideCost === null) {
+        if (this.serviceMap.rideCost === null) {
           const rc: IRideCosts = new RideCosts();
           rc.pricePerKilometre = 0;
           this.rideCostsService.create(rc).subscribe(res => {
@@ -139,7 +138,7 @@ export class ServiceOffersComponent implements OnInit, OnDestroy {
       title: this.editForm.get(['title'])!.value,
       description: this.editForm.get(['description'])!.value,
       costHour: this.editForm.get(['costHour'])!.value,
-      serviceMaps: this.serviceMap
+      serviceMaps: this.serviceMap,
     };
   }
 
@@ -169,5 +168,4 @@ export class ServiceOffersComponent implements OnInit, OnDestroy {
   gotoServiceMaps(): void {
     this.router.navigate(['/service/service-maps/' + this.serviceId]);
   }
-
 }

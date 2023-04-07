@@ -14,6 +14,5 @@ import { ShopLikeDislikeRoutingModule } from './route/shop-like-dislike-routing.
     ShopLikeDislikeUpdateComponent,
     ShopLikeDislikeDeleteDialogComponent,
   ],
-  entryComponents: [ShopLikeDislikeDeleteDialogComponent],
 })
 export class ShopLikeDislikeModule {}

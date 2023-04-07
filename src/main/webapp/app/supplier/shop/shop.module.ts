@@ -37,9 +37,8 @@ import { Mp3PlayerModule } from 'app/views/mp3-player/mp3-player.module';
     ProgressSpinnerModule,
     ToastModule,
     ProductListModule,
-    Mp3PlayerModule
+    Mp3PlayerModule,
   ],
   declarations: [ShopEditComponent, ShopOverviewComponent],
-  entryComponents: []
 })
 export class ShopModule {}

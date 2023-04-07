@@ -14,6 +14,5 @@ import { ChipsCollectionRoutingModule } from './route/chips-collection-routing.m
     ChipsCollectionUpdateComponent,
     ChipsCollectionDeleteDialogComponent,
   ],
-  entryComponents: [ChipsCollectionDeleteDialogComponent],
 })
 export class ChipsCollectionModule {}

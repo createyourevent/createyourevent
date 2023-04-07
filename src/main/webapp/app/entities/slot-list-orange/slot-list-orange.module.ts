@@ -14,6 +14,5 @@ import { SlotListOrangeRoutingModule } from './route/slot-list-orange-routing.mo
     SlotListOrangeUpdateComponent,
     SlotListOrangeDeleteDialogComponent,
   ],
-  entryComponents: [SlotListOrangeDeleteDialogComponent],
 })
 export class SlotListOrangeModule {}

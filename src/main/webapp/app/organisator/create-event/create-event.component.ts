@@ -1,6 +1,6 @@
 import { Validator4Weeks } from './../../validators/Validator4Weeks.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormGroup, Validators } from '@angular/forms';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { SharedEventService } from './shared-event.service';
 import { Router } from '@angular/router';
@@ -54,7 +54,7 @@ export class CreateEventComponent implements OnInit, OnDestroy {
 
   steps: StepType[];
 
-  form: FormArray;
+  form: UntypedFormArray;
   options: any;
   isAdding = false;
 
@@ -326,7 +326,7 @@ export class CreateEventComponent implements OnInit, OnDestroy {
       },
     ];
 
-    this.form = new FormArray(this.steps.map(() => new FormGroup({})));
+    this.form = new UntypedFormArray(this.steps.map(() => new UntypedFormGroup({})));
     this.options = this.steps.map(() => <FormlyFormOptions>{});
 
     this.generalService.findWidthAuthorities().subscribe(u => {

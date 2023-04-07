@@ -14,6 +14,5 @@ import { EventStarRatingRoutingModule } from './route/event-star-rating-routing.
     EventStarRatingUpdateComponent,
     EventStarRatingDeleteDialogComponent,
   ],
-  entryComponents: [EventStarRatingDeleteDialogComponent],
 })
 export class EventStarRatingModule {}

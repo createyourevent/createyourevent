@@ -14,6 +14,5 @@ import { AdminFeesPriceRoutingModule } from './route/admin-fees-price-routing.mo
     AdminFeesPriceUpdateComponent,
     AdminFeesPriceDeleteDialogComponent,
   ],
-  entryComponents: [AdminFeesPriceDeleteDialogComponent],
 })
 export class AdminFeesPriceModule {}

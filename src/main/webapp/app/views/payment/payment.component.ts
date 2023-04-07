@@ -1,32 +1,25 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
-import { StripeIbanComponent,  StripeCardComponent, StripeService } from 'ngx-stripe';
-import {
-  StripeElementsOptions,
-  StripeIbanElementOptions,
-  PaymentIntent,
-  StripeCardElementOptions
-} from '@stripe/stripe-js';
+import { StripeIbanComponent, StripeCardComponent, StripeService } from 'ngx-stripe';
+import { StripeElementsOptions, StripeIbanElementOptions, PaymentIntent, StripeCardElementOptions } from '@stripe/stripe-js';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { MessageService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { GeneralService } from 'app/general.service';
 import { ActivatedRoute } from '@angular/router';
 
 declare var window: any;
 
-
 @Component({
   selector: 'jhi-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class PaymentComponent implements OnInit, OnChanges {
-
   @ViewChild(StripeIbanComponent) iban!: StripeIbanComponent;
   @ViewChild(StripeCardComponent, { static: false }) card!: StripeCardComponent;
 
@@ -37,7 +30,6 @@ export class PaymentComponent implements OnInit, OnChanges {
 
   transactionId: string;
   production: boolean;
-
 
   public payPalConfig?: IPayPalConfig;
 
@@ -50,10 +42,10 @@ export class PaymentComponent implements OnInit, OnChanges {
         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
         fontSize: '18px',
         '::placeholder': {
-          color: '#CFD7E0'
-        }
-      }
-    }
+          color: '#CFD7E0',
+        },
+      },
+    },
   };
 
   cardOptions: StripeCardElementOptions = {
@@ -64,27 +56,27 @@ export class PaymentComponent implements OnInit, OnChanges {
         fontWeight: '300',
         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
         fontSize: '18px',
-      }
-    }
+      },
+    },
   };
 
   elementsOptions: StripeElementsOptions = {
-    locale: 'auto'
+    locale: 'auto',
   };
 
-  ccGroup!: FormGroup;
+  ccGroup!: UntypedFormGroup;
 
   datatransTrxId: string;
 
-
-  constructor(private fb: FormBuilder,
-              private messageService: MessageService,
-              private stripeService: StripeService,
-              private http: HttpClient,
-              private translate: TranslateService,
-              private generalService: GeneralService,
-              private route: ActivatedRoute) { }
-
+  constructor(
+    private fb: UntypedFormBuilder,
+    private messageService: MessageService,
+    private stripeService: StripeService,
+    private http: HttpClient,
+    private translate: TranslateService,
+    private generalService: GeneralService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['value'] !== undefined && changes['value'].currentValue !== undefined) {
@@ -95,7 +87,7 @@ export class PaymentComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     const host = window.location.host;
-    if(host.startsWith('dev.')) {
+    if (host.startsWith('dev.')) {
       this.production = false;
     } else {
       this.production = true;
@@ -106,10 +98,10 @@ export class PaymentComponent implements OnInit, OnChanges {
     });
     this.route.queryParams.subscribe(params => {
       this.datatransTrxId = params['datatransTrxId'];
-      if(this.datatransTrxId) {
+      if (this.datatransTrxId) {
         this.generalService.getStatusFromTransactionIdFromDatatrans(this.datatransTrxId).subscribe(res => {
           const z = res.body;
-          if(z.status === "authorized" || z.status === "settled") {
+          if (z.status === 'authorized' || z.status === 'settled') {
             this.successEvent.emit(z);
           }
         });
@@ -134,7 +126,7 @@ export class PaymentComponent implements OnInit, OnChanges {
     if (this.ccGroup.valid) {
       this.createPaymentIntent(this.value * 100)
         .pipe(
-          switchMap((pi) =>
+          switchMap(pi =>
             this.stripeService.confirmCardPayment(pi.client_secret!, {
               payment_method: {
                 card: this.card.element,
@@ -145,13 +137,17 @@ export class PaymentComponent implements OnInit, OnChanges {
             })
           )
         )
-        .subscribe((result) => {
+        .subscribe(result => {
           if (result.error) {
-            this.messageService.add({severity:'error', summary: result.error.message, detail: result.error.message});
+            this.messageService.add({ severity: 'error', summary: result.error.message, detail: result.error.message });
           } else {
             // The payment has been processed!
             if (result.paymentIntent!.status === 'succeeded') {
-              this.messageService.add({severity:'success', summary: this.translate.instant('cashbox.payment-successfull'), detail: this.translate.instant('cashbox.cc-form.successful.info')});
+              this.messageService.add({
+                severity: 'success',
+                summary: this.translate.instant('cashbox.payment-successfull'),
+                detail: this.translate.instant('cashbox.cc-form.successful.info'),
+              });
               this.ccGroup.reset();
               this.card.element.clear();
               this.successEvent.emit(result);
@@ -159,65 +155,71 @@ export class PaymentComponent implements OnInit, OnChanges {
           }
         });
     } else {
-      this.messageService.add({severity:'error', summary: this.translate.instant('cashbox.cc-form.error'), detail: this.translate.instant('cashbox.cc-form.error.info')});
+      this.messageService.add({
+        severity: 'error',
+        summary: this.translate.instant('cashbox.cc-form.error'),
+        detail: this.translate.instant('cashbox.cc-form.error.info'),
+      });
     }
   }
 
   createPaymentIntent(amount: number): Observable<PaymentIntent> {
-    return this.http.post<PaymentIntent>(
-      `https://stripe.createyourevent.org/api/create-payment-intent`,
-      { amount: amount }
-    );
+    return this.http.post<PaymentIntent>(`https://stripe.createyourevent.org/api/create-payment-intent`, { amount: amount });
   }
 
   private initConfig(): void {
     this.payPalConfig = {
-    currency: 'CHF',
-    clientId: 'AcFPWJ-j150ofAt93PIKeb5oCzEBv7dO1NKeaaX9oKsJJNLCcmuVEPIvn_UOf9HAiBPX2Xz1npanBgU7',
-    createOrderOnClient: (data) => <ICreateOrderRequest>{
-      intent: 'CAPTURE',
-      purchase_units: [
-        {
-          amount: {
-            currency_code: 'CHF',
-            value: '' + this.value,
-            breakdown: {
-              item_total: {
+      currency: 'CHF',
+      clientId: 'AcFPWJ-j150ofAt93PIKeb5oCzEBv7dO1NKeaaX9oKsJJNLCcmuVEPIvn_UOf9HAiBPX2Xz1npanBgU7',
+      createOrderOnClient: data =>
+        <ICreateOrderRequest>{
+          intent: 'CAPTURE',
+          purchase_units: [
+            {
+              amount: {
                 currency_code: 'CHF',
-                value: '' + this.value
-              }
-            }
-          }
-        }
-      ]
-    },
-    advanced: {
-      commit: 'true'
-    },
-    style: {
-      label: 'paypal',
-      layout: 'vertical'
-    },
-    onApprove: (data, actions) => {
-      console.log('onApprove - transaction was approved, but not authorized', data, actions);
-      actions.order.get().then((details: any) => {
-        console.log('onApprove - you can get full order details inside onApprove: ', details);
-      });
-    },
-    onClientAuthorization: (data) => {
-      console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-      this.successEvent.emit({ data: data });
-      this.messageService.add({severity:'success', summary: this.translate.instant('cashbox.payment-successfull'), detail: this.translate.instant('cashbox.cc-form.successful.info')});
-    },
-    onCancel: (data, actions) => {
-      console.log('OnCancel', data, actions);
-    },
-    onError: err => {
-      console.log('OnError', err);
-    },
-    onClick: (data, actions) => {
-      console.log('onClick', data, actions);
-    },
-  };
+                value: '' + this.value,
+                breakdown: {
+                  item_total: {
+                    currency_code: 'CHF',
+                    value: '' + this.value,
+                  },
+                },
+              },
+            },
+          ],
+        },
+      advanced: {
+        commit: 'true',
+      },
+      style: {
+        label: 'paypal',
+        layout: 'vertical',
+      },
+      onApprove: (data, actions) => {
+        console.log('onApprove - transaction was approved, but not authorized', data, actions);
+        actions.order.get().then((details: any) => {
+          console.log('onApprove - you can get full order details inside onApprove: ', details);
+        });
+      },
+      onClientAuthorization: data => {
+        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+        this.successEvent.emit({ data: data });
+        this.messageService.add({
+          severity: 'success',
+          summary: this.translate.instant('cashbox.payment-successfull'),
+          detail: this.translate.instant('cashbox.cc-form.successful.info'),
+        });
+      },
+      onCancel: (data, actions) => {
+        console.log('OnCancel', data, actions);
+      },
+      onError: err => {
+        console.log('OnError', err);
+      },
+      onClick: (data, actions) => {
+        console.log('onClick', data, actions);
+      },
+    };
   }
 }

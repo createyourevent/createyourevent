@@ -1,27 +1,26 @@
-import { HttpResponse } from "@angular/common/http";
-import { Component, OnInit, ElementRef } from "@angular/core";
-import { Validators, FormBuilder } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
-import { DATE_TIME_FORMAT } from "app/config/input.constants";
-import { IProduct, Product } from "app/entities/product/product.model";
-import { ProductService } from "app/entities/product/service/product.service";
-import { ShopService } from "app/entities/shop/service/shop.service";
-import { IShop } from "app/entities/shop/shop.model";
-import { TagsService } from "app/entities/tags/service/tags.service";
-import { Tags } from "app/entities/tags/tags.model";
-import { GeneralService } from "app/general.service";
-import { AlertError } from "app/shared/alert/alert-error.model";
-import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from "ng-jhipster";
-import { MessageService } from "primeng/api";
-import { Observable } from "rxjs";
-import * as dayjs from "dayjs";
-
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { DATE_TIME_FORMAT } from 'app/config/input.constants';
+import { IProduct, Product } from 'app/entities/product/product.model';
+import { ProductService } from 'app/entities/product/service/product.service';
+import { ShopService } from 'app/entities/shop/service/shop.service';
+import { IShop } from 'app/entities/shop/shop.model';
+import { TagsService } from 'app/entities/tags/service/tags.service';
+import { Tags } from 'app/entities/tags/tags.model';
+import { GeneralService } from 'app/general.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
+import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from 'ng-jhipster';
+import { MessageService } from 'primeng/api';
+import { Observable } from 'rxjs';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'jhi-product-update',
   templateUrl: './product-update.component.html',
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class ProductUpdateComponent implements OnInit {
   isSaving = false;
@@ -53,7 +52,7 @@ export class ProductUpdateComponent implements OnInit {
     itemNumber: [],
     status: [],
     motto: [null, [Validators.required]],
-    shop: []
+    shop: [],
   });
 
   items: any[] = [];
@@ -67,7 +66,7 @@ export class ProductUpdateComponent implements OnInit {
     protected shopService: ShopService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private tagsService: TagsService,
     private generalService: GeneralService,
     private messageService: MessageService,
@@ -93,8 +92,8 @@ export class ProductUpdateComponent implements OnInit {
 
         ['clean'], // remove formatting button
 
-        ['link', 'image', 'video'] // link and image, video
-      ]
+        ['link', 'image', 'video'], // link and image, video
+      ],
     };
   }
 
@@ -112,7 +111,7 @@ export class ProductUpdateComponent implements OnInit {
 
       this.generalService.findProductTags(product.id).subscribe(res => {
         res.body!.forEach(tag => {
-          this.items.push({display: tag.tag, value: tag.tag});
+          this.items.push({ display: tag.tag, value: tag.tag });
         });
       });
     });
@@ -142,7 +141,7 @@ export class ProductUpdateComponent implements OnInit {
       itemNumber: product.itemNumber,
       status: product.status,
       motto: product.motto,
-      shop: product.shop
+      shop: product.shop,
     });
   }
 
@@ -168,34 +167,42 @@ export class ProductUpdateComponent implements OnInit {
     toolbar.addHandler('image', this.imageHandler);
   }
 
-   imageHandler = (image: any, callback: any) => {
-     const input = <HTMLInputElement> document.getElementById('fileInputField');
-     input.onchange = () => {
+  imageHandler = (image: any, callback: any) => {
+    const input = <HTMLInputElement>document.getElementById('fileInputField');
+    input.onchange = () => {
       const file: File = input!.files![0];
-       // file type is only image.
-       if (/^image\//.test(file.type)) {
-         if (file.size > this.maxUploadFileSize) {
-          this.messageService.add({severity:'error', summary: this.translate.instant('register-shop.filesize.error'), detail: this.translate.instant('register-shop.filesize.error.info')});
-         } else {
-           const reader  = new FileReader();
-           reader.onload = () =>  {
-             const range = this.quillEditorRef.getSelection();
-             const img = '<img src="' + reader.result + '" />';
-             this.quillEditorRef.clipboard.dangerouslyPasteHTML(range.index, img);
-           };
-           reader.readAsDataURL(file);
-         }
-       } else {
-          this.messageService.add({severity:'error', summary: this.translate.instant('register-shop.filetype.error'), detail: this.translate.instant('register-shop.filetype.error.info')});
-       }
-     };
-     input.click();
-   }
+      // file type is only image.
+      if (/^image\//.test(file.type)) {
+        if (file.size > this.maxUploadFileSize) {
+          this.messageService.add({
+            severity: 'error',
+            summary: this.translate.instant('register-shop.filesize.error'),
+            detail: this.translate.instant('register-shop.filesize.error.info'),
+          });
+        } else {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const range = this.quillEditorRef.getSelection();
+            const img = '<img src="' + reader.result + '" />';
+            this.quillEditorRef.clipboard.dangerouslyPasteHTML(range.index, img);
+          };
+          reader.readAsDataURL(file);
+        }
+      } else {
+        this.messageService.add({
+          severity: 'error',
+          summary: this.translate.instant('register-shop.filetype.error'),
+          detail: this.translate.instant('register-shop.filetype.error.info'),
+        });
+      }
+    };
+    input.click();
+  };
 
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     this.editForm.patchValue({
       [field]: null,
-      [fieldContentType]: null
+      [fieldContentType]: null,
     });
     if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
       this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
@@ -243,7 +250,7 @@ export class ProductUpdateComponent implements OnInit {
       itemNumber: this.editForm.get(['itemNumber'])!.value,
       status: this.editForm.get(['status'])!.value,
       motto: this.editForm.get(['motto'])!.value,
-      shop: this.editForm.get(['shop'])!.value
+      shop: this.editForm.get(['shop'])!.value,
     };
   }
 

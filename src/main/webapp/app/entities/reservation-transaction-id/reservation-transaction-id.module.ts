@@ -14,6 +14,5 @@ import { ReservationTransactionIdRoutingModule } from './route/reservation-trans
     ReservationTransactionIdUpdateComponent,
     ReservationTransactionIdDeleteDialogComponent,
   ],
-  entryComponents: [ReservationTransactionIdDeleteDialogComponent],
 })
 export class ReservationTransactionIdModule {}

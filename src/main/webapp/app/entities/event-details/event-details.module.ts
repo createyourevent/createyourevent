@@ -9,6 +9,5 @@ import { EventDetailsRoutingModule } from './route/event-details-routing.module'
 @NgModule({
   imports: [SharedModule, EventDetailsRoutingModule],
   declarations: [EventDetailsComponent, EventDetailsDetailComponent, EventDetailsUpdateComponent, EventDetailsDeleteDialogComponent],
-  entryComponents: [EventDetailsDeleteDialogComponent],
 })
 export class EventDetailsModule {}

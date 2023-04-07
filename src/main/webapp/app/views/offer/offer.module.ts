@@ -20,10 +20,9 @@ import { EditRowBoxComponent } from './editrow-box.component';
     MatInputModule,
     MatButtonModule,
     MatInputModule,
-    CommonModule
+    CommonModule,
   ],
   declarations: [OfferComponent, EditRowBoxComponent],
   exports: [OfferComponent],
-  entryComponents: [EditRowBoxComponent]
 })
 export class OfferModule {}

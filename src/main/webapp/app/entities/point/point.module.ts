@@ -9,6 +9,5 @@ import { PointRoutingModule } from './route/point-routing.module';
 @NgModule({
   imports: [SharedModule, PointRoutingModule],
   declarations: [PointComponent, PointDetailComponent, PointUpdateComponent, PointDeleteDialogComponent],
-  entryComponents: [PointDeleteDialogComponent],
 })
 export class PointModule {}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
@@ -28,7 +28,7 @@ export class ChipsCollectionUpdateComponent implements OnInit {
     protected chipsCollectionService: ChipsCollectionService,
     protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
+    protected fb: UntypedFormBuilder
   ) {}
 
   ngOnInit(): void {

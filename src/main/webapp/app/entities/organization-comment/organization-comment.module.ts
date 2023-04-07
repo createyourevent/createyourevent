@@ -14,6 +14,5 @@ import { OrganizationCommentRoutingModule } from './route/organization-comment-r
     OrganizationCommentUpdateComponent,
     OrganizationCommentDeleteDialogComponent,
   ],
-  entryComponents: [OrganizationCommentDeleteDialogComponent],
 })
 export class OrganizationCommentModule {}

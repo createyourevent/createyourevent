@@ -9,6 +9,5 @@ import { DeliveryTypeRoutingModule } from './route/delivery-type-routing.module'
 @NgModule({
   imports: [SharedModule, DeliveryTypeRoutingModule],
   declarations: [DeliveryTypeComponent, DeliveryTypeDetailComponent, DeliveryTypeUpdateComponent, DeliveryTypeDeleteDialogComponent],
-  entryComponents: [DeliveryTypeDeleteDialogComponent],
 })
 export class DeliveryTypeModule {}

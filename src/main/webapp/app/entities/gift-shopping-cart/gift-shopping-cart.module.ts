@@ -14,6 +14,5 @@ import { GiftShoppingCartRoutingModule } from './route/gift-shopping-cart-routin
     GiftShoppingCartUpdateComponent,
     GiftShoppingCartDeleteDialogComponent,
   ],
-  entryComponents: [GiftShoppingCartDeleteDialogComponent],
 })
 export class GiftShoppingCartModule {}

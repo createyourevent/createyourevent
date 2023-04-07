@@ -9,6 +9,5 @@ import { TagsRoutingModule } from './route/tags-routing.module';
 @NgModule({
   imports: [SharedModule, TagsRoutingModule],
   declarations: [TagsComponent, TagsDetailComponent, TagsUpdateComponent, TagsDeleteDialogComponent],
-  entryComponents: [TagsDeleteDialogComponent],
 })
 export class TagsModule {}

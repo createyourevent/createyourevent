@@ -9,6 +9,5 @@ import { ShopCommentRoutingModule } from './route/shop-comment-routing.module';
 @NgModule({
   imports: [SharedModule, ShopCommentRoutingModule],
   declarations: [ShopCommentComponent, ShopCommentDetailComponent, ShopCommentUpdateComponent, ShopCommentDeleteDialogComponent],
-  entryComponents: [ShopCommentDeleteDialogComponent],
 })
 export class ShopCommentModule {}

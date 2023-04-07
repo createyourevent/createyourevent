@@ -9,6 +9,5 @@ import { ChipsRoutingModule } from './route/chips-routing.module';
 @NgModule({
   imports: [SharedModule, ChipsRoutingModule],
   declarations: [ChipsComponent, ChipsDetailComponent, ChipsUpdateComponent, ChipsDeleteDialogComponent],
-  entryComponents: [ChipsDeleteDialogComponent],
 })
 export class ChipsModule {}

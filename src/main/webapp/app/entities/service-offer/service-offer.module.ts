@@ -9,6 +9,5 @@ import { ServiceOfferRoutingModule } from './route/service-offer-routing.module'
 @NgModule({
   imports: [SharedModule, ServiceOfferRoutingModule],
   declarations: [ServiceOfferComponent, ServiceOfferDetailComponent, ServiceOfferUpdateComponent, ServiceOfferDeleteDialogComponent],
-  entryComponents: [ServiceOfferDeleteDialogComponent],
 })
 export class ServiceOfferModule {}

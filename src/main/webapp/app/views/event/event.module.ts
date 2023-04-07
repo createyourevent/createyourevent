@@ -63,7 +63,7 @@ import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { GMapModule } from 'primeng/gmap';
 import { CrossSellingEventsModule } from './crossSellingEvents/crossSellingEvents.module';
-import { NgxCurrencyModule } from "ngx-currency";
+import { NgxCurrencyModule } from 'ngx-currency';
 import { Mp3PlayerModule } from '../mp3-player/mp3-player.module';
 import { MP3Component } from './dashboard-event/mp3/mp3.component';
 import { Mp3PlayerAdminModule } from '../mp3-player/mp3-player-admin/mp3-player-admin.module';
@@ -133,7 +133,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
     PaymentModule,
     KnobModule,
     DialogModule,
-    ProgressBarModule
+    ProgressBarModule,
   ],
   declarations: [
     StarRatingsComponent,
@@ -160,9 +160,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
     EditServicesComponent,
     MP3Component,
     EventPaymentDialogComponent,
-    InFavoritsComponent
+    InFavoritsComponent,
   ],
-  entryComponents: [EventDeleteDialogComponent, AdminCommentsEventProductComponent, EventProductOrderDeleteDialogComponent, EventPaymentDialogComponent],
   exports: [
     GalleryEventComponent,
     CalculationEventComponent,
@@ -170,7 +169,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
     AdminCommentsEventComponent,
     AdminCommentsEventProductComponent,
     AdminGalleryEventComponent,
-    MP3Component
-  ]
+    MP3Component,
+  ],
 })
 export class CYEEventModule {}

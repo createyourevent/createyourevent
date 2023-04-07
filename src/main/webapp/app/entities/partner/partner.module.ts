@@ -9,6 +9,5 @@ import { PartnerRoutingModule } from './route/partner-routing.module';
 @NgModule({
   imports: [SharedModule, PartnerRoutingModule],
   declarations: [PartnerComponent, PartnerDetailComponent, PartnerUpdateComponent, PartnerDeleteDialogComponent],
-  entryComponents: [PartnerDeleteDialogComponent],
 })
 export class PartnerModule {}

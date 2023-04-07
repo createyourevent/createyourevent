@@ -14,6 +14,5 @@ import { ProductCommentRoutingModule } from './route/product-comment-routing.mod
     ProductCommentUpdateComponent,
     ProductCommentDeleteDialogComponent,
   ],
-  entryComponents: [ProductCommentDeleteDialogComponent],
 })
 export class ProductCommentModule {}

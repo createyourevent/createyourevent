@@ -9,6 +9,5 @@ import { ReservationRoutingModule } from './route/reservation-routing.module';
 @NgModule({
   imports: [SharedModule, ReservationRoutingModule],
   declarations: [ReservationComponent, ReservationDetailComponent, ReservationUpdateComponent, ReservationDeleteDialogComponent],
-  entryComponents: [ReservationDeleteDialogComponent],
 })
 export class ReservationModule {}

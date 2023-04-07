@@ -9,6 +9,5 @@ import { ServiceMapRoutingModule } from './route/service-map-routing.module';
 @NgModule({
   imports: [SharedModule, ServiceMapRoutingModule],
   declarations: [ServiceMapComponent, ServiceMapDetailComponent, ServiceMapUpdateComponent, ServiceMapDeleteDialogComponent],
-  entryComponents: [ServiceMapDeleteDialogComponent],
 })
 export class ServiceMapModule {}

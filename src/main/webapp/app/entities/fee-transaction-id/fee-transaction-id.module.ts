@@ -14,6 +14,5 @@ import { FeeTransactionIdRoutingModule } from './route/fee-transaction-id-routin
     FeeTransactionIdUpdateComponent,
     FeeTransactionIdDeleteDialogComponent,
   ],
-  entryComponents: [FeeTransactionIdDeleteDialogComponent],
 })
 export class FeeTransactionIdModule {}

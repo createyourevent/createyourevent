@@ -1,18 +1,17 @@
-import { HttpResponse } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
-import { IAddress, Address } from "app/entities/address/address.model";
-import { AddressService } from "app/entities/address/service/address.service";
-import { LocationService } from "app/entities/location/service/location.service";
-import { GoogleGeocodeService } from "app/google-geocode.service";
-import { Observable } from "rxjs";
-import { EventService } from "./event.service";
-
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { UntypedFormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { IAddress, Address } from 'app/entities/address/address.model';
+import { AddressService } from 'app/entities/address/service/address.service';
+import { LocationService } from 'app/entities/location/service/location.service';
+import { GoogleGeocodeService } from 'app/google-geocode.service';
+import { Observable } from 'rxjs';
+import { EventService } from './event.service';
 
 @Component({
   selector: 'jhi-address-update',
-  templateUrl: './address-update.component.html'
+  templateUrl: './address-update.component.html',
 })
 export class AddressUpdateComponent implements OnInit {
   isSaving = false;
@@ -26,13 +25,13 @@ export class AddressUpdateComponent implements OnInit {
     id: [],
     address: [],
     lat: [],
-    lng: []
+    lng: [],
   });
 
   constructor(
     protected locationService: LocationService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private eventUserService: EventService,
     private route: ActivatedRoute,
     private addressService: AddressService,
@@ -57,7 +56,7 @@ export class AddressUpdateComponent implements OnInit {
       id: this.address.id,
       address: this.address.address,
       lat: this.address.lat,
-      lng: this.address.lng
+      lng: this.address.lng,
     });
   }
 
@@ -82,7 +81,7 @@ export class AddressUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       address: this.formattedaddress,
       lat: this.lat,
-      lng: this.lng
+      lng: this.lng,
     };
   }
 

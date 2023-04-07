@@ -14,6 +14,5 @@ import { ServiceStarRatingRoutingModule } from './route/service-star-rating-rout
     ServiceStarRatingUpdateComponent,
     ServiceStarRatingDeleteDialogComponent,
   ],
-  entryComponents: [ServiceStarRatingDeleteDialogComponent],
 })
 export class ServiceStarRatingModule {}

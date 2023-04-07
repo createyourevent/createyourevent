@@ -9,6 +9,5 @@ import { TicketRoutingModule } from './route/ticket-routing.module';
 @NgModule({
   imports: [SharedModule, TicketRoutingModule],
   declarations: [TicketComponent, TicketDetailComponent, TicketUpdateComponent, TicketDeleteDialogComponent],
-  entryComponents: [TicketDeleteDialogComponent],
 })
 export class TicketModule {}

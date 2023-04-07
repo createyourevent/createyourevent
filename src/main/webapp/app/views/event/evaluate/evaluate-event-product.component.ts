@@ -1,26 +1,28 @@
-import { Component, OnInit } from "@angular/core";
-import { FormControl, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
-import { SharedChatService } from "app/chat.service";
-import { IEventProductRatingComment, EventProductRatingComment } from "app/entities/event-product-rating-comment/event-product-rating-comment.model";
-import { EventProductRatingCommentService } from "app/entities/event-product-rating-comment/service/event-product-rating-comment.service";
-import { EventProductRating, IEventProductRating } from "app/entities/event-product-rating/event-product-rating.model";
-import { EventProductRatingService } from "app/entities/event-product-rating/service/event-product-rating.service";
-import { IEvent } from "app/entities/event/event.model";
-import { EventService } from "app/entities/event/service/event.service";
-import { IProduct } from "app/entities/product/product.model";
-import { ProductService } from "app/entities/product/service/product.service";
-import { IUser } from "app/entities/user/user.model";
-import { GeneralService } from "app/general.service";
-import { Subject } from "rxjs";
-import { EventService as EventUserService } from "../event.service";
-import * as dayjs from "dayjs";
-
+import { Component, OnInit } from '@angular/core';
+import { UntypedFormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { SharedChatService } from 'app/chat.service';
+import {
+  IEventProductRatingComment,
+  EventProductRatingComment,
+} from 'app/entities/event-product-rating-comment/event-product-rating-comment.model';
+import { EventProductRatingCommentService } from 'app/entities/event-product-rating-comment/service/event-product-rating-comment.service';
+import { EventProductRating, IEventProductRating } from 'app/entities/event-product-rating/event-product-rating.model';
+import { EventProductRatingService } from 'app/entities/event-product-rating/service/event-product-rating.service';
+import { IEvent } from 'app/entities/event/event.model';
+import { EventService } from 'app/entities/event/service/event.service';
+import { IProduct } from 'app/entities/product/product.model';
+import { ProductService } from 'app/entities/product/service/product.service';
+import { IUser } from 'app/entities/user/user.model';
+import { GeneralService } from 'app/general.service';
+import { Subject } from 'rxjs';
+import { EventService as EventUserService } from '../event.service';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'jhi-event-product-rating',
   templateUrl: './evaluate-event-product.component.html',
-  styleUrls: ['./evaluate-event-product.component.scss']
+  styleUrls: ['./evaluate-event-product.component.scss'],
 })
 export class EventToProductRatingComponent implements OnInit {
   event!: IEvent;
@@ -33,7 +35,7 @@ export class EventToProductRatingComponent implements OnInit {
   likes = 0;
   dislikes = 0;
 
-  commentText = new FormControl(null, Validators.required);
+  commentText = new UntypedFormControl(null, Validators.required);
   rating!: EventProductRating;
   comments: IEventProductRatingComment[] = [];
   isSaving = false;
@@ -48,7 +50,7 @@ export class EventToProductRatingComponent implements OnInit {
     private eventProductRatingService: EventProductRatingService,
     private eventProductRatingCommentService: EventProductRatingCommentService,
     private generalService: GeneralService,
-    private sharedChatService: SharedChatService,
+    private sharedChatService: SharedChatService
   ) {}
 
   ngOnInit(): void {

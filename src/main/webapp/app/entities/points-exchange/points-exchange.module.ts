@@ -14,6 +14,5 @@ import { PointsExchangeRoutingModule } from './route/points-exchange-routing.mod
     PointsExchangeUpdateComponent,
     PointsExchangeDeleteDialogComponent,
   ],
-  entryComponents: [PointsExchangeDeleteDialogComponent],
 })
 export class PointsExchangeModule {}

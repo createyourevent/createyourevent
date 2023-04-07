@@ -61,16 +61,15 @@ import { Mp3PlayerModule } from '../mp3-player/mp3-player.module';
     GMapModule,
     ToastModule,
     Mp3PlayerAdminModule,
-    Mp3PlayerModule
+    Mp3PlayerModule,
   ],
   declarations: [
     DashboardServiceComponent,
     AdminGalleryServiceComponent,
     GalleryServiceComponent,
     CreateYourEventServiceUpdateComponent,
-    CreateYourEventServiceDetailComponent
+    CreateYourEventServiceDetailComponent,
   ],
-  entryComponents: [],
-  exports: [GalleryServiceComponent]
+  exports: [GalleryServiceComponent],
 })
 export class CreateyoureventServicessModule {}

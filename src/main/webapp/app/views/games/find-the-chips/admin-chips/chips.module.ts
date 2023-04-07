@@ -14,7 +14,6 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 @NgModule({
   imports: [SharedModule, CommonModule, RouterModule.forChild(chipsRoute), SelectButtonModule, TableModule, ColorPickerModule],
   declarations: [ChipsComponent, ChipsDetailComponent, ChipsUpdateComponent, ChipsDeleteDialogComponent],
-  entryComponents: [ChipsDeleteDialogComponent],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class CreateyoureventCYEChipsModule {}

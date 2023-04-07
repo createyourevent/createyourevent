@@ -14,6 +14,5 @@ import { SlotListCherryRoutingModule } from './route/slot-list-cherry-routing.mo
     SlotListCherryUpdateComponent,
     SlotListCherryDeleteDialogComponent,
   ],
-  entryComponents: [SlotListCherryDeleteDialogComponent],
 })
 export class SlotListCherryModule {}

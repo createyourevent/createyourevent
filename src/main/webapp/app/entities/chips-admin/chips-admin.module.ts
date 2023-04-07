@@ -9,6 +9,5 @@ import { ChipsAdminRoutingModule } from './route/chips-admin-routing.module';
 @NgModule({
   imports: [SharedModule, ChipsAdminRoutingModule],
   declarations: [ChipsAdminComponent, ChipsAdminDetailComponent, ChipsAdminUpdateComponent, ChipsAdminDeleteDialogComponent],
-  entryComponents: [ChipsAdminDeleteDialogComponent],
 })
 export class ChipsAdminModule {}

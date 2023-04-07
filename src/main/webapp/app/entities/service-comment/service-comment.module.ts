@@ -14,6 +14,5 @@ import { ServiceCommentRoutingModule } from './route/service-comment-routing.mod
     ServiceCommentUpdateComponent,
     ServiceCommentDeleteDialogComponent,
   ],
-  entryComponents: [ServiceCommentDeleteDialogComponent],
 })
 export class ServiceCommentModule {}

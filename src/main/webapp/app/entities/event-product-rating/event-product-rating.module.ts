@@ -14,6 +14,5 @@ import { EventProductRatingRoutingModule } from './route/event-product-rating-ro
     EventProductRatingUpdateComponent,
     EventProductRatingDeleteDialogComponent,
   ],
-  entryComponents: [EventProductRatingDeleteDialogComponent],
 })
 export class EventProductRatingModule {}

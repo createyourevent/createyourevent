@@ -9,6 +9,5 @@ import { BuildingRoutingModule } from './route/building-routing.module';
 @NgModule({
   imports: [SharedModule, BuildingRoutingModule],
   declarations: [BuildingComponent, BuildingDetailComponent, BuildingUpdateComponent, BuildingDeleteDialogComponent],
-  entryComponents: [BuildingDeleteDialogComponent],
 })
 export class BuildingModule {}

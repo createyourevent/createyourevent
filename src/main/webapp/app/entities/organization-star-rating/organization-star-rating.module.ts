@@ -14,6 +14,5 @@ import { OrganizationStarRatingRoutingModule } from './route/organization-star-r
     OrganizationStarRatingUpdateComponent,
     OrganizationStarRatingDeleteDialogComponent,
   ],
-  entryComponents: [OrganizationStarRatingDeleteDialogComponent],
 })
 export class OrganizationStarRatingModule {}

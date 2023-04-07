@@ -1,27 +1,26 @@
-import { HttpResponse } from "@angular/common/http";
-import { Component, OnInit, ElementRef, ChangeDetectorRef } from "@angular/core";
-import { Validators, FormBuilder } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
-import { ADDRESS_REGEX } from "app/constants";
-import { ShopService } from "app/entities/shop/service/shop.service";
-import { IShop, Shop } from "app/entities/shop/shop.model";
-import { TagsService } from "app/entities/tags/service/tags.service";
-import { Tags } from "app/entities/tags/tags.model";
-import { IUser } from "app/entities/user/user.model";
-import { UserService } from "app/entities/user/user.service";
-import { GeneralService } from "app/general.service";
-import { AlertError } from "app/shared/alert/alert-error.model";
-import { ValidatorHttp } from "app/validators/ValidatorHttp.service";
-import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from "ng-jhipster";
-import { MessageService } from "primeng/api";
-import { Observable } from "rxjs";
-
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { ADDRESS_REGEX } from 'app/constants';
+import { ShopService } from 'app/entities/shop/service/shop.service';
+import { IShop, Shop } from 'app/entities/shop/shop.model';
+import { TagsService } from 'app/entities/tags/service/tags.service';
+import { Tags } from 'app/entities/tags/tags.model';
+import { IUser } from 'app/entities/user/user.model';
+import { UserService } from 'app/entities/user/user.service';
+import { GeneralService } from 'app/general.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
+import { ValidatorHttp } from 'app/validators/ValidatorHttp.service';
+import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from 'ng-jhipster';
+import { MessageService } from 'primeng/api';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'jhi-shop-edit',
   templateUrl: './shop-edit.component.html',
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class ShopEditComponent implements OnInit {
   isSaving = false;
@@ -41,13 +40,7 @@ export class ShopEditComponent implements OnInit {
     id: [],
     name: [null, [Validators.required]],
     motto: [null, [Validators.required]],
-    address: [
-      null,
-      [
-        Validators.required,
-        Validators.pattern(ADDRESS_REGEX)
-      ]
-    ],
+    address: [null, [Validators.required, Validators.pattern(ADDRESS_REGEX)]],
     productType: [null, [Validators.required]],
     logo: [],
     logoContentType: [],
@@ -55,7 +48,7 @@ export class ShopEditComponent implements OnInit {
     description: [null, [Validators.required]],
     phone: [null, [Validators.required]],
     webAddress: [null, [this.validatorHttp.checkHttp()]],
-    user: []
+    user: [],
   });
 
   constructor(
@@ -65,7 +58,7 @@ export class ShopEditComponent implements OnInit {
     protected userService: UserService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private generalService: GeneralService,
     private tagsService: TagsService,
     private ref: ChangeDetectorRef,
@@ -94,7 +87,7 @@ export class ShopEditComponent implements OnInit {
         ['clean'], // remove formatting button
 
         ['link', 'image', 'video'], // link and image, video
-      ]
+      ],
     };
   }
 
@@ -105,7 +98,7 @@ export class ShopEditComponent implements OnInit {
       this.generalService.findShopTags(shop.id).subscribe(s => {
         const shops = s.body!;
         shops.forEach(sh => {
-          this.items.push({display: sh.tag, value: sh.tag});
+          this.items.push({ display: sh.tag, value: sh.tag });
         });
       });
       this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
@@ -115,13 +108,13 @@ export class ShopEditComponent implements OnInit {
       mentions: [
         {
           items: ['Noah', 'Liam', 'Mason', 'Jacob'],
-          triggerChar: '@'
+          triggerChar: '@',
         },
         {
           items: ['Red', 'Yellow', 'Green'],
-          triggerChar: '#'
-        }
-      ]
+          triggerChar: '#',
+        },
+      ],
     };
   }
 
@@ -131,30 +124,37 @@ export class ShopEditComponent implements OnInit {
     toolbar.addHandler('image', this.imageHandler);
   }
 
-   imageHandler = (image: any, callback: any) => {
-     const input = <HTMLInputElement> document.getElementById('fileInputField');
-     document.getElementById('fileInputField')!.onchange = () => {
+  imageHandler = (image: any, callback: any) => {
+    const input = <HTMLInputElement>document.getElementById('fileInputField');
+    document.getElementById('fileInputField')!.onchange = () => {
       const file: File = input.files![0];
-       // file type is only image.
-       if (/^image\//.test(file.type)) {
-         if (file.size > this.maxUploadFileSize) {
-          this.messageService.add({severity:'error', summary: this.translate.instant('register-shop.filesize.error'), detail: this.translate.instant('register-shop.filesize.error.info')});
-         } else {
-           const reader  = new FileReader();
-           reader.onload = () =>  {
-             const range = this.quillEditorRef.getSelection();
-             const img = '<img src="' + reader.result + '" />';
-             this.quillEditorRef.clipboard.dangerouslyPasteHTML(range.index, img);
-           };
-           reader.readAsDataURL(file);
-         }
-       } else {
-          this.messageService.add({severity:'error', summary: this.translate.instant('register-shop.filetype.error'), detail: this.translate.instant('register-shop.filetype.error.info')});
-       }
-     };
-     input.click();
-   }
-
+      // file type is only image.
+      if (/^image\//.test(file.type)) {
+        if (file.size > this.maxUploadFileSize) {
+          this.messageService.add({
+            severity: 'error',
+            summary: this.translate.instant('register-shop.filesize.error'),
+            detail: this.translate.instant('register-shop.filesize.error.info'),
+          });
+        } else {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const range = this.quillEditorRef.getSelection();
+            const img = '<img src="' + reader.result + '" />';
+            this.quillEditorRef.clipboard.dangerouslyPasteHTML(range.index, img);
+          };
+          reader.readAsDataURL(file);
+        }
+      } else {
+        this.messageService.add({
+          severity: 'error',
+          summary: this.translate.instant('register-shop.filetype.error'),
+          detail: this.translate.instant('register-shop.filetype.error.info'),
+        });
+      }
+    };
+    input.click();
+  };
 
   public addressChange(address: any): void {
     this.formattedaddress = address.formatted_address;
@@ -174,7 +174,7 @@ export class ShopEditComponent implements OnInit {
       user: shop.user,
       motto: shop.motto,
       phone: shop.phone,
-      webAddress: shop.webAddress
+      webAddress: shop.webAddress,
     });
   }
 
@@ -197,7 +197,7 @@ export class ShopEditComponent implements OnInit {
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     this.editForm.patchValue({
       [field]: null,
-      [fieldContentType]: null
+      [fieldContentType]: null,
     });
     if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
       this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
@@ -232,7 +232,7 @@ export class ShopEditComponent implements OnInit {
       user: this.editForm.get(['user'])!.value,
       motto: this.editForm.get(['motto'])!.value,
       phone: this.editForm.get(['phone'])!.value,
-      webAddress: this.editForm.get(['webAddress'])!.value
+      webAddress: this.editForm.get(['webAddress'])!.value,
     };
   }
 

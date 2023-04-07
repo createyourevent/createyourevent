@@ -1,21 +1,20 @@
-import { HttpResponse } from "@angular/common/http";
-import { Component, OnInit, ElementRef } from "@angular/core";
-import { Validators, FormBuilder } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
-import { ADDRESS_REGEX } from "app/constants";
-import { IPartner, Partner } from "app/entities/partner/partner.model";
-import { PartnerService } from "app/entities/partner/service/partner.service";
-import { AlertError } from "app/shared/alert/alert-error.model";
-import { ValidateImageWidthHeightService } from "app/validators/ValidateImageWidthHeight.service";
-import { ValidatorHttp } from "app/validators/ValidatorHttp.service";
-import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from "ng-jhipster";
-import { Observable } from "rxjs";
-
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ADDRESS_REGEX } from 'app/constants';
+import { IPartner, Partner } from 'app/entities/partner/partner.model';
+import { PartnerService } from 'app/entities/partner/service/partner.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
+import { ValidateImageWidthHeightService } from 'app/validators/ValidateImageWidthHeight.service';
+import { ValidatorHttp } from 'app/validators/ValidatorHttp.service';
+import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from 'ng-jhipster';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'jhi-register-partner',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   isSaving = false;
@@ -32,7 +31,7 @@ export class RegisterComponent implements OnInit {
       logoContentType: [],
       mail: [null, [Validators.required]],
       webaddress: [null, [this.validatorHttp.checkHttp()]],
-      sponsorshipAmount: []
+      sponsorshipAmount: [],
     },
     { validator: this.validateImageWidthHeightService.validateProductImageWidthHeightPartner(400, 250) }
   );
@@ -43,7 +42,7 @@ export class RegisterComponent implements OnInit {
     protected partnerService: PartnerService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private validateImageWidthHeightService: ValidateImageWidthHeightService,
     private validatorHttp: ValidatorHttp
   ) {}
@@ -64,7 +63,7 @@ export class RegisterComponent implements OnInit {
       logoContentType: partner.logoContentType,
       mail: partner.mail,
       webaddress: partner.webaddress,
-      sponsorshipAmount: partner.sponsorshipAmount
+      sponsorshipAmount: partner.sponsorshipAmount,
     });
   }
 
@@ -87,7 +86,7 @@ export class RegisterComponent implements OnInit {
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     this.editForm.patchValue({
       [field]: null,
-      [fieldContentType]: null
+      [fieldContentType]: null,
     });
     if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
       this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
@@ -115,12 +114,15 @@ export class RegisterComponent implements OnInit {
       logo: this.editForm.get(['logo'])!.value,
       mail: this.editForm.get(['mail'])!.value,
       webaddress: this.editForm.get(['webaddress'])!.value,
-      sponsorshipAmount: this.editForm.get(['sponsorshipAmount'])!.value
+      sponsorshipAmount: this.editForm.get(['sponsorshipAmount'])!.value,
     };
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IPartner>>): void {
-    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
+    result.subscribe(
+      () => this.onSaveSuccess(),
+      () => this.onSaveError()
+    );
   }
 
   protected onSaveSuccess(): void {

@@ -59,7 +59,7 @@ import { AddProductToEventModule } from './add-product-to-event/add-product-to-e
     ToastModule,
     CrossSellingModule,
     Mp3PlayerAdminModule,
-    Mp3PlayerModule
+    Mp3PlayerModule,
   ],
   declarations: [
     ProductDetailComponent,
@@ -68,9 +68,8 @@ import { AddProductToEventModule } from './add-product-to-event/add-product-to-e
     DashboardSupplierComponent,
     AdminGalleryProductComponent,
     GalleryProductComponent,
-    AdminCalculationProductComponent
+    AdminCalculationProductComponent,
   ],
-  entryComponents: [ProductDeleteDialogComponent],
-  exports: [AdminGalleryProductComponent, AdminCalculationProductComponent]
+  exports: [AdminGalleryProductComponent, AdminCalculationProductComponent],
 })
 export class CreateyoureventProductsModule {}

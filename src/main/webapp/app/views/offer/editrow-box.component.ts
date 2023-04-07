@@ -1,24 +1,24 @@
 import { Component, Inject, Optional, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import * as dayjs from "dayjs";
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import * as dayjs from 'dayjs';
+import { UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
 @Component({
   selector: 'jhi-editrow-box',
   templateUrl: './editrow-box.component.html',
-  styleUrls: ['./editrow-box.component.scss']
+  styleUrls: ['./editrow-box.component.scss'],
 })
 export class EditRowBoxComponent implements OnInit {
   action!: string;
   localData: any;
   missingTranslationHandler = 0;
-  worksheetForm!: FormGroup;
+  worksheetForm!: UntypedFormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<EditRowBoxComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     this.localData = { ...data };
   }
@@ -45,7 +45,7 @@ export class EditRowBoxComponent implements OnInit {
       start: ['', Validators.required],
       end: ['', Validators.required],
       costHour: ['', Validators.required],
-      total: ['']
+      total: [''],
     });
   }
 

@@ -9,6 +9,5 @@ import { CartRoutingModule } from './route/cart-routing.module';
 @NgModule({
   imports: [SharedModule, CartRoutingModule],
   declarations: [CartComponent, CartDetailComponent, CartUpdateComponent, CartDeleteDialogComponent],
-  entryComponents: [CartDeleteDialogComponent],
 })
 export class CartModule {}

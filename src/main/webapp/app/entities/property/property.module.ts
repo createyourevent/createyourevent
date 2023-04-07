@@ -9,6 +9,5 @@ import { PropertyRoutingModule } from './route/property-routing.module';
 @NgModule({
   imports: [SharedModule, PropertyRoutingModule],
   declarations: [PropertyComponent, PropertyDetailComponent, PropertyUpdateComponent, PropertyDeleteDialogComponent],
-  entryComponents: [PropertyDeleteDialogComponent],
 })
 export class PropertyModule {}

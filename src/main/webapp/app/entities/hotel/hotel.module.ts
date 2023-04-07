@@ -9,6 +9,5 @@ import { HotelRoutingModule } from './route/hotel-routing.module';
 @NgModule({
   imports: [SharedModule, HotelRoutingModule],
   declarations: [HotelComponent, HotelDetailComponent, HotelUpdateComponent, HotelDeleteDialogComponent],
-  entryComponents: [HotelDeleteDialogComponent],
 })
 export class HotelModule {}

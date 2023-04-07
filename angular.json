@@ -107,7 +107,6 @@
       }
     }
   },
-  "defaultProject": "createyourevent",
   "cli": {
     "analytics": "5a5d98f3-b418-4c3a-be25-8961775df930",
     "packageManager": "npm"

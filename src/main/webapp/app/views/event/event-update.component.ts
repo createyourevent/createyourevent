@@ -1,31 +1,30 @@
-import { HttpResponse } from "@angular/common/http";
-import { Component, OnInit, ElementRef } from "@angular/core";
-import { Validators, FormBuilder } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { DATE_TIME_FORMAT } from "app/config/input.constants";
-import { IEvent, Event as Party } from "app/entities/event/event.model";
-import { EventService } from "app/entities/event/service/event.service";
-import { ILocation } from "app/entities/location/location.model";
-import { LocationService } from "app/entities/location/service/location.service";
-import { IProduct } from "app/entities/product/product.model";
-import { ProductService } from "app/entities/product/service/product.service";
-import { TagsService } from "app/entities/tags/service/tags.service";
-import { Tags } from "app/entities/tags/tags.model";
-import { IUser } from "app/entities/user/user.model";
-import { UserService } from "app/entities/user/user.service";
-import { GeneralService } from "app/general.service";
-import { AlertError } from "app/shared/alert/alert-error.model";
-import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from "ng-jhipster";
-import { Observable } from "rxjs";
-import * as dayjs from "dayjs";
-import { EventStatus } from "app/entities/enumerations/event-status.model";
-
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DATE_TIME_FORMAT } from 'app/config/input.constants';
+import { IEvent, Event as Party } from 'app/entities/event/event.model';
+import { EventService } from 'app/entities/event/service/event.service';
+import { ILocation } from 'app/entities/location/location.model';
+import { LocationService } from 'app/entities/location/service/location.service';
+import { IProduct } from 'app/entities/product/product.model';
+import { ProductService } from 'app/entities/product/service/product.service';
+import { TagsService } from 'app/entities/tags/service/tags.service';
+import { Tags } from 'app/entities/tags/tags.model';
+import { IUser } from 'app/entities/user/user.model';
+import { UserService } from 'app/entities/user/user.service';
+import { GeneralService } from 'app/general.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
+import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from 'ng-jhipster';
+import { Observable } from 'rxjs';
+import * as dayjs from 'dayjs';
+import { EventStatus } from 'app/entities/enumerations/event-status.model';
 
 type SelectableEntity = ILocation | IUser | IProduct;
 
 @Component({
   selector: 'jhi-event-update',
-  templateUrl: './event-update.component.html'
+  templateUrl: './event-update.component.html',
 })
 export class EventUpdateComponent implements OnInit {
   isSaving = false;
@@ -53,7 +52,7 @@ export class EventUpdateComponent implements OnInit {
     location: [],
     wishlist: [],
     eventDetail: [],
-    user: []
+    user: [],
   });
 
   items: any[] = [];
@@ -69,7 +68,7 @@ export class EventUpdateComponent implements OnInit {
     protected productService: ProductService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router,
     private generalService: GeneralService,
     private tagsService: TagsService
@@ -94,8 +93,8 @@ export class EventUpdateComponent implements OnInit {
 
         ['clean'], // remove formatting button
 
-        ['link', 'video'] // link and image, video
-      ]
+        ['link', 'video'], // link and image, video
+      ],
     };
   }
 
@@ -114,7 +113,7 @@ export class EventUpdateComponent implements OnInit {
     });
   }
 
-  isEventDefinitiv() : boolean {
+  isEventDefinitiv(): boolean {
     return this.event.definitelyConfirmed === true && this.event.status === EventStatus.DEFINITELY;
   }
 
@@ -140,7 +139,7 @@ export class EventUpdateComponent implements OnInit {
       definitelyConfirmed: event.definitelyConfirmed,
       location: event.location,
       eventDetail: event.eventDetail,
-      user: event.user
+      user: event.user,
     });
   }
 
@@ -163,7 +162,7 @@ export class EventUpdateComponent implements OnInit {
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     this.editForm.patchValue({
       [field]: null,
-      [fieldContentType]: null
+      [fieldContentType]: null,
     });
     if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
       this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
@@ -219,7 +218,7 @@ export class EventUpdateComponent implements OnInit {
       definitelyConfirmed: this.editForm.get(['definitelyConfirmed'])!.value,
       location: this.editForm.get(['location'])!.value,
       eventDetail: this.editForm.get(['eventDetail'])!.value,
-      user: this.editForm.get(['user'])!.value
+      user: this.editForm.get(['user'])!.value,
     };
   }
 

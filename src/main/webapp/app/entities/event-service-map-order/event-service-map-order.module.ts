@@ -14,6 +14,5 @@ import { EventServiceMapOrderRoutingModule } from './route/event-service-map-ord
     EventServiceMapOrderUpdateComponent,
     EventServiceMapOrderDeleteDialogComponent,
   ],
-  entryComponents: [EventServiceMapOrderDeleteDialogComponent],
 })
 export class EventServiceMapOrderModule {}

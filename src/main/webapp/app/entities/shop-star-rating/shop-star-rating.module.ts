@@ -14,6 +14,5 @@ import { ShopStarRatingRoutingModule } from './route/shop-star-rating-routing.mo
     ShopStarRatingUpdateComponent,
     ShopStarRatingDeleteDialogComponent,
   ],
-  entryComponents: [ShopStarRatingDeleteDialogComponent],
 })
 export class ShopStarRatingModule {}

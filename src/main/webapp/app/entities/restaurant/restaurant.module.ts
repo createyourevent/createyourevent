@@ -9,6 +9,5 @@ import { RestaurantRoutingModule } from './route/restaurant-routing.module';
 @NgModule({
   imports: [SharedModule, RestaurantRoutingModule],
   declarations: [RestaurantComponent, RestaurantDetailComponent, RestaurantUpdateComponent, RestaurantDeleteDialogComponent],
-  entryComponents: [RestaurantDeleteDialogComponent],
 })
 export class RestaurantModule {}

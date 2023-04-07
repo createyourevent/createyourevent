@@ -14,6 +14,5 @@ import { OrganizationLikeDislikeRoutingModule } from './route/organization-like-
     OrganizationLikeDislikeUpdateComponent,
     OrganizationLikeDislikeDeleteDialogComponent,
   ],
-  entryComponents: [OrganizationLikeDislikeDeleteDialogComponent],
 })
 export class OrganizationLikeDislikeModule {}

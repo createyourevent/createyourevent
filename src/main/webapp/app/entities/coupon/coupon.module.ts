@@ -9,6 +9,5 @@ import { CouponRoutingModule } from './route/coupon-routing.module';
 @NgModule({
   imports: [SharedModule, CouponRoutingModule],
   declarations: [CouponComponent, CouponDetailComponent, CouponUpdateComponent, CouponDeleteDialogComponent],
-  entryComponents: [CouponDeleteDialogComponent],
 })
 export class CouponModule {}

@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
@@ -18,7 +18,7 @@ import { ValidateFileSizeService } from 'app/validators/ValidateFileSize.service
 @Component({
   selector: 'jhi-event-flyer',
   templateUrl: './flyer.component.html',
-  styleUrls: ['./flyer.scss']
+  styleUrls: ['./flyer.scss'],
 })
 export class FlyerComponent implements OnInit, OnDestroy {
   isSaving = false;
@@ -32,7 +32,7 @@ export class FlyerComponent implements OnInit, OnDestroy {
   editForm = this.fb.group({
     flyer: [null, [this.validateFileSizeService.valFileSize(256000)]],
     flyerContentType: [],
-    youtube: []
+    youtube: [],
   });
 
   constructor(
@@ -44,7 +44,7 @@ export class FlyerComponent implements OnInit, OnDestroy {
     protected productService: ProductService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router,
     protected sharedEventService: SharedEventService,
     private validateFileSizeService: ValidateFileSizeService
@@ -60,7 +60,7 @@ export class FlyerComponent implements OnInit, OnDestroy {
   updateForm(): void {
     this.editForm.patchValue({
       flyer: this.sharedEventService.sharedFlyer,
-      flyerContentType: this.sharedEventService.sharedFlyerContentType
+      flyerContentType: this.sharedEventService.sharedFlyerContentType,
     });
   }
 
@@ -83,7 +83,7 @@ export class FlyerComponent implements OnInit, OnDestroy {
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     this.editForm.patchValue({
       [field]: null,
-      [fieldContentType]: null
+      [fieldContentType]: null,
     });
     if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
       this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
@@ -103,7 +103,7 @@ export class FlyerComponent implements OnInit, OnDestroy {
     this.sharedEventService.sharedFlyer = flyer;
     this.sharedEventService.sharedFlyerContentType = flyerContentType;
 
-    if(this.model.price === 0 && this.model.investment === 0) {
+    if (this.model.price === 0 && this.model.investment === 0) {
       this.router.navigate(['/organisator/create-event/overview']);
     } else {
       this.router.navigate(['/organisator/create-event/products-services']);

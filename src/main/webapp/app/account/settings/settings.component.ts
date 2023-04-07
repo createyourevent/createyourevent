@@ -1,18 +1,16 @@
 import { UserService } from './../../entities/user/user.service';
 
-import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
-import { Validators, FormBuilder } from "@angular/forms";
-import { LANGUAGES } from "app/config/language.constants";
-import { ADDRESS_REGEX } from "app/constants";
-import { GeneralService } from "app/general.service";
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
+import { LANGUAGES } from 'app/config/language.constants';
+import { ADDRESS_REGEX } from 'app/constants';
+import { GeneralService } from 'app/general.service';
 import { IUser } from 'app/entities/user/user.model';
-import { ibanValidator } from "ngx-iban";
-
-
+import { ibanValidator } from 'ngx-iban';
 
 @Component({
   selector: 'jhi-settings',
-  templateUrl: './settings.component.html'
+  templateUrl: './settings.component.html',
 })
 export class SettingsComponent implements OnInit {
   success = false;
@@ -21,33 +19,14 @@ export class SettingsComponent implements OnInit {
   user!: IUser;
 
   settingsForm = this.fb.group({
-    address: [
-      undefined,
-      [
-        Validators.required,
-        Validators.minLength(1),
-        Validators.maxLength(250),
-        Validators.pattern(ADDRESS_REGEX)
-      ]
-    ],
+    address: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(250), Validators.pattern(ADDRESS_REGEX)]],
     phone: [undefined, [Validators.required]],
     iban: [undefined, [Validators.required, ibanValidator()]],
     bankname: [undefined, [Validators.required]],
-    bankaddress: [
-      undefined,
-      [
-        Validators.required,
-        Validators.minLength(1),
-        Validators.maxLength(250),
-        Validators.pattern(ADDRESS_REGEX)
-      ]
-    ],
+    bankaddress: [undefined, [Validators.required, Validators.minLength(1), Validators.maxLength(250), Validators.pattern(ADDRESS_REGEX)]],
   });
 
-  constructor(
-    private fb: FormBuilder,
-    private generalService: GeneralService,
-  ) {}
+  constructor(private fb: UntypedFormBuilder, private generalService: GeneralService) {}
 
   ngOnInit(): void {
     this.generalService.findWidthAuthorities().subscribe(u => {
@@ -60,7 +39,7 @@ export class SettingsComponent implements OnInit {
             phone: this.user.phone,
             iban: this.user.iban,
             bankname: this.user.bankname,
-            bankaddress: this.user.bankaddress
+            bankaddress: this.user.bankaddress,
           });
         }
       });
@@ -84,9 +63,18 @@ export class SettingsComponent implements OnInit {
       user.iban = this.settingsForm.get('iban')!.value;
       user.bankname = this.settingsForm.get('bankname')!.value;
       user.bankaddress = this.settingsForm.get('bankaddress')!.value;
-      this.generalService.updateAddressAndPhoneAndIBanAndBanknameAndBankaddressFromUser(user.id, user.address, user.phone, user.iban, user.bankname, user.bankaddress).subscribe(() => {
-        this.success = true;
-      });
+      this.generalService
+        .updateAddressAndPhoneAndIBanAndBanknameAndBankaddressFromUser(
+          user.id,
+          user.address,
+          user.phone,
+          user.iban,
+          user.bankname,
+          user.bankaddress
+        )
+        .subscribe(() => {
+          this.success = true;
+        });
     });
   }
 }

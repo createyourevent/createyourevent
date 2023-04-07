@@ -14,6 +14,5 @@ import { CreateYourEventServiceRoutingModule } from './route/create-your-event-s
     CreateYourEventServiceUpdateComponent,
     CreateYourEventServiceDeleteDialogComponent,
   ],
-  entryComponents: [CreateYourEventServiceDeleteDialogComponent],
 })
 export class CreateYourEventServiceModule {}

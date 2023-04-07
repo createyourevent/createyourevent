@@ -1,33 +1,32 @@
 import { IUser } from './../../entities/user/user.model';
-import { HttpResponse } from "@angular/common/http";
-import { Component, OnInit, ElementRef, ChangeDetectorRef } from "@angular/core";
-import { Validators, FormBuilder } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
-import { ADDRESS_REGEX } from "app/constants";
-import { ShopService } from "app/entities/shop/service/shop.service";
-import { IShop, Shop } from "app/entities/shop/shop.model";
-import { TagsService } from "app/entities/tags/service/tags.service";
-import { Tags } from "app/entities/tags/tags.model";
-import { UserPointAssociationService } from "app/entities/user-point-association/service/user-point-association.service";
-import { UserPointAssociation } from "app/entities/user-point-association/user-point-association.model";
-import { GeneralService } from "app/general.service";
-import { PointsDataService } from "app/points/points-display/points-display.service";
-import { AlertError } from "app/shared/alert/alert-error.model";
-import { ValidateFileSizeService } from "app/validators/ValidateFileSize.service";
-import { ValidatorHttp } from "app/validators/ValidatorHttp.service";
-import * as dayjs from "dayjs";
-import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from "ng-jhipster";
-import { MessageService } from "primeng/api";
-import { Observable } from "rxjs";
-import { RegisterShopService } from "./register-shop.service";
-
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { ADDRESS_REGEX } from 'app/constants';
+import { ShopService } from 'app/entities/shop/service/shop.service';
+import { IShop, Shop } from 'app/entities/shop/shop.model';
+import { TagsService } from 'app/entities/tags/service/tags.service';
+import { Tags } from 'app/entities/tags/tags.model';
+import { UserPointAssociationService } from 'app/entities/user-point-association/service/user-point-association.service';
+import { UserPointAssociation } from 'app/entities/user-point-association/user-point-association.model';
+import { GeneralService } from 'app/general.service';
+import { PointsDataService } from 'app/points/points-display/points-display.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
+import { ValidateFileSizeService } from 'app/validators/ValidateFileSize.service';
+import { ValidatorHttp } from 'app/validators/ValidatorHttp.service';
+import * as dayjs from 'dayjs';
+import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from 'ng-jhipster';
+import { MessageService } from 'primeng/api';
+import { Observable } from 'rxjs';
+import { RegisterShopService } from './register-shop.service';
 
 @Component({
   selector: 'jhi-register-shop',
   templateUrl: './register-shop.component.html',
   styleUrls: ['./register-shop.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class RegisterShopComponent implements OnInit {
   isSaving = false;
@@ -46,13 +45,7 @@ export class RegisterShopComponent implements OnInit {
     id: [],
     name: [null, [Validators.required]],
     motto: [null, [Validators.required]],
-    address: [
-      null,
-      [
-        Validators.required,
-        Validators.pattern(ADDRESS_REGEX)
-      ]
-    ],
+    address: [null, [Validators.required, Validators.pattern(ADDRESS_REGEX)]],
     productType: [null, [Validators.required]],
     description: [null, [Validators.required]],
     logo: [null, [Validators.required, this.validateFileSizeService.valFileSize(256000)]],
@@ -60,7 +53,7 @@ export class RegisterShopComponent implements OnInit {
     active: [],
     phone: [null, [Validators.required]],
     webAddress: [null, [this.validatorHttp.checkHttp()]],
-    user: []
+    user: [],
   });
 
   items: any[] = [];
@@ -71,7 +64,7 @@ export class RegisterShopComponent implements OnInit {
     protected shopService: ShopService,
     protected registerShopService: RegisterShopService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
     protected elementRef: ElementRef,
@@ -105,8 +98,8 @@ export class RegisterShopComponent implements OnInit {
 
         ['clean'], // remove formatting button
 
-        ['link', 'image', 'video'] // link and image, video
-      ]
+        ['link', 'image', 'video'], // link and image, video
+      ],
     };
   }
 
@@ -122,29 +115,37 @@ export class RegisterShopComponent implements OnInit {
     toolbar.addHandler('image', this.imageHandler);
   }
 
-   imageHandler = (image: any, callback: any) => {
-     const input = <HTMLInputElement> document.getElementById('fileInputField');
-     document.getElementById('fileInputField')!.onchange = () => {
+  imageHandler = (image: any, callback: any) => {
+    const input = <HTMLInputElement>document.getElementById('fileInputField');
+    document.getElementById('fileInputField')!.onchange = () => {
       const file: File = input.files![0];
-       // file type is only image.
-       if (/^image\//.test(file.type)) {
-         if (file.size > this.maxUploadFileSize) {
-          this.messageService.add({severity:'error', summary: this.translate.instant('register-shop.filesize.error'), detail: this.translate.instant('register-shop.filesize.error.info')});
-         } else {
-           const reader  = new FileReader();
-           reader.onload = () =>  {
-             const range = this.quillEditorRef.getSelection();
-             const img = '<img src="' + reader.result + '" />';
-             this.quillEditorRef.clipboard.dangerouslyPasteHTML(range.index, img);
-           };
-           reader.readAsDataURL(file);
-         }
-       } else {
-          this.messageService.add({severity:'error', summary: this.translate.instant('register-shop.filetype.error'), detail: this.translate.instant('register-shop.filetype.error.info')});
-       }
-     };
-     input.click();
-   }
+      // file type is only image.
+      if (/^image\//.test(file.type)) {
+        if (file.size > this.maxUploadFileSize) {
+          this.messageService.add({
+            severity: 'error',
+            summary: this.translate.instant('register-shop.filesize.error'),
+            detail: this.translate.instant('register-shop.filesize.error.info'),
+          });
+        } else {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const range = this.quillEditorRef.getSelection();
+            const img = '<img src="' + reader.result + '" />';
+            this.quillEditorRef.clipboard.dangerouslyPasteHTML(range.index, img);
+          };
+          reader.readAsDataURL(file);
+        }
+      } else {
+        this.messageService.add({
+          severity: 'error',
+          summary: this.translate.instant('register-shop.filetype.error'),
+          detail: this.translate.instant('register-shop.filetype.error.info'),
+        });
+      }
+    };
+    input.click();
+  };
 
   byteSize(base64String: string): string {
     return this.dataUtils.byteSize(base64String);
@@ -165,7 +166,7 @@ export class RegisterShopComponent implements OnInit {
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     this.registerShopForm.patchValue({
       [field]: null,
-      [fieldContentType]: null
+      [fieldContentType]: null,
     });
     if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
       this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
@@ -195,7 +196,7 @@ export class RegisterShopComponent implements OnInit {
       motto: this.registerShopForm.get(['motto'])!.value,
       phone: this.registerShopForm.get(['phone'])!.value,
       webAddress: this.registerShopForm.get(['webAddress'])!.value,
-      user: this.user
+      user: this.user,
     };
   }
 
@@ -207,7 +208,7 @@ export class RegisterShopComponent implements OnInit {
   }
 
   protected onSaveSuccess(s: IShop): void {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
     this.generalService.findWidthAuthorities().subscribe(ub => {
       const user = ub.body!;
       this.generalService.findPointsByKey('create_shop').subscribe(p => {

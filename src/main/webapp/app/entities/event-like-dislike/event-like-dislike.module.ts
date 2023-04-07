@@ -14,6 +14,5 @@ import { EventLikeDislikeRoutingModule } from './route/event-like-dislike-routin
     EventLikeDislikeUpdateComponent,
     EventLikeDislikeDeleteDialogComponent,
   ],
-  entryComponents: [EventLikeDislikeDeleteDialogComponent],
 })
 export class EventLikeDislikeModule {}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { PropertyService } from 'app/entities/property/service/property.service';
 import { GeneralService } from 'app/general.service';
@@ -7,14 +7,13 @@ import { GeneralService } from 'app/general.service';
 @Component({
   selector: 'jhi-admin-tetris',
   templateUrl: './admin-tetris.component.html',
-  styleUrls: ['./admin-tetris.component.scss']
+  styleUrls: ['./admin-tetris.component.scss'],
 })
 export class AdminTetrisComponent implements OnInit {
-
   commitment = 0;
   linePoints = 0;
 
-  form = new FormGroup({});
+  form = new UntypedFormGroup({});
   model = { commitment_tetris: 0, linePoints_tetris: 0 };
   fields: FormlyFieldConfig[] = [
     {
@@ -24,7 +23,7 @@ export class AdminTetrisComponent implements OnInit {
         label: 'Commitment points',
         placeholder: 'Commitment for this game-round.',
         required: true,
-      }
+      },
     },
     {
       key: 'linePoints_tetris',
@@ -33,12 +32,11 @@ export class AdminTetrisComponent implements OnInit {
         label: 'Line points',
         placeholder: 'Points for a deleted line.',
         required: true,
-      }
+      },
     },
   ];
 
-
-  constructor(private generalService: GeneralService, private propertyService: PropertyService) { }
+  constructor(private generalService: GeneralService, private propertyService: PropertyService) {}
 
   ngOnInit(): void {
     this.generalService.findPropertyByKey('commitment_tetris').subscribe(cp => {
@@ -63,5 +61,4 @@ export class AdminTetrisComponent implements OnInit {
       this.propertyService.update(property).subscribe();
     });
   }
-
 }

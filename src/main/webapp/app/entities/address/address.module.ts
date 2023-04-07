@@ -9,6 +9,5 @@ import { AddressRoutingModule } from './route/address-routing.module';
 @NgModule({
   imports: [SharedModule, AddressRoutingModule],
   declarations: [AddressComponent, AddressDetailComponent, AddressUpdateComponent, AddressDeleteDialogComponent],
-  entryComponents: [AddressDeleteDialogComponent],
 })
 export class AddressModule {}

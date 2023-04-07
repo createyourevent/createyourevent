@@ -1,6 +1,5 @@
-
 import { Component, OnChanges, OnInit, Input, Output, ViewChild, SimpleChanges, EventEmitter } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { SharedChatService } from 'app/chat.service';
 import { UserPointAssociationService } from 'app/entities/user-point-association/service/user-point-association.service';
 import { UserPointAssociation } from 'app/entities/user-point-association/user-point-association.model';
@@ -15,12 +14,12 @@ import { OverlayPanel } from 'primeng/overlaypanel';
 @Component({
   selector: 'jhi-comment-box',
   templateUrl: './comment-box.component.html',
-  styleUrls: ['comment-box.component.scss']
+  styleUrls: ['comment-box.component.scss'],
 })
 export class CommentBoxComponent implements OnChanges, OnInit {
   @Input() comments!: any[];
   @Output() comment: EventEmitter<string> = new EventEmitter();
-  @Output() answer: EventEmitter<{commentId: number, answer: string}> = new EventEmitter();
+  @Output() answer: EventEmitter<{ commentId: number; answer: string }> = new EventEmitter();
 
   @ViewChild('op')
   private _op!: OverlayPanel;
@@ -33,8 +32,8 @@ export class CommentBoxComponent implements OnChanges, OnInit {
   points: number = 0;
   subscription: Subscription = new Subscription();
 
-  textareaInput = new FormControl(null, Validators.required);
-  answerInput = new FormControl(null, Validators.required);
+  textareaInput = new UntypedFormControl(null, Validators.required);
+  answerInput = new UntypedFormControl(null, Validators.required);
 
   constructor(
     private sharedChatService: SharedChatService,
@@ -61,7 +60,7 @@ export class CommentBoxComponent implements OnChanges, OnInit {
   }
 
   clickAnswer(commentId: number): void {
-    this.answer.emit({commentId: commentId, answer: this.answerInput.value});
+    this.answer.emit({ commentId: commentId, answer: this.answerInput.value });
     this.answerInput.reset();
     this._op.hide();
   }

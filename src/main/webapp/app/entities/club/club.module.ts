@@ -9,6 +9,5 @@ import { ClubRoutingModule } from './route/club-routing.module';
 @NgModule({
   imports: [SharedModule, ClubRoutingModule],
   declarations: [ClubComponent, ClubDetailComponent, ClubUpdateComponent, ClubDeleteDialogComponent],
-  entryComponents: [ClubDeleteDialogComponent],
 })
 export class ClubModule {}

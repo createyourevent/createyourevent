@@ -9,6 +9,5 @@ import { RideCostsRoutingModule } from './route/ride-costs-routing.module';
 @NgModule({
   imports: [SharedModule, RideCostsRoutingModule],
   declarations: [RideCostsComponent, RideCostsDetailComponent, RideCostsUpdateComponent, RideCostsDeleteDialogComponent],
-  entryComponents: [RideCostsDeleteDialogComponent],
 })
 export class RideCostsModule {}

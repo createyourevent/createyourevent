@@ -14,6 +14,5 @@ import { UserPointAssociationRoutingModule } from './route/user-point-associatio
     UserPointAssociationUpdateComponent,
     UserPointAssociationDeleteDialogComponent,
   ],
-  entryComponents: [UserPointAssociationDeleteDialogComponent],
 })
 export class UserPointAssociationModule {}

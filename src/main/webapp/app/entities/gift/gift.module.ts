@@ -9,6 +9,5 @@ import { GiftRoutingModule } from './route/gift-routing.module';
 @NgModule({
   imports: [SharedModule, GiftRoutingModule],
   declarations: [GiftComponent, GiftDetailComponent, GiftUpdateComponent, GiftDeleteDialogComponent],
-  entryComponents: [GiftDeleteDialogComponent],
 })
 export class GiftModule {}

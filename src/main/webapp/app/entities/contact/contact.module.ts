@@ -9,6 +9,5 @@ import { ContactRoutingModule } from './route/contact-routing.module';
 @NgModule({
   imports: [SharedModule, ContactRoutingModule],
   declarations: [ContactComponent, ContactDetailComponent, ContactUpdateComponent, ContactDeleteDialogComponent],
-  entryComponents: [ContactDeleteDialogComponent],
 })
 export class ContactModule {}

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, ValidatorFn } from '@angular/forms';
+import { UntypedFormGroup, ValidatorFn } from '@angular/forms';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ValidateImageWidthHeightService {
   constructor() {}
 
   validateProductImageWidthHeight(w: number, h: number): any {
-    return (formGroup: FormGroup) => {
+    return (formGroup: UntypedFormGroup) => {
       const imageByte = formGroup.controls.photo.value;
       const imageContentType = formGroup.controls.photoContentType.value;
 
@@ -48,7 +48,7 @@ export class ValidateImageWidthHeightService {
   }
 
   validateProductImageWidthHeightPartner(w: number, h: number): any {
-    return (formGroup: FormGroup) => {
+    return (formGroup: UntypedFormGroup) => {
       const imageByte = formGroup.controls.logo.value;
       const imageContentType = formGroup.controls.logoContentType.value;
 

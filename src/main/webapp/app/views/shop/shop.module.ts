@@ -27,7 +27,6 @@ import { AdminReservationsShopComponent } from './admin-reservations-shop/admin-
 import { StarRatingModule } from '../ratings/starRating/starRating.module';
 import { Mp3PlayerAdminModule } from '../mp3-player/mp3-player-admin/mp3-player-admin.module';
 
-
 @NgModule({
   imports: [
     SharedModule,
@@ -48,10 +47,15 @@ import { Mp3PlayerAdminModule } from '../mp3-player/mp3-player-admin/mp3-player-
     ButtonModule,
     InputSwitchModule,
     StarRatingModule,
-    Mp3PlayerAdminModule
+    Mp3PlayerAdminModule,
   ],
-  declarations: [DashboardSupplierShopComponent, AdminGalleryShopComponent, GalleryShopComponent, AdminCalculationShopComponent, AdminReservationsShopComponent],
-  entryComponents: [],
-  exports: [GalleryShopComponent, AdminCalculationShopComponent]
+  declarations: [
+    DashboardSupplierShopComponent,
+    AdminGalleryShopComponent,
+    GalleryShopComponent,
+    AdminCalculationShopComponent,
+    AdminReservationsShopComponent,
+  ],
+  exports: [GalleryShopComponent, AdminCalculationShopComponent],
 })
 export class CreateyoureventShopsModule {}

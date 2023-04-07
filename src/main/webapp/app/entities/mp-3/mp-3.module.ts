@@ -9,6 +9,5 @@ import { Mp3RoutingModule } from './route/mp-3-routing.module';
 @NgModule({
   imports: [SharedModule, Mp3RoutingModule],
   declarations: [Mp3Component, Mp3DetailComponent, Mp3UpdateComponent, Mp3DeleteDialogComponent],
-  entryComponents: [Mp3DeleteDialogComponent],
 })
 export class Mp3Module {}

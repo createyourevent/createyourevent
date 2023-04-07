@@ -9,6 +9,5 @@ import { BondRoutingModule } from './route/bond-routing.module';
 @NgModule({
   imports: [SharedModule, BondRoutingModule],
   declarations: [BondComponent, BondDetailComponent, BondUpdateComponent, BondDeleteDialogComponent],
-  entryComponents: [BondDeleteDialogComponent],
 })
 export class BondModule {}

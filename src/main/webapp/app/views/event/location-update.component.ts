@@ -1,20 +1,19 @@
-import { HttpResponse } from "@angular/common/http";
-import { Component, OnInit, ElementRef } from "@angular/core";
-import { Validators, FormBuilder } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { IAddress } from "app/entities/address/address.model";
-import { AddressService } from "app/entities/address/service/address.service";
-import { ILocation } from "app/entities/location/location.model";
-import { LocationService } from "app/entities/location/service/location.service";
-import { AlertError } from "app/shared/alert/alert-error.model";
-import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from "ng-jhipster";
-import { Observable } from "rxjs";
-import { EventService as EventUserService } from "./event.service";
-
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IAddress } from 'app/entities/address/address.model';
+import { AddressService } from 'app/entities/address/service/address.service';
+import { ILocation } from 'app/entities/location/location.model';
+import { LocationService } from 'app/entities/location/service/location.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
+import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from 'ng-jhipster';
+import { Observable } from 'rxjs';
+import { EventService as EventUserService } from './event.service';
 
 @Component({
   selector: 'jhi-edit-location-update',
-  templateUrl: './location-update.component.html'
+  templateUrl: './location-update.component.html',
 })
 export class EditLocationUpdateComponent implements OnInit {
   isSaving = false;
@@ -26,9 +25,8 @@ export class EditLocationUpdateComponent implements OnInit {
     description: [null, [Validators.required]],
     photo: [],
     photoContentType: [],
-    address: []
+    address: [],
   });
-
 
   modules = {};
 
@@ -41,31 +39,31 @@ export class EditLocationUpdateComponent implements OnInit {
     protected addressService: AddressService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router
   ) {
     this.modules = {
       toolbar: [
-        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
         ['blockquote', 'code-block'],
 
-        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-        [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-        [{ 'direction': 'rtl' }],                         // text direction
+        [{ header: 1 }, { header: 2 }], // custom button values
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
+        [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+        [{ direction: 'rtl' }], // text direction
 
-        [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
 
-        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-        [{ 'font': [] }],
-        [{ 'align': [] }],
+        [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+        [{ font: [] }],
+        [{ align: [] }],
 
-        ['clean'],                                         // remove formatting button
+        ['clean'], // remove formatting button
 
-        ['link', 'video']                         // link and image, video
-      ]
+        ['link', 'video'], // link and image, video
+      ],
     };
   }
 
@@ -88,7 +86,7 @@ export class EditLocationUpdateComponent implements OnInit {
       description: this.location.description,
       photo: this.location.photo,
       photoContentType: this.location.photoContentType,
-      address: this.location.address
+      address: this.location.address,
     });
   }
 
@@ -111,7 +109,7 @@ export class EditLocationUpdateComponent implements OnInit {
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     this.editForm.patchValue({
       [field]: null,
-      [fieldContentType]: null
+      [fieldContentType]: null,
     });
     if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
       this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
@@ -144,7 +142,7 @@ export class EditLocationUpdateComponent implements OnInit {
       description: this.editForm.get(['description'])!.value,
       photoContentType: this.editForm.get(['photoContentType'])!.value,
       photo: this.editForm.get(['photo'])!.value,
-      address: this.editForm.get(['address'])!.value
+      address: this.editForm.get(['address'])!.value,
     };
   }
 

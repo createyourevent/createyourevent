@@ -9,6 +9,5 @@ import { OrderRoutingModule } from './route/order-routing.module';
 @NgModule({
   imports: [SharedModule, OrderRoutingModule],
   declarations: [OrderComponent, OrderDetailComponent, OrderUpdateComponent, OrderDeleteDialogComponent],
-  entryComponents: [OrderDeleteDialogComponent],
 })
 export class OrderModule {}

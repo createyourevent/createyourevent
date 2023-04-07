@@ -1,27 +1,26 @@
-import { HttpResponse } from "@angular/common/http";
-import { Component, OnInit, ElementRef, ChangeDetectorRef } from "@angular/core";
-import { Validators, FormBuilder } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
-import { ADDRESS_REGEX } from "app/constants";
-import { ICreateYourEventService, CreateYourEventService } from "app/entities/create-your-event-service/create-your-event-service.model";
-import { CreateYourEventServiceService } from "app/entities/create-your-event-service/service/create-your-event-service.service";
-import { TagsService } from "app/entities/tags/service/tags.service";
-import { Tags } from "app/entities/tags/tags.model";
-import { IUser } from "app/entities/user/user.model";
-import { UserService } from "app/entities/user/user.service";
-import { GeneralService } from "app/general.service";
-import { AlertError } from "app/shared/alert/alert-error.model";
-import { ValidatorHttp } from "app/validators/ValidatorHttp.service";
-import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from "ng-jhipster";
-import { MessageService } from "primeng/api";
-import { Observable } from "rxjs";
-
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { ADDRESS_REGEX } from 'app/constants';
+import { ICreateYourEventService, CreateYourEventService } from 'app/entities/create-your-event-service/create-your-event-service.model';
+import { CreateYourEventServiceService } from 'app/entities/create-your-event-service/service/create-your-event-service.service';
+import { TagsService } from 'app/entities/tags/service/tags.service';
+import { Tags } from 'app/entities/tags/tags.model';
+import { IUser } from 'app/entities/user/user.model';
+import { UserService } from 'app/entities/user/user.service';
+import { GeneralService } from 'app/general.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
+import { ValidatorHttp } from 'app/validators/ValidatorHttp.service';
+import { JhiDataUtils, JhiEventManager, JhiFileLoadError, JhiEventWithContent } from 'ng-jhipster';
+import { MessageService } from 'primeng/api';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'jhi-create-your-event-service-update',
   templateUrl: './create-your-event-service-update.component.html',
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class CreateYourEventServiceUpdateComponent implements OnInit {
   isSaving = false;
@@ -37,23 +36,16 @@ export class CreateYourEventServiceUpdateComponent implements OnInit {
     logoContentType: [],
     active: [],
     description: [null, [Validators.required]],
-    address: [
-      null,
-      [
-        Validators.required,
-        Validators.pattern(ADDRESS_REGEX)
-      ]
-    ],
+    address: [null, [Validators.required, Validators.pattern(ADDRESS_REGEX)]],
     motto: [null, [Validators.required]],
     phone: [null, [Validators.required]],
     webAddress: [null, [this.validatorHttp.checkHttp()]],
     category: [null, [Validators.required]],
-    user: []
+    user: [],
   });
 
   items: any[] = [];
   modules = {};
-
 
   constructor(
     protected dataUtils: JhiDataUtils,
@@ -62,7 +54,7 @@ export class CreateYourEventServiceUpdateComponent implements OnInit {
     protected userService: UserService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private route: ActivatedRoute,
     private generalService: GeneralService,
     private tagsService: TagsService,
@@ -92,7 +84,7 @@ export class CreateYourEventServiceUpdateComponent implements OnInit {
         ['clean'], // remove formatting button
 
         ['link', 'image', 'video'], // link and image, video
-      ]
+      ],
     };
   }
 
@@ -117,29 +109,37 @@ export class CreateYourEventServiceUpdateComponent implements OnInit {
     toolbar.addHandler('image', this.imageHandler);
   }
 
-   imageHandler = (image: any, callback: any) => {
-     const input = <HTMLInputElement> document.getElementById('fileInputField');
-     document.getElementById('fileInputField')!.onchange = () => {
-       const file: File = input!.files![0];
-       // file type is only image.
-       if (/^image\//.test(file.type)) {
-         if (file.size > this.maxUploadFileSize) {
-          this.messageService.add({severity:'error', summary: this.translate.instant('register-shop.filesize.error'), detail: this.translate.instant('register-shop.filesize.error.info')});
-         } else {
-           const reader  = new FileReader();
-           reader.onload = () =>  {
-             const range = this.quillEditorRef.getSelection();
-             const img = '<img src="' + reader.result + '" />';
-             this.quillEditorRef.clipboard.dangerouslyPasteHTML(range.index, img);
-           };
-           reader.readAsDataURL(file);
-         }
-       } else {
-          this.messageService.add({severity:'error', summary: this.translate.instant('register-shop.filetype.error'), detail: this.translate.instant('register-shop.filetype.error.info')});
-       }
-     };
-     input.click();
-   }
+  imageHandler = (image: any, callback: any) => {
+    const input = <HTMLInputElement>document.getElementById('fileInputField');
+    document.getElementById('fileInputField')!.onchange = () => {
+      const file: File = input!.files![0];
+      // file type is only image.
+      if (/^image\//.test(file.type)) {
+        if (file.size > this.maxUploadFileSize) {
+          this.messageService.add({
+            severity: 'error',
+            summary: this.translate.instant('register-shop.filesize.error'),
+            detail: this.translate.instant('register-shop.filesize.error.info'),
+          });
+        } else {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const range = this.quillEditorRef.getSelection();
+            const img = '<img src="' + reader.result + '" />';
+            this.quillEditorRef.clipboard.dangerouslyPasteHTML(range.index, img);
+          };
+          reader.readAsDataURL(file);
+        }
+      } else {
+        this.messageService.add({
+          severity: 'error',
+          summary: this.translate.instant('register-shop.filetype.error'),
+          detail: this.translate.instant('register-shop.filetype.error.info'),
+        });
+      }
+    };
+    input.click();
+  };
 
   updateForm(createYourEventService: ICreateYourEventService): void {
     this.editForm.patchValue({
@@ -154,7 +154,7 @@ export class CreateYourEventServiceUpdateComponent implements OnInit {
       phone: createYourEventService.phone,
       webAddress: createYourEventService.webAddress,
       category: createYourEventService.category,
-      user: createYourEventService.user
+      user: createYourEventService.user,
     });
   }
 
@@ -185,7 +185,7 @@ export class CreateYourEventServiceUpdateComponent implements OnInit {
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
     this.editForm.patchValue({
       [field]: null,
-      [fieldContentType]: null
+      [fieldContentType]: null,
     });
     if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
       this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
@@ -220,7 +220,7 @@ export class CreateYourEventServiceUpdateComponent implements OnInit {
       phone: this.editForm.get(['phone'])!.value,
       webAddress: this.editForm.get(['webAddress'])!.value,
       category: this.editForm.get(['category'])!.value,
-      user: this.editForm.get(['user'])!.value
+      user: this.editForm.get(['user'])!.value,
     };
   }
 

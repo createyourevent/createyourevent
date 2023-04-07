@@ -9,6 +9,5 @@ import { WorksheetRoutingModule } from './route/worksheet-routing.module';
 @NgModule({
   imports: [SharedModule, WorksheetRoutingModule],
   declarations: [WorksheetComponent, WorksheetDetailComponent, WorksheetUpdateComponent, WorksheetDeleteDialogComponent],
-  entryComponents: [WorksheetDeleteDialogComponent],
 })
 export class WorksheetModule {}

@@ -9,6 +9,5 @@ import { FeeBalanceRoutingModule } from './route/fee-balance-routing.module';
 @NgModule({
   imports: [SharedModule, FeeBalanceRoutingModule],
   declarations: [FeeBalanceComponent, FeeBalanceDetailComponent, FeeBalanceUpdateComponent, FeeBalanceDeleteDialogComponent],
-  entryComponents: [FeeBalanceDeleteDialogComponent],
 })
 export class FeeBalanceModule {}

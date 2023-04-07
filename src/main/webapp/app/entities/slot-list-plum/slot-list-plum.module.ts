@@ -9,6 +9,5 @@ import { SlotListPlumRoutingModule } from './route/slot-list-plum-routing.module
 @NgModule({
   imports: [SharedModule, SlotListPlumRoutingModule],
   declarations: [SlotListPlumComponent, SlotListPlumDetailComponent, SlotListPlumUpdateComponent, SlotListPlumDeleteDialogComponent],
-  entryComponents: [SlotListPlumDeleteDialogComponent],
 })
 export class SlotListPlumModule {}

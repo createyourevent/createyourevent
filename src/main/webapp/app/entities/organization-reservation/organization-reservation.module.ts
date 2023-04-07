@@ -14,6 +14,5 @@ import { OrganizationReservationRoutingModule } from './route/organization-reser
     OrganizationReservationUpdateComponent,
     OrganizationReservationDeleteDialogComponent,
   ],
-  entryComponents: [OrganizationReservationDeleteDialogComponent],
 })
 export class OrganizationReservationModule {}

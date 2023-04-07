@@ -12,7 +12,7 @@ import { GuestReservationDetailComponent } from './guest-reservation-detail.comp
 import { GuestReservationDeleteDialogComponent } from './guest-reservation-delete-dialog.component';
 import { ReservationCounterModule } from 'app/views/reservation-counter/reservation-counter.module';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
-import {ToastModule} from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   imports: [
@@ -23,9 +23,8 @@ import {ToastModule} from 'primeng/toast';
     MatToolbarModule,
     MatIconModule,
     NgxQRCodeModule,
-    ToastModule
+    ToastModule,
   ],
   declarations: [GuestReservationComponent, GuestReservationDetailComponent, GuestReservationDeleteDialogComponent],
-  entryComponents: [GuestReservationDeleteDialogComponent]
 })
 export class GuestReservationModule {}
