@@ -1,7 +1,7 @@
 @import 'bootstrap-variables';
-@import '~bootstrap/scss/functions';
-@import '~bootswatch/dist/cosmo/variables';
-@import '~bootstrap/scss/variables';
+@import 'bootstrap/scss/functions';
+@import 'bootswatch/dist/cosmo/variables';
+@import 'bootstrap/scss/variables';
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
@@ -16,7 +16,7 @@
 @import url('../../../../../node_modules/quill/dist/quill.snow.css');
 @import url('../../../../../node_modules/primeflex/primeflex.css');
 // @import url('../../../../../node_modules/quill-emoji/dist/quill-emoji.css');
-// @import '~ngx-sharebuttons/themes/default/default-theme';
+// @import 'ngx-sharebuttons/themes/default/default-theme';
 // @import url('../../../../../node_modules/ng-chat/ng-chat/assets/icons.css');
 // @import url('../../../../../node_modules/ng-chat/ng-chat/assets/loading-spinner.css');
 // @import url('../../../../../node_modules/ng-chat/ng-chat/assets/ng-chat.component.default.css');
@@ -49,7 +49,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Vast+Shadow&display=swap');
 
-@import url('~@videogular/ngx-videogular/fonts/videogular.css');
+@import url('@videogular/ngx-videogular/fonts/videogular.css');
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
