@@ -4,7 +4,6 @@ steps:
   args: ['push', 'https://github.com/createyourevent/createyourevent.git']
   dir: '/home/ceo/mmmm/createyourevent/'
 - name: 'maven'
-  entrypoint: 'mvn'
-  args: [' -Pprod package verify jib:dockerBuild --offline -Dmaven.test.skip=true']
+  args: ['mvn','-Pprod', 'package', 'verify', 'jib:dockerBuild', '--offline', '-Dmaven.test.skip=true']
 - name: 'gcr.io/$PROJECT_ID/docker'
-  args: ['run' '-d -p 8080:8080 --name createyourevent createyourevent']
+  args: ['run', '-d -p 8080:8080 --name createyourevent createyourevent']
