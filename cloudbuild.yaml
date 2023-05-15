@@ -1,7 +1,7 @@
 steps:
 - name: maven:3.6.3-jdk-11
   entrypoint: mvn
-  args: ['-Dmaven.test.skip=true', '-X']
+  args: ['-Dmaven.test.skip=true', '-X', 'package', '-Pprod', 'verify', 'jib:dockerBuild']
 
 options:
   logging: CLOUD_LOGGING_ONLY
