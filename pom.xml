@@ -1050,6 +1050,7 @@
                                     <arguments>run webapp:build</arguments>
                                     <environmentVariables>
                                         <APP_VERSION>${project.version}</APP_VERSION>
+                                        <NODE_OPTIONS>--max_old_space_size=4096</NODE_OPTIONS>
                                     </environmentVariables>
                                     <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
                                 </configuration>
