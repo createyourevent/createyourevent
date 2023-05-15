@@ -1,8 +1,7 @@
 steps:
-  steps:
-  - name: maven:3.3-jdk-8
-    entrypoint: mvn
-    args: ['-Dmaven.test.skip=true']
+- name: maven:3.3-jdk-8
+  entrypoint: mvn
+  args: ['-Dmaven.test.skip=true']
 
 options:
   logging: CLOUD_LOGGING_ONLY
