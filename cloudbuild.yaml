@@ -1,6 +1,6 @@
 steps:
 - name: "maven"
-  args: ["mvn", "--version"]
+  args: ["mvn", "-Dmaven.test.skip=true"]
 
 options:
   logging: CLOUD_LOGGING_ONLY
