@@ -8,8 +8,6 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 
-FullCalendarModule.registerPlugins([dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]);
-
 @NgModule({
   imports: [CommonModule, SharedModule, FullCalendarModule],
   declarations: [OrganizationReservationCalendarComponent],

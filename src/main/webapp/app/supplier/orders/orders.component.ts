@@ -73,7 +73,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
               ) {
                 this.selledProducts.push(epo);
               }
-              if (i == products.length && l == epos.body.length) {
+              if (i === products.length && l === epos.body.length) {
                 this.provisionallySoldProducts = this.provisionallySoldProducts.sort(function (a, b) {
                   return a.event.name.localeCompare(b.event.name);
                 });

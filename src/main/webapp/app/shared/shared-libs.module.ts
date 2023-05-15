@@ -11,14 +11,16 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 
-FullCalendarModule.registerPlugins([
-  dayGridPlugin,
-  timeGridPlugin,
-  interactionPlugin,
-  listPlugin
-]);
-
 @NgModule({
-  exports: [FormsModule, CommonModule, NgbModule, InfiniteScrollModule, FontAwesomeModule, ReactiveFormsModule, TranslateModule, FullCalendarModule],
+  exports: [
+    FormsModule,
+    CommonModule,
+    NgbModule,
+    InfiniteScrollModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    FullCalendarModule,
+  ],
 })
 export class SharedLibsModule {}

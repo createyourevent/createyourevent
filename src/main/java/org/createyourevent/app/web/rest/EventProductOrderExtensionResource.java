@@ -1,23 +1,19 @@
 package org.createyourevent.app.web.rest;
 
-import org.createyourevent.app.domain.EventProductOrder;
-import org.createyourevent.app.service.EventProductOrderExtensionService;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
-import org.springframework.web.bind.annotation.*;
-
-import liquibase.pro.packaged.s;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.createyourevent.app.domain.EventProductOrder;
+import org.createyourevent.app.service.EventProductOrderExtensionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * REST controller for managing
@@ -51,31 +47,35 @@ public class EventProductOrderExtensionResource {
     public List<EventProductOrder> getEventProductOrdersWithProductId(@PathVariable Long id) {
         log.debug("REST request to get EventProductOrder by ProductId : {}", id);
         List<EventProductOrder> eventProductOrder = eventProductOrderExtensionService.findAllByProductId(id);
-        return eventProductOrder ;
+        return eventProductOrder;
     }
 
     @GetMapping("/event-product-orders/{productId}/{userId}/getByProductAndUser")
     public EventProductOrder getProductsWithEventIdAndUserId(@PathVariable Long productId, @PathVariable String userId) {
         log.debug("REST request to get EventProductOrder by ProductId and UserId");
-        EventProductOrder eventProductOrder = eventProductOrderExtensionService.findByProductIdAndUserId(productId,
-                userId);
+        EventProductOrder eventProductOrder = eventProductOrderExtensionService.findByProductIdAndUserId(productId, userId);
         return eventProductOrder;
     }
 
     @GetMapping("/event-product-orders/{dateStartFrom}/{dateStartUntil}/findAllByDateStartBetween")
-    public List<EventProductOrder> findAllByDateStartBetween(@PathVariable ZonedDateTime dateStartFrom,
-            @PathVariable ZonedDateTime dateStartUntil) {
+    public List<EventProductOrder> findAllByDateStartBetween(
+        @PathVariable ZonedDateTime dateStartFrom,
+        @PathVariable ZonedDateTime dateStartUntil
+    ) {
         log.debug("Rest: List<ProductReservation> findAllByDateStartBetween(Date dateStartFrom, Date dateStartUntil)");
-        List<EventProductOrder> result = eventProductOrderExtensionService.findAllByDateFromBetween(dateStartFrom,
-                dateStartUntil);
+        List<EventProductOrder> result = eventProductOrderExtensionService.findAllByDateFromBetween(dateStartFrom, dateStartUntil);
         return result;
     }
 
     @GetMapping("/event-product-orders/{productId}/findAllByProductIdAndDateStartBetween")
-    public List<EventProductOrder> findAllByProductIdAndDateStartBetween(@PathVariable Long productId,
-            @RequestParam String dateStartFrom, @RequestParam String dateStartUntil) {
+    public List<EventProductOrder> findAllByProductIdAndDateStartBetween(
+        @PathVariable Long productId,
+        @RequestParam String dateStartFrom,
+        @RequestParam String dateStartUntil
+    ) {
         log.debug(
-                "Rest: List<ProductReservation> findAllByProductIdAndDateStartBetween(Long productId, Date dateStartFrom, Date dateStartUntil)");
+            "Rest: List<ProductReservation> findAllByProductIdAndDateStartBetween(Long productId, Date dateStartFrom, Date dateStartUntil)"
+        );
         ZonedDateTime f = ZonedDateTime.now();
         ZonedDateTime u = ZonedDateTime.now();
         try {
@@ -96,10 +96,14 @@ public class EventProductOrderExtensionResource {
     }
 
     @GetMapping("/event-product-orders/{productId}/findAllWithProductIdAndDateFromGreaterThenAndDateUntilSmallerThen")
-    public List<EventProductOrder> findAllWithProductIdAndDateFromGreaterThenAndDateUntilSmallerThen(@PathVariable Long productId,
-            @RequestParam String dateStartFrom, @RequestParam String dateStartUntil) {
+    public List<EventProductOrder> findAllWithProductIdAndDateFromGreaterThenAndDateUntilSmallerThen(
+        @PathVariable Long productId,
+        @RequestParam String dateStartFrom,
+        @RequestParam String dateStartUntil
+    ) {
         log.debug(
-                "Rest: List<ProductReservation> findAllByProductIdAndDateStartBetween(Long productId, Date dateStartFrom, Date dateStartUntil)");
+            "Rest: List<ProductReservation> findAllByProductIdAndDateStartBetween(Long productId, Date dateStartFrom, Date dateStartUntil)"
+        );
         ZonedDateTime f = ZonedDateTime.now();
         ZonedDateTime u = ZonedDateTime.now();
         try {
@@ -108,15 +112,23 @@ public class EventProductOrderExtensionResource {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        List<EventProductOrder> result = eventProductOrderExtensionService.findAllWithProductIdAndDateFromGreaterThenAndDateUntilSmallerThen(productId, f, u);
+        List<EventProductOrder> result = eventProductOrderExtensionService.findAllWithProductIdAndDateFromGreaterThenAndDateUntilSmallerThen(
+            productId,
+            f,
+            u
+        );
         return result;
     }
 
     @GetMapping("/event-product-orders/{productId}/findAllByProductIdAndDateUntilBetween")
-    public List<EventProductOrder> findAllByProductIdAndDateUntilBetween(@PathVariable Long productId,
-            @RequestParam String dateStartFrom, @RequestParam String dateStartUntil) {
+    public List<EventProductOrder> findAllByProductIdAndDateUntilBetween(
+        @PathVariable Long productId,
+        @RequestParam String dateStartFrom,
+        @RequestParam String dateStartUntil
+    ) {
         log.debug(
-                "Rest: List<ProductReservation> findAllByProductIdAndDateStartBetween(Long productId, Date dateStartFrom, Date dateStartUntil)");
+            "Rest: List<ProductReservation> findAllByProductIdAndDateStartBetween(Long productId, Date dateStartFrom, Date dateStartUntil)"
+        );
         ZonedDateTime f = ZonedDateTime.now();
         ZonedDateTime u = ZonedDateTime.now();
         try {
@@ -128,7 +140,6 @@ public class EventProductOrderExtensionResource {
         List<EventProductOrder> result = eventProductOrderExtensionService.findAllByProductIdAndDateUntilBetween(productId, f, u);
         return result;
     }
-
 
     @GetMapping("/event-product-orders/findAllEventProductOrderByDateGreaterThen")
     public List<EventProductOrder> findAllEventProductOrderByDateGreaterThen(@RequestParam String now) {
@@ -143,9 +154,11 @@ public class EventProductOrderExtensionResource {
         return orders;
     }
 
-
     @GetMapping("/event-product-orders/{shopId}/findAllEventProductOrderByShopIdAndBilledFalseAndDateStartSmallerThen")
-    public List<EventProductOrder> findAllByShopIdAndBilledFalseAndDateStartSmallerThen(@PathVariable Long shopId, @RequestParam String now) {
+    public List<EventProductOrder> findAllByShopIdAndBilledFalseAndDateStartSmallerThen(
+        @PathVariable Long shopId,
+        @RequestParam String now
+    ) {
         log.debug("Rest: List<ProductReservation> findAllByDateStartBetween(Date dateStartFrom, Date dateStartUntil)");
         ZonedDateTime s = ZonedDateTime.now();
         try {
@@ -158,7 +171,10 @@ public class EventProductOrderExtensionResource {
     }
 
     @GetMapping("/event-product-orders/{shopId}/findAllEventProductOrderByShopIdAndBilledTrueAndDateStartSmallerThen")
-    public List<EventProductOrder> findAllByShopIdAndBilledTrueAndDateStartSmallerThen(@PathVariable Long shopId, @RequestParam String now) {
+    public List<EventProductOrder> findAllByShopIdAndBilledTrueAndDateStartSmallerThen(
+        @PathVariable Long shopId,
+        @RequestParam String now
+    ) {
         log.debug("Rest: List<ProductReservation> findAllByDateStartBetween(Date dateStartFrom, Date dateStartUntil)");
         ZonedDateTime s = ZonedDateTime.now();
         try {
@@ -183,13 +199,14 @@ public class EventProductOrderExtensionResource {
         return result;
     }
 
-
     //-------------------------------------------------------------------------------------------------------------------------------------------------//
 
     @GetMapping("/event-product-orders/findAllEventProductOrdersWithDateFromRange")
-    public List<EventProductOrder> findAllEventProductOrdersWithDateFromRange(@RequestParam String dateStart, @RequestParam String dateEnd) {
-        log.debug(
-                "List<EventProductOrder> findAllEventProductOrdersWithDateFromRange(ZonedDateTime startTime, ZonedDateTime endTime)");
+    public List<EventProductOrder> findAllEventProductOrdersWithDateFromRange(
+        @RequestParam String dateStart,
+        @RequestParam String dateEnd
+    ) {
+        log.debug("List<EventProductOrder> findAllEventProductOrdersWithDateFromRange(ZonedDateTime startTime, ZonedDateTime endTime)");
         ZonedDateTime f = ZonedDateTime.now();
         ZonedDateTime u = ZonedDateTime.now();
         try {
@@ -203,9 +220,13 @@ public class EventProductOrderExtensionResource {
     }
 
     @GetMapping("/event-product-orders/findAllEventProductOrdersWithDateFromSmallerThenAndDateUntilBetween")
-    public List<EventProductOrder> findAllEventProductOrdersWithDateFromSmallerThenAndDateUntilBetween(@RequestParam String dateStart, @RequestParam String dateEnd) {
+    public List<EventProductOrder> findAllEventProductOrdersWithDateFromSmallerThenAndDateUntilBetween(
+        @RequestParam String dateStart,
+        @RequestParam String dateEnd
+    ) {
         log.debug(
-                "List<EventProductOrder> findAllEventProductOrdersWithDateFromSmallerThenAndDateUntilBetween(ZonedDateTime startTime, ZonedDateTime endTime)");
+            "List<EventProductOrder> findAllEventProductOrdersWithDateFromSmallerThenAndDateUntilBetween(ZonedDateTime startTime, ZonedDateTime endTime)"
+        );
         ZonedDateTime f = ZonedDateTime.now();
         ZonedDateTime u = ZonedDateTime.now();
         try {
@@ -214,14 +235,21 @@ public class EventProductOrderExtensionResource {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        List<EventProductOrder> result = eventProductOrderExtensionService.findAllEventProductOrdersWithDateFromSmallerThenAndDateUntilBetween(f, u);
+        List<EventProductOrder> result = eventProductOrderExtensionService.findAllEventProductOrdersWithDateFromSmallerThenAndDateUntilBetween(
+            f,
+            u
+        );
         return result;
     }
 
     @GetMapping("/event-product-orders/findAllEventProductOrdersWithDateFromBetweenAndDateUntilBiggerThen")
-    public List<EventProductOrder> findAllEventProductOrdersWithDateFromBetweenAndDateUntilBiggerThen(@RequestParam String dateStart, @RequestParam String dateEnd) {
+    public List<EventProductOrder> findAllEventProductOrdersWithDateFromBetweenAndDateUntilBiggerThen(
+        @RequestParam String dateStart,
+        @RequestParam String dateEnd
+    ) {
         log.debug(
-                "List<EventProductOrder> findAllEventProductOrdersWithDateFromBetweenAndDateUntilBiggerThen(ZonedDateTime startTime, ZonedDateTime endTime)");
+            "List<EventProductOrder> findAllEventProductOrdersWithDateFromBetweenAndDateUntilBiggerThen(ZonedDateTime startTime, ZonedDateTime endTime)"
+        );
         ZonedDateTime f = ZonedDateTime.now();
         ZonedDateTime u = ZonedDateTime.now();
         try {
@@ -230,14 +258,21 @@ public class EventProductOrderExtensionResource {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        List<EventProductOrder> result = eventProductOrderExtensionService.findAllEventProductOrdersWithDateFromBetweenAndDateUntilBiggerThen(f, u);
+        List<EventProductOrder> result = eventProductOrderExtensionService.findAllEventProductOrdersWithDateFromBetweenAndDateUntilBiggerThen(
+            f,
+            u
+        );
         return result;
     }
 
     @GetMapping("/event-product-orders/findAllEventProductOrdersWithDateFromSmallerThenAndDateUntilBiggerThenAndOnSameTimeRange")
-    public List<EventProductOrder> findAllEventProductOrdersWithDateFromSmallerThenAndDateUntilBiggerThenAndOnSameTimeRange(@RequestParam String dateStart, @RequestParam String dateEnd) {
+    public List<EventProductOrder> findAllEventProductOrdersWithDateFromSmallerThenAndDateUntilBiggerThenAndOnSameTimeRange(
+        @RequestParam String dateStart,
+        @RequestParam String dateEnd
+    ) {
         log.debug(
-                "List<EventProductOrder> findAllEventProductOrdersWithDateFromSmallerThenAndDateUntilBiggerThenAndOnSameTimeRange(ZonedDateTime startTime, ZonedDateTime endTime)");
+            "List<EventProductOrder> findAllEventProductOrdersWithDateFromSmallerThenAndDateUntilBiggerThenAndOnSameTimeRange(ZonedDateTime startTime, ZonedDateTime endTime)"
+        );
         ZonedDateTime f = ZonedDateTime.now();
         ZonedDateTime u = ZonedDateTime.now();
         try {
@@ -246,10 +281,10 @@ public class EventProductOrderExtensionResource {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        List<EventProductOrder> result = eventProductOrderExtensionService.findAllEventProductOrdersWithDateFromSmallerThenAndDateUntilBiggerThenAndOnSameTimeRange(f, u);
+        List<EventProductOrder> result = eventProductOrderExtensionService.findAllEventProductOrdersWithDateFromSmallerThenAndDateUntilBiggerThenAndOnSameTimeRange(
+            f,
+            u
+        );
         return result;
     }
-
-
-
 }

@@ -341,11 +341,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
           const fte = new FeeTransactionEntry();
           fte.type = FeeType.EVENTPRODUCTORDER;
           fte.value = (epo.total / 100) * this.fees.feesSupplier;
-          if (fT.entries === null || fT.entries === undefined) {
-          }
-          {
-            fT.entries = [];
-          }
+          fT.entries = [];
           fT.entries.push(fte);
           const tid: FeeTransactionId = new FeeTransactionId();
           tid.transactionId = this.refNo;
