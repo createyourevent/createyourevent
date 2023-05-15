@@ -1,6 +1,7 @@
 steps:
+- name: maven:3.3-jdk-8
   entrypoint: mvn
-  args: ['-Pprod', 'package', 'verify', 'jib:dockerBuild', '--offline', '-Dmaven.test.skip=true']
+  args: ['package','-Dmaven.test.skip=true']
 - name: 'gcr.io/$PROJECT_ID/docker'
   args: ['run', '-d -p 8080:8080 --name createyourevent createyourevent']
 
