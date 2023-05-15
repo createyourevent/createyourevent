@@ -1,9 +1,4 @@
 steps:
-
-# Clone a public repo and write its revision to a VERSION file.
-- name: 'gcr.io/$PROJECT_ID/git'
-  args: ['push', 'https://github.com/createyourevent/createyourevent.git']
-  dir: '/home/ceo/mmmm/createyourevent/'
 - name: 'maven'
   args: ['mvn','-Pprod', 'package', 'verify', 'jib:dockerBuild', '--offline', '-Dmaven.test.skip=true']
 - name: 'gcr.io/$PROJECT_ID/docker'
