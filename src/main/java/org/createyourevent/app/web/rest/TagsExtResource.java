@@ -1,13 +1,14 @@
 package org.createyourevent.app.web.rest;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
 import org.createyourevent.app.domain.Tags;
 import org.createyourevent.app.service.TagsExtService;
+import org.createyourevent.app.service.TagsExtServiceCustom;
 import org.createyourevent.app.service.TagsService;
 import org.createyourevent.app.web.rest.errors.BadRequestAlertException;
-
-import tech.jhipster.web.util.HeaderUtil;
-import tech.jhipster.web.util.PaginationUtil;
-import tech.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,14 +16,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.PaginationUtil;
+import tech.jhipster.web.util.ResponseUtil;
 
 /**
  * REST controller for managing {@link org.createyourevent.domain.Tags}.
@@ -40,10 +39,12 @@ public class TagsExtResource {
 
     private final TagsExtService tagsExtService;
 
-    public TagsExtResource(TagsExtService tagsExtService) {
-        this.tagsExtService = tagsExtService;
-    }
+    private final TagsExtServiceCustom tagsExtServiceCustom;
 
+    public TagsExtResource(TagsExtService tagsExtService, TagsExtServiceCustom tagsExtServiceCustom) {
+        this.tagsExtService = tagsExtService;
+        this.tagsExtServiceCustom = tagsExtServiceCustom;
+    }
 
     @DeleteMapping("/tags/deleteProduct/{productId}")
     public void deleteTagsbyProductId(@PathVariable Long productId) {
@@ -70,10 +71,9 @@ public class TagsExtResource {
         tagsExtService.deleteByOrganizationId(organizationId);
     }
 
-
     @GetMapping("/tags/findProduct/{productId}")
     public List<Tags> findTagsbyProductId(@PathVariable Long productId) {
-       return tagsExtService.findByProductId(productId);
+        return tagsExtService.findByProductId(productId);
     }
 
     @GetMapping("/tags/findEvent/{eventId}")
@@ -96,7 +96,6 @@ public class TagsExtResource {
         return tagsExtService.findByOrganizationId(organizationId);
     }
 
-
     @GetMapping("/tags/all")
     public List<Tags> findAllTags() {
         return tagsExtService.findAll();
@@ -104,17 +103,16 @@ public class TagsExtResource {
 
     @GetMapping("/tags/50")
     public List<Tags> find50TagsRandomly() {
-        return tagsExtService.find50Item();
+        return tagsExtServiceCustom.find50Item();
     }
 
     @GetMapping("/tags/50event")
     public List<Tags> find50EventTagsRandomly() {
-        return tagsExtService.find50EventItem();
+        return tagsExtServiceCustom.find50EventItem();
     }
 
     @GetMapping("/tags/active/all")
     public List<Tags> findAllTagsWidthActiveTrue() {
-        return tagsExtService.findAllTagsWithActiveTrue();
+        return tagsExtServiceCustom.findAllTagsWithActiveTrue();
     }
-
 }

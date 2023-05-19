@@ -1,12 +1,15 @@
+<ngx-marquee>
+  <mark class="ticker-wrap">
+    <ng-template ngbSlide *ngFor="let tag of tagsData">
+      <a style="color: {{ tag.color }}" href="{{ tag.link }}">{{ tag.text }}</a>
+    </ng-template>
+  </mark>
+</ngx-marquee>
 
-<marquee class="ticker-wrap ticker">
-  <span class="ticker_item" *ngFor="let i of items">
-      <a style="color: {{ i.color }}" href="{{ i.link }}">++{{ i.text }}++</a>
-  </span>
-</marquee>
 <div class="outer">
-    <div class="inner ticker-wood-border ledstrip">
-        <span class="event-ticker" jhiTranslate="ticker.product.info">++ Product- and Service-Ticker -- All products and services that can be bought, rented and booked when planning an event ++</span>
-    </div>
+  <div class="inner ticker-wood-border ledstrip">
+    <span class="event-ticker" jhiTranslate="ticker.product.info"
+      >++ Product- and Service-Ticker -- All products and services that can be bought, rented and booked when planning an event ++</span
+    >
+  </div>
 </div>
-

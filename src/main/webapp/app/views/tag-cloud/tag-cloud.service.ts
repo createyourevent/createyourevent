@@ -1,58 +1,46 @@
 import { Injectable } from '@angular/core';
 import { GeneralService } from 'app/general.service';
-import * as dayjs from "dayjs";
+import * as dayjs from 'dayjs';
 import { CloudData } from 'angular-tag-cloud-module';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TagCloudService {
-  private tags!: CloudData[];
-
   constructor(private generalService: GeneralService) {}
 
-  public getTags(): CloudData[] {
-    return this.tags;
-  }
-
-  load(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      this.generalService.findAllTags().subscribe(response => {
+  load(): Observable<CloudData[]> {
+    return this.generalService.findAllTags().pipe(
+      map(response => {
         const md = response.body!;
-        const nd: CloudData[] = [];
-        md.forEach(tag => {
-          if (tag.shop !== null && tag.shop!.active === true && tag.shop.activeOwner === true) {
-            nd.push({
-              text: tag.tag!,
-              weight: this.getRandomInt(5, 9),
-              color: this.getRandomColor(),
-              rotate: this.getRandomInt(-30, 30),
-              link: '/supplier/shop/' + tag.shop!.id + '/overview'
-            });
-          } else if (tag.event !== null && tag.event!.active === true && tag.event!.dateStart! > dayjs()) {
-            nd.push({
-              text: tag.tag!,
-              weight: this.getRandomInt(5, 9),
-              color: this.getRandomColor(),
-              rotate: this.getRandomInt(-30, 30),
-              link: '/events/' + tag.event!.id + '/view'
-            });
-          } else if (tag.service !== null && tag.service!.active === true && tag.service.activeOwner === true) {
-            nd.push({
-              text: tag.tag!,
-              weight: this.getRandomInt(5, 9),
-              color: this.getRandomColor(),
-              rotate: this.getRandomInt(-30, 30),
-              link: '/services/' + tag.service!.id + '/viewService'
-            });
-          }
-        });
-        nd.sort(() => Math.random() - 0.5);
-        this.tags = nd.slice(0, 50);
-        this.tags = nd;
-        resolve(true);
-      });
-    });
+        const tags = md
+          .filter(tag => {
+            if (tag.shop) {
+              return tag.shop.active === true && tag.shop.activeOwner === true;
+            } else if (tag.event) {
+              return tag.event.active === true && tag.event.dateStart! > dayjs();
+            } else if (tag.service) {
+              return tag.service.active === true && tag.service.activeOwner === true;
+            }
+            return false;
+          })
+          .map(tag => ({
+            text: tag.tag!,
+            weight: this.getRandomInt(5, 9),
+            color: this.getRandomColor(),
+            rotate: this.getRandomInt(-30, 30),
+            link:
+              tag.shop !== null
+                ? '/supplier/shop/' + tag.shop.id + '/overview'
+                : tag.event !== null
+                ? '/events/' + tag.event.id + '/view'
+                : '/services/' + tag.service!.id + '/viewService',
+          }));
+        return tags.sort(() => Math.random() - 0.5).slice(0, 50);
+      })
+    );
   }
 
   getRandomInt(min: number, max: number): number {

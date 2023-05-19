@@ -1,9 +1,7 @@
 package org.createyourevent.app.repository;
 
 import java.util.List;
-
 import org.createyourevent.app.domain.Tags;
-
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -25,9 +23,9 @@ public interface TagsExtRepository extends JpaRepository<Tags, Long> {
     List<Tags> findByServiceId(Long serviceId);
     List<Tags> findByOrganizationId(Long organizationId);
 
-
-
-    @Query("select t from Tags t where t.product.active = true or t.event.active = true or t.shop.active = true or t.service.active = true or t.organization.active = true")
+    @Query(
+        "select t from Tags t where t.product.active = true or t.event.active = true or t.shop.active = true or t.service.active = true or t.organization.active = true"
+    )
     List<Tags> findAllWithActiveTrue();
 
     @Query(nativeQuery = true, value = "SELECT * FROM createyourevent.tags ORDER BY RAND() LIMIT 50")
@@ -35,5 +33,4 @@ public interface TagsExtRepository extends JpaRepository<Tags, Long> {
 
     @Query(nativeQuery = true, value = "SELECT * FROM createyourevent.tags t WHERE t.event_id > '' ORDER BY RAND()")
     List<Tags> find50EventItem();
-
 }
