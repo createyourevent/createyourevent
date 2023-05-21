@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Address {\n  constructor(id, address, lat, lng, location) {\n    this.id = id;\n    this.address = address;\n    this.lat = lat;\n    this.lng = lng;\n    this.location = location;\n  }\n}\nexport function getAddressIdentifier(address) {\n  return address.id;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

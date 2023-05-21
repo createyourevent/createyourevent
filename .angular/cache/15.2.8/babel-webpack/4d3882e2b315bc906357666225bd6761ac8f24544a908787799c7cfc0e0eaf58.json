@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { OfferOrganisatorComponent } from './offer-organisator.component';\nexport const OFFER_ROUTE = {\n  path: ':eventId/offer',\n  component: OfferOrganisatorComponent,\n  data: {\n    authorities: [],\n    pageTitle: 'offer.title'\n  }\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

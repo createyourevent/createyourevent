@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { MobileAppComponent } from './mobile-app.component';\nexport const MOBILEAPP_ROUTE = {\n  path: '',\n  component: MobileAppComponent,\n  data: {\n    authorities: [],\n    pageTitle: 'home.title'\n  }\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

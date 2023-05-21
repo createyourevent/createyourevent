@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Restaurant {\n  constructor(id, menu, organization, user) {\n    this.id = id;\n    this.menu = menu;\n    this.organization = organization;\n    this.user = user;\n  }\n}\nexport function getRestaurantIdentifier(restaurant) {\n  return restaurant.id;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

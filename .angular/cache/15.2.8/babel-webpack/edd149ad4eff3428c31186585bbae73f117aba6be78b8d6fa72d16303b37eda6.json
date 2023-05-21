@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { ActivateComponent } from './activate.component';\nexport const ACTIVATE_ROUTE = {\n  path: '',\n  component: ActivateComponent,\n  data: {\n    authorities: [],\n    pageTitle: 'home.title'\n  }\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

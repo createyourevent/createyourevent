@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class SlotListOrange {\n  constructor(id, coupons) {\n    this.id = id;\n    this.coupons = coupons;\n  }\n}\nexport function getSlotListOrangeIdentifier(slotListOrange) {\n  return slotListOrange.id;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

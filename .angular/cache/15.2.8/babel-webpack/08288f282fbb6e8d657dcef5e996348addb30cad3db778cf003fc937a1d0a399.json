@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const colors = {\n  red: {\n    primary: '#ad2121',\n    secondary: '#FAE3E3'\n  },\n  blue: {\n    primary: '#1e90ff',\n    secondary: '#D1E8FF'\n  },\n  yellow: {\n    primary: '#e3bc08',\n    secondary: '#FDF1BA'\n  }\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

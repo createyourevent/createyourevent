@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { PrintBondComponent } from './print-bond.component';\nexport const PRINTBOND_ROUTE = {\n  path: 'admin/:bondId/print-bond',\n  component: PrintBondComponent,\n  data: {\n    authorities: [],\n    pageTitle: 'home.title'\n  }\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

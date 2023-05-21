@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Property {\n  constructor(id, key, value) {\n    this.id = id;\n    this.key = key;\n    this.value = value;\n  }\n}\nexport function getPropertyIdentifier(property) {\n  return property.id;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

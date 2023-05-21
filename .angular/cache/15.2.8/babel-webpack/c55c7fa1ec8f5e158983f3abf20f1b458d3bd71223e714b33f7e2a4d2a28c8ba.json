@@ -1,0 +1,1 @@
+{"ast":null,"code":"/*\n * Function used to workaround https://github.com/microsoft/TypeScript/issues/16069\n * es2019 alternative `const filteredArr = myArr.flatMap((x) => x ? x : []);`\n */\nexport function isPresent(t) {\n  return t !== undefined && t !== null;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

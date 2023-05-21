@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { AdminBondsComponent } from './admin-bonds.component';\nexport const ADMINBONDS_ROUTE = {\n  path: '',\n  component: AdminBondsComponent,\n  data: {\n    authorities: [],\n    pageTitle: 'home.title'\n  }\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

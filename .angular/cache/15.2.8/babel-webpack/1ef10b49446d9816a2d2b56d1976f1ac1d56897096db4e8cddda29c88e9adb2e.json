@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { AboutUsComponent } from './about-us.component';\nexport const ABOUT_US_ROUTE = [{\n  path: '',\n  component: AboutUsComponent,\n  data: {\n    authorities: [],\n    pageTitle: 'routes.about-us.title'\n  }\n}];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

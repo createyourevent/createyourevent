@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { BusinessPlanComponent } from './business-plan.component';\nexport const BUSINESSPLAN_ROUTE = {\n  path: '',\n  component: BusinessPlanComponent,\n  data: {\n    pageTitle: 'routes.businessplan.title'\n  }\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

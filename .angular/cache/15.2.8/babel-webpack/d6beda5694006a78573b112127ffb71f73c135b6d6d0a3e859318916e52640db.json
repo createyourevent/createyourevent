@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var OrderStatus = /*#__PURE__*/(() => {\n  (function (OrderStatus) {\n    OrderStatus[\"NEW\"] = \"NEW\";\n    OrderStatus[\"PROCESSING\"] = \"PROCESSING\";\n    OrderStatus[\"COMPLETED\"] = \"COMPLETED\";\n  })(OrderStatus || (OrderStatus = {}));\n  return OrderStatus;\n})();","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

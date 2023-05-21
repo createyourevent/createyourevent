@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { StreamComponent } from './stream.component';\nexport const STREAM_ROUTE = [{\n  path: '',\n  component: StreamComponent,\n  data: {\n    authorities: [],\n    pageTitle: 'routes.stream.title'\n  }\n}];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

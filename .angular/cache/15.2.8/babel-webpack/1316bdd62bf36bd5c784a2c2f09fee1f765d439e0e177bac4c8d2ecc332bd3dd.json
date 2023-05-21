@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class EventDetails {\n  constructor(id, totalEntranceFee, event) {\n    this.id = id;\n    this.totalEntranceFee = totalEntranceFee;\n    this.event = event;\n  }\n}\nexport function getEventDetailsIdentifier(eventDetails) {\n  return eventDetails.id;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

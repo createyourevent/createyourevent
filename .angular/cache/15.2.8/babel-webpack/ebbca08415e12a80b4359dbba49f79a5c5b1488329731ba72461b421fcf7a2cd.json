@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { RouterModule } from '@angular/router';\nimport { TetrisComponent } from './tetris.component';\nconst routes = [{\n  path: '',\n  component: TetrisComponent,\n  data: {\n    pageTitle: 'navbar.tetris'\n  }\n}];\nexport const TetrisRoutes = RouterModule.forChild(routes);","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

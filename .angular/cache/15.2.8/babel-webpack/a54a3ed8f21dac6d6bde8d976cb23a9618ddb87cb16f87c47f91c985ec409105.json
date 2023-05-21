@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const DATE_FORMAT = 'YYYY-MM-DD';\nexport const DATE_TIME_FORMAT = 'YYYY-MM-DDTHH:mm';","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

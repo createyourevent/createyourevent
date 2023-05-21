@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { AgbComponent } from './agb.component';\nexport const AGB_ROUTE = {\n  path: '',\n  component: AgbComponent,\n  data: {\n    pageTitle: 'routes.agb.title'\n  }\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,7 +19,7 @@ import { ChipsCollectionService } from 'app/entities/chips-collection/service/ch
 import { UserPointAssociationService } from 'app/entities/user-point-association/service/user-point-association.service';
 import { UserPointAssociation } from 'app/entities/user-point-association/user-point-association.model';
 import { SharedChatService } from 'app/chat.service';
-
+import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -42,7 +41,7 @@ export class AccountService {
     private socket: Socket,
     private userPointAssociationService: UserPointAssociationService,
     private chipsCollectionService: ChipsCollectionService,
-    private sharedChatService: SharedChatService,
+    private sharedChatService: SharedChatService
   ) {}
 
   authenticate(identity: Account | null): void {
@@ -62,28 +61,26 @@ export class AccountService {
   }
 
   identity(force?: boolean): Observable<Account | null> {
-    if (!this.accountCache$   || force || !this.isAuthenticated()) {
+    if (!this.accountCache$ || force || !this.isAuthenticated()) {
       this.accountCache$ = this.fetch().pipe(
         catchError(() => of(null)),
         tap((account: Account | null) => {
           this.authenticate(account);
 
-                    // After retrieve the account info, the language will be changed to
+          // After retrieve the account info, the language will be changed to
           // the user's preferred language configured in the account setting
           if (account && account.langKey) {
-
             this.sharedChatService.onLoginComplete();
             const langKey = this.sessionStorage.retrieve('locale') || account.langKey;
             this.languageService.changeLanguage(langKey);
 
             this.generalService.findWidthAuthorities().subscribe(u => {
-
-              if(u.body.agb === null || u.body.agb === undefined ||u.body.agb === false) {
+              if (u.body.agb === null || u.body.agb === undefined || u.body.agb === false) {
                 this.router.navigate(['/agb']);
                 return;
               }
 
-              if(u.body.address === null || u.body.phone === null || u.body.iban === null) {
+              if (u.body.address === null || u.body.phone === null || u.body.iban === null) {
                 this.router.navigate(['/settings']);
                 return;
               }
@@ -91,7 +88,7 @@ export class AccountService {
                 const pointsKc = p.body;
                 u.body.points = pointsKc;
                 this.pointsDataService.changePoint(u.body.points);
-                if(u.body.points === null) {
+                if (u.body.points === null) {
                   u.body.points = 0;
                   this.generalService.updateUserLoggedInAndPoints(u.body.id, u.body.loggedIn, u.body.points).subscribe();
                 }
@@ -134,7 +131,7 @@ export class AccountService {
                       this.generalService.findWidthAuthorities().subscribe(us => {
                         const user = us.body;
                         this.generalService.updateUserLoggedInAndPoints(u.body.id, u.body.loggedIn, u.body.points).subscribe(t => {
-                            this.pointsDataService.changePoint(u.body.points);
+                          this.pointsDataService.changePoint(u.body.points);
                         });
                       });
                     }

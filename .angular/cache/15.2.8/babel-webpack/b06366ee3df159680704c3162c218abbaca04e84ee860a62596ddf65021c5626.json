@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class FeeBalance {\n  constructor(id, date, type, total, user) {\n    this.id = id;\n    this.date = date;\n    this.type = type;\n    this.total = total;\n    this.user = user;\n  }\n}\nexport function getFeeBalanceIdentifier(feeBalance) {\n  return feeBalance.id;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

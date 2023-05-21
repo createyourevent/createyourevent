@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class ChipItem {\n  constructor(component, data) {\n    this.component = component;\n    this.data = data;\n  }\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

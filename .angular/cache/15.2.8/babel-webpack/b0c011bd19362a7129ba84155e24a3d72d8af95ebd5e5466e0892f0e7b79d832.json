@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class SlotListClock {\n  constructor(id, coupons) {\n    this.id = id;\n    this.coupons = coupons;\n  }\n}\nexport function getSlotListClockIdentifier(slotListClock) {\n  return slotListClock.id;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { NavbarComponent } from './navbar.component';\nexport const navbarRoute = {\n  path: '',\n  component: NavbarComponent,\n  outlet: 'navbar'\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

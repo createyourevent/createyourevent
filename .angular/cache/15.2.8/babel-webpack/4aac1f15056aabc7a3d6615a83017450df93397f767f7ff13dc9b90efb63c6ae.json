@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { HealthComponent } from './health.component';\nexport const healthRoute = {\n  path: '',\n  component: HealthComponent,\n  data: {\n    pageTitle: 'health.title'\n  }\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

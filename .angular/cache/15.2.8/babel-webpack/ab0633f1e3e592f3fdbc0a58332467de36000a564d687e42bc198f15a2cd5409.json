@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { LogsComponent } from './logs.component';\nexport const logsRoute = {\n  path: '',\n  component: LogsComponent,\n  data: {\n    pageTitle: 'logs.title'\n  }\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

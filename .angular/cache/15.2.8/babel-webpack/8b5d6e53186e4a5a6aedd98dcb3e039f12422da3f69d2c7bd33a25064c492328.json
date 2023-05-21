@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class ChipsAdmin {\n  constructor(id, gameActive) {\n    this.id = id;\n    this.gameActive = gameActive;\n    this.gameActive = this.gameActive ?? false;\n  }\n}\nexport function getChipsAdminIdentifier(chipsAdmin) {\n  return chipsAdmin.id;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

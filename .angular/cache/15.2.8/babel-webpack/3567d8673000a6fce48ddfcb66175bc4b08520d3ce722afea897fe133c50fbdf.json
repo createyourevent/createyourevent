@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Building {\n  constructor(id, surface, organization, user) {\n    this.id = id;\n    this.surface = surface;\n    this.organization = organization;\n    this.user = user;\n  }\n}\nexport function getBuildingIdentifier(building) {\n  return building.id;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

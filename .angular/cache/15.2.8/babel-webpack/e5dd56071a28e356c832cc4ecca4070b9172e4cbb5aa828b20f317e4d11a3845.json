@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Order {\n  constructor(id, status, dateAdded) {\n    this.id = id;\n    this.status = status;\n    this.dateAdded = dateAdded;\n  }\n}\nexport function getOrderIdentifier(order) {\n  return order.id;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

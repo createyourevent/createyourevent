@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { ConfigurationComponent } from './configuration.component';\nexport const configurationRoute = {\n  path: '',\n  component: ConfigurationComponent,\n  data: {\n    pageTitle: 'configuration.title'\n  }\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

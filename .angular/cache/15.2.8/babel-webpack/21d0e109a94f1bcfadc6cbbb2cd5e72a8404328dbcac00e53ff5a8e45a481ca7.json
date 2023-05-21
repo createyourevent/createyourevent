@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class RideCosts {\n  constructor(id, pricePerKilometre, serviceMap) {\n    this.id = id;\n    this.pricePerKilometre = pricePerKilometre;\n    this.serviceMap = serviceMap;\n  }\n}\nexport function getRideCostsIdentifier(rideCosts) {\n  return rideCosts.id;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

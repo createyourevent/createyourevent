@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Contact {\n  constructor(id, name, email, message, date) {\n    this.id = id;\n    this.name = name;\n    this.email = email;\n    this.message = message;\n    this.date = date;\n  }\n}\nexport function getContactIdentifier(contact) {\n  return contact.id;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

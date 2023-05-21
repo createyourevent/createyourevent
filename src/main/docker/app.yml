@@ -109,7 +109,7 @@ services:
     ports:
       - 127.0.0.1:3100:3100
 volumes:
-  db-data:
+  db_data:
     external: true
   realm-config:
     external: true

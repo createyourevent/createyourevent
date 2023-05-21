@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { MetricsComponent } from './metrics.component';\nexport const metricsRoute = {\n  path: '',\n  component: MetricsComponent,\n  data: {\n    pageTitle: 'metrics.title'\n  }\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { DocsComponent } from './docs.component';\nexport const docsRoute = {\n  path: '',\n  component: DocsComponent,\n  data: {\n    pageTitle: 'global.menu.admin.apidocs'\n  }\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

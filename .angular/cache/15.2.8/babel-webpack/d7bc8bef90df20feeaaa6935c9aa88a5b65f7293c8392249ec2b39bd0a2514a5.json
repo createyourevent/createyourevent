@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { CreateServiceComponent } from './create-service.component';\nexport const CREATE_SERVICE_ROUTE = {\n  path: '',\n  component: CreateServiceComponent,\n  data: {\n    authorities: [],\n    pageTitle: 'routes.create-service.title'\n  }\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

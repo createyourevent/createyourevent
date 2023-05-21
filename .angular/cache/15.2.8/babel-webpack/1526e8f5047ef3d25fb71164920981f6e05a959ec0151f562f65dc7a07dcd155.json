@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Club {\n  constructor(id, priceCard, organization, user) {\n    this.id = id;\n    this.priceCard = priceCard;\n    this.organization = organization;\n    this.user = user;\n  }\n}\nexport function getClubIdentifier(club) {\n  return club.id;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

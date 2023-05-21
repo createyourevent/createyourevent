@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { RouterModule } from '@angular/router';\nimport { ContactComponent } from './contact.component';\nconst routes = [{\n  path: '',\n  component: ContactComponent\n}];\nexport const ContactRoutes = RouterModule.forChild(routes);","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

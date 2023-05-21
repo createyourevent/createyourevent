@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class ChipsCollection {\n  constructor(id, user, chipsCollectionChips) {\n    this.id = id;\n    this.user = user;\n    this.chipsCollectionChips = chipsCollectionChips;\n  }\n}\nexport function getChipsCollectionIdentifier(chipsCollection) {\n  return chipsCollection.id;\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

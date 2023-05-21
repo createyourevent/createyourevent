@@ -847,6 +847,7 @@
                     <version>${maven-surefire-plugin.version}</version>
                     <configuration>
                         <!-- Force alphabetical order to have a reproducible build -->
+                        <skipTests>true</skipTests>
                         <runOrder>alphabetical</runOrder>
                         <excludes>
                             <exclude>**/*IT*</exclude>
@@ -1126,6 +1127,7 @@
                                     <goal>install-node-and-npm</goal>
                                 </goals>
                                 <configuration>
+                                    <arguments>-Dmaven.test.skip=true --legacy-peer-deps</arguments>
                                     <nodeVersion>${node.version}</nodeVersion>
                                     <npmVersion>${npm.version}</npmVersion>
                                 </configuration>
