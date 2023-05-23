@@ -39,9 +39,9 @@
         <m2e.apt.activation>jdt_apt</m2e.apt.activation>
         <run.addResources>false</run.addResources>
         <!-- These remain empty unless the corresponding profile is active -->
-        <profile.no-liquibase />
-        <profile.api-docs />
-        <profile.tls />
+        <profile.no-liquibase/>
+        <profile.api-docs/>
+        <profile.tls/>
 
         <!-- Dependency versions -->
         <jhipster-dependencies.version>7.3.1</jhipster-dependencies.version>
@@ -56,7 +56,7 @@
         <javassist.version>3.27.0-GA</javassist.version>
         <!-- The liquibase version should match the one managed by
         https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies/${spring-boot.version} -->
-        <liquibase.version>4.20.0</liquibase.version>
+        <liquibase.version>4.21.1</liquibase.version>
         <liquibase-hibernate5.version>4.5.0</liquibase-hibernate5.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <jaxb-runtime.version>2.3.3</jaxb-runtime.version>
@@ -774,7 +774,7 @@
                             <id>enforce-dependencyConvergence</id>
                             <configuration>
                                 <rules>
-                                    <DependencyConvergence />
+                                    <DependencyConvergence/>
                                 </rules>
                                 <fail>false</fail>
                             </configuration>
@@ -1007,11 +1007,11 @@
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <condition property="skip.npm" value="true" else="false" >
+                                        <condition property="skip.npm" value="true" else="false">
                                             <and>
-                                                <available file="checksums.csv" filepath="${project.build.directory}" />
-                                                <available file="checksums.csv.old" filepath="${project.build.directory}" />
-                                                <filesmatch file1="${project.build.directory}/checksums.csv" file2="${project.build.directory}/checksums.csv.old" />
+                                                <available file="checksums.csv" filepath="${project.build.directory}"/>
+                                                <available file="checksums.csv.old" filepath="${project.build.directory}"/>
+                                                <filesmatch file1="${project.build.directory}/checksums.csv" file2="${project.build.directory}/checksums.csv.old"/>
                                             </and>
                                         </condition>
                                     </target>
