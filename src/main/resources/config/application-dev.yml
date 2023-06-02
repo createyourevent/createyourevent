@@ -27,12 +27,9 @@ eureka:
   client:
     enabled: false # By default, the JHipster Registry is not used in the "dev" profile
     service-url:
-      defaultZone: https://ceo:${jhipster.registry.password}@cye-registry.createyourevent.org/eureka/
+      defaultZone: https://registry.createyourevent.org/eureka/
 
 spring:
-  security:
-    user:
-      password: ihMMuka8243Schaffhausen
   devtools:
     restart:
       enabled: true
@@ -46,10 +43,10 @@ spring:
     config:
       server:
         username: ceo
-        password: ihMMuka8243Schaffhausen
-      uri: https://ceo:${jhipster.registry.password}@cye-registry.createyourevent.org//config
+        password: ihMMuka8243
+      uri: https://registry.createyourevent.org/registry/config
       # name of the config server's property source (file.yml) that we want to use
-      name: createyourevent
+      name: application.yml
       profile: dev
       label: main # toggle to switch to a different version of the configuration as stored in git
       # it can be set to any label, branch or commit of the configuration source Git repository

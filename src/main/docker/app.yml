@@ -10,16 +10,14 @@ services:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,api-docs
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
-      # - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=https://ceo:$${jhipster.registry.password}@cye-registry.createyourevent.org/registry/applications
-      # - SPRING_CLOUD_CONFIG_URI=https://ceo:$${jhipster.registry.password}@cye-registry.createyourevent.org/registry/config
-      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=https://ceo:$${jhipster.registry.password}@cye-registry.createyourevent.org/registry/applications
-      - SPRING_CLOUD_CONFIG_URI=https://ceo:$${jhipster.registry.password}@cye-registry.createyourevent.org/registry/config
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=https://registry.createyourevent.org/eureka/
+      - SPRING_CLOUD_CONFIG_URI=https://registry.createyourevent.org/registry/config
       - SPRING_DATASOURCE_URL=jdbc:mysql://createyourevent-mysql:3306/createyourevent?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
       - SPRING_LIQUIBASE_URL=jdbc:mysql://createyourevent-mysql:3306/createyourevent?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
       - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=https://keycloak.createyourevent.org/auth/realms/jhipster
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=web_app
-      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=9f608490-949a-4d83-95b0-f77c64f374bc
-      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=0a07a541-0695-4a23-be24-df3cc5082978
+      - JHIPSTER_SLEEP=10 # gives time for other services to boot before the application
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
     ports:
@@ -27,7 +25,7 @@ services:
   createyourevent-mysql:
     image: mysql:5.7
     volumes:
-      - db-data:/var/lib/mysql
+      - ./db_data:/var/lib/mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ihMMuka8243
@@ -39,9 +37,9 @@ services:
     ports:
       - 127.0.0.1:3306:3306
     command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
-  heartfull-mind-registry:
-    image: jhipster/jhipster-registry:v6.7.1
-    # image: heartfullmind/registry:latestdoc
+
+  createyourevent-registry:
+    image: jhipster/jhipster-registry:latest
     volumes:
       - ./central-server-config:/central-config
     # When run with the "dev" Spring profile, the JHipster Registry will
@@ -51,21 +49,22 @@ services:
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=dev,api-docs,oauth2
-      - SPRING_SECURITY_USER_PASSWORD=ihMMuka8243
-      - JHIPSTER_REGISTRY_PASSWORD=ihMMuka8243Schaffhausen!
-      # - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_TYPE=native
-      # - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_SEARCH_LOCATIONS=file:./central-server-config/localhost-config/
+      - SPRING_SECURITY_USER_PASSWORD=ceo
+      - JHIPSTER_REGISTRY_PASSWORD=ihMMuka8243
+      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_TYPE=native
+      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_SEARCH_LOCATIONS=file:./central-server-config/localhost-config/
       - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_TYPE=git
       - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_URI=https://github.com/jhipster/jhipster-registry/
       - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_SEARCH_PATHS=central-config
       # For keycloak to work, you need to add '127.0.0.1 keycloak' to your hosts file
       - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=https://keycloak.createyourevent.org/auth/realms/jhipster
       - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=jhipster-registry
-      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=jhipster-registry # 133e5ac2-aa04-49e0-8890-894993d9f816
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=46684bb8-b193-46af-8840-cbf99bd8a800
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
     ports:
-      - 127.0.0.1:8761:8761
+      - 8761:8761
+
   keycloak:
     image: jboss/keycloak:14.0.0
     user: '${UID}:${GID}'
@@ -81,9 +80,9 @@ services:
         '-Dkeycloak.profile.feature.upload_scripts=enabled',
       ]
     volumes:
-      - realm-config:/opt/jboss/keycloak/realm-config
-      - keycloak-postgresql-vol:/opt/jboss/keycloak/standalone/data
-      - keycloak-themes-folder:/opt/jboss/keycloak/themes/createyourevent
+      - ./realm-config:/opt/jboss/keycloak/realm-config
+      - ./keycloak-postgresql-vol:/opt/jboss/keycloak/standalone/data
+      - ./keycloak-themes-folder:/opt/jboss/keycloak/themes/createyourevent
     environment:
       #- KEYCLOAK_USER=admin
       #- KEYCLOAK_PASSWORD=ihMMuka8243Schaffhausen!

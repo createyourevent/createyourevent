@@ -1,16 +1,13 @@
 package org.createyourevent.app.web.rest;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud.Update;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
 import javax.servlet.http.HttpServletRequest;
-
-import com.mysql.cj.x.protobuf.MysqlxCrud.Update;
-
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
 import org.keycloak.OAuth2Constants;
@@ -38,7 +35,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-
 @RestController
 @RequestMapping("/api")
 public class KeycloakController {
@@ -53,14 +49,13 @@ public class KeycloakController {
 
     @GetMapping("/keycloak/{userId}")
     public Integer getPointsFromUser(@PathVariable String userId) {
-
         String url = "https://keycloak.createyourevent.org/auth/realms/jhipster/protocol/openid-connect/token";
 
         ClientCredentialsResourceDetails resourceDetails = new ClientCredentialsResourceDetails();
         resourceDetails.setGrantType(OAuth2Constants.CLIENT_CREDENTIALS);
         resourceDetails.setAccessTokenUri(url);
         resourceDetails.setClientId("web_app");
-        resourceDetails.setClientSecret("9f608490-949a-4d83-95b0-f77c64f374bc");
+        resourceDetails.setClientSecret("0a07a541-0695-4a23-be24-df3cc5082978");
 
         String url2 = "https://keycloak.createyourevent.org/auth/admin/realms/jhipster/users/" + userId;
 
@@ -69,23 +64,21 @@ public class KeycloakController {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-        Object vars = ((LinkedHashMap<String,Object>)restTemplate.getForObject(url2, Object.class)).get("attributes");
-        Object points = ((LinkedHashMap<String,Object>)vars).get("points");
-        ArrayList<String> p = (ArrayList<String>)points;
+        Object vars = ((LinkedHashMap<String, Object>) restTemplate.getForObject(url2, Object.class)).get("attributes");
+        Object points = ((LinkedHashMap<String, Object>) vars).get("points");
+        ArrayList<String> p = (ArrayList<String>) points;
         return Integer.parseInt(p.get(0));
     }
 
-
     @PutMapping("/keycloak/{userId}/{points}")
     public void updatePoints(@PathVariable String userId, @PathVariable String points) {
-
         String url = "https://keycloak.createyourevent.org/auth/realms/jhipster/protocol/openid-connect/token";
 
         ClientCredentialsResourceDetails resourceDetails = new ClientCredentialsResourceDetails();
         resourceDetails.setGrantType(OAuth2Constants.CLIENT_CREDENTIALS);
         resourceDetails.setAccessTokenUri(url);
         resourceDetails.setClientId("web_app");
-        resourceDetails.setClientSecret("9f608490-949a-4d83-95b0-f77c64f374bc");
+        resourceDetails.setClientSecret("0a07a541-0695-4a23-be24-df3cc5082978");
 
         String url2 = "https://keycloak.createyourevent.org/auth/admin/realms/jhipster/users/" + userId;
 
@@ -97,6 +90,4 @@ public class KeycloakController {
 
         restTemplate.put(url2, n);
     }
-
-
 }
