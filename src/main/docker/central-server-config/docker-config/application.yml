@@ -13,4 +13,4 @@ jhipster:
 eureka:
   client:
     service-url:
-      defaultZone: https://ceo:${jhipster.registry.password}@cye-registry.createyourevent.org/eureka/
+      defaultZone: https://registry.createyourevent.org/eureka/

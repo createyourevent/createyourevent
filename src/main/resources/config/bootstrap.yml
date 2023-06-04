@@ -5,12 +5,12 @@
 
 jhipster:
   registry:
-    password: ihMMuka8243Schaffhausen!
+    password: ihMMuka8243
 
 spring:
   security:
     user:
-      password: ihMMuka8243Schaffhausen
+      password: ihMMuka8243
   application:
     name: createyourevent
   profiles:
@@ -24,7 +24,7 @@ spring:
         username: ceo
         password: ihMMuka8243Schaffhausen
       fail-fast: false # if not in "prod" profile, do not force to use Spring Cloud Config
-      uri: https://cye-registry.createyourevent.org/registry/config
+      uri: https://registry.createyourevent.org/registry/config
       # name of the config server's property source (file.yml) that we want to use
       name: createyourevent
       profile: dev # profile(s) of the property source

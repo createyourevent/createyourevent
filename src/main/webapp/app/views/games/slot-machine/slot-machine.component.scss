@@ -1,89 +1,112 @@
-@import '~slot-machine-gen/dist/slot-machine.css';
+.slot-machine {
+  height: 480px;
+  width: 600px;
 
-#slot-machine {
-  margin: 0 auto 0 auto;
-}
+  .display {
+    display: flex;
+    height: inherit;
+    position: absolute;
+    transform: translateZ(0);
+    width: inherit;
+    z-index: 2;
 
-.text-align-center {
-  text-align: center;
-}
+    .reel {
+      background: transparent;
+      border: 1px solid #999;
+      border-radius: 10px;
+      cursor: pointer;
+      height: calc(100% - 103px);
+      margin: 47px 10px;
+      overflow: hidden;
+      width: 200px;
 
-#play-button {
-  display: block;
-  margin: 0 auto;
-  width: 100px;
-}
+      &:after {
+        box-shadow: inset -3em -3em 4em #0c090a;
+      }
 
-.button-slot-machine {
-  margin: 0 auto;
-  text-align: center;
-}
+      &:before {
+        box-shadow: inset -3em 3em 4em #0c090a;
+      }
 
-.title-points-costs {
-  text-align: center;
-  font-family: 'Chango', cursive;
-  color: yellow;
-  text-shadow: 5px 5px black;
-  text-align: center;
-  font-size: xx-large;
-}
+      &:after,
+      &:before {
+        content: '';
+        display: block;
+        height: 50%;
+        width: calc(100% + 100px);
+      }
+    }
+  }
 
-.points-count {
-  width: 240px;
-  padding: 10px;
-  z-index: 6;
-  margin: 40px auto;
-  border-radius: 5px;
-  border: 4px solid black;
-  box-shadow: 5px 5px 15px 5px #ff8080, -9px 5px 15px 5px #ffe488, -7px -5px 15px 5px #8cff85, 12px -5px 15px 5px #80c7ff,
-    12px 10px 15px 7px #e488ff, -10px 10px 15px 7px #ff616b, -10px -7px 27px 1px #8e5cff, 5px 5px 15px 5px rgb(0 0 0 / 0%);
-  font-size: xx-large;
-  color: #ffffff;
-  background: #333333;
-  text-shadow: #fff 0px 0px 5px, #fff 0px 0px 10px, #fff 0px 0px 15px, #ff2d95 0px 0px 20px, #ff2d95 0px 0px 30px, #ff2d95 0px 0px 40px,
-    #ff2d95 0px 0px 50px, #ff2d95 0px 0px 75px;
-  font-family: 'Shrikhand', cursive;
-  text-align: center;
-}
+  .slots {
+    height: inherit;
+    z-index: 1;
+    --webkit-transform: translate3d(0, 0, 0);
 
-.box-not-enought-points {
-  background-color: yellow;
-  font-weight: bold;
-  color: red;
-  border: 1px solid black;
-  border-radius: 5px;
-  -webkit-box-shadow: 5px 5px 15px 5px #000000;
-  box-shadow: 5px 5px 15px 5px #000000;
-  margin: 20px;
-  padding: 10px;
-  text-align: center;
-  font-size: larger;
-}
+    .reel {
+      display: inline-block;
+      //transform-style: preserve-3d;
 
-.status {
-  background-color: yellow;
-  font-weight: bold;
-  color: red;
-  border: 1px solid black;
-  border-radius: 5px;
-  -webkit-box-shadow: 5px 5px 15px 5px #000000;
-  box-shadow: 5px 5px 15px 5px #000000;
-  margin: 20px;
-  padding: 10px;
-  text-align: center;
-  font-size: x-large;
-}
+      .strip {
+        list-style: none;
+        margin-left: -40px;
+        transform-style: preserve-3d;
 
-.container-not-enought-points {
-  margin: 0 auto;
-}
+        &.start {
+          animation: init 300ms ease-in reverse;
+        }
 
-.play-button {
-  width: 300px;
-  height: 100px;
-  text-align: center;
-  margin: 0 auto;
-  font-size: xx-large;
-  font-weight: bold;
-  padding: 50px;
+        &.spin {
+          animation: spin 600ms linear infinite reverse;
+        }
+
+        &.stop {
+          animation: init 1000ms ease-out reverse;
+        }
+
+        li {
+          font-size: 0;
+          position: absolute;
+          text-align: center;
+          -webkit-backface-visibility: hidden;
+        }
+      }
+    }
+  }
+
+  @-moz-keyframes init {
+    from {
+      -moz-transform: rotateX(0);
+    }
+    to {
+      -moz-transform: rotateX(15deg);
+    }
+  }
+
+  @-webkit-keyframes init {
+    from {
+      -webkit-transform: rotateX(0);
+    }
+    to {
+      -webkit-transform: rotateX(15deg);
+    }
+  }
+
+  @-moz-keyframes spin {
+    from {
+      -moz-transform: rotateX(0);
+    }
+    to {
+      -moz-transform: rotateX(360deg);
+    }
+  }
+
+  @-webkit-keyframes spin {
+    from {
+      -webkit-transform: rotateX(0);
+    }
+    to {
+      -webkit-transform: rotateX(360deg);
+    }
+  }
 }

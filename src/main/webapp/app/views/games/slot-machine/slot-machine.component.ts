@@ -20,6 +20,7 @@ import { PointsDataService } from 'app/points/points-display/points-display.serv
   templateUrl: './slot-machine.component.html',
   styleUrls: ['./slot-machine.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SlotMachineComponent implements OnInit {
   @Output() clockWin = new EventEmitter<any>();
@@ -141,7 +142,7 @@ export class SlotMachineComponent implements OnInit {
   enoughtPoints = false;
   state = 'new';
 
-  constructor(private generalService: GeneralService, private pointsDataService: PointsDataService) {}
+  constructor(private generalService: GeneralService, private pointsDataService: PointsDataService, private ref: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.generalService.findWidthAuthorities().subscribe(us => {
@@ -150,6 +151,7 @@ export class SlotMachineComponent implements OnInit {
         this.pointsStart = Number(rt.body.value);
         if (this.user.points >= this.pointsStart) {
           this.enoughtPoints = true;
+          this.ref.markForCheck();
           while (!document.querySelector('#slot-machine')) {
             await new Promise(r => setTimeout(r, 500));
           }

@@ -16,7 +16,7 @@
 
 eureka:
   client:
-    enabled: true
+    enabled: false
     healthcheck:
       enabled: true
     fetch-registry: true
@@ -178,7 +178,7 @@ spring:
         registration:
           oidc:
             client-id: web_app
-            client-secret: 0a07a541-0695-4a23-be24-df3cc5082978
+            client-secret: 6fb8d2ef-bdb2-40b0-bfa4-d59a7e87e117
             scope: openid,profile,email
 
 server:
