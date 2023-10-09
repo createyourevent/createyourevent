@@ -1,6 +1,6 @@
 {
   "realm": "jhipster",
-  "auth-server-url": "https://keycloak.createyourevent.org/auth",
+  "auth-server-url": "http://keycloak:9080/auth",
   "ssl-required": "none",
   "resource": "web_app",
   "verify-token-audience": true,

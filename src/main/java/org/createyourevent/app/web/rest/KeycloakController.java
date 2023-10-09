@@ -49,7 +49,7 @@ public class KeycloakController {
 
     @GetMapping("/keycloak/{userId}")
     public Integer getPointsFromUser(@PathVariable String userId) {
-        String url = "https://keycloak.createyourevent.org/auth/realms/jhipster/protocol/openid-connect/token";
+        String url = "http://keycloak:9080/auth/realms/jhipster/protocol/openid-connect/token";
 
         ClientCredentialsResourceDetails resourceDetails = new ClientCredentialsResourceDetails();
         resourceDetails.setGrantType(OAuth2Constants.CLIENT_CREDENTIALS);
@@ -57,7 +57,7 @@ public class KeycloakController {
         resourceDetails.setClientId("web_app");
         resourceDetails.setClientSecret("6fb8d2ef-bdb2-40b0-bfa4-d59a7e87e117");
 
-        String url2 = "https://keycloak.createyourevent.org/auth/admin/realms/jhipster/users/" + userId;
+        String url2 = "http://keycloak:9080/auth/admin/realms/jhipster/users/" + userId;
 
         RestTemplate restTemplate = new OAuth2RestTemplate(resourceDetails);
 
@@ -72,7 +72,7 @@ public class KeycloakController {
 
     @PutMapping("/keycloak/{userId}/{points}")
     public void updatePoints(@PathVariable String userId, @PathVariable String points) {
-        String url = "https://keycloak.createyourevent.org/auth/realms/jhipster/protocol/openid-connect/token";
+        String url = "http://keycloak:9080/auth/realms/jhipster/protocol/openid-connect/token";
 
         ClientCredentialsResourceDetails resourceDetails = new ClientCredentialsResourceDetails();
         resourceDetails.setGrantType(OAuth2Constants.CLIENT_CREDENTIALS);
@@ -80,7 +80,7 @@ public class KeycloakController {
         resourceDetails.setClientId("web_app");
         resourceDetails.setClientSecret("6fb8d2ef-bdb2-40b0-bfa4-d59a7e87e117");
 
-        String url2 = "https://keycloak.createyourevent.org/auth/admin/realms/jhipster/users/" + userId;
+        String url2 = "http://keycloak:9080/auth/admin/realms/jhipster/users/" + userId;
 
         RestTemplate restTemplate = new OAuth2RestTemplate(resourceDetails);
 

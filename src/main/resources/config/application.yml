@@ -174,7 +174,7 @@ spring:
       client:
         provider:
           oidc:
-            issuer-uri: https://keycloak.createyourevent.org/auth/realms/jhipster
+            issuer-uri: http://keycloak:9080/auth/realms/jhipster
         registration:
           oidc:
             client-id: web_app
@@ -199,7 +199,7 @@ keycloak:
   configurationFile: 'classpath:keycloak.json'
   realm: jhipster
   resource: mobile_app
-  auth-server-url: https://keycloak.createyourevent.org/auth
+  auth-server-url: http://keycloak:9080/auth
   ssl-required: none
   public-client: true
   verify-token-audience: true
@@ -237,7 +237,7 @@ jhipster:
     name: 'createyoureventApp'
   # By default CORS is disabled. Uncomment to enable.
   cors:
-    allowed-origins: 'https://keycloak.createyourevent.org'
+    allowed-origins: 'http://keycloak:9080'
     allowed-methods: '*'
     allowed-headers: '*'
     exposed-headers: 'Authorization,Link,X-Total-Count,X-${jhipster.clientApp.name}-alert,X-${jhipster.clientApp.name}-error,X-${jhipster.clientApp.name}-params'

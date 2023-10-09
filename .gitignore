@@ -158,3 +158,8 @@ Desktop.ini
 /coverage/
 /.nyc_output/
 package-lock.json
+
+######################
+# Angular temps
+######################
+.angular/
