@@ -55,7 +55,7 @@ public class KeycloakController {
         resourceDetails.setGrantType(OAuth2Constants.CLIENT_CREDENTIALS);
         resourceDetails.setAccessTokenUri(url);
         resourceDetails.setClientId("web_app");
-        resourceDetails.setClientSecret("6fb8d2ef-bdb2-40b0-bfa4-d59a7e87e117");
+        resourceDetails.setClientSecret("e1f4565e-8e40-48fb-a38a-da801be7fc23");
 
         String url2 = "http://keycloak:9080/auth/admin/realms/jhipster/users/" + userId;
 
@@ -78,7 +78,7 @@ public class KeycloakController {
         resourceDetails.setGrantType(OAuth2Constants.CLIENT_CREDENTIALS);
         resourceDetails.setAccessTokenUri(url);
         resourceDetails.setClientId("web_app");
-        resourceDetails.setClientSecret("6fb8d2ef-bdb2-40b0-bfa4-d59a7e87e117");
+        resourceDetails.setClientSecret("e1f4565e-8e40-48fb-a38a-da801be7fc23");
 
         String url2 = "http://keycloak:9080/auth/admin/realms/jhipster/users/" + userId;
 

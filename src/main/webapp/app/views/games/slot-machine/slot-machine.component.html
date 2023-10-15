@@ -1,3 +1,95 @@
+<div class="box_brown padding">
+  <h3 class="title-slot-machine" jhiTranslate="home.slot-machine">Slot machine</h3>
+  <p class="white big bold" jhiTranslate="home.slot-machine.info">
+    Join our slot machine game. Every month we raffle vouchers for events that are planned and organized on our platform. Everyone can
+    register with us and plan and advertise their own events. We at Create Your Event will issue and pay out vouchers worth CHF 300 every
+    month. To participate in the game you need to register on our platform, which is free if you're just an event attendee, and earn points
+    on Create Your Event. We explain how you can collect points on our platform at https://createyourevent.org/points-list. A game costs you
+    50 points. We wish good luck.
+  </p>
+  <div class="row">
+    <div class="col-md-8">
+      <p-toast key="myKey1"></p-toast>
+      <jhi-slot-machine
+        (clockWin)="clockWin()"
+        (cherryWin)="cherryWin()"
+        (orangeWin)="orangeWin()"
+        (plumWin)="plumWin()"
+      ></jhi-slot-machine>
+    </div>
+    <div class="col-md-4">
+      <div class="row box_violet">
+        <div class="col-md-6">
+          <img src="../../content/images/slot-machine/bell.png" class="center" />
+        </div>
+        <div class="col-md-6">
+          <h5 class="bold white text-shadow" jhiTranslate="home.bell">Bell</h5>
+          <p-card>
+            <ng-template pTemplate="header">
+              {{ clockCoupon.title }}
+            </ng-template>
+            {{ clockCoupon.description }}
+            <ng-template pTemplate="footer">
+              {{ clockCoupon.value | currency }}
+            </ng-template>
+          </p-card>
+        </div>
+      </div>
+      <div class="row box_violet">
+        <div class="col-md-6">
+          <img src="../../content/images/slot-machine/cherry.png" class="center" />
+        </div>
+        <div class="col-md-6">
+          <h5 class="bold white text-shadow" jhiTranslate="home.cherry">Cherry</h5>
+          <p-card>
+            <ng-template pTemplate="header">
+              {{ cherryCoupon.title }}
+            </ng-template>
+            {{ cherryCoupon.description }}
+            <ng-template pTemplate="footer">
+              {{ cherryCoupon.value | currency }}
+            </ng-template>
+          </p-card>
+        </div>
+      </div>
+      <div class="row box_violet">
+        <div class="col-md-6">
+          <img src="../../content/images/slot-machine/orange.png" class="center" />
+        </div>
+        <div class="col-md-6">
+          <h5 class="bold white text-shadow" jhiTranslate="home.orange">>Orange</h5>
+          <p-card>
+            <ng-template pTemplate="header">
+              {{ orangeCoupon.title }}
+            </ng-template>
+            {{ orangeCoupon.description }}
+            <ng-template pTemplate="footer">
+              {{ orangeCoupon.value | currency }}
+            </ng-template>
+          </p-card>
+        </div>
+      </div>
+      <div class="row box_violet">
+        <div class="col-md-6">
+          <img src="../../content/images/slot-machine/plum.png" class="center" />
+        </div>
+        <div class="col-md-6">
+          <h5 class="bold white text-shadow" jhiTranslate="home.plum">Plum</h5>
+          <p-card>
+            <ng-template pTemplate="header">
+              {{ plumCoupon.title }}
+            </ng-template>
+            {{ plumCoupon.description }}
+            <ng-template pTemplate="footer">
+              {{ plumCoupon.value | currency }}
+            </ng-template>
+          </p-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="title-points-costs" jhiTranslate="slot-machine.one-game-costs">One game will use</div>
 <div class="points-count">{{ pointsStart }} {{ 'slot-machine.points' | translate }}</div>
 
