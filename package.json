@@ -146,7 +146,7 @@
     "ngx-iban": "^12.1.0",
     "ngx-infinite-scroll": "10.0.1",
     "ngx-marquee": "^13.2.1",
-    "ngx-material-timepicker": "^5.5.2",
+    "ngx-material-timepicker": "^13.0.0",
     "ngx-matomo": "^0.1.4",
     "ngx-paypal": "^8.0.0",
     "ngx-quill": "^14.3.0",
