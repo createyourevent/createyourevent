@@ -154,7 +154,7 @@
     "ngx-scrolltop": "^2.4.0",
     "ngx-select-dropdown": "^2.1.0",
     "ngx-sharebuttons": "^9.0.0",
-    "ngx-socket-io": "^4.1.0",
+    "ngx-socket-io": "^4.8.0",
     "ngx-stripe": "^12.7.0",
     "ngx-tetris": "^0.2.1",
     "ngx-webstorage": "8.0.0",
